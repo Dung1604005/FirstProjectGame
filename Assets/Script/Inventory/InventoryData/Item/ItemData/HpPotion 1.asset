@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd25a416b60ca446b73e80190782fbb, type: 3}
+  m_Name: HpPotion 1
+  m_EditorClassIdentifier: 
+  description: a new medkit
+  stackable: 1
+  maxStack: 99
+  type: 0
+  itemName: MedKit
+  index: 4
+  icon: {fileID: 21300000, guid: 4fe51e3a0bdbc904ba737bcfd0052592, type: 3}
+  value: 100
+  hpRecover: 70
