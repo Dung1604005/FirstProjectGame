@@ -24,7 +24,7 @@ public class BulletController : MonoBehaviour
         {
             collision.gameObject.GetComponentInParent<Health>().OnDamaged(damaged);
         }
-        else if (collision.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
+        if (collision.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
         {
             collision.gameObject.GetComponent<Health>().OnDamaged(damaged);
         }

@@ -9,5 +9,7 @@ public class GameConfig : MonoBehaviour
     public static String DESTROYABLE_OBJECT_TAG = "DestroyObject";
 
     public static String ENEMY_TAG = "Enemy";
+
+    public static String HITBOX_ENEMY = "HitBox_Enemy";
     
 }

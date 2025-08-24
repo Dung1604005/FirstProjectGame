@@ -10,7 +10,8 @@ public class EnemyMelee : EnemyBase
     {
         if (cur_coolDown >= coolDownAttack)
         {
-            
+            attacking = true;
+            cur_coolDown = 0f;
             anim.SetTrigger("IsAttack");
             anim.SetFloat("MoveX", x);
             anim.SetFloat("MoveY", y);
@@ -25,11 +26,17 @@ public class EnemyMelee : EnemyBase
     {
         Vector2 dir = (player.position - transform.position);
         float dis = dir.sqrMagnitude;
-        cur_coolDown = 0f;
+
         if (dis <= rangeAttack * rangeAttack)
         {
-            player.GetComponent<Health>().OnDamaged(damaged);
+            if (attacking)
+            {
+                player.GetComponent<Health>().OnDamaged(damaged);
+            }
+
+            
         }
+        attacking = false;
     }
     // Quan li Trang thai tan cong
     protected override void OnAttack()

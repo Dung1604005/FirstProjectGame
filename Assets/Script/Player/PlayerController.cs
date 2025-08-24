@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private Weapon weapon;
+    
+
     private StatPlayer stat;
     public StatPlayer Stat => stat;
 
@@ -16,8 +20,8 @@ public class PlayerController : MonoBehaviour
     public Health Health => health;
     public static PlayerController Instance { get; private set; }
     private Rigidbody2D rb;
-    
-    [SerializeField] private Pistol_Bullet pistol_;
+    private bool usingGun = false;
+    private float attackCountDown = 0f;
 
     private Animator anim;
     // Kiem soat va cham
@@ -32,19 +36,47 @@ public class PlayerController : MonoBehaviour
     }
 
     // Tao anim cho Blend tree
-    void AnimUpdate(float x, float y)
+    public void EquipGunAnim()
+    {
+        usingGun = true;
+        anim.SetBool("UsingGun", usingGun);  
+    }
+    public void UnEquipGunAnim()
+    {
+        usingGun = false;
+        anim.SetBool("UsingGun", usingGun);  
+    }
+    public void AnimUpdate(float x, float y)
     {
         anim.SetFloat("MoveX", x);
         anim.SetFloat("MoveY", y);
-       
-      
+
+
+    }
+    public Vector2 GetDirFromMouseToPlayer()
+    {
+        Vector2 playerPos = getPos();
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 dir = (mousePos - playerPos).normalized;
+        return dir;
     }
     //Di chuyen
     void Move()
     {
         float movex = Input.GetAxis("Horizontal");
         float movey = Input.GetAxis("Vertical");
-        AnimUpdate(movex, movey);
+        if (weapon.Attacking == false)
+        {
+            if (usingGun)
+            {
+                weapon.UpdateAnim(movex, movey);
+            }
+            AnimUpdate(movex, movey);
+        }
+        
+    
+        
         Vector2 dir = new Vector2(movex, movey).normalized;
         Vector2 new_pos = rb.position + dir * Time.fixedDeltaTime * stat.Speed;
         rb.MovePosition(new_pos);
@@ -56,11 +88,13 @@ public class PlayerController : MonoBehaviour
         return rb.position;
     }
     // Ban
-    void Shoot()
+    void Attack()
     {
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            pistol_.FirePistol();
+            Vector2 dir = GetDirFromMouseToPlayer();
+            weapon.Attack(dir.x, dir.y);
         }
     }
     void Awake()
@@ -104,7 +138,24 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        Shoot();
+        if (weapon.WeaponData.Type == ItemType.Gun)
+        {
+            EquipGunAnim();
+        }
+        if (weapon.Attacking == false)
+        {
+            attackCountDown += Time.deltaTime;
+            if (attackCountDown >= weapon.WeaponData.CoolDown)
+            {
+                Attack();
+            }
+        }
+        else
+        {
+            attackCountDown = 0f;
+        }
+        
+        
 
 
     }

@@ -54,7 +54,7 @@ public class Health : MonoBehaviour
     public void OnDamaged(float damaged)
     {
         cur_health -= damaged;
-        Debug.Log(damaged);
+        
         if (cur_health < 0f)
         {
             cur_health = 0f;
@@ -73,11 +73,10 @@ public class Health : MonoBehaviour
         if (this.gameObject.tag == GameConfig.ENEMY_TAG)
         {
 
-            Debug.Log(damaged);
+            
             float scale = cur_health / max_health;
-
+            Debug.Log(cur_health);
             Transform childPos = this.transform.GetChild(1).transform;
-            Debug.Log("ENEMY BE ATTACKEED " + scale + " " + (childPos.position.x - transform.position.x));
 
             this.transform.GetChild(1).transform.DOScaleX(scale * 0.8f, 0.2f);
             this.transform.GetChild(1).gameObject.SetActive(true);

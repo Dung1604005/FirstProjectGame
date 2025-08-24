@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3c51d4682fef34d8b77d0df984458a, type: 3}
   m_Name: Melee
   m_EditorClassIdentifier: 
-  description: 
+  description: a bat that from Dungprozzz
   stackable: 0
   maxStack: 1
   type: 2
@@ -21,5 +21,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 438509887f3fbf641b994fc63bb5def7, type: 3}
   value: 250
   damaged: 50
-  coolDown: 1
+  coolDown: 0.5
   range: 2

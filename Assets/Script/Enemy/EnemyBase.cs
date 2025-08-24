@@ -22,6 +22,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected Animator anim;
 
+    protected bool attacking = false;       
+
 
 
     protected State curState;
@@ -133,7 +135,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             return;
         }
-        if (cur_coolDown < coolDownAttack)
+        if (attacking == false && cur_coolDown < coolDownAttack)
         {
             cur_coolDown += Time.deltaTime;
         }
