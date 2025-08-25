@@ -52,11 +52,14 @@ public class EquipMentSystem
     }
     public void UseSlot(int index, int amount)
     {
-        if (slots[index].Count == 0 || slots[index].ItemData == null)
-        {
-            return;
-        }
+
+
         slots[index].Remove(amount);
+
+        if (slots[index].Count <= 0 || slots[index].ItemData == null)
+        {
+            slots[index].Set(null, 0);
+        }
         OnEquipmentChange?.Invoke();
     }
     public void TryUnEquip(int index)

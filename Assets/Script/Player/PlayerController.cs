@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
     {
         if (weapon == null || weapon.Attacking == false)
         {
-            Debug.Log(attackCountDown);
+            
             attackCountDown += Time.deltaTime;
             if (weapon == null)
             {
@@ -255,11 +255,11 @@ public class PlayerController : MonoBehaviour
             weapon = weaponPrefab.GetComponent<Weapon>();
             return;
         }
-        if (itemData.Type == ItemType.Consumable)
+        if (itemData.Type == ItemType.HpPotion)
         {
             HpPotionData hpPotionData = itemData as HpPotionData;
             Health.OnHeal(hpPotionData.HpRecover);
-            UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.Slots[slot].Remove(1);
+            UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.UseSlot(slot, 1);
 
         }
     }

@@ -34,7 +34,7 @@ public class EquipmentSystemUI : MonoBehaviour
         for (int i = 0; i < equipMentSystem.SizeEquipMent; i++)
         {
             
-            if (equipMentSystem.Slots[i].ItemData != null)
+            if (equipMentSystem.Slots[i].ItemData != null &&equipMentSystem.Slots[i].Count > 0 )
             {
                 slots[i].UpdateUI(equipMentSystem.Slots[i].ItemData.Icon, i);
             }

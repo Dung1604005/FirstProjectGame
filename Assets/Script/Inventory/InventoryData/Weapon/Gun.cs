@@ -74,6 +74,7 @@ public class Gun : Weapon
         // Them vao sau hieu ung shake
         if (weaponData.ItemName == "ShotGun")
         {
+            Debug.Log("SHOOT");
             cinemachineImpulseSource.GenerateImpulse(strengthShake);
         }
         

@@ -121,9 +121,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 8931d07466d35fa4aa4bb19e354d3bef, type: 2}
+  anim: {fileID: 0}
   radius_bullet: 2.3
   delayTimeAfterShoot: 0.2
   angleShotGun: 10
+  strengthShake: 0.3
 --- !u!114 &4604735557414038977
 MonoBehaviour:
   m_ObjectHideFlags: 0

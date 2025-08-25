@@ -38,7 +38,7 @@ public class InventorySystem
             else
             {
                 // Neu gap cung loai
-                if (item.Type == slot.ItemData.Type)
+                if (item.Index == slot.ItemData.Index)
                 {
                     if (item.Stackable && slot.ItemData.MaxStack >= slot.Count + amount)
                     {
@@ -79,7 +79,7 @@ public class InventorySystem
             else
             {
                 // Neu gap cung loai
-                if (item.Type == slot.ItemData.Type)
+                if (item.Index == slot.ItemData.Index)
                 {
                     if (item.Stackable && slot.ItemData.MaxStack >= slot.Count + amount)
                     {

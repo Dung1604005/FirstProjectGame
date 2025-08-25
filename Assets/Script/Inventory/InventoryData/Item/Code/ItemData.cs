@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum ItemType
 {
-    Consumable, Gun, Melee, Bullet
+    HpPotion, Gun, Melee, Bullet
 }
 
 

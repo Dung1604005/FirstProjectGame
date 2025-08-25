@@ -7,4 +7,6 @@ public class HpPotionData : ItemData
 {
     [SerializeField] private float hpRecover;
     public float HpRecover => hpRecover;
+
+    
 }
