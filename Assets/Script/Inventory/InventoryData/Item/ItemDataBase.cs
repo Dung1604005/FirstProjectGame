@@ -1,18 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ItemDataBase : MonoBehaviour
+[CreateAssetMenu(menuName = "Script/ItemDataBase", fileName = "ItemDataBase")]
+public class ItemDataBase : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] List<ItemData> itemDatas = new List<ItemData>(18);
+    public List<ItemData> ItemDatas => itemDatas;
+    
 }

@@ -9,5 +9,7 @@ public class GunData : WeaponData
     [Header("Gun Stats")]
     
     [SerializeField] private GameObject bullet;
+    [SerializeField] private Gun gun;
+    public Gun Gun => gun;
     public GameObject Bullet => bullet;
 }

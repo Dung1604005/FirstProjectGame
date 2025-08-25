@@ -11,17 +11,18 @@ public abstract class Weapon : MonoBehaviour
 
     public WeaponData WeaponData => weaponData;
 
-    protected Animator anim;
+    [SerializeField] protected Animator anim;
     public void EndAttack()
     {
         
         attacking = false;
     }
+    
      public virtual void UpdateAnim(float dirX, float dirY)
     {
-        
-        
-        
+
+
+
     }
     public virtual void Attack(float dirX, float dirY)
     {

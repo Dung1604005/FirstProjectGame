@@ -13,7 +13,8 @@ public class GameManageMent : MonoBehaviour
     public static GameManageMent Instance { get; private set; }
     private  GameState gameState;
     public GameState GameState => gameState;
-
+    [SerializeField] private ItemDataBase itemDataBase;
+    public ItemDataBase ItemDataBase => itemDataBase;
     
     [Header("Inventory")]
 
@@ -51,9 +52,8 @@ public class GameManageMent : MonoBehaviour
        
 
     }
-    void Update()
+    public void OpenInventory()
     {
-        // Mo inventory
         if (Input.GetKeyDown(KeyCode.I))
         {
             if (gameState == GameState.Continue)
@@ -67,7 +67,10 @@ public class GameManageMent : MonoBehaviour
                 inventoryUI.TurnOff();
             }
         }
-        if (Input.GetKeyDown(KeyCode.Tab))
+    }
+    public void OpenStatMenu()
+    {
+         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (gameState == GameState.Continue)
             {
@@ -80,6 +83,64 @@ public class GameManageMent : MonoBehaviour
                 UIManageMent.Instance.ExpStatSystemUI.TurnOff();
             }
         }
+    }
+    void Update()
+    {
+        // Mo inventory
+        OpenInventory();
+        // Mo bang stat
+        OpenStatMenu();
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[0], 1))
+            {
+                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[0], 1);
+            }
+
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[1], 1))
+            {
+                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[1], 1);
+            }
+
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[2], 1))
+            {
+                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[2], 1);
+            }
+
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[3], 1))
+            {
+                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[3], 1);
+            }
+
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[4], 1))
+            {
+                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[4], 1);
+            }
+
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[5], 1))
+            {
+                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[5], 1);
+            }
+
+        }
+        
+       
 
     }
 }

@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Weapon weapon;
 
+    private GameObject weaponPrefab;
+
 
     private StatPlayer stat;
     public StatPlayer Stat => stat;
@@ -24,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool usingGun = false;
     private bool punching = false;
+
+    private bool swapping = false;
 
     private float attackCountDown = 0f;
 
@@ -85,6 +89,7 @@ public class PlayerController : MonoBehaviour
     //Di chuyen
     void Move()
     {
+        Debug.Log("MOVE");
         float movex = Input.GetAxis("Horizontal");
         float movey = Input.GetAxis("Vertical");
         if (weapon == null)
@@ -169,19 +174,22 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        Move();
+        // Khong cho di chuyen luc swap de weapon cap nhat anim
+        if (!swapping)
+        {
+            Move();
+
+        }
+       
 
     }
 
-    void Update()
-    {
-        if (GameManageMent.Instance.GameState == GameState.Pause)
-        {
-            return;
-        }
 
+    void UpdateCountDown()
+    {
         if (weapon == null || weapon.Attacking == false)
         {
+            Debug.Log(attackCountDown);
             attackCountDown += Time.deltaTime;
             if (weapon == null)
             {
@@ -202,6 +210,96 @@ public class PlayerController : MonoBehaviour
         {
             attackCountDown = 0f;
         }
+    }
+    public void EquipSlot(int slot)
+    {
+
+        ItemData itemData = UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.Slots[slot].ItemData;
+        if (weapon != null)
+        {
+            weapon = null;
+            Destroy(weaponPrefab);
+        }
+        if (itemData == null)
+        {
+            UnEquipGunAnim();
+            weapon = null;
+            return;
+        }
+        
+        if (itemData.Type == ItemType.Gun)
+        {
+            
+            EquipGunAnim();
+            GunData gunData = itemData as GunData;
+           
+            weaponPrefab = Instantiate(gunData.Gun.gameObject, this.transform.GetChild(2).transform);
+            weapon = weaponPrefab.GetComponent<Weapon>();
+            return;
+        }
+        else
+        {
+            UnEquipGunAnim();
+        }
+        if (itemData.Type != ItemType.Melee)
+        {
+            weapon = null;
+
+
+        }
+        else
+        {
+            
+            MeleeData meleeData = itemData as MeleeData;
+            weaponPrefab = Instantiate(meleeData.Melee.gameObject, this.transform.GetChild(2).transform);
+            weapon = weaponPrefab.GetComponent<Weapon>();
+            return;
+        }
+        if (itemData.Type == ItemType.Consumable)
+        {
+            HpPotionData hpPotionData = itemData as HpPotionData;
+            Health.OnHeal(hpPotionData.HpRecover);
+            UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.Slots[slot].Remove(1);
+
+        }
+    }
+    void ChooseSlot()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            EquipSlot(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+             EquipSlot(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+             EquipSlot(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            EquipSlot(3);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            EquipSlot(4);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            EquipSlot(5);
+        }
+    }
+
+    void Update()
+    {
+        if (GameManageMent.Instance.GameState == GameState.Pause)
+        {
+            return;
+        }
+
+        UpdateCountDown();
+        ChooseSlot();
 
 
 

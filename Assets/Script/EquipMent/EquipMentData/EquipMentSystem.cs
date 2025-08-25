@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class EquipMentSystem
@@ -49,6 +50,15 @@ public class EquipMentSystem
 
 
     }
+    public void UseSlot(int index, int amount)
+    {
+        if (slots[index].Count == 0 || slots[index].ItemData == null)
+        {
+            return;
+        }
+        slots[index].Remove(amount);
+        OnEquipmentChange?.Invoke();
+    }
     public void TryUnEquip(int index)
     {
         if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(slots[index].ItemData, slots[index].Count))
@@ -58,7 +68,7 @@ public class EquipMentSystem
 
             OnEquipmentChange?.Invoke();
         }
-        
+
     }
     
 }

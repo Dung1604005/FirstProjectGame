@@ -9,5 +9,7 @@ public class MeleeData : WeaponData
     [Header("Melee Stats")]
     
     [SerializeField] private float range;
+    [SerializeField] private Melee melee;
+    public Melee Melee => melee;
     public float Range => range;
 }

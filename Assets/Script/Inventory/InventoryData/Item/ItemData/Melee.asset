@@ -23,3 +23,4 @@ MonoBehaviour:
   damaged: 50
   coolDown: 0.5
   range: 2
+  melee: {fileID: 347892475367036819, guid: d769d3972b8e8bb41bfbcb19c79ae7d7, type: 3}

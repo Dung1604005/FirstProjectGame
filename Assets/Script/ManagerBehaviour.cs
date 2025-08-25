@@ -18,8 +18,6 @@ public class ManagerBehaviour : MonoBehaviour
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private int inventorySize;
 
-    [SerializeField] private ItemData test;
-    [SerializeField] private ItemData test2;
 
 
     void Start()
@@ -40,21 +38,6 @@ public class ManagerBehaviour : MonoBehaviour
             PlayerController.Instance.ExpSystem.GainExp(1000);
         }
         
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            if (inventorySystem.TryAdd(test, 1))
-            {
-                inventorySystem.Add(test, 1);
-            }
-
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (inventorySystem.TryAdd(test2, 1))
-            {
-                inventorySystem.Add(test2, 1);
-            }
-           
-        }
+       
     }
 }

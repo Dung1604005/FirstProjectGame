@@ -23,3 +23,4 @@ MonoBehaviour:
   damaged: 30
   coolDown: 0.7
   bullet: {fileID: 3503186805714729074, guid: 4ff532beb7275ae48b631f931b60abec, type: 3}
+  gun: {fileID: 2471267266265702773, guid: ce430a3473feef847be62ae3270e5782, type: 3}
