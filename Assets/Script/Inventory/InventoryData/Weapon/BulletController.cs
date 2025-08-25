@@ -10,6 +10,8 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float exist_time = 2f;
 
     [SerializeField] private float damaged;
+
+    
     
     private Rigidbody2D rb;
 
@@ -45,7 +47,8 @@ public class BulletController : MonoBehaviour
     public void Fire(Vector2 dir)
     {
 
-
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg ;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
         rb.velocity = dir * moveSpeed;
 
         StartCoroutine(AutoDestroy());

@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Weapon weapon;
-    
+
 
     private StatPlayer stat;
     public StatPlayer Stat => stat;
@@ -21,7 +23,11 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; }
     private Rigidbody2D rb;
     private bool usingGun = false;
+    private bool punching = false;
+
     private float attackCountDown = 0f;
+
+    [SerializeField] private float punchCountDown;
 
     private Animator anim;
     // Kiem soat va cham
@@ -32,26 +38,41 @@ public class PlayerController : MonoBehaviour
             float dam = collision.gameObject.GetComponentInParent<EnemyMelee>().GetDame();
             this.GetComponent<Health>().OnDamaged(dam);
         }
-        
+
     }
 
     // Tao anim cho Blend tree
     public void EquipGunAnim()
     {
         usingGun = true;
-        anim.SetBool("UsingGun", usingGun);  
+        anim.SetBool("UsingGun", usingGun);
     }
     public void UnEquipGunAnim()
     {
         usingGun = false;
-        anim.SetBool("UsingGun", usingGun);  
+        anim.SetBool("UsingGun", usingGun);
     }
     public void AnimUpdate(float x, float y)
     {
         anim.SetFloat("MoveX", x);
         anim.SetFloat("MoveY", y);
+    }
+    public void UpdatePunchAnim()
+    {
+        punching = true;
+        Vector2 dir = GetDirFromMouseToPlayer();
+        float angle = Mathf.Atan2(dir.y, dir.x);
+        float y = Mathf.Sin(angle);
+        float x = Mathf.Cos(angle);
 
 
+        Debug.Log(x + " " + y);
+        anim.SetTrigger("Punch");
+        AnimUpdate(x, y);
+    }
+    public void EndPunch()
+    {
+        punching = false;
     }
     public Vector2 GetDirFromMouseToPlayer()
     {
@@ -66,17 +87,29 @@ public class PlayerController : MonoBehaviour
     {
         float movex = Input.GetAxis("Horizontal");
         float movey = Input.GetAxis("Vertical");
-        if (weapon.Attacking == false)
+        if (weapon == null)
         {
-            if (usingGun)
+            if (punching == false)
             {
-                weapon.UpdateAnim(movex, movey);
+                AnimUpdate(movex, movey);
             }
-            AnimUpdate(movex, movey);
         }
-        
-    
-        
+        else
+        {
+            if (weapon.Attacking == false)
+            {
+                if (usingGun)
+                {
+                    weapon.UpdateAnim(movex, movey);
+                }
+                AnimUpdate(movex, movey);
+            }
+        }
+
+
+
+
+
         Vector2 dir = new Vector2(movex, movey).normalized;
         Vector2 new_pos = rb.position + dir * Time.fixedDeltaTime * stat.Speed;
         rb.MovePosition(new_pos);
@@ -90,11 +123,18 @@ public class PlayerController : MonoBehaviour
     // Ban
     void Attack()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Vector2 dir = GetDirFromMouseToPlayer();
-            weapon.Attack(dir.x, dir.y);
+            if (weapon != null)
+            {
+                weapon.Attack(dir.x, dir.y);
+            }
+            else
+            {
+                UpdatePunchAnim();
+            }
         }
     }
     void Awake()
@@ -104,7 +144,7 @@ public class PlayerController : MonoBehaviour
         expSystem = GetComponent<ExpSystem>();
         stat = GetComponent<StatPlayer>();
         health = GetComponent<Health>();
-        
+        weapon = null;
         if (Instance == null)
         {
             Instance = this;
@@ -132,30 +172,38 @@ public class PlayerController : MonoBehaviour
         Move();
 
     }
+
     void Update()
     {
         if (GameManageMent.Instance.GameState == GameState.Pause)
         {
             return;
         }
-        if (weapon.WeaponData.Type == ItemType.Gun)
-        {
-            EquipGunAnim();
-        }
-        if (weapon.Attacking == false)
+
+        if (weapon == null || weapon.Attacking == false)
         {
             attackCountDown += Time.deltaTime;
-            if (attackCountDown >= weapon.WeaponData.CoolDown)
+            if (weapon == null)
             {
-                Attack();
+                if (attackCountDown >= punchCountDown)
+                {
+                    Attack();
+                }
+            }
+            else
+            {
+                if (attackCountDown >= weapon.WeaponData.CoolDown)
+                {
+                    Attack();
+                }
             }
         }
         else
         {
             attackCountDown = 0f;
         }
-        
-        
+
+
 
 
     }

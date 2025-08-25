@@ -11,5 +11,7 @@ public class GameConfig : MonoBehaviour
     public static String ENEMY_TAG = "Enemy";
 
     public static String HITBOX_ENEMY = "HitBox_Enemy";
+
+    public static string HITBOX_PUNCH = "HitBox_Punch";
     
 }

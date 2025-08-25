@@ -17,6 +17,7 @@ public abstract class EnemyBase : MonoBehaviour
 
 
     [SerializeField] protected Rigidbody2D rb;
+    
 
     protected Transform player;
 
@@ -43,6 +44,14 @@ public abstract class EnemyBase : MonoBehaviour
     protected bool isDied = false;
 
     [SerializeField] protected float speed;
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("ATTACK");
+        if (other.tag == GameConfig.HITBOX_PUNCH)
+        {
+            this.GetComponent<Health>().OnDamaged(PlayerController.Instance.Stat.Atk);
+        }
+    }
 
     public float GetDame()
     {

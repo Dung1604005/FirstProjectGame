@@ -11,6 +11,7 @@ TagManager:
   - AttackMeleeEnemyHitBox
   - Enemy
   - DestroyObject
+  - HitBox_Punch
   layers:
   - Default
   - TransparentFX
