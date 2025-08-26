@@ -13,6 +13,10 @@ public class Health : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Color defaultColor;
+    public void SetCurHp(float hp)
+    {
+        cur_health = hp;
+    }
     public float CurHp()
     {
         return cur_health;
@@ -24,7 +28,7 @@ public class Health : MonoBehaviour
 
     private void OnDamagedEffect()
     {
-        
+
         Color color;
         if (this.gameObject.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
         {
@@ -33,7 +37,7 @@ public class Health : MonoBehaviour
 
         }
         else
-        { 
+        {
             color = Color.red;
 
         }
@@ -44,15 +48,32 @@ public class Health : MonoBehaviour
         spriteRenderer.DOColor(color, 0.05f).SetLoops(2, LoopType.Yoyo).OnComplete(() => spriteRenderer.color = defaultColor);
 
     }
-    
+
     private void OnHealEffect()
     {
         spriteRenderer.DOKill();
 
-        spriteRenderer.DOColor(Color.green, 0.05f).SetLoops(2, LoopType.Yoyo).OnComplete(()=>spriteRenderer.color = defaultColor);  
+        spriteRenderer.DOColor(Color.green, 0.05f).SetLoops(2, LoopType.Yoyo).OnComplete(() => spriteRenderer.color = defaultColor);
+    }
+
+    private void UpdateHealthUIEnemy()
+    {
+        float scale = cur_health / max_health;
+        Debug.Log(cur_health);
+        Transform childPos = this.transform.GetChild(1).transform;
+
+        this.transform.GetChild(1).transform.DOScaleX(scale * 0.8f, 0.2f);
+        this.transform.GetChild(1).gameObject.SetActive(true);
+        this.transform.GetChild(2).gameObject.SetActive(true);
     }
     public void OnDamaged(float damaged)
     {
+        
+        if (cur_health < 0.1f)
+        {
+            return;
+        }
+       
         cur_health -= damaged;
         
         if (cur_health < 0f)
@@ -69,23 +90,15 @@ public class Health : MonoBehaviour
 
         // Build them truong hop pha huy vat can
         //Kiem tra va cham de dieu chinh thanh mau
-        
+
         if (this.gameObject.tag == GameConfig.ENEMY_TAG)
         {
-
-            
-            float scale = cur_health / max_health;
-            Debug.Log(cur_health);
-            Transform childPos = this.transform.GetChild(1).transform;
-
-            this.transform.GetChild(1).transform.DOScaleX(scale * 0.8f, 0.2f);
-            this.transform.GetChild(1).gameObject.SetActive(true);
-            this.transform.GetChild(2).gameObject.SetActive(true);
+            UpdateHealthUIEnemy();
 
         }
 
         // Hoat anh chet
-        if (cur_health <= 0)
+        if (cur_health <= 0.1f)
         {
             if (this.tag == GameConfig.ENEMY_TAG)
             {
@@ -95,7 +108,7 @@ public class Health : MonoBehaviour
             else if (this.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
             {
                 Destroy(gameObject);
-                
+
             }
 
         }
@@ -132,9 +145,9 @@ public class Health : MonoBehaviour
         {
             OnHealthChanged.Invoke(cur_health, max_health);
         }
-        
+
     }
-    
+
     public void OnDied()
     {
         Destroy(this.gameObject);
@@ -142,10 +155,10 @@ public class Health : MonoBehaviour
     }
     void Awake()
     {
-    
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
-        
+
     }
     void Start()
     {
@@ -157,7 +170,7 @@ public class Health : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            
+
             OnDamaged(20);
         }
         if (Input.GetKeyDown(KeyCode.K))

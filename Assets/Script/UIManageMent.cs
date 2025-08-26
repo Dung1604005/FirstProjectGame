@@ -25,8 +25,12 @@ public class UIManageMent : MonoBehaviour
 
     [SerializeField] private Health healthPlayer; 
     [SerializeField] private Image hpBar;
-
-    [SerializeField] private float fillTarget;
+    
+    [SerializeField] private float fillTargetHp;
+    [Header("EXP")]
+    [SerializeField] private Image expBar;
+    [SerializeField] private ExpSystem expSystem;
+    [SerializeField] private float fillTargetExp;
     [SerializeField] private float fillSpeed;
 
     //Canh bao
@@ -44,7 +48,11 @@ public class UIManageMent : MonoBehaviour
     // Cap nhat thanh mau
     public void SetHealthBar(float hp, float mx)
     {
-        fillTarget = hp / mx;
+        fillTargetHp = hp / mx;
+    }
+    public void SetExpBar(float exp, float mx)
+    {
+        fillTargetExp = exp / mx;
     }
 
     void Awake()
@@ -68,6 +76,7 @@ public class UIManageMent : MonoBehaviour
     {
         // Khi OnHealh duoc goi thi sethealth cung duoc goi
         healthPlayer.OnHealthChanged.AddListener(SetHealthBar);
+        expSystem.OnExpChange.AddListener(SetExpBar);
     }
 
 
@@ -75,9 +84,13 @@ public class UIManageMent : MonoBehaviour
     void Update()
     {
         // Dich chuyen thanh mau
-        if (hpBar.fillAmount != fillTarget)
+        if (hpBar.fillAmount != fillTargetHp)
         {
-            hpBar.fillAmount = Mathf.Lerp(hpBar.fillAmount, fillTarget, fillSpeed * Time.deltaTime);
+            hpBar.fillAmount = Mathf.Lerp(hpBar.fillAmount, fillTargetHp, fillSpeed * Time.deltaTime);
+        }
+        if (expBar.fillAmount != fillTargetExp)
+        {
+            expBar.fillAmount = Mathf.Lerp(expBar.fillAmount, fillTargetExp, fillSpeed * Time.deltaTime);
         }
     }
 }

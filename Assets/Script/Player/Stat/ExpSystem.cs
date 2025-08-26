@@ -38,11 +38,13 @@ public class ExpSystem : MonoBehaviour
         }
         UIManageMent.Instance.ExpStatSystemUI.UpdateLvUI(lv.ToString());
         UIManageMent.Instance.ExpStatSystemUI.UpdatePointStatUI(pointStat.ToString());
+        OnExpChange?.Invoke(curExp, expToLvUp);
 
     }
     public void GainExp(float addExp)
     {
-        curExp += addExp;
+        curExp += addExp;   
+        //Debug.Log(curExp / expToLvUp);
         LvUp();
     }
     void Start()
@@ -52,6 +54,7 @@ public class ExpSystem : MonoBehaviour
         pointStat = 0;
         UIManageMent.Instance.ExpStatSystemUI.UpdateLvUI(lv.ToString());
         UIManageMent.Instance.ExpStatSystemUI.UpdatePointStatUI(pointStat.ToString());
+        UIManageMent.Instance.SetExpBar(0f, 1f);
     }
 
 }

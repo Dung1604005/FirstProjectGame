@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "AttackMeleeEnemyHitBox")
         {
-            float dam = collision.gameObject.GetComponentInParent<EnemyMelee>().GetDame();
+            float dam = collision.gameObject.GetComponentInParent<EnemyMelee>().GetDamage();
             this.GetComponent<Health>().OnDamaged(dam);
         }
 

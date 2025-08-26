@@ -22,8 +22,10 @@ public class BulletController : MonoBehaviour
     //Kiem tra va cham voi dich
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "HitBox_Enemy")
+        Debug.Log("Damaged");
+        if (collision.tag == GameConfig.HITBOX_ENEMY)
         {
+            
             collision.gameObject.GetComponentInParent<Health>().OnDamaged(damaged);
         }
         if (collision.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
