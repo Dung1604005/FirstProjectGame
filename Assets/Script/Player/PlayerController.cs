@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     public Health Health => health;
     public static PlayerController Instance { get; private set; }
     private Rigidbody2D rb;
-    private bool usingGun = false;
+    private bool usingWeapon = false;
     private bool punching = false;
 
     private bool swapping = false;
@@ -46,15 +46,15 @@ public class PlayerController : MonoBehaviour
     }
 
     // Tao anim cho Blend tree
-    public void EquipGunAnim()
+    public void EquipWeaponAnim()
     {
-        usingGun = true;
-        anim.SetBool("UsingGun", usingGun);
+        usingWeapon = true;
+        anim.SetBool("UsingWeapon", usingWeapon);
     }
-    public void UnEquipGunAnim()
+    public void UnEquipWeaponAnim()
     {
-        usingGun = false;
-        anim.SetBool("UsingGun", usingGun);
+        usingWeapon = false;
+        anim.SetBool("UsingWeapon", usingWeapon);
     }
     public void AnimUpdate(float x, float y)
     {
@@ -103,9 +103,13 @@ public class PlayerController : MonoBehaviour
         {
             if (weapon.Attacking == false)
             {
-                if (usingGun)
+                if (usingWeapon)
                 {
-                    weapon.UpdateAnim(movex, movey);
+                    if (weapon.WeaponData.Type == ItemType.Gun)
+                    {
+                        weapon.UpdateAnim(movex, movey);
+                    }
+                    
                 }
                 AnimUpdate(movex, movey);
             }
@@ -222,7 +226,7 @@ public class PlayerController : MonoBehaviour
         }
         if (itemData == null)
         {
-            UnEquipGunAnim();
+            UnEquipWeaponAnim();
             weapon = null;
             return;
         }
@@ -230,7 +234,7 @@ public class PlayerController : MonoBehaviour
         if (itemData.Type == ItemType.Gun)
         {
             
-            EquipGunAnim();
+            EquipWeaponAnim();
             GunData gunData = itemData as GunData;
            
             weaponPrefab = Instantiate(gunData.Gun.gameObject, this.transform.GetChild(2).transform);
@@ -239,7 +243,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            UnEquipGunAnim();
+            UnEquipWeaponAnim();
         }
         if (itemData.Type != ItemType.Melee)
         {
@@ -249,7 +253,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            
+            EquipWeaponAnim();
             MeleeData meleeData = itemData as MeleeData;
             weaponPrefab = Instantiate(meleeData.Melee.gameObject, this.transform.GetChild(2).transform);
             weapon = weaponPrefab.GetComponent<Weapon>();

@@ -15,7 +15,7 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (icon == null)
+            if (icon == null ||UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.GetItemData(index) == null)
             {
                 return;
             }

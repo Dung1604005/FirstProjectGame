@@ -15,7 +15,7 @@ public enum MoveState
 public abstract class EnemyBase : MonoBehaviour
 {
 
-
+  
     [SerializeField] protected Rigidbody2D rb;
 
     protected Health healthSystem;

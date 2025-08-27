@@ -6,6 +6,7 @@ public abstract class Weapon : MonoBehaviour
 {
 
     [SerializeField] protected WeaponData weaponData;
+    [SerializeField] protected SpriteRenderer spriteRenderer;
     protected bool attacking;
     public bool Attacking => attacking;
 

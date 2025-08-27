@@ -15,12 +15,25 @@ public class Gun : Weapon
     void Awake()
     {
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         attacking = false;
     }
     public override void UpdateAnim(float dirX, float dirY)
     {
-        
+        if (dirX > 0.01f || dirX < -0.01f)
+        {
+            spriteRenderer.sortingOrder = 2;
+        }
+        else if (dirY < 0.1f)
+        {
+            spriteRenderer.sortingOrder = 2;
+        }
+        else
+        {
+            spriteRenderer.sortingOrder = 0;
+        }
+       
         if (dirX == 0f && dirY == 0f)
         {
             // ANimation down
@@ -30,6 +43,7 @@ public class Gun : Weapon
         }
         else
         {
+
             anim.SetFloat("DirX", dirX);
             anim.SetFloat("DirY", dirY);
         }
@@ -53,19 +67,21 @@ public class Gun : Weapon
         Vector2 dir = (mousePos - playerPos).normalized;
         Vector2 reach = playerPos + dir * radius_bullet;
         GameObject bullet = Instantiate(gunData.Bullet, reach, Quaternion.identity);
-        dir = (mousePos - (Vector2)bullet.transform.position).normalized;
+        
+        
+        Debug.Log(dir.x + ", " + dir.y);
         if (weaponData.ItemName == "ShotGun")
         {
             // Ban 2 vien lech goc angleShotGun
-            Debug.Log("SHOTGUN");
+
             GameObject bullet2 = Instantiate(gunData.Bullet, reach, Quaternion.identity);
             GameObject bullet3 = Instantiate(gunData.Bullet, reach, Quaternion.identity);
             bullet2.GetComponent<BulletController>().SetDamaged(weaponData.Damaged);
-            
 
-            bullet2.GetComponent<BulletController>().Fire(Quaternion.Euler(0, 0, angleShotGun)*dir);
+
+            bullet2.GetComponent<BulletController>().Fire(Quaternion.Euler(0, 0, angleShotGun) * dir);
             bullet3.GetComponent<BulletController>().SetDamaged(weaponData.Damaged);
-            bullet3.GetComponent<BulletController>().Fire(Quaternion.Euler(0, 0,-angleShotGun)*dir);
+            bullet3.GetComponent<BulletController>().Fire(Quaternion.Euler(0, 0, -angleShotGun) * dir);
 
 
         }

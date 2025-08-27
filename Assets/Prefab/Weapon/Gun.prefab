@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 76dc3ab3e763b5e4b92bb3aa2dc0021d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,5 +120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 74d4cc9e67f0fed41a229c3bedf07b9c, type: 2}
+  spriteRenderer: {fileID: 0}
+  anim: {fileID: 0}
   radius_bullet: 2
   delayTimeAfterShoot: 0.2
+  angleShotGun: 0
+  strengthShake: 0

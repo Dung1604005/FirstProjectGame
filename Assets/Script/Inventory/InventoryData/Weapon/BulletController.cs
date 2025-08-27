@@ -49,6 +49,7 @@ public class BulletController : MonoBehaviour
     public void Fire(Vector2 dir)
     {
 
+    
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg ;
         transform.rotation = Quaternion.Euler(0, 0, angle);
         rb.velocity = dir * moveSpeed;
