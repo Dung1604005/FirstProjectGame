@@ -19,5 +19,5 @@ MonoBehaviour:
   itemName: Bandage
   index: 1
   icon: {fileID: 21300000, guid: f75338416f3f55242a8e38a6359355bb, type: 3}
-  value: 30
+  value: 50
   hpRecover: 30

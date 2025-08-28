@@ -8,6 +8,11 @@ using TMPro;
 public class UIManageMent : MonoBehaviour
 {
     public static UIManageMent Instance{ get; set; }
+    [Header("SHOP")]
+    [SerializeField] private ShopSystem shopSystem;
+    public ShopSystem ShopSystem => shopSystem;
+    [SerializeField] private TextMeshProUGUI goldText;
+    public TextMeshProUGUI GoldText => goldText;
     [Header("EXPSTAT")]
     [SerializeField] private ExpStatSystemUI expStatSystemUI;
     public ExpStatSystemUI ExpStatSystemUI => expStatSystemUI;
@@ -54,6 +59,10 @@ public class UIManageMent : MonoBehaviour
     {
         fillTargetExp = exp / mx;
     }
+    public void SetGoldText(string text)
+    {
+        goldText.text = text;
+    }
 
     void Awake()
     {
@@ -77,6 +86,10 @@ public class UIManageMent : MonoBehaviour
         // Khi OnHealh duoc goi thi sethealth cung duoc goi
         healthPlayer.OnHealthChanged.AddListener(SetHealthBar);
         expSystem.OnExpChange.AddListener(SetExpBar);
+        inventoryUI.TurnOff();
+        expStatSystemUI.TurnOff();
+        ShopSystem.TurnOff();
+        
     }
 
 
@@ -92,5 +105,6 @@ public class UIManageMent : MonoBehaviour
         {
             expBar.fillAmount = Mathf.Lerp(expBar.fillAmount, fillTargetExp, fillSpeed * Time.deltaTime);
         }
+
     }
 }

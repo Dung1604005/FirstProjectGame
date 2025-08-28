@@ -19,5 +19,5 @@ MonoBehaviour:
   itemName: MedKit
   index: 4
   icon: {fileID: 21300000, guid: 4fe51e3a0bdbc904ba737bcfd0052592, type: 3}
-  value: 100
+  value: 150
   hpRecover: 70

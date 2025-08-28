@@ -16,6 +16,7 @@ public class ContextMenu : MonoBehaviour
 
     private int index;
     public int Index => index;
+    private int price;
     public void TurnOn()
     {
         this.gameObject.SetActive(true);
@@ -45,6 +46,7 @@ public class ContextMenu : MonoBehaviour
     public void UpdateIndex(int _index)
     {
         index = _index;
+        price = UIManageMent.Instance.InventoryUI.Inven.GetSlotData(index).ItemData.Value / 2;
     }
     public void Drop()
     {
@@ -53,6 +55,8 @@ public class ContextMenu : MonoBehaviour
     }
     public void Sell()
     {
+        PlayerController.Instance.Gold.AddGold(price);
+        UIManageMent.Instance.InventoryUI.Inven.Remove(index, 1);
         TurnOff();
 
     }

@@ -10,6 +10,9 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Weapon weapon;
+    private GoldPlayer gold;
+    public GoldPlayer Gold => gold;
+    
 
     private GameObject weaponPrefab;
 
@@ -89,7 +92,7 @@ public class PlayerController : MonoBehaviour
     //Di chuyen
     void Move()
     {
-        Debug.Log("MOVE");
+       
         float movex = Input.GetAxis("Horizontal");
         float movey = Input.GetAxis("Vertical");
         if (weapon == null)
@@ -153,6 +156,7 @@ public class PlayerController : MonoBehaviour
         expSystem = GetComponent<ExpSystem>();
         stat = GetComponent<StatPlayer>();
         health = GetComponent<Health>();
+        gold = GetComponent<GoldPlayer>();
         weapon = null;
         if (Instance == null)
         {

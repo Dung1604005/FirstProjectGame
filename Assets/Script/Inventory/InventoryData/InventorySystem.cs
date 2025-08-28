@@ -97,13 +97,16 @@ public class InventorySystem
 
     public void Remove(int index, int amount)
     {
+    
         if (index < slots.Count)
         {
+            Debug.Log("HERE");
             if (slots[index].ItemData != null)
             {
                 // Xoa 1 vat pham
 
                 slots[index].Add(-amount);
+
                 if (slots[index].Count == 0)
                 {
                     slots[index].Set(null, 0);
