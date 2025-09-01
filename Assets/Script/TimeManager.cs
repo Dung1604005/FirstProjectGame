@@ -16,6 +16,10 @@ public class TimeManager : MonoBehaviour
     public TimeState TimeState => timeState;
 
     [SerializeField] private float timerPerDay;
+    [SerializeField] private float dayIntense;
+    [SerializeField] private float midDayIntense;
+    [SerializeField] private float nightIntense;
+    [SerializeField] private float midNightIntense;
     private float elapseTime = 0f;
     private void Awake()
     {
@@ -32,16 +36,16 @@ public class TimeManager : MonoBehaviour
         elapseTime += Time.deltaTime;
 
         float t = (elapseTime /  (timerPerDay*60f)) % 1f;
-        Debug.Log(t);
-        if (t <= 0.25f)
+        //Debug.Log(t);
+        if (t <= 0.15f)
         {
             OnDay();
         }
-        else if (t <= 0.5f)
+        else if (t <= 0.4f)
         {
             OnMidDay();
         }
-        else if (t <= 0.75f)
+        else if (t <= 0.55f)
         {
             OnNight();
         }
@@ -56,26 +60,26 @@ public class TimeManager : MonoBehaviour
     {
         
         light2D.color = new Color32(243, 199, 138, 255);
-        animationCurve = AnimationCurve.EaseInOut(0, 0.2f, 0.25f, 0.55f);
+        animationCurve = AnimationCurve.EaseInOut(0, midNightIntense, 0.1f, dayIntense);
     }
     public void OnMidDay()
     {
         
         light2D.color = new Color32(255, 245, 224, 255);
-         animationCurve = AnimationCurve.EaseInOut(0.25f, 0.55f, 0.5f, 1f);
+        animationCurve = AnimationCurve.EaseInOut(0.2f, dayIntense, 0.3f, midDayIntense);
 
     }
     public void OnNight()
     {
         
         light2D.color = new Color32(233, 155, 116, 255);
-        animationCurve = AnimationCurve.EaseInOut(0.5f, 1f, 0.75f, 0.55f);
+        animationCurve = AnimationCurve.EaseInOut(0.4f, midDayIntense, 0.5f, nightIntense);
     }
     public void OnMidNight()
     {
         
         light2D.color = new Color32(24, 38, 61, 255);
-        animationCurve = AnimationCurve.EaseInOut(0.75f, 0.55f, 1f, 0.2f);
+        animationCurve = AnimationCurve.EaseInOut(0.55f, nightIntense, 0.65f, midNightIntense);
     }
 
 }
