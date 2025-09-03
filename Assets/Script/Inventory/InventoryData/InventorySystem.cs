@@ -64,13 +64,13 @@ public class InventorySystem
                 if (item.Stackable)
                 {
                     slot.Set(item, amount);
-
                 }
                 else
                 {
                     slot.Set(item, 1);
                 }
-
+                Debug.Log("ADD");
+                UIManageMent.Instance.AddItemToQueue(item, amount);
                 OnChangeInventory?.Invoke();
                 return;
 
@@ -86,6 +86,8 @@ public class InventorySystem
 
                         slot.Add(amount);
                         OnChangeInventory?.Invoke();
+                        Debug.Log("ADD");
+                        UIManageMent.Instance.AddItemToQueue(item, amount);
                         return;
 
                     }
