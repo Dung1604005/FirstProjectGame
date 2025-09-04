@@ -10,6 +10,8 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Weapon weapon;
+
+    [SerializeField] private int curSlotEquip;
     private GoldPlayer gold;
     public GoldPlayer Gold => gold;
     
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
         float x = Mathf.Cos(angle);
 
 
-        Debug.Log(x + " " + y);
+        
         anim.SetTrigger("Punch");
         AnimUpdate(x, y);
     }
@@ -228,6 +230,10 @@ public class PlayerController : MonoBehaviour
             weapon = null;
             Destroy(weaponPrefab);
         }
+      
+        UIManageMent.Instance.EquipmentSystemUI.Slots[curSlotEquip].UnSelectSlot();
+        UIManageMent.Instance.EquipmentSystemUI.Slots[slot].SelectSlot();
+        curSlotEquip = slot;
         if (itemData == null)
         {
             UnEquipWeaponAnim();
@@ -237,10 +243,10 @@ public class PlayerController : MonoBehaviour
         
         if (itemData.Type == ItemType.Gun)
         {
-            
+
             EquipWeaponAnim();
             GunData gunData = itemData as GunData;
-           
+
             weaponPrefab = Instantiate(gunData.Gun.gameObject, this.transform.GetChild(2).transform);
             weapon = weaponPrefab.GetComponent<Weapon>();
             return;

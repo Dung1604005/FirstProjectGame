@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class FloatingObject : MonoBehaviour
@@ -10,22 +11,30 @@ public class FloatingObject : MonoBehaviour
     [SerializeField] private float defaultY;
     [SerializeField] private int indexItem;
     [SerializeField] private float offSet;
+
+    [SerializeField] private float rangePick;
+
+    [SerializeField] private float moveSpeed;
+
+    [SerializeField] private int amount;
+
     private float timer = 0f;
 
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        
+
 
     }
     void Start()
     {
         defaultY = transform.position.y;
     }
-    public void SetInfo(int index)
+    public void SetInfo(int index, int _amount)
     {
         indexItem = index;
         spriteRenderer.sprite = GameManageMent.Instance.ItemDataBase.ItemDatas[index].Icon;
+        amount = _amount;
 
     }
     private void Floating()
@@ -52,16 +61,61 @@ public class FloatingObject : MonoBehaviour
         transform.position = pos;
     }
 
-    void Update()
+    public void AddToPlayer(Vector2 dir)
+    {
+        
+        this.transform.Translate(dir * Time.deltaTime * moveSpeed);
+    }
+    public void OnPick()
+    {
+        Vector2 pos = transform.position;
+        float range = (PlayerController.Instance.getPos() - pos).sqrMagnitude;
+        
+
+
+        if (GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Type == ItemType.Material)
+        {
+
+            AddToPlayer((PlayerController.Instance.getPos() - pos).normalized);
+            if (range <= 3f)
+            {
+                UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount);
+                Destroy(gameObject);
+            }
+        }
+        else
+        {
+            
+        }
+    }
+
+    void FixedUpdate()
     {
         timer += Time.deltaTime;
         timer %= 1f;
-        Floating();
+        Vector2 pos = transform.position;
+        float range = (PlayerController.Instance.getPos() - pos).sqrMagnitude;
+        if (range > rangePick * rangePick)
+        {
+            Floating();
+        }
+        else
+        {
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount))
+            {
+                OnPick();
+            }
+            else
+            {
+                Floating();
+            }
+        }
+        
 
-        
-        //Debug.Log(transform.position.y);
-        
-        
-        
+
+
+
+
+
     }
 }

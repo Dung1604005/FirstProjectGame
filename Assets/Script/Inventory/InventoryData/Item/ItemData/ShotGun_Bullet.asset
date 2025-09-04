@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b533dad25f4fbaf44afe6be515abb99f, type: 3}
+  m_Name: ShotGun_Bullet
+  m_EditorClassIdentifier: 
+  description: Bullet for shotgun
+  stackable: 1
+  maxStack: 99
+  type: 3
+  itemName: ShotGun_Bullet
+  index: 10
+  icon: {fileID: 21300000, guid: ec6a2d4a83186834f9381358ea9caddc, type: 3}
+  value: 50
+  amount: 5

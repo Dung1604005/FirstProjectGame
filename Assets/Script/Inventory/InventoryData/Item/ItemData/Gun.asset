@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22583668536c6d74cb80a312cba6f968, type: 3}
   m_Name: Gun
   m_EditorClassIdentifier: 
-  description: a pistol that no one need
+  description: A gun from your dad
   stackable: 0
   maxStack: 1
   type: 1
-  itemName: Pistol
-  index: 0
-  icon: {fileID: 21300000, guid: c1fc3e0a29392e848b5f9c1cd7d75ef0, type: 3}
-  value: 200
+  itemName: Gun
+  index: 5
+  icon: {fileID: 21300000, guid: 4685cb63763d6e344a568d33e334b317, type: 3}
+  value: 400
   damaged: 30
-  coolDown: 1
-  bullet: {fileID: 5891252105905767901, guid: 5a529558ae254c04db826dd4ab4d6377, type: 3}
-  gun: {fileID: 1544478468110989626, guid: 846e8c6d25b487840ae1ab87149742a9, type: 3}
+  coolDown: 0.7
+  bullet: {fileID: 3503186805714729074, guid: 4ff532beb7275ae48b631f931b60abec, type: 3}
+  gun: {fileID: 2471267266265702773, guid: ce430a3473feef847be62ae3270e5782, type: 3}

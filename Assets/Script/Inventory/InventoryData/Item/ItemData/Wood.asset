@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd25a416b60ca446b73e80190782fbb, type: 3}
-  m_Name: HpPotion 1
+  m_Script: {fileID: 11500000, guid: b8c2ca621d56e2d4a903456447c03de9, type: 3}
+  m_Name: Wood
   m_EditorClassIdentifier: 
-  description: a new medkit
+  description: a wood
   stackable: 1
   maxStack: 99
-  type: 0
-  itemName: MedKit
-  index: 4
-  icon: {fileID: 21300000, guid: 4fe51e3a0bdbc904ba737bcfd0052592, type: 3}
-  value: 150
-  hpRecover: 70
+  type: 4
+  itemName: Wood
+  index: 6
+  icon: {fileID: 21300000, guid: 97e5943a1905df147a97a25b1f58cc70, type: 3}
+  value: 1

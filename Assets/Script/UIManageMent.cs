@@ -103,7 +103,17 @@ public class UIManageMent : MonoBehaviour
 
     public void AddItemToQueue(ItemData itemData, int mount)
     {
-        addedItemQueue.Enqueue(new Pair<ItemData, int>(itemData, mount));
+        
+        if (popUpAddedItem.State == true && itemData.ItemName == popUpAddedItem.Name.text && itemData.MaxStack >= mount + popUpAddedItem.Stock)
+        {
+            popUpAddedItem.UpdateAmount(mount);
+        }
+        else
+        {
+            Debug.Log("queue here");
+            addedItemQueue.Enqueue(new Pair<ItemData, int>(itemData, mount));
+        }
+        
 
     }
     void Start()
@@ -116,7 +126,7 @@ public class UIManageMent : MonoBehaviour
         ShopSystem.TurnOff();
         PopUpAddedItem.TurnOff();
     }
-
+    int c = 0;
 
     // Update is called once per frame
     void Update()
@@ -130,12 +140,14 @@ public class UIManageMent : MonoBehaviour
         {
             expBar.fillAmount = Mathf.Lerp(expBar.fillAmount, fillTargetExp, fillSpeed * Time.deltaTime);
         }
-        if (addedItemQueue.Count > 0 && popUpAddedItem.PopUpAddedItemImage.color.a == 0)
+        
+        if (addedItemQueue.Count > 0 && popUpAddedItem.PopUpAddedItemImage.color.a <= 0.000001f)
         {
-
+            c += 1;
+            Debug.Log(c);
             popUpAddedItem.SetInfo(addedItemQueue.Peek().First.Icon, addedItemQueue.Peek().Second, addedItemQueue.Peek().First.ItemName);
             addedItemQueue.Dequeue();
-            
+
         }
 
     }

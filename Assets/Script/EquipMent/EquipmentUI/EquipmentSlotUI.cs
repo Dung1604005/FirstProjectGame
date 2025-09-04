@@ -8,19 +8,27 @@ using UnityEngine.UI;
 public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Image icon;
+    [SerializeField] private Image backGround;
+    [SerializeField] private Sprite select;
+    [SerializeField] private Sprite unSelect;
     private int index;
     public int Index => index;
+
+    public void Awake()
+    {
+        backGround = GetComponent<Image>();
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (icon == null ||UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.GetItemData(index) == null)
+            if (icon == null || UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.GetItemData(index) == null)
             {
                 return;
             }
 
-            
+
             UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.TryUnEquip(index);
         }
     }
@@ -28,6 +36,14 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
     {
         icon.sprite = _icon;
         index = _index;
+    }
+    public void SelectSlot()
+    {
+        backGround.sprite = select;
+    }
+    public void UnSelectSlot()
+    {
+        backGround.sprite = unSelect;
     }
     public void UpdateUI(Sprite _icon, int _index)
     {
