@@ -52,7 +52,7 @@ public class GameManageMent : MonoBehaviour
     {
         
         gameState = GameState.Continue;
-       
+       Application.targetFrameRate = 60;
 
     }
     public void OpenInventory()
@@ -92,7 +92,7 @@ public class GameManageMent : MonoBehaviour
     
     public void OpenShop()
     {
-         if (Input.GetKeyDown(KeyCode.E))
+         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (UIManageMent.Instance.ShopSystem.gameObject.activeInHierarchy)
             {

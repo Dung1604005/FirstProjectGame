@@ -26,6 +26,7 @@ public class Health : MonoBehaviour
         return max_health;
     }
 
+    
     private void OnDamagedEffect()
     {
 

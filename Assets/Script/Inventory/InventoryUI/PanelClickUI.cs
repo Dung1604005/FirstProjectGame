@@ -13,6 +13,8 @@ public class PanelClickUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI name_item;
 
+    
+
 
     public void UpdateContent(Sprite Icon, string Description, string NameItem, string Stat = null)
     {
