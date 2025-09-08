@@ -19,12 +19,17 @@ public class GameManageMent : MonoBehaviour
     [Header("Inventory")]
 
     [SerializeField] private InventoryUI inventoryUI;
+
+    [Header("BuildMode")] 
+    
+    [SerializeField] private BuildManager buildManager;
+    public BuildManager BuildManager => buildManager;
     
     public void PauseGame()
     {
-        
+
         gameState = GameState.Pause;
-        
+
     }
     public void Continue()
     {
@@ -50,9 +55,10 @@ public class GameManageMent : MonoBehaviour
     }
     void Start()
     {
-        
+
         gameState = GameState.Continue;
-       Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
+       buildManager = GetComponent<BuildManager>();
 
     }
     public void OpenInventory()
@@ -164,10 +170,7 @@ public class GameManageMent : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            UIManageMent.Instance.ShopSystem.Refresh();
-        }
+      
         
        
 

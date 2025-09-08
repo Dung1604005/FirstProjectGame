@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,9 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image backGround;
     [SerializeField] private Sprite select;
     [SerializeField] private Sprite unSelect;
+
+    [SerializeField] private TextMeshProUGUI amountText;
+    
     private int index;
     public int Index => index;
 
@@ -29,7 +33,12 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
             }
 
 
+
             UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.TryUnEquip(index);
+            if (index == PlayerController.Instance.CurSlotEquip)
+            {
+                PlayerController.Instance.UnEquipSlot();
+            }
         }
     }
     public EquipmentSlotUI(Sprite _icon, int _index)
@@ -45,7 +54,7 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
     {
         backGround.sprite = unSelect;
     }
-    public void UpdateUI(Sprite _icon, int _index)
+    public void UpdateUI(Sprite _icon, int _amount, int _index)
     {
         if (_icon == null)
         {
@@ -54,6 +63,14 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
         else
         {
             icon.gameObject.SetActive(true);
+        }
+        if (_amount > 0)
+        {
+            amountText.text = "x" + _amount.ToString();
+        }
+        else
+        {
+            amountText.text = "";
         }
         icon.sprite = _icon;
         index = _index;

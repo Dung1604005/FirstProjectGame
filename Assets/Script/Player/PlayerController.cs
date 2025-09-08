@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Weapon weapon;
 
     [SerializeField] private int curSlotEquip;
+    public int CurSlotEquip => curSlotEquip;
     private GoldPlayer gold;
     public GoldPlayer Gold => gold;
     
@@ -83,6 +84,7 @@ public class PlayerController : MonoBehaviour
             UIManageMent.Instance.InventoryUI.TurnOnPanelClick();
             if (Input.GetKeyDown(KeyCode.E))
             {
+                
                 hit.gameObject.GetComponent<FloatingObject>().PickUp();
             }
             
@@ -108,17 +110,20 @@ public class PlayerController : MonoBehaviour
     public void EquipWeaponAnim()
     {
         usingWeapon = true;
-        anim.SetBool("UsingWeapon", usingWeapon);
+        anim.SetBool(GameConfig.USINGWEAPON_BOOL, usingWeapon);
     }
     public void UnEquipWeaponAnim()
     {
         usingWeapon = false;
-        anim.SetBool("UsingWeapon", usingWeapon);
+        anim.SetBool(GameConfig.USINGWEAPON_BOOL, usingWeapon);
     }
     public void AnimUpdate(float x, float y)
     {
-        anim.SetFloat("MoveX", x);
-        anim.SetFloat("MoveY", y);
+        Debug.Log("Movve");
+        Vector2 a = new Vector2(x, y).normalized;
+        anim.SetFloat(GameConfig.MOVEX_FLOAT, x);
+        anim.SetFloat(GameConfig.MOVEY_FLOAT, y);
+        anim.SetFloat(GameConfig.SPEED_PARAMETER, a.sqrMagnitude);
     }
     public void UpdatePunchAnim()
     {
@@ -130,9 +135,10 @@ public class PlayerController : MonoBehaviour
 
 
         
-        anim.SetTrigger("Punch");
+        anim.SetTrigger(GameConfig.PUNCH_TRIGGER);
         AnimUpdate(x, y);
     }
+    
     public void EndPunch()
     {
         punching = false;
@@ -149,8 +155,8 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
        
-        float movex = Input.GetAxis("Horizontal");
-        float movey = Input.GetAxis("Vertical");
+        float movex = Input.GetAxis(GameConfig.HORIZONTAL);
+        float movey = Input.GetAxis(GameConfig.VERTICAL);
         if (weapon == null)
         {
             if (punching == false)
@@ -205,6 +211,133 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+     void UpdateCountDown()
+    {
+        if (weapon == null || weapon.Attacking == false)
+        {
+            
+            attackCountDown += Time.deltaTime;
+            if (weapon == null)
+            {
+                if (attackCountDown >= punchCountDown)
+                {
+                    Attack();
+                }
+            }
+            else
+            {
+                if (attackCountDown >= weapon.WeaponData.CoolDown)
+                {
+                    Attack();
+                }
+            }
+        }
+        else
+        {
+            attackCountDown = 0f;
+        }
+    }
+    public void UnEquipSlot()
+    {
+        weapon = null;
+        Destroy(weaponPrefab);
+        UnEquipWeaponAnim();
+        
+
+    }
+    public void EquipSlot(int slot)
+    {
+
+        ItemData itemData = UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.Slots[slot].ItemData;
+        ItemData lastItemData = UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.Slots[curSlotEquip].ItemData;
+        if (weapon != null)
+        {
+            weapon = null;
+            Destroy(weaponPrefab);
+        }
+        if (lastItemData != null && lastItemData.Type == ItemType.Buildable)
+        {
+            GameManageMent.Instance.BuildManager.TurnOffBuildMode();
+        }
+        UIManageMent.Instance.EquipmentSystemUI.Slots[curSlotEquip].UnSelectSlot();
+        UIManageMent.Instance.EquipmentSystemUI.Slots[slot].SelectSlot();
+        curSlotEquip = slot;
+        if (itemData == null)
+        {
+            UnEquipWeaponAnim();
+            weapon = null;
+            return;
+        }
+
+        if (itemData.Type == ItemType.Gun)
+        {
+
+            EquipWeaponAnim();
+            GunData gunData = itemData as GunData;
+
+            weaponPrefab = Instantiate(gunData.Gun.gameObject, this.transform.GetChild(2).transform);
+            weapon = weaponPrefab.GetComponent<Weapon>();
+            return;
+        }
+        else
+        {
+            UnEquipWeaponAnim();
+        }
+        if (itemData.Type != ItemType.Melee)
+        {
+            weapon = null;
+
+
+        }
+        else
+        {
+            EquipWeaponAnim();
+            MeleeData meleeData = itemData as MeleeData;
+            weaponPrefab = Instantiate(meleeData.Melee.gameObject, this.transform.GetChild(2).transform);
+            weapon = weaponPrefab.GetComponent<Weapon>();
+            return;
+        }
+
+        if (itemData.Type == ItemType.HpPotion || itemData.Type == ItemType.Bullet)
+        {
+            itemData.UseItem();
+            UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.UseSlot(slot, 1);
+
+        }
+        else if (itemData.Type == ItemType.Buildable)
+        {
+            BuildableData buildableData = itemData as BuildableData;
+            GameManageMent.Instance.BuildManager.TurnOnBuildMode(buildableData.Index_BuildableObject);
+        }
+    }
+    void ChooseSlot()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            EquipSlot(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+             EquipSlot(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+             EquipSlot(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            EquipSlot(3);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            EquipSlot(4);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            EquipSlot(5);
+        }
+    }
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -249,115 +382,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void UpdateCountDown()
-    {
-        if (weapon == null || weapon.Attacking == false)
-        {
-            
-            attackCountDown += Time.deltaTime;
-            if (weapon == null)
-            {
-                if (attackCountDown >= punchCountDown)
-                {
-                    Attack();
-                }
-            }
-            else
-            {
-                if (attackCountDown >= weapon.WeaponData.CoolDown)
-                {
-                    Attack();
-                }
-            }
-        }
-        else
-        {
-            attackCountDown = 0f;
-        }
-    }
-    public void EquipSlot(int slot)
-    {
-
-        ItemData itemData = UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.Slots[slot].ItemData;
-        if (weapon != null)
-        {
-            weapon = null;
-            Destroy(weaponPrefab);
-        }
-      
-        UIManageMent.Instance.EquipmentSystemUI.Slots[curSlotEquip].UnSelectSlot();
-        UIManageMent.Instance.EquipmentSystemUI.Slots[slot].SelectSlot();
-        curSlotEquip = slot;
-        if (itemData == null)
-        {
-            UnEquipWeaponAnim();
-            weapon = null;
-            return;
-        }
-        
-        if (itemData.Type == ItemType.Gun)
-        {
-
-            EquipWeaponAnim();
-            GunData gunData = itemData as GunData;
-
-            weaponPrefab = Instantiate(gunData.Gun.gameObject, this.transform.GetChild(2).transform);
-            weapon = weaponPrefab.GetComponent<Weapon>();
-            return;
-        }
-        else
-        {
-            UnEquipWeaponAnim();
-        }
-        if (itemData.Type != ItemType.Melee)
-        {
-            weapon = null;
-
-
-        }
-        else
-        {
-            EquipWeaponAnim();
-            MeleeData meleeData = itemData as MeleeData;
-            weaponPrefab = Instantiate(meleeData.Melee.gameObject, this.transform.GetChild(2).transform);
-            weapon = weaponPrefab.GetComponent<Weapon>();
-            return;
-        }
-        if (itemData.Type == ItemType.HpPotion)
-        {
-            HpPotionData hpPotionData = itemData as HpPotionData;
-            Health.OnHeal(hpPotionData.HpRecover);
-            UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.UseSlot(slot, 1);
-
-        }
-    }
-    void ChooseSlot()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            EquipSlot(0);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-             EquipSlot(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-             EquipSlot(2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            EquipSlot(3);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            EquipSlot(4);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            EquipSlot(5);
-        }
-    }
 
     void Update()
     {
@@ -369,6 +393,13 @@ public class PlayerController : MonoBehaviour
         UpdateCountDown();
         ChooseSlot();
         CheckHoverItem();
+        if (GameManageMent.Instance.BuildManager.BuildMode && Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (GameManageMent.Instance.BuildManager.BuildPlacement.CanPlace()) {
+                GameManageMent.Instance.BuildManager.BuildPlacement.PlaceObject();
+            }
+            
+        }
 
 
 

@@ -13,8 +13,8 @@ public class EnemyMelee : EnemyBase
             attacking = true;
             cur_coolDown = 0f;
             anim.SetTrigger("IsAttack");
-            anim.SetFloat("MoveX", x);
-            anim.SetFloat("MoveY", y);
+            anim.SetFloat(GameConfig.MOVEX_FLOAT, x);
+            anim.SetFloat(GameConfig.MOVEY_FLOAT, y);
             
             
         }

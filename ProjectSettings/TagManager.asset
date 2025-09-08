@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - DestroyObject
   - HitBox_Punch
+  - PlayerWall
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - HitBox_Enemy
   - Building
   - Item
-  - 
+  - PlayerWall
   - 
   - 
   - 

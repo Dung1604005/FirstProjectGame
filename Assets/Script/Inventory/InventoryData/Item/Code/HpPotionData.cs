@@ -8,5 +8,10 @@ public class HpPotionData : ItemData
     [SerializeField] private float hpRecover;
     public float HpRecover => hpRecover;
 
+    public override void UseItem()
+    {
+        PlayerController.Instance.Health.OnHeal(hpRecover);
+    }
+
     
 }

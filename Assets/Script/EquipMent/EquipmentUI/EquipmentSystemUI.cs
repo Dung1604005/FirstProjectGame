@@ -25,7 +25,7 @@ public class EquipmentSystemUI : MonoBehaviour
         {
             var slot = Instantiate(equipmentSlotUI, this.transform);
             slots.Add(slot);
-            slots[i].UpdateUI(null, i);
+            slots[i].UpdateUI(null, 0,  i);
         }
     }
 
@@ -36,11 +36,11 @@ public class EquipmentSystemUI : MonoBehaviour
             
             if (equipMentSystem.Slots[i].ItemData != null &&equipMentSystem.Slots[i].Count > 0 )
             {
-                slots[i].UpdateUI(equipMentSystem.Slots[i].ItemData.Icon, i);
+                slots[i].UpdateUI(equipMentSystem.Slots[i].ItemData.Icon,equipMentSystem.Slots[i].Count,  i);
             }
             else
             {
-                slots[i].UpdateUI(null, i);
+                slots[i].UpdateUI(null,0, i);
             }
         }
     }

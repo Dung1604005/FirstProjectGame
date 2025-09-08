@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum ItemType
 {
-    HpPotion, Gun, Melee, Bullet, Material
+    HpPotion, Gun, Melee, Bullet, Material, Buildable
 }
 
 
@@ -29,6 +29,11 @@ public abstract class ItemData : ScriptableObject
 
     [SerializeField] int value;
     public int Value => value;
+
+    public virtual void UseItem()
+    {
+        
+    }
 
 }
 

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class GameConfig : MonoBehaviour
 {
+    public static string HORIZONTAL = "Horizontal";
+
+    public static string VERTICAL = "Vertical";
     public static String PLAYER_TAG0 = "Player";
     public static String DESTROYABLE_OBJECT_TAG = "DestroyObject";
 
@@ -12,8 +15,23 @@ public class GameConfig : MonoBehaviour
 
     public static String HITBOX_ENEMY = "HitBox_Enemy";
 
+    public static string SPEED_PARAMETER = "Speed";
+
     public static string HITBOX_PUNCH = "HitBox_Punch";
 
     public static string ITEM_MASK = "Item";
+
+    public static string PUNCH_TRIGGER = "Punch";
+
+    public static string LOOT_TRIGGER = "Loot";
+    public static string MOVEX_FLOAT = "MoveX";
+    public static string MOVEY_FLOAT = "MoveY";
+    public static string DIRX_FLOAT = "DirX";
+    public static string DIRY_FLOAT = "DirY";
+
+    public static string USINGWEAPON_BOOL = "UsingWeapon";
+
+   
+
     
 }
