@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PopUpAddedItem : MonoBehaviour
 {
-    private Image popUpAddedItemImage;
+    [SerializeField] private Image popUpAddedItemImage;
     public Image PopUpAddedItemImage => popUpAddedItemImage;
 
     private float defaultAlpha;
@@ -33,6 +33,7 @@ public class PopUpAddedItem : MonoBehaviour
     {
         popUpAddedItemImage = GetComponent<Image>();
         defaultAlpha = popUpAddedItemImage.color.a;
+        TurnOff();
     }
 
     public void SetInfo(Sprite _icon, int _amount, string _name)
@@ -63,10 +64,11 @@ public class PopUpAddedItem : MonoBehaviour
         name.DOFade(1f, 0.5f);
         Icon.DOFade(1f, 0.5f);
     }
+    
     public void TurnOff()
     {
-        
-        popUpAddedItemImage.DOFade(0, 0.5f).OnComplete(()=> state = false);
+
+        popUpAddedItemImage.DOFade(0, 0.5f).OnComplete(() => state = false);
         amount.DOFade(0f, 0.5f);
         name.DOFade(0f, 0.5f);
         Icon.DOFade(0f, 0.5f);

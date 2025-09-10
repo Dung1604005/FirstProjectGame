@@ -56,11 +56,11 @@ public class BuySystem : MonoBehaviour
     }
     public void Buy()
     {
-        if (PlayerController.Instance.Gold.TryBuy(priceNumb))
+        if (GameManageMent.Instance.PlayerManager.Gold.TryBuy(priceNumb))
         {
             if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(GameManageMent.Instance.ItemDataBase.ItemDatas[index], amountNumb))
             {
-                PlayerController.Instance.Gold.Buy(priceNumb);
+                GameManageMent.Instance.PlayerManager.Gold.Buy(priceNumb);
                 UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[index], amountNumb);
                 Cancel();
             }

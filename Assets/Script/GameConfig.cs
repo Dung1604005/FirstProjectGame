@@ -13,6 +13,8 @@ public class GameConfig : MonoBehaviour
 
     public static String ENEMY_TAG = "Enemy";
 
+    public static string GAMEMANAGER_TAG = "GameManager";
+
     public static String HITBOX_ENEMY = "HitBox_Enemy";
 
     public static string SPEED_PARAMETER = "Speed";
@@ -30,6 +32,12 @@ public class GameConfig : MonoBehaviour
     public static string DIRY_FLOAT = "DirY";
 
     public static string USINGWEAPON_BOOL = "UsingWeapon";
+
+    public static string COLORWHITERELOAD = "#FFFFFFFF";
+    public static string COLORREDRELOAD = "#FF5A5AFF";
+    public static string COLORYELLOWRELOAD = "#FFC14DFF";
+
+    
 
    
 

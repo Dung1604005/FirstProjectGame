@@ -21,7 +21,7 @@ public class Melee : Weapon
     {
         if (collision.tag == GameConfig.HITBOX_ENEMY)
         {
-            collision.gameObject.GetComponentInParent<Health>().OnDamaged(weaponData.Damaged + PlayerController.Instance.Stat.Atk);
+            collision.gameObject.GetComponentInParent<Health>().OnDamaged(weaponData.Damaged + GameManageMent.Instance.PlayerManager.Stat.Atk);
         }
     }
     
@@ -32,7 +32,7 @@ public class Melee : Weapon
         float y = Mathf.Sin(angle);
         float x = Mathf.Cos(angle);
         attacking = true;
-        PlayerController.Instance.AnimUpdate(x, y);
+        GameManageMent.Instance.PlayerManager.PlayerController.AnimUpdate(x, y);
         UpdateAnim(x, y);
 
     }

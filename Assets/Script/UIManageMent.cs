@@ -57,6 +57,10 @@ public class UIManageMent : MonoBehaviour
     [SerializeField] private float fillTargetExp;
     [SerializeField] private float fillSpeed;
 
+    [Header("BULLETUI")]
+    [SerializeField] private BulletUIController bulletUIController;
+    public BulletUIController BulletUIController => bulletUIController;
+
     //Canh bao
     public void UpdateWarning(string content)
     {
@@ -64,7 +68,9 @@ public class UIManageMent : MonoBehaviour
     }
     public void TurnOnWarning()
     {
+        Debug.Log("WARNING");
         warning.gameObject.SetActive(true);
+        warning.DOKill();
         warning.DOFade(0f, 2f).OnComplete(() => { warning.gameObject.SetActive(false); warning.alpha = 1f; });
 
     }
@@ -72,7 +78,9 @@ public class UIManageMent : MonoBehaviour
     // Cap nhat thanh mau
     public void SetHealthBar(float hp, float mx)
     {
+
         fillTargetHp = hp / mx;
+        Debug.Log(fillTargetHp);
     }
     public void SetExpBar(float exp, float mx)
     {
@@ -91,6 +99,12 @@ public class UIManageMent : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(this);
+        healthPlayer.OnHealthChanged.AddListener(SetHealthBar);
+        expSystem.OnExpChange.AddListener(SetExpBar);
+        inventoryUI.TurnOff();
+        expStatSystemUI.TurnOff();
+        ShopSystem.TurnOff();
+        
     }
     public void DoFadeIn(Image image, float duration)
     {
@@ -116,15 +130,11 @@ public class UIManageMent : MonoBehaviour
         
 
     }
+    
     void Start()
     {
         // Khi OnHealh duoc goi thi sethealth cung duoc goi
-        healthPlayer.OnHealthChanged.AddListener(SetHealthBar);
-        expSystem.OnExpChange.AddListener(SetExpBar);
-        inventoryUI.TurnOff();
-        expStatSystemUI.TurnOff();
-        ShopSystem.TurnOff();
-        PopUpAddedItem.TurnOff();
+        
     }
     int c = 0;
 

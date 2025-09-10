@@ -44,7 +44,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (other.tag == GameConfig.HITBOX_PUNCH)
         {
             
-            healthSystem.OnDamaged(PlayerController.Instance.Stat.Atk);
+            healthSystem.OnDamaged(GameManageMent.Instance.PlayerManager.Stat.Atk);
         }
     }
 
@@ -55,7 +55,7 @@ public abstract class EnemyBase : MonoBehaviour
     public void SetDie()
     {
         isDied = true;
-        PlayerController.Instance.ExpSystem.GainExp(enemyBaseData.ExpValue);
+        GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(enemyBaseData.ExpValue);
     }
     // State dung yen
     protected virtual void OnIdle()

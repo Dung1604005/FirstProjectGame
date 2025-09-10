@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Xml.Schema;
 using Cinemachine;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class Gun : Weapon
@@ -10,14 +13,62 @@ public class Gun : Weapon
     [SerializeField] private float angleShotGun;
     [SerializeField] private float strengthShake;
 
+    [SerializeField] private int curBullet;
+    public int CurBullet => curBullet;
+
+    private int totalBullet;
+    public int TotalBullet => totalBullet;
+
+    private bool reloading = false;
+    public bool Reloading => reloading;
+
+    private float timeReload = 0f;
+
+
     private CinemachineImpulseSource cinemachineImpulseSource;
-    
+    void UpdateCurStateBullet()
+    {
+        if (curBullet / (float)(WeaponData as GunData).MagSize >= 0.5f)
+        {
+            UIManageMent.Instance.BulletUIController.SetStateCurrentBulletColor(GameConfig.COLORWHITERELOAD);
+        }
+        else if (curBullet / (float)(WeaponData as GunData).MagSize >= 0.2f)
+        {
+            UIManageMent.Instance.BulletUIController.SetStateCurrentBulletColor(GameConfig.COLORYELLOWRELOAD);
+        }
+        else
+        {
+            UIManageMent.Instance.BulletUIController.SetStateCurrentBulletColor(GameConfig.COLORREDRELOAD);
+        }
+    }
     void Awake()
     {
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         attacking = false;
+        if (weaponData != null)
+        {
+            if (weaponData.ItemName == "ShotGun")
+            {
+
+                totalBullet = GameManageMent.Instance.PlayerManager.ShotgunBullet;
+            }
+            else if (weaponData.ItemName == "Pistol")
+            {
+
+                totalBullet = GameManageMent.Instance.PlayerManager.PistolBullet;
+            }
+            else if (weaponData.ItemName == "Gun")
+            {
+
+                totalBullet = GameManageMent.Instance.PlayerManager.GunBullet;
+            }
+        }
+        UIManageMent.Instance.BulletUIController.UpdateBulletUI((weaponData as GunData).BulletUI, curBullet, (weaponData as GunData).MagSize, totalBullet);
+        UIManageMent.Instance.BulletUIController.TurnOnBulletUI();
+        UpdateCurStateBullet();
+
     }
     public override void UpdateAnim(float dirX, float dirY)
     {
@@ -33,7 +84,7 @@ public class Gun : Weapon
         {
             spriteRenderer.sortingOrder = 0;
         }
-       
+
         if (dirX == 0f && dirY == 0f)
         {
             // ANimation down
@@ -57,19 +108,39 @@ public class Gun : Weapon
         EndAttack();
 
     }
+    IEnumerator WaitTimeReload(float time)
+    {
+        reloading = true;
+        timeReload = 0f;
+        yield return new WaitForSeconds(time);
+        reloading = false;
+        if (totalBullet >= (weaponData as GunData).MagSize - curBullet)
+        {
+            totalBullet -= (weaponData as GunData).MagSize - curBullet;
+            curBullet = (weaponData as GunData).MagSize;
+
+        }
+        else
+        {
+            curBullet += totalBullet;
+            totalBullet = 0;
+        }
+        UIManageMent.Instance.BulletUIController.UpdateBulletUI((weaponData as GunData).BulletUI, curBullet, (weaponData as GunData).MagSize, totalBullet);
+        UpdateCurStateBullet();
+    }
 
     public void Fire()
     {
         GunData gunData = weaponData as GunData;
-        Vector2 playerPos = PlayerController.Instance.getPos();
+        Vector2 playerPos = GameManageMent.Instance.PlayerManager.PlayerController.getPos();
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Vector2 dir = (mousePos - playerPos).normalized;
         Vector2 reach = playerPos + dir * radius_bullet;
         GameObject bullet = Instantiate(gunData.Bullet, reach, Quaternion.identity);
+
+
         
-        
-        Debug.Log(dir.x + ", " + dir.y);
         if (weaponData.ItemName == "ShotGun")
         {
             // Ban 2 vien lech goc angleShotGun
@@ -90,27 +161,69 @@ public class Gun : Weapon
         // Them vao sau hieu ung shake
         if (weaponData.ItemName == "ShotGun")
         {
-            Debug.Log("SHOOT");
+            
             cinemachineImpulseSource.GenerateImpulse(strengthShake);
         }
-        
-        
+
+        curBullet -= 1;
+        UpdateCurStateBullet();
+        UIManageMent.Instance.BulletUIController.UpdateCurrentBullet(curBullet);
 
         StartCoroutine(Couroutine(delayTimeAfterShoot));
 
     }
     public override void Attack(float dirX, float dirY)
     {
-
+        if(reloading)
+        {
+            UIManageMent.Instance.UpdateWarning("Reloading...");
+            UIManageMent.Instance.TurnOnWarning();
+            return;
+        }
+        if(curBullet <= 0)
+        {
+            UIManageMent.Instance.UpdateWarning("Out of Bullet, Reload!");
+            UIManageMent.Instance.TurnOnWarning();
+            return;
+        }
         float angle = Mathf.Atan2(dirY, dirX);
         float y = Mathf.Sin(angle);
         float x = Mathf.Cos(angle);
         attacking = true;
-        PlayerController.Instance.AnimUpdate(x, y);
+        GameManageMent.Instance.PlayerManager.PlayerController.AnimUpdate(x, y);
         UpdateAnim(x, y);
         Fire();
 
 
+    }
+    public void Reload()
+    {
+        if (!reloading)
+        {
+
+            if (totalBullet > 0)
+            {
+                StartCoroutine(WaitTimeReload((weaponData as GunData).ReloadTime));
+            }
+
+        }
+        else
+        {
+            UIManageMent.Instance.UpdateWarning("Reloading...");
+            UIManageMent.Instance.TurnOnWarning();
+        }
+    }
+
+    void Update()
+    {
+        if (!reloading)
+        {
+            
+            if (timeReload < (weaponData as GunData).ReloadTime)
+            {
+                timeReload += Time.deltaTime;
+            }
+        }
     }
 
 }

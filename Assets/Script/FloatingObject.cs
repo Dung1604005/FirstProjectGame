@@ -92,14 +92,14 @@ public class FloatingObject : MonoBehaviour
     public void AutoPick()
     {
         Vector2 pos = transform.position;
-        float range = (PlayerController.Instance.getPos() - pos).sqrMagnitude;
+        float range = (GameManageMent.Instance.PlayerManager.PlayerController.getPos() - pos).sqrMagnitude;
 
 
 
         if (GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Type == ItemType.Material||GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Type == ItemType.Bullet)
         {
 
-            AddToPlayer((PlayerController.Instance.getPos() - pos).normalized);
+            AddToPlayer((GameManageMent.Instance.PlayerManager.PlayerController.getPos() - pos).normalized);
             if (range <= 3f)
             {
                 UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount);
@@ -111,7 +111,7 @@ public class FloatingObject : MonoBehaviour
     public void PickUp()
     {
         Vector2 pos = transform.position;
-        float range = (PlayerController.Instance.getPos() - pos).sqrMagnitude;
+        float range = (GameManageMent.Instance.PlayerManager.PlayerController.getPos() - pos).sqrMagnitude;
         if (GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Type != ItemType.Material && GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Type != ItemType.Bullet)
         {
             if (range <= rangePick*rangePick)
@@ -128,7 +128,7 @@ public class FloatingObject : MonoBehaviour
         timer += Time.deltaTime;
         timer %= 1f;
         Vector2 pos = transform.position;
-        float range = (PlayerController.Instance.getPos() - pos).sqrMagnitude;
+        float range = (GameManageMent.Instance.PlayerManager.PlayerController.getPos() - pos).sqrMagnitude;
         if (range > rangePick * rangePick)
         {
             if (!isHover)

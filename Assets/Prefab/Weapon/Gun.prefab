@@ -126,3 +126,4 @@ MonoBehaviour:
   delayTimeAfterShoot: 0.2
   angleShotGun: 0
   strengthShake: 0
+  curBullet: 30

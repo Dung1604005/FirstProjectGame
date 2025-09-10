@@ -9,26 +9,13 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Weapon weapon;
+ 
+    private SlotPlayerController slotPlayerController;
+    public SlotPlayerController SlotPlayerController => slotPlayerController;
 
-    [SerializeField] private int curSlotEquip;
-    public int CurSlotEquip => curSlotEquip;
-    private GoldPlayer gold;
-    public GoldPlayer Gold => gold;
+    private LootSystem lootSystem;
+    public LootSystem LootSystem=> lootSystem;
     
-
-    private GameObject weaponPrefab;
-
-
-    private StatPlayer stat;
-    public StatPlayer Stat => stat;
-
-    private ExpSystem expSystem;
-    public ExpSystem ExpSystem => expSystem;
-
-    private Health health;
-    public Health Health => health;
-    public static PlayerController Instance { get; private set; }
     private Rigidbody2D rb;
     private bool usingWeapon = false;
     private bool punching = false;
@@ -38,8 +25,6 @@ public class PlayerController : MonoBehaviour
     private float attackCountDown = 0f;
 
     [SerializeField] private float punchCountDown;
-
-    [SerializeField] private FloatingObject lastFloatingObject;
 
     private Animator anim;
     // Kiem soat va cham
@@ -52,58 +37,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    public void CheckHoverItem()
-    {
-        LayerMask itemMask = LayerMask.GetMask(GameConfig.ITEM_MASK);
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Collider2D hit = Physics2D.OverlapPoint(mousePos, itemMask);
-        if (hit != null)
-        {
-            if (lastFloatingObject != null)
-            {
-                lastFloatingObject.SetStateHover(false);
-            }
-            ItemData itemHover = hit.gameObject.GetComponent<FloatingObject>().GetItemData();
-            lastFloatingObject = hit.gameObject.GetComponent<FloatingObject>();
-            lastFloatingObject.SetStateHover(true);
-            if (itemHover.Type == ItemType.Gun || itemHover.Type == ItemType.Melee)
-            {
-                WeaponData weaponHover = itemHover as WeaponData;
-
-                int damage = weaponHover.Damaged;
-                float cd = weaponHover.CoolDown;
-                string Stat = "DAME:" + damage.ToString() + "\n" + "CD:" + cd.ToString();
-                UIManageMent.Instance.InventoryUI.UpdatePanelClick(itemHover.Icon, itemHover.Description, itemHover.name, Stat);
-            }
-
-            else
-            {
-                UIManageMent.Instance.InventoryUI.UpdatePanelClick(itemHover.Icon, itemHover.Description, itemHover.name);
-            }
-
-            UIManageMent.Instance.InventoryUI.TurnOnPanelClick();
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                
-                hit.gameObject.GetComponent<FloatingObject>().PickUp();
-            }
-            
-        }
-        else
-        {
-
-            if (lastFloatingObject != null)
-            {
-                lastFloatingObject.SetStateHover(false);
-            }
-            lastFloatingObject = null;
-            if (UIManageMent.Instance.InventoryUI.PanelClickUI.isActiveAndEnabled)
-            {
-                UIManageMent.Instance.InventoryUI.TurnOffPanelClick();
-            }
-        }
-        
-    }
+    
 
 
     // Tao anim cho Blend tree
@@ -128,7 +62,7 @@ public class PlayerController : MonoBehaviour
     public void UpdatePunchAnim()
     {
         punching = true;
-        Vector2 dir = GetDirFromMouseToPlayer();
+        Vector2 dir = GameManageMent.Instance.PlayerManager.GetDirFromMouseToPlayer();
         float angle = Mathf.Atan2(dir.y, dir.x);
         float y = Mathf.Sin(angle);
         float x = Mathf.Cos(angle);
@@ -143,21 +77,14 @@ public class PlayerController : MonoBehaviour
     {
         punching = false;
     }
-    public Vector2 GetDirFromMouseToPlayer()
-    {
-        Vector2 playerPos = getPos();
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector2 dir = (mousePos - playerPos).normalized;
-        return dir;
-    }
+    
     //Di chuyen
     void Move()
     {
        
         float movex = Input.GetAxis(GameConfig.HORIZONTAL);
         float movey = Input.GetAxis(GameConfig.VERTICAL);
-        if (weapon == null)
+        if (slotPlayerController.Weapon == null)
         {
             if (punching == false)
             {
@@ -166,13 +93,13 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (weapon.Attacking == false)
+            if (slotPlayerController.Weapon.Attacking == false)
             {
                 if (usingWeapon)
                 {
-                    if (weapon.WeaponData.Type == ItemType.Gun)
+                    if (slotPlayerController.Weapon.WeaponData.Type == ItemType.Gun)
                     {
-                        weapon.UpdateAnim(movex, movey);
+                        slotPlayerController.Weapon.UpdateAnim(movex, movey);
                     }
                     
                 }
@@ -180,12 +107,8 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
-
-
-
         Vector2 dir = new Vector2(movex, movey).normalized;
-        Vector2 new_pos = rb.position + dir * Time.fixedDeltaTime * stat.Speed;
+        Vector2 new_pos = rb.position + dir * Time.fixedDeltaTime * GameManageMent.Instance.PlayerManager.Stat.Speed;
         rb.MovePosition(new_pos);
     }
     // Lay vi tri
@@ -200,10 +123,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Vector2 dir = GetDirFromMouseToPlayer();
-            if (weapon != null)
+            Vector2 dir = GameManageMent.Instance.PlayerManager.GetDirFromMouseToPlayer();
+            if (slotPlayerController.Weapon != null)
             {
-                weapon.Attack(dir.x, dir.y);
+                slotPlayerController.Weapon.Attack(dir.x, dir.y);
             }
             else
             {
@@ -213,11 +136,11 @@ public class PlayerController : MonoBehaviour
     }
      void UpdateCountDown()
     {
-        if (weapon == null || weapon.Attacking == false)
+        if (slotPlayerController.Weapon == null || slotPlayerController.Weapon.Attacking == false)
         {
             
             attackCountDown += Time.deltaTime;
-            if (weapon == null)
+            if (slotPlayerController.Weapon  == null)
             {
                 if (attackCountDown >= punchCountDown)
                 {
@@ -226,7 +149,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (attackCountDown >= weapon.WeaponData.CoolDown)
+                if (attackCountDown >= slotPlayerController.Weapon.WeaponData.CoolDown)
                 {
                     Attack();
                 }
@@ -237,134 +160,17 @@ public class PlayerController : MonoBehaviour
             attackCountDown = 0f;
         }
     }
-    public void UnEquipSlot()
-    {
-        weapon = null;
-        Destroy(weaponPrefab);
-        UnEquipWeaponAnim();
-        
-
-    }
-    public void EquipSlot(int slot)
-    {
-
-        ItemData itemData = UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.Slots[slot].ItemData;
-        ItemData lastItemData = UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.Slots[curSlotEquip].ItemData;
-        if (weapon != null)
-        {
-            weapon = null;
-            Destroy(weaponPrefab);
-        }
-        if (lastItemData != null && lastItemData.Type == ItemType.Buildable)
-        {
-            GameManageMent.Instance.BuildManager.TurnOffBuildMode();
-        }
-        UIManageMent.Instance.EquipmentSystemUI.Slots[curSlotEquip].UnSelectSlot();
-        UIManageMent.Instance.EquipmentSystemUI.Slots[slot].SelectSlot();
-        curSlotEquip = slot;
-        if (itemData == null)
-        {
-            UnEquipWeaponAnim();
-            weapon = null;
-            return;
-        }
-
-        if (itemData.Type == ItemType.Gun)
-        {
-
-            EquipWeaponAnim();
-            GunData gunData = itemData as GunData;
-
-            weaponPrefab = Instantiate(gunData.Gun.gameObject, this.transform.GetChild(2).transform);
-            weapon = weaponPrefab.GetComponent<Weapon>();
-            return;
-        }
-        else
-        {
-            UnEquipWeaponAnim();
-        }
-        if (itemData.Type != ItemType.Melee)
-        {
-            weapon = null;
 
 
-        }
-        else
-        {
-            EquipWeaponAnim();
-            MeleeData meleeData = itemData as MeleeData;
-            weaponPrefab = Instantiate(meleeData.Melee.gameObject, this.transform.GetChild(2).transform);
-            weapon = weaponPrefab.GetComponent<Weapon>();
-            return;
-        }
-
-        if (itemData.Type == ItemType.HpPotion || itemData.Type == ItemType.Bullet)
-        {
-            itemData.UseItem();
-            UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.UseSlot(slot, 1);
-
-        }
-        else if (itemData.Type == ItemType.Buildable)
-        {
-            BuildableData buildableData = itemData as BuildableData;
-            GameManageMent.Instance.BuildManager.TurnOnBuildMode(buildableData.Index_BuildableObject);
-        }
-    }
-    void ChooseSlot()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            EquipSlot(0);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-             EquipSlot(1);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-             EquipSlot(2);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            EquipSlot(3);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            EquipSlot(4);
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            EquipSlot(5);
-        }
-    }
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        expSystem = GetComponent<ExpSystem>();
-        stat = GetComponent<StatPlayer>();
-        health = GetComponent<Health>();
-        gold = GetComponent<GoldPlayer>();
-        weapon = null;
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(this);
-        }
-
-
-
+        slotPlayerController = GetComponent<SlotPlayerController>();
+        lootSystem = GetComponent<LootSystem>();
     }
-    void Start()
-    {
-        health.SetMaxHp(stat.MaxHP, true);
-
-    }
+    
     void FixedUpdate()
     {
         if (GameManageMent.Instance.GameState == GameState.Pause)
@@ -382,21 +188,34 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
     void Update()
     {
         if (GameManageMent.Instance.GameState == GameState.Pause)
         {
             return;
         }
-
         UpdateCountDown();
-        ChooseSlot();
-        CheckHoverItem();
+        slotPlayerController.ChooseSlot();
+        lootSystem.CheckHoverItem();
         if (GameManageMent.Instance.BuildManager.BuildMode && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (GameManageMent.Instance.BuildManager.BuildPlacement.CanPlace()) {
+            if (GameManageMent.Instance.BuildManager.BuildPlacement.CanPlace())
+            {
                 GameManageMent.Instance.BuildManager.BuildPlacement.PlaceObject();
+                UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.UseSlot(slotPlayerController.CurSlotEquip, 1);
+                if (UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.Slots[slotPlayerController.CurSlotEquip].Count == 0)
+                {
+                    GameManageMent.Instance.BuildManager.TurnOffBuildMode();
+                }
+
+            }
+
+        }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            if(slotPlayerController.Weapon != null && slotPlayerController.Weapon.WeaponData.Type == ItemType.Gun)
+            {
+                (slotPlayerController.Weapon as Gun).Reload();
             }
             
         }

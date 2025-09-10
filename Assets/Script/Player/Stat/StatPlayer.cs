@@ -20,7 +20,7 @@ public class StatPlayer : MonoBehaviour
 
     public bool CheckEnoughPoint()
     {
-        if (PlayerController.Instance.ExpSystem.PointStat > 0)
+        if (GameManageMent.Instance.PlayerManager.ExpSystem.PointStat > 0)
         {
             return true;
 
@@ -35,10 +35,10 @@ public class StatPlayer : MonoBehaviour
     {
         if (CheckEnoughPoint())
         {
-            PlayerController.Instance.ExpSystem.UsePoint();
+            GameManageMent.Instance.PlayerManager.ExpSystem.UsePoint();
             maxHP += healthGrowth;
             UIManageMent.Instance.ExpStatSystemUI.UpdateHealthStatUI(maxHP.ToString());
-            PlayerController.Instance.Health.SetMaxHp(maxHP);
+            GameManageMent.Instance.PlayerManager.Health.SetMaxHp(maxHP);
         }
 
     }
@@ -46,7 +46,7 @@ public class StatPlayer : MonoBehaviour
     {
         if (CheckEnoughPoint())
         {
-            PlayerController.Instance.ExpSystem.UsePoint();
+            GameManageMent.Instance.PlayerManager.ExpSystem.UsePoint();
             atk += atkGrowth;
             UIManageMent.Instance.ExpStatSystemUI.UpdateAtkStatUI(atk.ToString());
         }
@@ -56,7 +56,7 @@ public class StatPlayer : MonoBehaviour
     {
         if (CheckEnoughPoint())
         {
-            PlayerController.Instance.ExpSystem.UsePoint();
+            GameManageMent.Instance.PlayerManager.ExpSystem.UsePoint();
             speed += speedGrowth;
             UIManageMent.Instance.ExpStatSystemUI.UpdateSpeedStatUI(speed.ToString());
         }

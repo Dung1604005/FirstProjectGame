@@ -55,7 +55,7 @@ public class ContextMenu : MonoBehaviour
     }
     public void Sell()
     {
-        PlayerController.Instance.Gold.AddGold(price);
+        GameManageMent.Instance.PlayerManager.Gold.AddGold(price);
         UIManageMent.Instance.InventoryUI.Inven.Remove(index, 1);
         TurnOff();
 

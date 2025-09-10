@@ -35,7 +35,7 @@ public class ManagerBehaviour : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            PlayerController.Instance.ExpSystem.GainExp(1000);
+            GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(1000);
         }
         
        

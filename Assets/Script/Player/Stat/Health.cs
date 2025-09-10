@@ -142,8 +142,10 @@ public class Health : MonoBehaviour
         {
             cur_health = max_health;
         }
+        
         if (this.gameObject.tag == GameConfig.PLAYER_TAG0)
         {
+            Debug.Log("SET HEALTH " + this.gameObject.tag + " " + cur_health + " " + max_health );
             OnHealthChanged.Invoke(cur_health, max_health);
         }
 

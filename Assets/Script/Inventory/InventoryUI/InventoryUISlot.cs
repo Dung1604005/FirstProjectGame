@@ -124,10 +124,15 @@ public class InventoryUISlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
             //Gan lai mau va Icon
             image.gameObject.SetActive(true);
             image.sprite = item.Icon;
+            image.type = Image.Type.Simple;
+            image.preserveAspect = true;
+
 
             // Gan so luong
             text.gameObject.SetActive(true);
+            
             string count = amount.ToString();
+            
             if (amount < 10)
             {
                 count = "0" + count;

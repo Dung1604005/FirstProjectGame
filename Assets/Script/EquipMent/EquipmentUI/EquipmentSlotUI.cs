@@ -35,9 +35,9 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
 
 
             UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.TryUnEquip(index);
-            if (index == PlayerController.Instance.CurSlotEquip)
+            if (index == GameManageMent.Instance.PlayerManager.PlayerController.SlotPlayerController.CurSlotEquip)
             {
-                PlayerController.Instance.UnEquipSlot();
+                GameManageMent.Instance.PlayerManager.PlayerController.SlotPlayerController.UnEquipSlot();
             }
         }
     }
@@ -73,6 +73,8 @@ public class EquipmentSlotUI : MonoBehaviour, IPointerClickHandler
             amountText.text = "";
         }
         icon.sprite = _icon;
+        icon.type = Image.Type.Simple;
+        icon.preserveAspect = true;
         index = _index;
     }
 

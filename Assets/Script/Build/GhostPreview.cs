@@ -10,6 +10,8 @@ public class GhostPreview : MonoBehaviour
     private bool canPlace = true;
     public bool CanPlace => canPlace;
 
+    private int curCollision = 0;
+
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -51,6 +53,7 @@ public class GhostPreview : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("COLLIDER");
+        curCollision += 1;
 
 
         SetWarning();
@@ -58,7 +61,12 @@ public class GhostPreview : MonoBehaviour
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
-        SetCanPlace();
+        curCollision -= 1;
+        if (curCollision == 0)
+        {
+            SetCanPlace();
+        }
+      
     }
 
     public void SetPos(float x, float y)

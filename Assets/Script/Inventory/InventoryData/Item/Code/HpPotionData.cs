@@ -10,7 +10,7 @@ public class HpPotionData : ItemData
 
     public override void UseItem()
     {
-        PlayerController.Instance.Health.OnHeal(hpRecover);
+        GameManageMent.Instance.PlayerManager.Health.OnHeal(hpRecover);
     }
 
     

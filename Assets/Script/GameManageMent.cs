@@ -15,6 +15,10 @@ public class GameManageMent : MonoBehaviour
     public GameState GameState => gameState;
     [SerializeField] private ItemDataBase itemDataBase;
     public ItemDataBase ItemDataBase => itemDataBase;
+
+    private PlayerManager playerManager;
+
+    public PlayerManager PlayerManager => playerManager;    
     
     [Header("Inventory")]
 
@@ -50,7 +54,8 @@ public class GameManageMent : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
+        buildManager = GetComponent<BuildManager>();
+        playerManager = GetComponent<PlayerManager>();
         
     }
     void Start()
@@ -58,7 +63,8 @@ public class GameManageMent : MonoBehaviour
 
         gameState = GameState.Continue;
         Application.targetFrameRate = 60;
-       buildManager = GetComponent<BuildManager>();
+        
+        
 
     }
     public void OpenInventory()
