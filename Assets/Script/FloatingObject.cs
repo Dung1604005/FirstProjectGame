@@ -102,7 +102,15 @@ public class FloatingObject : MonoBehaviour
             AddToPlayer((GameManageMent.Instance.PlayerManager.PlayerController.getPos() - pos).normalized);
             if (range <= 3f)
             {
-                UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount);
+                if (GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Type == ItemType.Bullet)
+                {
+                    GameManageMent.Instance.PlayerManager.AddBullet(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].ItemName, amount);
+
+                }
+                else
+                {
+                    UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount);
+                }
                 Destroy(gameObject);
             }
         }

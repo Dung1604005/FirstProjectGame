@@ -20,14 +20,17 @@ public class GameManageMent : MonoBehaviour
 
     public PlayerManager PlayerManager => playerManager;    
     
-    [Header("Inventory")]
+    [Header("Menu")]
 
-    [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private MenuController menuController;
+    
 
     [Header("BuildMode")] 
     
     [SerializeField] private BuildManager buildManager;
     public BuildManager BuildManager => buildManager;
+
+   
     
     public void PauseGame()
     {
@@ -37,7 +40,7 @@ public class GameManageMent : MonoBehaviour
     }
     public void Continue()
     {
-        if (!inventoryUI.gameObject.activeInHierarchy && !  UIManageMent.Instance.ExpStatSystemUI.gameObject.activeInHierarchy && !UIManageMent.Instance.ShopSystem.gameObject.activeInHierarchy)
+        if (!menuController.gameObject.activeInHierarchy && !UIManageMent.Instance.ShopSystem.gameObject.activeInHierarchy)
         {
             gameState = GameState.Continue;
         }
@@ -67,40 +70,35 @@ public class GameManageMent : MonoBehaviour
         
 
     }
-    public void OpenInventory()
+    public void ControlMenu()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (inventoryUI.gameObject.activeInHierarchy)
+            if (menuController.gameObject.activeInHierarchy)
             {
-                inventoryUI.TurnOff();
-                Continue();
+                menuController.SwitchTab();
+                
             }
-            else
+        }
+        //Mo Menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log(menuController.gameObject.activeInHierarchy);
+            if (!menuController.gameObject.activeInHierarchy)
             {
-                inventoryUI.TurnOn();
+                menuController.OpenMenu();
                 PauseGame();
             }
-            
-        }
-    }
-    public void OpenStatMenu()
-    {
-         if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (UIManageMent.Instance.ExpStatSystemUI.gameObject.activeInHierarchy)
-            {
-                UIManageMent.Instance.ExpStatSystemUI.TurnOff();
-                Continue();
-            }
             else
             {
-                 PauseGame();
-                UIManageMent.Instance.ExpStatSystemUI.TurnOn();
+
+                menuController.CloseMenu();
+                Continue();
             }
-           
+
         }
     }
+    
     
     public void OpenShop()
     {
@@ -113,7 +111,7 @@ public class GameManageMent : MonoBehaviour
             }
             else
             {
-                 PauseGame();
+                PauseGame();
                 UIManageMent.Instance.ShopSystem.TurnOn();
             }
             
@@ -121,10 +119,8 @@ public class GameManageMent : MonoBehaviour
     }
     void Update()
     {
-        // Mo inventory
-        OpenInventory();
-        // Mo bang stat
-        OpenStatMenu();
+        //Mo Menu
+        ControlMenu();
 
         OpenShop();
 

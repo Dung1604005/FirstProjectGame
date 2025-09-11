@@ -25,12 +25,19 @@ public class PlayerManager : MonoBehaviour
     [Header("OTHER")]
     [SerializeField] private int shotgunBullet;
     public int ShotgunBullet => shotgunBullet;  
+    
+    [SerializeField] private int cur_ShotgunBullet;
+    public int Cur_ShotgunBullet => cur_ShotgunBullet;
 
-    [SerializeField]private int pistolBullet;   
+    [SerializeField] private int pistolBullet;   
     public int PistolBullet => pistolBullet;
+    [SerializeField] private int cur_PistolBullet;
+    public int Cur_PistolBullet => cur_PistolBullet;
 
    [SerializeField] private int gunBullet;    
     public int GunBullet => gunBullet;  
+    [SerializeField] private int cur_GunBullet;
+    public int Cur_GunBullet => cur_GunBullet;
 
     public Vector2 GetDirFromMouseToPlayer()
     {
@@ -41,6 +48,55 @@ public class PlayerManager : MonoBehaviour
         return dir;
     }
 
+    public void AddBullet(string bulletName, int amount)
+    {
+        switch(bulletName)
+        {
+            case "ShotGun_Bullet":
+                shotgunBullet += amount;
+                break;
+            case "Pistol_Bullet":
+                pistolBullet += amount;
+                break;
+            case "Gun_Bullet":
+                gunBullet += amount;
+                break;
+        }
+        
+    }
+
+    public void UpdateCurrentBullet(string GunName, int amount)
+    {
+        switch(GunName)
+        {
+            case "ShotGun":
+                cur_ShotgunBullet = amount;
+                break;
+            case "Pistol":
+                cur_PistolBullet = amount;
+                break;
+            case "Gun":
+                cur_GunBullet = amount;
+                break;
+        }
+    }
+    public void UpdateTotalBullet(string GunName, int amount)
+    {
+        switch(GunName)
+        {
+            case "ShotGun":
+                shotgunBullet = amount;
+                break;
+            case "Pistol":
+                pistolBullet = amount;
+                break;
+            case "Gun":
+                gunBullet = amount;
+                break;
+        }
+    }
+
+   
 
     void Awake()
     {

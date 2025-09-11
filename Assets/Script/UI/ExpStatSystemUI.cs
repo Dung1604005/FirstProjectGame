@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ExpStatSystemUI : MonoBehaviour
+public class ExpStatSystemUI : MenuLayOutUI
 {
     [SerializeField] private TextMeshProUGUI healthStatUI;
     [SerializeField] private TextMeshProUGUI atkStatUI;
@@ -14,15 +14,7 @@ public class ExpStatSystemUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lvUI;
 
     [SerializeField] private TextMeshProUGUI pointStatUI;
-    public void TurnOn()
-    {
-        
-        this.gameObject.SetActive(true);
-    }
-    public void TurnOff()
-    {
-        this.gameObject.SetActive(false);
-    }
+    
     public void UpdateLvUI(string content)
     {
         lvUI.text ="LV:"+content;

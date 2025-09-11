@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public class InventoryUI : MonoBehaviour
+public class InventoryUI : MenuLayOutUI
 {
     [SerializeField] private ContextMenu contextMenu;
     public ContextMenu ContextMenu => contextMenu;
@@ -102,11 +102,11 @@ public class InventoryUI : MonoBehaviour
 
     }
 
-    public void TurnOn()
+    public override void TurnOn()
     {
         this.gameObject.SetActive(true);
     }
-    public void TurnOff()
+    public override void TurnOff()
     {
         panelClickUI.TurnOff();
         this.gameObject.SetActive(false);

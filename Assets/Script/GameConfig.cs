@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameConfig : MonoBehaviour
@@ -36,6 +37,9 @@ public class GameConfig : MonoBehaviour
     public static string COLORWHITERELOAD = "#FFFFFFFF";
     public static string COLORREDRELOAD = "#FF5A5AFF";
     public static string COLORYELLOWRELOAD = "#FFC14DFF";
+    
+    public static string COLOR_TABNAME_ACTIVE = "#F0E6FFFF";
+    public static string COLOR_TABNAME_INACTIVE = "#C0B8CCFF";
 
     
 

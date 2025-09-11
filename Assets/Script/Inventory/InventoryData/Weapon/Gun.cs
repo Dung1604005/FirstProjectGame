@@ -53,20 +53,25 @@ public class Gun : Weapon
             {
 
                 totalBullet = GameManageMent.Instance.PlayerManager.ShotgunBullet;
+                curBullet = GameManageMent.Instance.PlayerManager.Cur_ShotgunBullet;
             }
             else if (weaponData.ItemName == "Pistol")
             {
 
                 totalBullet = GameManageMent.Instance.PlayerManager.PistolBullet;
+                curBullet = GameManageMent.Instance.PlayerManager.Cur_PistolBullet;
             }
             else if (weaponData.ItemName == "Gun")
             {
 
                 totalBullet = GameManageMent.Instance.PlayerManager.GunBullet;
+                curBullet = GameManageMent.Instance.PlayerManager.Cur_GunBullet;
             }
         }
+        
         UIManageMent.Instance.BulletUIController.UpdateBulletUI((weaponData as GunData).BulletUI, curBullet, (weaponData as GunData).MagSize, totalBullet);
         UIManageMent.Instance.BulletUIController.TurnOnBulletUI();
+        
         UpdateCurStateBullet();
 
     }
@@ -112,19 +117,31 @@ public class Gun : Weapon
     {
         reloading = true;
         timeReload = 0f;
+        UIManageMent.Instance.TurnOnReloadingText();    
         yield return new WaitForSeconds(time);
         reloading = false;
         if (totalBullet >= (weaponData as GunData).MagSize - curBullet)
         {
+            
+
             totalBullet -= (weaponData as GunData).MagSize - curBullet;
+
             curBullet = (weaponData as GunData).MagSize;
+            GameManageMent.Instance.PlayerManager.UpdateTotalBullet(weaponData.ItemName, totalBullet);
+            GameManageMent.Instance.PlayerManager.UpdateCurrentBullet(weaponData.ItemName, curBullet);
 
         }
         else
         {
+            
+            
             curBullet += totalBullet;
+
             totalBullet = 0;
+            GameManageMent.Instance.PlayerManager.UpdateTotalBullet(weaponData.ItemName, totalBullet);
+            GameManageMent.Instance.PlayerManager.UpdateCurrentBullet(weaponData.ItemName, curBullet);
         }
+        UIManageMent.Instance.TurnOffReloadingText();
         UIManageMent.Instance.BulletUIController.UpdateBulletUI((weaponData as GunData).BulletUI, curBullet, (weaponData as GunData).MagSize, totalBullet);
         UpdateCurStateBullet();
     }
@@ -164,8 +181,9 @@ public class Gun : Weapon
             
             cinemachineImpulseSource.GenerateImpulse(strengthShake);
         }
-
+        
         curBullet -= 1;
+        GameManageMent.Instance.PlayerManager.UpdateCurrentBullet(weaponData.ItemName, curBullet);
         UpdateCurStateBullet();
         UIManageMent.Instance.BulletUIController.UpdateCurrentBullet(curBullet);
 
@@ -204,6 +222,11 @@ public class Gun : Weapon
             if (totalBullet > 0)
             {
                 StartCoroutine(WaitTimeReload((weaponData as GunData).ReloadTime));
+            }
+            else
+            {
+                UIManageMent.Instance.UpdateWarning("No Bullet Left!");
+                UIManageMent.Instance.TurnOnWarning();
             }
 
         }

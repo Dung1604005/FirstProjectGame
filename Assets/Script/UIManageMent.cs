@@ -61,6 +61,24 @@ public class UIManageMent : MonoBehaviour
     [SerializeField] private BulletUIController bulletUIController;
     public BulletUIController BulletUIController => bulletUIController;
 
+    [SerializeField] private TextMeshProUGUI reloadingText;
+    public TextMeshProUGUI ReloadingText => reloadingText;
+
+    [Header("OTHER")]
+    [SerializeField] private Sprite tabBackground_Active;
+    public Sprite TabBackground_Active => tabBackground_Active;
+    [SerializeField] private Sprite tabBackground_Inactive;
+    public Sprite TabBackground_Inactive => tabBackground_Inactive;
+    
+
+    public void TurnOnReloadingText()
+    {
+        reloadingText.gameObject.SetActive(true);
+    }
+    public void TurnOffReloadingText()
+    {
+        reloadingText.gameObject.SetActive(false);
+    }
     //Canh bao
     public void UpdateWarning(string content)
     {
