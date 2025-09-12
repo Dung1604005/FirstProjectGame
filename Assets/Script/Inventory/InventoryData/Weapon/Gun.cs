@@ -77,11 +77,20 @@ public class Gun : Weapon
     }
     public override void UpdateAnim(float dirX, float dirY)
     {
+        if (dirX == 0f && dirY == 0f)
+        {
+            // ANimation down
+            dirY = -1f;
+
+        }
+        
+        
+        
         if (dirX > 0.01f || dirX < -0.01f)
         {
             spriteRenderer.sortingOrder = 2;
         }
-        else if (dirY < 0.1f)
+        else if (dirY < -0.01f)
         {
             spriteRenderer.sortingOrder = 2;
         }
@@ -90,19 +99,10 @@ public class Gun : Weapon
             spriteRenderer.sortingOrder = 0;
         }
 
-        if (dirX == 0f && dirY == 0f)
-        {
-            // ANimation down
-            anim.SetFloat("DirX", 0);
-            anim.SetFloat("DirY", -1);
-
-        }
-        else
-        {
-
-            anim.SetFloat("DirX", dirX);
-            anim.SetFloat("DirY", dirY);
-        }
+        
+        anim.SetFloat("DirX", dirX);
+        anim.SetFloat("DirY", dirY);
+        
 
     }
     IEnumerator Couroutine(float time)
