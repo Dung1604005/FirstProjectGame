@@ -12,6 +12,11 @@ public class MenuController : MonoBehaviour
     private int currentTabIndex = 0;
     public int CurrentTabIndex => currentTabIndex;
 
+    void Awake()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void OpenMenu()
     {
         this.gameObject.SetActive(true);

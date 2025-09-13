@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerBehaviour : MonoBehaviour
+public class InventoryAndEquipmentManager : MonoBehaviour
 {
 
     // Quan li trao doi giua runtime script va UI trong inventory
@@ -14,13 +14,15 @@ public class ManagerBehaviour : MonoBehaviour
     
     public EquipmentSystemUI EquipmentSystemUI => equipmentSystemUI;
     private InventorySystem inventorySystem;
+
+    public InventorySystem InventorySystem => inventorySystem;
     [Header("Inventory")]
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private int inventorySize;
 
 
 
-    void Start()
+    void Awake()
     {
         equipMentSystem = new EquipMentSystem(equipSize);
         equipmentSystemUI.SetData(equipMentSystem);

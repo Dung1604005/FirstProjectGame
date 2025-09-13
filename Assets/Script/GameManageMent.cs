@@ -30,6 +30,10 @@ public class GameManageMent : MonoBehaviour
     [SerializeField] private BuildManager buildManager;
     public BuildManager BuildManager => buildManager;
 
+    [Header("Inventory And Equipment")]
+    [SerializeField] private InventoryAndEquipmentManager inventoryAndEquipmentManager;
+    public InventoryAndEquipmentManager InventoryAndEquipmentManager => inventoryAndEquipmentManager;
+
    
     
     public void PauseGame()
@@ -59,6 +63,7 @@ public class GameManageMent : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         buildManager = GetComponent<BuildManager>();
         playerManager = GetComponent<PlayerManager>();
+        inventoryAndEquipmentManager = GetComponent<InventoryAndEquipmentManager>();
         
     }
     void Start()
