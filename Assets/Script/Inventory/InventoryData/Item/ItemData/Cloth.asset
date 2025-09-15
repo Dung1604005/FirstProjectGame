@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c2ca621d56e2d4a903456447c03de9, type: 3}
   m_Name: Cloth
   m_EditorClassIdentifier: 
-  description: 
-  stackable: 0
-  maxStack: 0
-  type: 0
-  itemName: 
-  index: 0
-  icon: {fileID: 0}
+  description: An old cloth
+  stackable: 1
+  maxStack: 99
+  type: 4
+  itemName: Cloth
+  index: 13
+  icon: {fileID: 21300000, guid: 6167ba65d0fbba04f8e3dbd08e9319e7, type: 3}
   value: 0

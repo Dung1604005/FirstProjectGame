@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a009bef43341bfa4b96de4b140dcf5b6, type: 3}
   m_Name: Reinforced_Wall
   m_EditorClassIdentifier: 
-  itemToCraftData: {fileID: 0}
-  requiredMaterial1Data: {fileID: 0}
-  requiredMaterial1Amount: 0
-  requiredMaterial2Data: {fileID: 0}
-  requiredMaterial2Amount: 0
+  itemToCraftData: {fileID: 11400000, guid: 939756a7ae566504a9b0921ac28f7abc, type: 2}
+  requiredMaterial1Data: {fileID: 11400000, guid: 8b0afd0efc4358748b1e4292922c042b, type: 2}
+  requiredMaterial1Amount: 3
+  requiredMaterial2Data: {fileID: 11400000, guid: 7edafe27ebe154f4993e9b9c574a7553, type: 2}
+  requiredMaterial2Amount: 2

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a009bef43341bfa4b96de4b140dcf5b6, type: 3}
   m_Name: WoodWallRecipe
   m_EditorClassIdentifier: 
-  itemToCraftData: {fileID: 0}
-  requiredMaterial1Data: {fileID: 0}
-  requiredMaterial1Amount: 0
+  itemToCraftData: {fileID: 11400000, guid: 10c9ed52066995e46881d320ccafcfc3, type: 2}
+  requiredMaterial1Data: {fileID: 11400000, guid: 8b0afd0efc4358748b1e4292922c042b, type: 2}
+  requiredMaterial1Amount: 4
   requiredMaterial2Data: {fileID: 0}
   requiredMaterial2Amount: 0
