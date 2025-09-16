@@ -88,7 +88,7 @@ public class GameManageMent : MonoBehaviour
         //Mo Menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log(menuController.gameObject.activeInHierarchy);
+           
             if (!menuController.gameObject.activeInHierarchy)
             {
                 menuController.OpenMenu();

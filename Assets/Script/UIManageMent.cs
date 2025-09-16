@@ -98,7 +98,7 @@ public class UIManageMent : MonoBehaviour
     {
 
         fillTargetHp = hp / mx;
-        Debug.Log(fillTargetHp);
+       
     }
     public void SetExpBar(float exp, float mx)
     {
@@ -142,7 +142,7 @@ public class UIManageMent : MonoBehaviour
         }
         else
         {
-            Debug.Log("queue here");
+            
             addedItemQueue.Enqueue(new Pair<ItemData, int>(itemData, mount));
         }
         

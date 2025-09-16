@@ -18,7 +18,7 @@ public class BuildableObject : MonoBehaviour
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = buildableData.Icon;
+        
         defaultColor = spriteRenderer.color;
         cur_health = buildableData.Health;
 

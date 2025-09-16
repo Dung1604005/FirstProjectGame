@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class InventorySystem
 {
     private Dictionary<int, int> itemCount = new Dictionary<int, int>();
     public Dictionary<int, int> ItemCount => itemCount;
-    [SerializeField] private string warningFull = "INVENTORY FULL!";
+    
     // List chua du lieu cac slot trong inven
     private List<InventorySlot> slots;
 
@@ -51,7 +53,7 @@ public class InventorySystem
             }
         }
 
-        UIManageMent.Instance.UpdateWarning(warningFull);
+        UIManageMent.Instance.UpdateWarning(GameConfig.INVENTORY_FULL_WARNING);
         UIManageMent.Instance.TurnOnWarning();
         return false;
     }
@@ -111,12 +113,12 @@ public class InventorySystem
 
     }
 
-    public void Remove(int index, int amount)
+    public void RemoveByIndex(int index, int amount)
     {
 
         if (index < slots.Count)
         {
-            Debug.Log("HERE");
+            
             if (slots[index].ItemData != null)
             {
                 // Xoa 1 vat pham
@@ -136,6 +138,50 @@ public class InventorySystem
         }
 
     }
+    public bool TryRemoveItem(ItemData itemData, int amount)
+    {
+        if (GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount.TryGetValue(itemData.Index, out var cur))
+        {
+            if (cur < amount)
+            {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+    public void RemoveItem(ItemData itemData, int amount)
+    {
+        if (!TryRemoveItem(itemData, amount))
+        {
+            UIManageMent.Instance.UpdateWarning(GameConfig.NOT_ENOUGH_ITEM_WARNING);
+            UIManageMent.Instance.TurnOnWarning();
+            return;
+        }
+        
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].ItemData.Index == itemData.Index)
+            {
+                
+                if (slots[i].Count >= amount)
+                {
+                    GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount[itemData.Index] -= amount;
+                    RemoveByIndex(i, amount);
+                    amount = 0;
+                    return;
+                }
+                else
+                {
+                    GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount[itemData.Index] -= slots[i].Count;
+                    amount -= slots[i].Count;
+                    RemoveByIndex(i, slots[i].Count);
+
+                }
+            }
+        }
+    }
+    
 
     public void Swap(int index1, int index2)
     {

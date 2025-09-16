@@ -6,6 +6,12 @@ using UnityEngine;
 
 public class GameConfig : MonoBehaviour
 {
+
+    [Header("WARNING")]
+    public static string CANT_CRAFT_WARNING = "CAN'T CRAFT!";
+    public static string INVENTORY_FULL_WARNING = "INVENTORY FULL!";
+
+    public static string NOT_ENOUGH_ITEM_WARNING = "NOT ENOUGH ITEM!";
     public static string HORIZONTAL = "Horizontal";
 
     public static string VERTICAL = "Vertical";

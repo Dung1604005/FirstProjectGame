@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     }
     public void AnimUpdate(float x, float y)
     {
-        Debug.Log("Movve");
+        
         Vector2 a = new Vector2(x, y).normalized;
         anim.SetFloat(GameConfig.MOVEX_FLOAT, x);
         anim.SetFloat(GameConfig.MOVEY_FLOAT, y);

@@ -14,17 +14,22 @@ public class MaterialUI : MonoBehaviour
 
     [SerializeField] private int indexItem;
 
+    private bool enoughMaterial = true;
+    public bool EnoughMaterial => enoughMaterial;
+
 
     void Awake()
     {
         icon.gameObject.SetActive(false);
         amountText.gameObject.SetActive(false);
+
     }
     public void SetInfo(int _index, int _amount)
     {
         icon.gameObject.SetActive(true);
         amountText.gameObject.SetActive(true);
         indexItem = _index;
+        enoughMaterial = true;
         MaterialData data = GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem] as MaterialData;
         icon.sprite = data.Icon;
         icon.type = Image.Type.Simple;
@@ -39,24 +44,26 @@ public class MaterialUI : MonoBehaviour
         if (GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount.TryGetValue(indexItem, out var cur))
         {
             amountText.text = cur.ToString() + "/" + amount.ToString();
-            Debug.Log(cur + " " + amount);
+            
             if (cur < amount)
             {
-                Debug.Log("red");
+                enoughMaterial = false;
                 if (ColorUtility.TryParseHtmlString(GameConfig.COLORREDRELOAD, out var red))
                     amountText.color = red;
+
             }
             else
             {
                 amountText.color = Color.white;
-                
+                enoughMaterial = true;
+
             }
                     
         }
         else
         {
             amountText.text = "0" + "/" + amount.ToString();
-           
+            enoughMaterial = false;
             if(ColorUtility.TryParseHtmlString(GameConfig.COLORREDRELOAD, out var red))
                 amountText.color = red;
             

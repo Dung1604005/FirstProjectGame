@@ -33,7 +33,7 @@ public class ContextMenu : MonoBehaviour
         {
             
             if (UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.TryEquip(itemData, amount)) {
-                UIManageMent.Instance.InventoryUI.Inven.Remove(index, amount);
+                UIManageMent.Instance.InventoryUI.Inven.RemoveByIndex(index, amount);
             }
             
 
@@ -50,13 +50,13 @@ public class ContextMenu : MonoBehaviour
     }
     public void Drop()
     {
-        UIManageMent.Instance.InventoryUI.Inven.Remove(index, 1);
+        UIManageMent.Instance.InventoryUI.Inven.RemoveByIndex(index, 1);
         TurnOff();
     }
     public void Sell()
     {
         GameManageMent.Instance.PlayerManager.Gold.AddGold(price);
-        UIManageMent.Instance.InventoryUI.Inven.Remove(index, 1);
+        UIManageMent.Instance.InventoryUI.Inven.RemoveByIndex(index, 1);
         TurnOff();
 
     }
