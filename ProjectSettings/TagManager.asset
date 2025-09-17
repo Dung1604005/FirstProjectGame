@@ -28,7 +28,7 @@ TagManager:
   - Building
   - Item
   - PlayerWall
-  - 
+  - TreeLayer
   - 
   - 
   - 
@@ -56,6 +56,9 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 1276704215
+    locked: 0
+  - name: TreeLayer
+    uniqueID: 757073833
     locked: 0
   - name: Bullet
     uniqueID: 4255496769
