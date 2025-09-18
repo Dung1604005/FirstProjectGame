@@ -34,7 +34,8 @@ public class GameManageMent : MonoBehaviour
     [SerializeField] private InventoryAndEquipmentManager inventoryAndEquipmentManager;
     public InventoryAndEquipmentManager InventoryAndEquipmentManager => inventoryAndEquipmentManager;
 
-   
+    private ObjectVisibilityManager objectVisibilityManager;
+    public ObjectVisibilityManager ObjectVisibilityManager => objectVisibilityManager;
     
     public void PauseGame()
     {
@@ -64,6 +65,7 @@ public class GameManageMent : MonoBehaviour
         buildManager = GetComponent<BuildManager>();
         playerManager = GetComponent<PlayerManager>();
         inventoryAndEquipmentManager = GetComponent<InventoryAndEquipmentManager>();
+        objectVisibilityManager = GetComponent<ObjectVisibilityManager>();
         
     }
     void Start()
