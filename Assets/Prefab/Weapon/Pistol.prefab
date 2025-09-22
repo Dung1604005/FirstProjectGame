@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1276704215
   m_SortingLayer: 2
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1571476329, guid: bf5cf22b0d4825640abfae16c710959c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -105,6 +105,7 @@ MonoBehaviour:
   delayTimeAfterShoot: 0.2
   angleShotGun: 0
   strengthShake: 0
+  curBullet: 0
 --- !u!95 &4487106548855134050
 Animator:
   serializedVersion: 5

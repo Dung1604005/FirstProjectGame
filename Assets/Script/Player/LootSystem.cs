@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class LootSystem : MonoBehaviour
 {
-    [SerializeField] private FloatingObject lastFloatingObject;
+    [SerializeField] private LootItem lastFloatingObject;
 
-    public FloatingObject LastFloatingObject => lastFloatingObject;
+    public LootItem LastFloatingObject => lastFloatingObject;
     public void CheckHoverItem()
     {
         LayerMask itemMask = LayerMask.GetMask(GameConfig.ITEM_MASK);
@@ -18,8 +18,8 @@ public class LootSystem : MonoBehaviour
             {
                 lastFloatingObject.SetStateHover(false);
             }
-            ItemData itemHover = hit.gameObject.GetComponent<FloatingObject>().GetItemData();
-            lastFloatingObject = hit.gameObject.GetComponent<FloatingObject>();
+            ItemData itemHover = hit.gameObject.GetComponent<LootItem>().GetItemData();
+            lastFloatingObject = hit.gameObject.GetComponent<LootItem>();
             lastFloatingObject.SetStateHover(true);
             if (itemHover.Type == ItemType.Gun || itemHover.Type == ItemType.Melee)
             {
@@ -40,7 +40,7 @@ public class LootSystem : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
 
-                hit.gameObject.GetComponent<FloatingObject>().PickUp();
+                hit.gameObject.GetComponent<LootItem>().PickUp();
             }
 
         }

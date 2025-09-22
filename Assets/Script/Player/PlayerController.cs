@@ -35,8 +35,7 @@ public class PlayerController : MonoBehaviour
             float dam = collision.gameObject.GetComponentInParent<EnemyMelee>().GetDamage();
             this.GetComponent<Health>().OnDamaged(dam);
         }
-        
-
+    
     }
 
     public void OllisionEnter2D(Collision2D collision)

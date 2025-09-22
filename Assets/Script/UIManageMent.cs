@@ -69,6 +69,11 @@ public class UIManageMent : MonoBehaviour
     public Sprite TabBackground_Active => tabBackground_Active;
     [SerializeField] private Sprite tabBackground_Inactive;
     public Sprite TabBackground_Inactive => tabBackground_Inactive;
+
+    [SerializeField] private Material flashMaterial;
+    [SerializeField] private float flashDuration;
+
+    private Coroutine flashRoutine;
     
 
     public void TurnOnReloadingText()
@@ -146,6 +151,24 @@ public class UIManageMent : MonoBehaviour
             addedItemQueue.Enqueue(new Pair<ItemData, int>(itemData, mount));
         }
         
+
+    }
+    private IEnumerator FlashRoutine(SpriteRenderer renderer, Material defaultMaterial)
+    {
+        renderer.material = flashMaterial;
+        yield return new WaitForSeconds(flashDuration);
+        if(renderer!= null){
+
+            renderer.material = defaultMaterial;
+        }
+        
+        
+    }
+
+    public void Flash(SpriteRenderer spriteRenderer)
+    {
+        Material defaultMaterial = spriteRenderer.material;
+        StartCoroutine(FlashRoutine(spriteRenderer, defaultMaterial));
 
     }
     

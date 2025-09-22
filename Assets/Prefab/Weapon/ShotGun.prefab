@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1276704215
   m_SortingLayer: 2
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 178538631, guid: 0603f02bb7e483647a5e4c6ab8f32813, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -127,6 +127,7 @@ MonoBehaviour:
   delayTimeAfterShoot: 0.2
   angleShotGun: 10
   strengthShake: 0.3
+  curBullet: 0
 --- !u!114 &4604735557414038977
 MonoBehaviour:
   m_ObjectHideFlags: 0

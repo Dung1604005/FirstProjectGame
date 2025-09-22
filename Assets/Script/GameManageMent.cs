@@ -18,7 +18,10 @@ public class GameManageMent : MonoBehaviour
 
     private PlayerManager playerManager;
 
-    public PlayerManager PlayerManager => playerManager;    
+    public PlayerManager PlayerManager => playerManager;
+
+    private PoolManager poolManager;
+    public PoolManager PoolManager => poolManager;
     
     [Header("Menu")]
 
@@ -34,8 +37,9 @@ public class GameManageMent : MonoBehaviour
     [SerializeField] private InventoryAndEquipmentManager inventoryAndEquipmentManager;
     public InventoryAndEquipmentManager InventoryAndEquipmentManager => inventoryAndEquipmentManager;
 
-    private ObjectVisibilityManager objectVisibilityManager;
-    public ObjectVisibilityManager ObjectVisibilityManager => objectVisibilityManager;
+    [Header("DropSystem")]
+    private DropSystem dropSystem;
+    public DropSystem DropSystem => dropSystem;
     
     public void PauseGame()
     {
@@ -65,7 +69,8 @@ public class GameManageMent : MonoBehaviour
         buildManager = GetComponent<BuildManager>();
         playerManager = GetComponent<PlayerManager>();
         inventoryAndEquipmentManager = GetComponent<InventoryAndEquipmentManager>();
-        objectVisibilityManager = GetComponent<ObjectVisibilityManager>();
+        poolManager = GetComponent<PoolManager>();
+        dropSystem = GetComponent<DropSystem>();
         
     }
     void Start()
