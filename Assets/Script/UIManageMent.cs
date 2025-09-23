@@ -155,10 +155,12 @@ public class UIManageMent : MonoBehaviour
     }
     private IEnumerator FlashRoutine(SpriteRenderer renderer, Material defaultMaterial)
     {
+        Debug.Log(defaultMaterial);
         renderer.material = flashMaterial;
         yield return new WaitForSeconds(flashDuration);
         if(renderer!= null){
 
+            Debug.Log("End flash");
             renderer.material = defaultMaterial;
         }
         

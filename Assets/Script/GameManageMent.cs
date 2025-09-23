@@ -77,7 +77,7 @@ public class GameManageMent : MonoBehaviour
     {
 
         gameState = GameState.Continue;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
         
         
 

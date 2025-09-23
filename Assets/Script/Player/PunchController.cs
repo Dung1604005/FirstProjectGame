@@ -12,5 +12,9 @@ public class PunchController : MonoBehaviour
         {
             collision.GetComponent<ObjectController>().OnDamaged(GameManageMent.Instance.PlayerManager.Stat.Atk);
         }
+        else if (collision.tag == GameConfig.HITBOX_ENEMY)
+        {
+            collision.GetComponentInParent<EnemyBase>().HealthSystem.OnDamaged(GameManageMent.Instance.PlayerManager.Stat.Atk);
+        }
     }
 }

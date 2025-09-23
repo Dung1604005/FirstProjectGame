@@ -75,8 +75,8 @@ public class LootItem : MonoBehaviour, IPoolable
         indexItem = index;
         spriteRenderer.sprite = GameManageMent.Instance.ItemDataBase.ItemDatas[index].Icon;
         amount = _amount;
-        float offsetX = Random.Range(-offSetDrop, offSetDrop);
-        float offsetY = Random.Range(-offSetDrop, offSetDrop);
+        float offsetX = UnityEngine.Random.Range(-offSetDrop, offSetDrop);
+        float offsetY = UnityEngine.Random.Range(-offSetDrop, offSetDrop);
         Vector2 dropPos = transform.position;
         dropPos.x += offsetX;
         dropPos.y += offsetY;
@@ -195,8 +195,8 @@ public class LootItem : MonoBehaviour, IPoolable
         {
             if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount))
             {
-                //AutoPick();
-                Floating();
+                AutoPick();
+                
             }
             else
             {

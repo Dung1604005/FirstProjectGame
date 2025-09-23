@@ -147,6 +147,7 @@ MonoBehaviour:
   indexLootTable: 0
   amountDrop: 2
   maxHealth: 20
+  timeSpawn: 45
 --- !u!1 &2004361388871099260
 GameObject:
   m_ObjectHideFlags: 0

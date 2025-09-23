@@ -19,7 +19,8 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected Rigidbody2D rb;
 
     protected Health healthSystem;
-    
+
+    public Health HealthSystem => healthSystem;
 
     protected Transform player;
 
@@ -38,15 +39,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected bool isDied = false;
    
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        
-        if (other.tag == GameConfig.HITBOX_PUNCH)
-        {
-            
-            healthSystem.OnDamaged(GameManageMent.Instance.PlayerManager.Stat.Atk);
-        }
-    }
+    
 
     public float GetDamage()
     {

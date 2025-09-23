@@ -30,23 +30,7 @@ public class Health : MonoBehaviour
     private void OnDamagedEffect()
     {
 
-        Color color;
-        if (this.gameObject.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
-        {
-            Debug.Log("nhay trang");
-            color = Color.grey;
-
-        }
-        else
-        {
-            color = Color.red;
-
-        }
-
-        spriteRenderer.DOKill();// Huy tween cu
-
-        // Flash đỏ/trang rồi quay lại màu ban đầu
-        spriteRenderer.DOColor(color, 0.05f).SetLoops(2, LoopType.Yoyo).OnComplete(() => spriteRenderer.color = defaultColor);
+        UIManageMent.Instance.Flash(this.GetComponent<SpriteRenderer>());
 
     }
 
@@ -145,7 +129,7 @@ public class Health : MonoBehaviour
         
         if (this.gameObject.tag == GameConfig.PLAYER_TAG0)
         {
-            Debug.Log("SET HEALTH " + this.gameObject.tag + " " + cur_health + " " + max_health );
+            
             OnHealthChanged.Invoke(cur_health, max_health);
         }
 

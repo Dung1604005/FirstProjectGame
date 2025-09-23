@@ -9,7 +9,10 @@ public class ObjectController : MonoBehaviour
 
     [SerializeField] private float maxHealth;
 
+
     private float curHealth;
+
+    
 
     public void OnDamaged(float damaged)
     {
