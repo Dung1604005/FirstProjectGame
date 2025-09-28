@@ -14,6 +14,10 @@ public class MenuController : MonoBehaviour
 
     void Awake()
     {
+        
+    }
+    void Start()
+    {
         gameObject.SetActive(false);
     }
 

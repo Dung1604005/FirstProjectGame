@@ -67,6 +67,9 @@ TagManager:
   - name: Building
     uniqueID: 839274785
     locked: 0
+  - name: Effect
+    uniqueID: 2969939291
+    locked: 0
   - name: UI
     uniqueID: 3017644155
     locked: 0
