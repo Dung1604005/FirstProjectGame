@@ -20,6 +20,9 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private float midDayIntense;
     [SerializeField] private float nightIntense;
     [SerializeField] private float midNightIntense;
+
+    [SerializeField] private ParticleSystem rainEffect;
+    private bool IsRainEffectRandom = false;
     private float elapseTime = 0f;
     private void Awake()
     {
@@ -31,26 +34,48 @@ public class TimeManager : MonoBehaviour
     {
         
     }
+    private void RandomRain()
+    {
+        if (IsRainEffectRandom)
+        {
+            return;
+            
+        }
+        IsRainEffectRandom = true;
+        rainEffect.Stop();
+        int rad = UnityEngine.Random.Range(0, 100);
+        Debug.Log(rad);
+        if (rad <= 33)
+        {
+            rainEffect.Play();
+        }
+
+    }
     public void Update()
     {
         elapseTime += Time.deltaTime;
 
-        float t = (elapseTime /  (timerPerDay*60f)) % 1f;
-        //Debug.Log(t);
+        float t = (elapseTime / (timerPerDay * 60f)) % 1f;
+        
         if (t <= 0.15f)
         {
+            
+            RandomRain();
             OnDay();
         }
         else if (t <= 0.4f)
         {
+            IsRainEffectRandom = false;
             OnMidDay();
         }
         else if (t <= 0.55f)
         {
+            RandomRain();
             OnNight();
         }
         else if (t <= 1f)
         {
+            IsRainEffectRandom = false;
             OnMidNight();
         }
         light2D.intensity = animationCurve.Evaluate(t);
