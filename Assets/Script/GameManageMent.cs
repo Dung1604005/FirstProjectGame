@@ -40,6 +40,10 @@ public class GameManageMent : MonoBehaviour
     [Header("DropSystem")]
     private DropSystem dropSystem;
     public DropSystem DropSystem => dropSystem;
+
+    [Header("Quest System")]
+    private QuestManager questManager;
+    public QuestManager QuestManager => questManager;
     
     public void PauseGame()
     {
@@ -71,6 +75,7 @@ public class GameManageMent : MonoBehaviour
         inventoryAndEquipmentManager = GetComponent<InventoryAndEquipmentManager>();
         poolManager = GetComponent<PoolManager>();
         dropSystem = GetComponent<DropSystem>();
+        questManager = GetComponent<QuestManager>();
         
     }
     void Start()

@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+
+[System.Serializable]
 public class Pair<T1, T2>
 {
     public T1 First;
@@ -63,6 +65,12 @@ public class UIManageMent : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI reloadingText;
     public TextMeshProUGUI ReloadingText => reloadingText;
+
+    [Header("Dialogue")]
+
+    [SerializeField] private DialogueUI dialogueUI;
+
+    public DialogueUI DialogueUI => dialogueUI;
 
     [Header("OTHER")]
     [SerializeField] private Sprite tabBackground_Active;

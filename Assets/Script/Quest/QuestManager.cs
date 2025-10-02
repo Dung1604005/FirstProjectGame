@@ -32,6 +32,10 @@ public class QuestManager : MonoBehaviour
     }
     public void UpdateKillProgress(int amount, int id)
     {
+        if (onQuest == false)
+        {
+            return;
+        }
         questProgress.UpdateProgress(amount, ObjectiveType.Kill, id);
 
         if (questProgress.checkProgress())
