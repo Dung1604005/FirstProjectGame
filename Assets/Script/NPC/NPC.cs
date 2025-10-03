@@ -30,6 +30,11 @@ public class NPC : MonoBehaviour
 
     public void StartDialogue()
     {
+        if (onQuest)
+        {
+            UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, onQuestDialogue);
+            return;
+        }
         int totalDialogue = npcDialogues[curNpcDialogues].Dialogues.Count;
         Debug.Log(UIManageMent.Instance.DialogueUI.Completed);
         if (UIManageMent.Instance.DialogueUI.Completed == true && indexDialogue < totalDialogue)
@@ -47,6 +52,27 @@ public class NPC : MonoBehaviour
     {
         interacting = false;
     }
+    public void AcceptQuest()
+    {
+        if (!interacting)
+        {
+            return;
+        }
+        
+        GameManageMent.Instance.QuestManager.AcceptQuest(npcDialogues[curNpcDialogues].QuestDefinition);
+        onQuest = true;
+        
+    }
+
+    public void RefuseQuest()
+    {
+        
+    }
+    void Start()
+    {
+        GameManageMent.Instance.QuestManager.OnAcceptingQuest += AcceptQuest;
+    }
+
     void Update()
     {
         if (!interacting)

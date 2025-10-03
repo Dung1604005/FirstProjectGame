@@ -1,62 +1,61 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    [SerializeField] private QuestDefinition curQuestDefinition;
-    [SerializeField] private QuestProgress questProgress;
+    [SerializeField] private List<QuestDefinition> curQuestDefinitions = new List<QuestDefinition>();
+    [SerializeField] private List<QuestProgress> questProgresses = new List<QuestProgress>();
 
     [SerializeField] private bool onQuest;
 
     public bool OnQuest => onQuest;
 
+    private List<int> completedQuest = new List<int>();
+
+    public event Action OnAcceptingQuest;
+
+
     public void AcceptQuest(QuestDefinition quest)
     {
-        if (!onQuest)
-        {
-            curQuestDefinition = quest;
-            questProgress = new QuestProgress(quest.Id, quest.Objectives);
-        }
+
+        curQuestDefinitions.Add(quest);
+        questProgresses.Add(new QuestProgress(quest.Id, quest.Objectives));
+
+        OnAcceptingQuest?.Invoke();
+
 
     }
-    public void Complete()
+    public void Complete(int id)
     {
 
     }
-    public void CancelQuest()
+    public void CancelQuest(int id)
     {
-        onQuest = false;
-        curQuestDefinition = null;
-        questProgress = null;
+        curQuestDefinitions.RemoveAt(id);
+        questProgresses.RemoveAt(id);
     }
-    public void UpdateKillProgress(int amount, int id)
+    public void UpdateProgress(int amount, int id, int idQuest, ObjectiveType objectiveType)
     {
-        if (onQuest == false)
-        {
-            return;
-        }
-        questProgress.UpdateProgress(amount, ObjectiveType.Kill, id);
 
-        if (questProgress.checkProgress())
+        questProgresses[idQuest].UpdateProgress(amount, objectiveType, id);
+
+        if (questProgresses[idQuest].checkProgress())
         {
-            Complete(); 
+            Complete(idQuest);
+            curQuestDefinitions.RemoveAt(idQuest);
+            questProgresses.RemoveAt(idQuest);
+
         }
     }
-    public void UpdateCollectProgress(int amount, int id)
+    public void UpdateProgressAllQuest(int amount, int id, ObjectiveType objectiveType)
     {
-        questProgress.UpdateProgress(amount, ObjectiveType.Collect, id);
-        if (questProgress.checkProgress())
-        {
-            Complete(); 
+        completedQuest.Clear();
+        for (int i = curQuestDefinitions.Count - 1; i >= 0; i--) {
+            UpdateProgress(amount, id, i, objectiveType);
         }
+        
     }
-    public void UpdateReachProgress(int id)
-    {
-        questProgress.UpdateProgress(1, ObjectiveType.Reach, id);
-        if (questProgress.checkProgress())
-        {
-            Complete(); 
-        }
-    }
+    
 }

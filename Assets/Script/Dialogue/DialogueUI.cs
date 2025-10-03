@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -12,7 +13,10 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private float charsPerSecond = 40f; // tốc độ gõ
     [SerializeField] private float punctuationDelay = 0.25f; // dừng nhẹ sau . , ! ?
 
-     private Coroutine typingCo;
+    [SerializeField] private Button buttonAccept;
+    [SerializeField] private Button buttonRefuse;
+
+    private Coroutine typingCo;
     public bool IsTyping { get; private set; }
     public bool Completed { get; private set; }
 
@@ -81,8 +85,9 @@ public class DialogueUI : MonoBehaviour
 
     public void SetInfoDialogue(string nameTalker, string dialogue)
     {
-        
+
         nameUI.text = nameTalker;
         StartTyping(dialogue);
     }
+    
 }
