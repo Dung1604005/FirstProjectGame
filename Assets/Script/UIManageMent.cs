@@ -72,6 +72,12 @@ public class UIManageMent : MonoBehaviour
 
     public DialogueUI DialogueUI => dialogueUI;
 
+    [Header("Quest")]
+
+    [SerializeField] private QuestUI questUI;
+    public QuestUI QuestUI => questUI;
+    
+
     [Header("OTHER")]
     [SerializeField] private Sprite tabBackground_Active;
     public Sprite TabBackground_Active => tabBackground_Active;
