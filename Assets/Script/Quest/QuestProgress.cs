@@ -5,22 +5,26 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 
-public enum QuestState {
+public enum QuestState
+{
     InProgress, Complete
 }
+
+[System.Serializable]
 public class QuestProgress
 {
     private int questId;
     public int QuestId => questId;
 
     private QuestState questState;
-    private List<Objective> objectives;
+    private List<Objective> objectives = new List<Objective>();
 
     private List<int> curCount = new List<int>();
 
 
     public QuestProgress(int _questId, List<Objective> _objectives)
     {
+        Debug.Log(_objectives.Count);
         this.questId = _questId;
         this.objectives = _objectives;
         this.questState = QuestState.InProgress;

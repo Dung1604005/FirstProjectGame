@@ -6,15 +6,19 @@ using UnityEngine;
 public class QuestManager : MonoBehaviour
 {
     [SerializeField] private List<QuestDefinition> curQuestDefinitions = new List<QuestDefinition>();
+
+    public List<QuestDefinition> CurQuestDefinitons => curQuestDefinitions;
+
     [SerializeField] private List<QuestProgress> questProgresses = new List<QuestProgress>();
+
+    public List<QuestProgress> QuestProgresses => questProgresses;
 
     [SerializeField] private bool onQuest;
 
     public bool OnQuest => onQuest;
 
-    private List<int> completedQuest = new List<int>();
 
-    public event Action OnAcceptingQuest;
+    public event Action OnQuestChange;
 
 
     public void AcceptQuest(QuestDefinition quest)
@@ -23,38 +27,39 @@ public class QuestManager : MonoBehaviour
         curQuestDefinitions.Add(quest);
         questProgresses.Add(new QuestProgress(quest.Id, quest.Objectives));
 
-        OnAcceptingQuest?.Invoke();
+        OnQuestChange?.Invoke();
 
 
     }
     public void Complete(int id)
     {
 
-    }
-    public void CancelQuest(int id)
-    {
+
         curQuestDefinitions.RemoveAt(id);
         questProgresses.RemoveAt(id);
+        OnQuestChange?.Invoke();
+
+
     }
+
     public void UpdateProgress(int amount, int id, int idQuest, ObjectiveType objectiveType)
     {
 
         questProgresses[idQuest].UpdateProgress(amount, objectiveType, id);
-
         if (questProgresses[idQuest].checkProgress())
         {
             Complete(idQuest);
-            curQuestDefinitions.RemoveAt(idQuest);
-            questProgresses.RemoveAt(idQuest);
-
         }
     }
     public void UpdateProgressAllQuest(int amount, int id, ObjectiveType objectiveType)
     {
-        completedQuest.Clear();
-        for (int i = curQuestDefinitions.Count - 1; i >= 0; i--) {
+        for (int i = curQuestDefinitions.Count - 1; i >= 0; i--)
+        {
             UpdateProgress(amount, id, i, objectiveType);
         }
+    }
+    void Start()
+    {
         
     }
     

@@ -21,8 +21,10 @@ public class QuestViewInfo : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-    public void SetInfo(int index )
+    public void SetInfo(int index)
     {
+        nameQuest.text = GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].NameQuest;
+        
         
     }
 }

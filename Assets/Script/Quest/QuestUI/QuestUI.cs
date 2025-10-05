@@ -11,6 +11,7 @@ public class QuestUI : MenuLayOutUI
     public QuestViewInfo QuestViewInfo => questViewInfo;
     void Start()
     {
+        GameManageMent.Instance.QuestManager.OnQuestChange += RefreshQuestUI;
         for (int i = 0; i < questButtons.Count; i++)
         {
 
@@ -20,9 +21,14 @@ public class QuestUI : MenuLayOutUI
 
     public void RefreshQuestUI()
     {
-        
-        
+        for (int i = 0; i < GameManageMent.Instance.QuestManager.CurQuestDefinitons.Count; i++)
+        {
+            questButtons[i].TurnOn();
+            questButtons[i].SetInfo(GameManageMent.Instance.QuestManager.CurQuestDefinitons[i].NameQuest, i);
+        }
+
     }
+    
 
 
 

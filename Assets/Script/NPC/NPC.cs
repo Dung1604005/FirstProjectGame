@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -54,12 +55,13 @@ public class NPC : MonoBehaviour
     }
     public void AcceptQuest()
     {
-        if (!interacting)
+        if (!interacting )
         {
             return;
         }
-        
+        Debug.Log("ACC");
         GameManageMent.Instance.QuestManager.AcceptQuest(npcDialogues[curNpcDialogues].QuestDefinition);
+        UIManageMent.Instance.DialogueUI.TurnOff();
         onQuest = true;
         
     }
@@ -67,10 +69,6 @@ public class NPC : MonoBehaviour
     public void RefuseQuest()
     {
         
-    }
-    void Start()
-    {
-        GameManageMent.Instance.QuestManager.OnAcceptingQuest += AcceptQuest;
     }
 
     void Update()

@@ -21,11 +21,10 @@ public class QuestButton : MonoBehaviour
     public void SetInfo(string _name, int _index)
     {
         this.nameQuest.text= _name;
-        this.index = _index; ;
+        this.index = _index; 
     }
     public void ViewQuestInfo()
     {
-        UIManageMent.Instance.QuestUI.QuestViewInfo.SetInfo(index);
         UIManageMent.Instance.QuestUI.QuestViewInfo.SetInfo(index);
     }
 }

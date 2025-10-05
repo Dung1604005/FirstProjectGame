@@ -44,7 +44,7 @@ public class TimeManager : MonoBehaviour
         IsRainEffectRandom = true;
         rainEffect.Stop();
         int rad = UnityEngine.Random.Range(0, 100);
-        Debug.Log(rad);
+        
         if (rad <= 33)
         {
             rainEffect.Play();
