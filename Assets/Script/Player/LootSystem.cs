@@ -14,6 +14,10 @@ public class LootSystem : MonoBehaviour
         Collider2D hit = Physics2D.OverlapPoint(mousePos, itemMask);
         if (hit != null)
         {
+            if (!GameManageMent.Instance.Interacting)
+            {
+                GameManageMent.Instance.SetCurSorInteract();
+            }
             if (lastFloatingObject != null)
             {
                 lastFloatingObject.SetStateHover(false);
@@ -46,6 +50,8 @@ public class LootSystem : MonoBehaviour
         }
         else
         {
+             
+            
 
             if (lastFloatingObject != null)
             {

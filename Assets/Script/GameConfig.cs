@@ -30,6 +30,8 @@ public class GameConfig : MonoBehaviour
 
     public static string ITEM_MASK = "Item";
 
+    public static string NPC_MASK = "NPC";
+
     public static string OBJECT_MASK = "ObjectLayer";
 
     public static string PUNCH_TRIGGER = "Punch";

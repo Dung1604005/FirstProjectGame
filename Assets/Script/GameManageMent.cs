@@ -44,6 +44,20 @@ public class GameManageMent : MonoBehaviour
     [Header("Quest System")]
     private QuestManager questManager;
     public QuestManager QuestManager => questManager;
+
+    [Header("Cursor")]
+    [SerializeField] private Texture2D iconMouse;
+    public Texture2D IconMouse => iconMouse;
+    [SerializeField] private Texture2D iconMouseInteract;
+    public Texture2D IconMouseInteract => iconMouseInteract;
+    public Vector2 hotspot = Vector2.zero;  
+    public CursorMode cursorMode = CursorMode.Auto;
+
+    private bool interacting = false;
+    public bool Interacting => interacting;
+
+    private NPC npcInteracting = null;
+    public NPC NpcInteracting => npcInteracting;
     
     public void PauseGame()
     {
@@ -83,9 +97,22 @@ public class GameManageMent : MonoBehaviour
 
         gameState = GameState.Continue;
         Application.targetFrameRate = 120;
-        
-        
+        Cursor.SetCursor(iconMouse, hotspot, cursorMode);
 
+    }
+    public void SetCurSorInteract()
+    {
+        interacting = true;
+        Cursor.SetCursor(iconMouseInteract, hotspot, cursorMode);
+    }
+    public void SetCurSorNormal()
+    {
+        interacting = false;
+        Cursor.SetCursor(iconMouse, hotspot, cursorMode);
+    }
+    public void SetNpcInteracting(NPC other)
+    {
+        npcInteracting = other;
     }
     public void ControlMenu()
     {
@@ -94,13 +121,13 @@ public class GameManageMent : MonoBehaviour
             if (menuController.gameObject.activeInHierarchy)
             {
                 menuController.SwitchTab();
-                
+
             }
         }
         //Mo Menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-           
+
             if (!menuController.gameObject.activeInHierarchy)
             {
                 menuController.OpenMenu();

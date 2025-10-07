@@ -81,11 +81,42 @@ public class PlayerController : MonoBehaviour
     {
         punching = false;
     }
+    public void InteractNpc()
+    {
+        LayerMask npcMask = LayerMask.GetMask(GameConfig.NPC_MASK);
+
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D hit = Physics2D.OverlapPoint(mousePos, npcMask);
+
+        if (hit != null)
+        {
+            if (GameManageMent.Instance.Interacting == false)
+            {
+                GameManageMent.Instance.SetCurSorInteract();
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                hit.gameObject.GetComponent<NPC>().TurnOnInteract();
+                GameManageMent.Instance.SetNpcInteracting(hit.gameObject.GetComponent<NPC>());
+            }
+
+        }
+        else
+        {
+            if (GameManageMent.Instance.Interacting == true)
+            {
+                GameManageMent.Instance.SetCurSorNormal();
+                GameManageMent.Instance.SetNpcInteracting(null);
+            }
+        }
+    }
     
     //Di chuyen
     void Move()
     {
-       
+        if(punching || (usingWeapon && slotPlayerController.Weapon.Attacking)){
+            return;
+        }
         float movex = Input.GetAxis(GameConfig.HORIZONTAL);
         float movey = Input.GetAxis(GameConfig.VERTICAL);
         if (slotPlayerController.Weapon == null)
@@ -198,6 +229,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        InteractNpc();
         UpdateCountDown();
         slotPlayerController.ChooseSlot();
         lootSystem.CheckHoverItem();

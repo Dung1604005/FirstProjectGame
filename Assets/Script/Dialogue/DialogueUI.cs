@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class DialogueUI : MonoBehaviour
@@ -24,6 +25,9 @@ public class DialogueUI : MonoBehaviour
     {
         IsTyping = false;
         Completed = true;
+        TurnOff();
+        TurnOfButton();
+
     }
     public void ShowInstant(string dialogue)
     {
@@ -36,7 +40,7 @@ public class DialogueUI : MonoBehaviour
     }
     public void StartTyping(string fullText)
     {
-        if (typingCo != null) StopCoroutine(typingCo);
+        if (typingCo != null || this.gameObject.activeInHierarchy == false) StopCoroutine(typingCo);
         typingCo = StartCoroutine(TypeRoutine(fullText));
     }
 
@@ -78,9 +82,33 @@ public class DialogueUI : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
+    public void AddOnClickAccept(UnityAction action)
+    {
+        buttonAccept.onClick.RemoveAllListeners(); 
+        buttonAccept.gameObject.SetActive(true);
+        buttonAccept.onClick.AddListener(action);
+    }
+    public void AddOnClickRefuse(UnityAction action)
+    {
+        buttonRefuse.onClick.RemoveAllListeners();
+        buttonRefuse.gameObject.SetActive(true);
+        buttonRefuse.onClick.AddListener(action);
+    }
+
+    public void TurnOfButton()
+    {
+        buttonAccept.gameObject.SetActive(false);
+        buttonRefuse.gameObject.SetActive(false);
+    }
+    public void TurnOnButton(UnityAction actionAcc, UnityAction actionRefuse)
+    {
+        AddOnClickAccept(actionAcc);
+        AddOnClickRefuse(actionRefuse);
+    }
     public void TurnOn()
     {
         this.gameObject.SetActive(true);
+       
     }
 
     public void SetInfoDialogue(string nameTalker, string dialogue)

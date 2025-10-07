@@ -211,7 +211,7 @@ public class UIManageMent : MonoBehaviour
         if (addedItemQueue.Count > 0 && popUpAddedItem.PopUpAddedItemImage.color.a <= 0.000001f)
         {
             c += 1;
-            Debug.Log(c);
+            
             popUpAddedItem.SetInfo(addedItemQueue.Peek().First.Icon, addedItemQueue.Peek().Second, addedItemQueue.Peek().First.ItemName);
             addedItemQueue.Dequeue();
 
