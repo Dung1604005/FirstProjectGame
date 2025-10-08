@@ -17,6 +17,8 @@ public class NPC : MonoBehaviour
 
     [SerializeField] private List<NpcDialogue> npcDialogues;
 
+    [SerializeField] private Sprite npcAvatar;
+
     [SerializeField] private bool onQuest;
     public bool OnQuest => onQuest;
 
@@ -36,15 +38,22 @@ public class NPC : MonoBehaviour
         if (onQuest)
         {
             
-            UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, onQuestDialogue);
+            UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, onQuestDialogue, npcAvatar);
             UIManageMent.Instance.DialogueUI.TurnOnButton(CompleteQuest, OnGoingQuest);
             return;
         }
         int totalDialogue = npcDialogues[curNpcDialogues].Dialogues.Count;
-        Debug.Log(UIManageMent.Instance.DialogueUI.Completed);
+        
         if (UIManageMent.Instance.DialogueUI.Completed == true && indexDialogue < totalDialogue && curNpcDialogues < npcDialogues.Count)
         {
-            UIManageMent.Instance.DialogueUI.SetInfoDialogue(npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First, npcDialogues[curNpcDialogues].Dialogues[indexDialogue].Second);
+            Sprite curTalkerAva = npcAvatar;
+            if (npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First != nameNpc)
+            {
+                curTalkerAva = GameManageMent.Instance.PlayerManager.PlayerAvatar;
+
+
+            }
+            UIManageMent.Instance.DialogueUI.SetInfoDialogue(npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First, npcDialogues[curNpcDialogues].Dialogues[indexDialogue].Second, curTalkerAva);
             indexDialogue++;
             if (indexDialogue == totalDialogue)
             {

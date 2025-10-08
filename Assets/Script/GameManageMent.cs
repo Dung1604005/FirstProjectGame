@@ -98,6 +98,9 @@ public class GameManageMent : MonoBehaviour
         gameState = GameState.Continue;
         Application.targetFrameRate = 120;
         Cursor.SetCursor(iconMouse, hotspot, cursorMode);
+        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+    
+        
 
     }
     public void SetCurSorInteract()

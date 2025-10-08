@@ -26,6 +26,7 @@ public class QuestManager : MonoBehaviour
 
         curQuestDefinitions.Add(quest);
         questProgresses.Add(new QuestProgress(quest.Id, quest.Objectives));
+        Debug.Log("here"); 
 
         OnQuestChange?.Invoke();
 

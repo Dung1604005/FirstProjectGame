@@ -17,6 +17,8 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private Button buttonAccept;
     [SerializeField] private Button buttonRefuse;
 
+    [SerializeField] private Image avatar;
+
     private Coroutine typingCo;
     public bool IsTyping { get; private set; }
     public bool Completed { get; private set; }
@@ -111,8 +113,9 @@ public class DialogueUI : MonoBehaviour
        
     }
 
-    public void SetInfoDialogue(string nameTalker, string dialogue)
+    public void SetInfoDialogue(string nameTalker, string dialogue, Sprite ava)
     {
+        avatar.sprite = ava;
 
         nameUI.text = nameTalker;
         StartTyping(dialogue);

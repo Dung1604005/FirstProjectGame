@@ -39,6 +39,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int cur_GunBullet;
     public int Cur_GunBullet => cur_GunBullet;
 
+    [SerializeField] private Sprite playerAvatar;
+
+    public Sprite PlayerAvatar => playerAvatar;
+    
+
     public Vector2 GetDirFromMouseToPlayer()
     {
         Vector2 playerPos = playerController.getPos();
