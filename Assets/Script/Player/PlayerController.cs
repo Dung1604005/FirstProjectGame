@@ -213,11 +213,11 @@ public class PlayerController : MonoBehaviour
             return;
         }
         // Khong cho di chuyen luc swap de weapon cap nhat anim
-        if (!swapping)
-        {
-            Move();
+        // if (!swapping)
+        // {
+        //     Move();
 
-        }
+        // }
        
 
     }
@@ -228,6 +228,11 @@ public class PlayerController : MonoBehaviour
         if (GameManageMent.Instance.GameState == GameState.Pause)
         {
             return;
+        }
+        if (!swapping)
+        {
+            Move();
+
         }
         InteractNpc();
         UpdateCountDown();
