@@ -17,9 +17,13 @@ public class QuestProgress
     public int QuestId => questId;
 
     private QuestState questState;
-    private List<Objective> objectives = new List<Objective>();
+    [SerializeField] private List<Objective> objectives = new List<Objective>();
 
-    private List<int> curCount = new List<int>();
+    public List<Objective> Objectives => objectives;
+
+    [SerializeField] private List<int> curCount = new List<int>();
+
+    public List<int> CurCount => curCount;
 
 
     public QuestProgress(int _questId, List<Objective> _objectives)
@@ -33,8 +37,27 @@ public class QuestProgress
             curCount.Add(0);
         }
     }
-    public void UpdateProgress(int amount, ObjectiveType type, int _targetId)
+    public void UpdateCollectProgress()
     {
+        for (int i = 0; i < objectives.Count; i++)
+        {
+            if (objectives[i].objectiveType == ObjectiveType.Collect)
+            {
+                if(GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount.TryGetValue(objectives[i].targetId, out var cur))
+                {
+                    curCount[i] = Math.Min(objectives[i].requiredCount, cur);
+                }
+            }
+        }
+
+    }
+    public void UpdateProgressKillOrReach(int amount, ObjectiveType type, int _targetId)
+    {
+        if(type == ObjectiveType.Collect)
+        {
+            UpdateCollectProgress();
+            return;
+        }
         for (int i = 0; i < objectives.Count; i++)
         {
             if (objectives[i].objectiveType == type && objectives[i].targetId == _targetId)

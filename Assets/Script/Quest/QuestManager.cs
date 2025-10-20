@@ -43,25 +43,41 @@ public class QuestManager : MonoBehaviour
 
     }
 
-    public void UpdateProgress(int amount, int id, int idQuest, ObjectiveType objectiveType)
+    public void UpdateProgressKillOrReach(int amount, int id, int idQuest, ObjectiveType objectiveType)
     {
 
-        questProgresses[idQuest].UpdateProgress(amount, objectiveType, id);
+        questProgresses[idQuest].UpdateProgressKillOrReach(amount, objectiveType, id);
         if (questProgresses[idQuest].checkProgress())
         {
             Complete(idQuest);
         }
     }
-    public void UpdateProgressAllQuest(int amount, int id, ObjectiveType objectiveType)
+    public void UpdateProgressCollect(int idQuest)
+    {
+        questProgresses[idQuest].UpdateCollectProgress();
+        if (questProgresses[idQuest].checkProgress())
+        {
+            Complete(idQuest);
+        }
+    }
+    public void UpdateProgressAllQuestKillOrReach(int amount, int id, ObjectiveType objectiveType)
     {
         for (int i = curQuestDefinitions.Count - 1; i >= 0; i--)
         {
-            UpdateProgress(amount, id, i, objectiveType);
+            UpdateProgressKillOrReach(amount, id, i, objectiveType);
+        }
+    }
+    public void UpdateProgressAllQuestCollect()
+    {
+        Debug.Log("Update all quest collect");      
+        for (int i = 0; i < curQuestDefinitions.Count; i++)
+        {
+            UpdateProgressCollect(i);
         }
     }
     void Start()
     {
-        
+        GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.OnChangeInventory += UpdateProgressAllQuestCollect;
     }
     
 }

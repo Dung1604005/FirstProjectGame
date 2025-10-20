@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -24,6 +25,16 @@ public class QuestViewInfo : MonoBehaviour
     public void SetInfo(int index)
     {
         nameQuest.text = GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].NameQuest;
+        description.text = "Description:\n" + GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].Description;
+        objectives.text = "Objectives:\n";
+        for(int i = 0; i < GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives.Count; i++)
+        {
+            int id = GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].targetId;    
+            String nameTarget = GameManageMent.Instance.ItemDataBase.ItemDatas[id].ItemName;  
+            objectives.text += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                GameManageMent.Instance.QuestManager.QuestProgresses[index].CurCount[i]   + "/"  +
+                GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].requiredCount + "]" ;
+        }
         
         
     }
