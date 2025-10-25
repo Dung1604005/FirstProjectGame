@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4fb72ef62fec644a9626bc12238e35, type: 3}
   m_Name: EnemyMeleeData
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 20
   atk: 20
   coolDown: 2
   rangeAtk: 2
@@ -20,3 +20,4 @@ MonoBehaviour:
   speed: 6
   goldValue: 10
   expValue: 20
+  indexEnemy: 0

@@ -21,7 +21,7 @@ public class Melee : Weapon
     {
         if (collision.tag == GameConfig.HITBOX_ENEMY)
         {
-            collision.gameObject.GetComponentInParent<Health>().OnDamaged(weaponData.Damaged + GameManageMent.Instance.PlayerManager.Stat.Atk);
+            collision.gameObject.GetComponentInParent<HealthEnemy>().OnDamaged(weaponData.Damaged + GameManageMent.Instance.PlayerManager.Stat.Atk);
         }
     }
     

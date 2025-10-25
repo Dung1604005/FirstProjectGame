@@ -76,7 +76,7 @@ public class UIManageMent : MonoBehaviour
 
     [SerializeField] private QuestUI questUI;
     public QuestUI QuestUI => questUI;
-    
+
 
     [Header("OTHER")]
     [SerializeField] private Sprite tabBackground_Active;
@@ -88,7 +88,7 @@ public class UIManageMent : MonoBehaviour
     [SerializeField] private float flashDuration;
 
     private Coroutine flashRoutine;
-    
+
 
     public void TurnOnReloadingText()
     {
@@ -117,7 +117,7 @@ public class UIManageMent : MonoBehaviour
     {
 
         fillTargetHp = hp / mx;
-       
+
     }
     public void SetExpBar(float exp, float mx)
     {
@@ -141,7 +141,7 @@ public class UIManageMent : MonoBehaviour
         inventoryUI.TurnOff();
         expStatSystemUI.TurnOff();
         ShopSystem.TurnOff();
-        
+
     }
     public void DoFadeIn(Image image, float duration)
     {
@@ -154,44 +154,62 @@ public class UIManageMent : MonoBehaviour
 
     public void AddItemToQueue(ItemData itemData, int mount)
     {
-        
+
         if (popUpAddedItem.State == true && itemData.ItemName == popUpAddedItem.Name.text && itemData.MaxStack >= mount + popUpAddedItem.Stock)
         {
             popUpAddedItem.UpdateAmount(mount);
         }
         else
         {
-            
+
             addedItemQueue.Enqueue(new Pair<ItemData, int>(itemData, mount));
         }
-        
+
 
     }
     private IEnumerator FlashRoutine(SpriteRenderer renderer, Material defaultMaterial)
     {
-        Debug.Log(defaultMaterial);
+
+        Material clonedMaterial = new Material(defaultMaterial);
+
+        // Đặt material của renderer thành flash material
         renderer.material = flashMaterial;
+        if (flashMaterial == null)
+        {
+            renderer.material = clonedMaterial;
+            yield break;
+        }
         yield return new WaitForSeconds(flashDuration);
-        if(renderer!= null){
+        if (renderer != null)
+        {
 
             Debug.Log("End flash");
-            renderer.material = defaultMaterial;
+            renderer.material = clonedMaterial;
         }
-        
-        
+
+
     }
 
     public void Flash(SpriteRenderer spriteRenderer)
     {
-        Material defaultMaterial = spriteRenderer.material;
-        StartCoroutine(FlashRoutine(spriteRenderer, defaultMaterial));
+        Material defaultMaterial ;
+        if (flashRoutine != null)
+        {
+            defaultMaterial = spriteRenderer.material;
+
+            // Dừng coroutine và khôi phục material
+            StopCoroutine(flashRoutine);
+            spriteRenderer.material = defaultMaterial;
+        }
+        defaultMaterial = spriteRenderer.material;
+        flashRoutine = StartCoroutine(FlashRoutine(spriteRenderer, defaultMaterial));
 
     }
-    
+
     void Start()
     {
         // Khi OnHealh duoc goi thi sethealth cung duoc goi
-        
+
     }
     int c = 0;
 
@@ -207,11 +225,11 @@ public class UIManageMent : MonoBehaviour
         {
             expBar.fillAmount = Mathf.Lerp(expBar.fillAmount, fillTargetExp, fillSpeed * Time.deltaTime);
         }
-        
+
         if (addedItemQueue.Count > 0 && popUpAddedItem.PopUpAddedItemImage.color.a <= 0.000001f)
         {
             c += 1;
-            
+
             popUpAddedItem.SetInfo(addedItemQueue.Peek().First.Icon, addedItemQueue.Peek().Second, addedItemQueue.Peek().First.ItemName);
             addedItemQueue.Dequeue();
 

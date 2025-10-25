@@ -13,8 +13,15 @@ public class GameManageMent : MonoBehaviour
     public static GameManageMent Instance { get; private set; }
     private  GameState gameState;
     public GameState GameState => gameState;
+
+    [SerializeField] private EffectController effectController;
+    public EffectController EffectController => effectController;
     [SerializeField] private ItemDataBase itemDataBase;
+    
     public ItemDataBase ItemDataBase => itemDataBase;
+    [SerializeField] private EnemyDataBase enemyDataBase;
+    public EnemyDataBase EnemyDataBase => enemyDataBase;
+    
 
     private PlayerManager playerManager;
 
@@ -90,6 +97,7 @@ public class GameManageMent : MonoBehaviour
         poolManager = GetComponent<PoolManager>();
         dropSystem = GetComponent<DropSystem>();
         questManager = GetComponent<QuestManager>();
+        effectController = GetComponent<EffectController>();
         
     }
     void Start()

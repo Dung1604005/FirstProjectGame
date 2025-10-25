@@ -7,12 +7,12 @@ public class ExpSystem : MonoBehaviour
 {
     [SerializeField] private int lv;
     public int Lv => lv;
-    [SerializeField] private float expToLvUp;
-    public float ExpToLvUp => expToLvUp;
+    [SerializeField] private int expToLvUp;
+    public int ExpToLvUp => expToLvUp;
 
-    [SerializeField] private float offSetNextExpLvUp;
-    [SerializeField] private float curExp;
-    public float CurExp => curExp;
+    [SerializeField] private int offSetNextExpLvUp;
+    [SerializeField] private int curExp;
+    public int CurExp => curExp;
 
     private int pointStat;
     public int PointStat => pointStat;
@@ -41,7 +41,7 @@ public class ExpSystem : MonoBehaviour
         OnExpChange?.Invoke(curExp, expToLvUp);
 
     }
-    public void GainExp(float addExp)
+    public void GainExp(int addExp)
     {
         curExp += addExp;   
         //Debug.Log(curExp / expToLvUp);

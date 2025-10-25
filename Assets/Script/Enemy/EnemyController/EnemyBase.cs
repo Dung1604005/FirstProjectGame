@@ -18,9 +18,9 @@ public abstract class EnemyBase : MonoBehaviour
   
     [SerializeField] protected Rigidbody2D rb;
 
-    protected Health healthSystem;
+    protected HealthEnemy healthSystem;
 
-    public Health HealthSystem => healthSystem;
+    public HealthEnemy HealthSystem => healthSystem;
 
     protected Transform player;
 
@@ -30,6 +30,8 @@ public abstract class EnemyBase : MonoBehaviour
 
 
     [SerializeField] protected EnemyBaseData enemyBaseData;
+
+    public EnemyBaseData EnemyBaseData => enemyBaseData;
     protected State curState;
     protected MoveState moveState;
 
@@ -99,6 +101,19 @@ public abstract class EnemyBase : MonoBehaviour
         }
 
     }
+    public void SpawnEnemy(Vector3 pos)
+    {
+        transform.position = pos;
+        curState = State.Idle;
+        isDied = false;
+        healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
+        this.gameObject.SetActive(true);
+        // Reset thanh mau
+        healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
+         float scale = healthSystem.CurHealth / healthSystem.MaxHealth;
+        this.transform.GetChild(1).gameObject.SetActive(false);
+        this.transform.GetChild(2).gameObject.SetActive(false);
+    }
 
     // Trang thai tan cong 
     protected virtual void OnAttack()
@@ -127,9 +142,9 @@ public abstract class EnemyBase : MonoBehaviour
         curState = State.Idle;
         anim = GetComponent<Animator>();
         cur_coolDown = 0f;
-        healthSystem = GetComponent<Health>();
-        healthSystem.SetMaxHp(enemyBaseData.MaxHealth);
-        healthSystem.SetCurHp(enemyBaseData.MaxHealth);
+        healthSystem = GetComponent<HealthEnemy>();
+        healthSystem.SetMaxHealth(enemyBaseData.MaxHealth);
+        healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
         
 
     }

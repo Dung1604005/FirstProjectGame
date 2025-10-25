@@ -8,6 +8,7 @@ public class ObjectController : MonoBehaviour
     [SerializeField] private int amountDrop;
 
     [SerializeField] private float maxHealth;
+    private Coroutine flashRoutine;
 
 
     private float curHealth;
@@ -17,7 +18,7 @@ public class ObjectController : MonoBehaviour
     public void OnDamaged(float damaged)
     {
         curHealth -= damaged;
-        UIManageMent.Instance.Flash(this.GetComponent<SpriteRenderer>());
+        GameManageMent.Instance.EffectController.Flash(this.GetComponent<SpriteRenderer>(), ref flashRoutine);
         if (curHealth <= 0f)
         {
             GameManageMent.Instance.DropSystem.DropItem(indexLootTable, amountDrop, this.gameObject.transform.position);

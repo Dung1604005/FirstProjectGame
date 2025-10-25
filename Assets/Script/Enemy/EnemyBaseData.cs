@@ -21,8 +21,11 @@ public abstract class EnemyBaseData : ScriptableObject
     [SerializeField] private float speed;
     public float Speed => speed;
 
-    [SerializeField] private float goldValue;
-    public float GoldValue => goldValue;
-    [SerializeField] private float expValue;
-    public float ExpValue => expValue;
+    [SerializeField] private int goldValue;
+    public int GoldValue => goldValue;
+    [SerializeField] private int expValue;
+    public int ExpValue => expValue;
+
+    [SerializeField] private int indexEnemy;
+    public int IndexEnemy => indexEnemy;
 }

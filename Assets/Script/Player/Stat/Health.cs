@@ -13,6 +13,10 @@ public class Health : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Color defaultColor;
+
+    [SerializeField] private Material flashMaterial;
+    [SerializeField] private float flashDuration;
+    private Coroutine flashRoutine;
     public void SetCurHp(float hp)
     {
         cur_health = hp;
@@ -25,12 +29,11 @@ public class Health : MonoBehaviour
     {
         return max_health;
     }
-
+    
     
     private void OnDamagedEffect()
     {
-
-        UIManageMent.Instance.Flash(this.GetComponent<SpriteRenderer>());
+        GameManageMent.Instance.EffectController.Flash(this.GetComponent<SpriteRenderer>(), ref flashRoutine);
 
     }
 
@@ -41,16 +44,7 @@ public class Health : MonoBehaviour
         spriteRenderer.DOColor(Color.green, 0.05f).SetLoops(2, LoopType.Yoyo).OnComplete(() => spriteRenderer.color = defaultColor);
     }
 
-    private void UpdateHealthUIEnemy()
-    {
-        float scale = cur_health / max_health;
-        Debug.Log(cur_health);
-        Transform childPos = this.transform.GetChild(1).transform;
-
-        this.transform.GetChild(1).transform.DOScaleX(scale * 0.8f, 0.2f);
-        this.transform.GetChild(1).gameObject.SetActive(true);
-        this.transform.GetChild(2).gameObject.SetActive(true);
-    }
+    
     public void OnDamaged(float damaged)
     {
         
@@ -76,26 +70,15 @@ public class Health : MonoBehaviour
         // Build them truong hop pha huy vat can
         //Kiem tra va cham de dieu chinh thanh mau
 
-        if (this.gameObject.tag == GameConfig.ENEMY_TAG)
-        {
-            UpdateHealthUIEnemy();
-
-        }
+        
 
         // Hoat anh chet
         if (cur_health <= 0.1f)
         {
-            if (this.tag == GameConfig.ENEMY_TAG)
-            {
-                this.GetComponent<EnemyBase>().SetDie();
-                this.GetComponent<Animator>().SetTrigger("IsDied");
-            }
-            else if (this.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
+            if (this.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
             {
                 Destroy(gameObject);
-
             }
-
         }
 
 
