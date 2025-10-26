@@ -56,7 +56,7 @@ public class HealthEnemy : MonoBehaviour
             // Enemy die
             this.GetComponent<EnemyBase>().SetDie();
             this.gameObject.SetActive(false);
-            Debug.Log("Enemy Die" + this.GetComponent<EnemyBase>().EnemyBaseData.ExpValue);
+            
             GameManageMent.Instance.PlayerManager.Gold.AddGold(this.GetComponent<EnemyBase>().EnemyBaseData.GoldValue);
             GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(this.GetComponent<EnemyBase>().EnemyBaseData.ExpValue);
             //Nhan thuong

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using System;
 
 [System.Serializable]
 public class Pair<T1, T2>
@@ -54,6 +55,9 @@ public class UIManageMent : MonoBehaviour
 
     [SerializeField] private float fillTargetHp;
     [Header("EXP")]
+    
+    [SerializeField] private TextMeshProUGUI levelText;
+    public TextMeshProUGUI LevelText=> levelText;
     [SerializeField] private Image expBar;
     [SerializeField] private ExpSystem expSystem;
     [SerializeField] private float fillTargetExp;
@@ -122,6 +126,11 @@ public class UIManageMent : MonoBehaviour
     public void SetExpBar(float exp, float mx)
     {
         fillTargetExp = exp / mx;
+        String text = expSystem.Lv.ToString();
+        if(expSystem.Lv < 10){
+            text = "0" + text;
+        } 
+        levelText.text = text;
     }
     public void SetGoldText(string text)
     {
