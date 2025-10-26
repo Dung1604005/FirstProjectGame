@@ -67,25 +67,23 @@ public class InventorySystem
 
                 if (item.Stackable)
                 {
-                    if (force == false)
-                    {
-                        if (itemCount.TryGetValue(item.Index, out var cur))
-                            itemCount[item.Index] = cur + amount;
-                        else
-                            itemCount[item.Index] = amount;
-                    }
+                    
+                    if (itemCount.TryGetValue(item.Index, out var cur))
+                        itemCount[item.Index] = cur + amount;
+                    else
+                        itemCount[item.Index] = amount;
+                    
 
                     slot.Set(item, amount);
                 }
                 else
                 {
-                    if (force == false)
-                    {
-                        if (itemCount.TryGetValue(item.Index, out var cur))
-                            itemCount[item.Index] = cur + 1;
-                        else
-                            itemCount[item.Index] = 1;
-                    }
+                    
+                    if (itemCount.TryGetValue(item.Index, out var cur))
+                        itemCount[item.Index] = cur + 1;
+                    else
+                        itemCount[item.Index] = 1;
+                    
 
                     slot.Set(item, 1);
                 }
@@ -105,13 +103,12 @@ public class InventorySystem
                 {
                     if (item.Stackable && slot.ItemData.MaxStack >= slot.Count + amount)
                     {
-                        if (force == false)
-                        {
-                            if (itemCount.TryGetValue(item.Index, out var cur))
-                                itemCount[item.Index] = cur + amount;
-                            else
-                                itemCount[item.Index] = amount;
-                        }
+                        
+                        if (itemCount.TryGetValue(item.Index, out var cur))
+                            itemCount[item.Index] = cur + amount;
+                        else
+                            itemCount[item.Index] = amount;
+                        
                         slot.Add(amount);
                         OnChangeInventory?.Invoke();
                         if (force == false)
@@ -138,18 +135,17 @@ public class InventorySystem
             if (slots[index].ItemData != null)
             {
                 // Xoa 1 vat pham
-                if (force == false)
-                {
-                    if (itemCount.TryGetValue(index, out var cur))
-                        itemCount[index] = cur - amount;
-                }
-
+                
+                if (itemCount.TryGetValue(slots[index].ItemData.Index, out var cur))
+                    itemCount[slots[index].ItemData.Index] = cur - amount;
+                
                 slots[index].Add(-amount);
 
                 if (slots[index].Count == 0)
                 {
                     slots[index].Set(null, 0);
                 }
+                
                 OnChangeInventory?.Invoke();
                 return;
 
@@ -181,19 +177,20 @@ public class InventorySystem
 
         for (int i = 0; i < slots.Count; i++)
         {
+            if(slots[i].IsEmpty() || slots[i].ItemData == null)
+                continue;
             if (slots[i].ItemData.Index == itemData.Index)
             {
 
                 if (slots[i].Count >= amount)
                 {
-                    GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount[itemData.Index] -= amount;
+                
                     RemoveByIndex(i, amount);
                     amount = 0;
                     return;
                 }
                 else
                 {
-                    GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount[itemData.Index] -= slots[i].Count;
                     amount -= slots[i].Count;
                     RemoveByIndex(i, slots[i].Count);
 

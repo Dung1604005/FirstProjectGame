@@ -41,7 +41,7 @@ public class MaterialUI : MonoBehaviour
     }
     void UpdateAmount()
     {
-        Debug.Log("Update Material UI");
+        
 
         if (GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount.TryGetValue(indexItem, out var cur))
         {
