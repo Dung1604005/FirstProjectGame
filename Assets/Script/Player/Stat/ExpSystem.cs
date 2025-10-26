@@ -43,8 +43,9 @@ public class ExpSystem : MonoBehaviour
     }
     public void GainExp(int addExp)
     {
+        Debug.Log("Gain Exp: " + addExp);
         curExp += addExp;   
-        //Debug.Log(curExp / expToLvUp);
+        
         LvUp();
     }
     void Start()

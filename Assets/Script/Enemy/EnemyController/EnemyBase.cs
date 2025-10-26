@@ -50,7 +50,7 @@ public abstract class EnemyBase : MonoBehaviour
     public void SetDie()
     {
         isDied = true;
-        GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(enemyBaseData.ExpValue);
+        
     }
     // State dung yen
     protected virtual void OnIdle()

@@ -167,44 +167,7 @@ public class UIManageMent : MonoBehaviour
 
 
     }
-    private IEnumerator FlashRoutine(SpriteRenderer renderer, Material defaultMaterial)
-    {
-
-        Material clonedMaterial = new Material(defaultMaterial);
-
-        // Đặt material của renderer thành flash material
-        renderer.material = flashMaterial;
-        if (flashMaterial == null)
-        {
-            renderer.material = clonedMaterial;
-            yield break;
-        }
-        yield return new WaitForSeconds(flashDuration);
-        if (renderer != null)
-        {
-
-            Debug.Log("End flash");
-            renderer.material = clonedMaterial;
-        }
-
-
-    }
-
-    public void Flash(SpriteRenderer spriteRenderer)
-    {
-        Material defaultMaterial ;
-        if (flashRoutine != null)
-        {
-            defaultMaterial = spriteRenderer.material;
-
-            // Dừng coroutine và khôi phục material
-            StopCoroutine(flashRoutine);
-            spriteRenderer.material = defaultMaterial;
-        }
-        defaultMaterial = spriteRenderer.material;
-        flashRoutine = StartCoroutine(FlashRoutine(spriteRenderer, defaultMaterial));
-
-    }
+    
 
     void Start()
     {
