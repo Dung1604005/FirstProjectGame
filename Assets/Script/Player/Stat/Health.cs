@@ -13,6 +13,8 @@ public class Health : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Color defaultColor;
+     private Material defaultMaterial;
+
 
     [SerializeField] private Material flashMaterial;
     [SerializeField] private float flashDuration;
@@ -33,7 +35,7 @@ public class Health : MonoBehaviour
     
     private void OnDamagedEffect()
     {
-        GameManageMent.Instance.EffectController.Flash(this.GetComponent<SpriteRenderer>(), ref flashRoutine);
+        GameManageMent.Instance.EffectController.Flash(this.GetComponent<SpriteRenderer>(), defaultMaterial, ref flashRoutine);
 
     }
 
@@ -128,6 +130,7 @@ public class Health : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
+        defaultMaterial = spriteRenderer.material;
 
     }
     void Start()

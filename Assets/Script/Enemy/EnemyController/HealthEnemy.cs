@@ -11,6 +11,7 @@ public class HealthEnemy : MonoBehaviour
     public float MaxHealth => max_health;
     public float CurHealth => cur_health;
     private Coroutine flashRoutine;
+    private Material defaultMaterial;
 
     public void SetCurHealth(float health)
     {
@@ -22,7 +23,7 @@ public class HealthEnemy : MonoBehaviour
     }
     private void OnDamagedEffect()
     {
-        GameManageMent.Instance.EffectController.Flash(this.GetComponent<SpriteRenderer>(), ref flashRoutine);
+        GameManageMent.Instance.EffectController.Flash(this.GetComponent<SpriteRenderer>(), defaultMaterial, ref flashRoutine);
 
     }
 
@@ -56,8 +57,17 @@ public class HealthEnemy : MonoBehaviour
             this.gameObject.SetActive(false);
             GameManageMent.Instance.PlayerManager.Gold.AddGold(this.GetComponent<EnemyBase>().EnemyBaseData.GoldValue);
             GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(this.GetComponent<EnemyBase>().EnemyBaseData.ExpValue);
+            //Nhan thuong
+            float randomOffset = Random.Range(2, 4f);
+
+            GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint(this.transform.position) + Vector3.up * randomOffset).SetUp("+" + this.GetComponent<EnemyBase>().EnemyBaseData.GoldValue.ToString() + " GOLD", Color.yellow);
+
 
         }
+    }
+    void Awake()
+    {
+        defaultMaterial = this.GetComponent<SpriteRenderer>().material;
     }
 
 

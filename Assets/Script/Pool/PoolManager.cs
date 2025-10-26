@@ -15,8 +15,20 @@ public class PoolManager : MonoBehaviour
 
     public ObjectPool<LootItem> LootPool => lootPool;
 
+    [Header("FloatingTextPool")]
+    [SerializeField] private FloatingText floatingTextPrefab;
+
+    [SerializeField] private Transform floatingTextRoot;
+    [SerializeField] private int floatingTextPoolSize;
+    [SerializeField] private int floatingTextPoolMaxSize;
+
+    private ObjectPool<FloatingText> floatingTextPool;
+
+    public ObjectPool<FloatingText> FloatingTextPool => floatingTextPool;
+
     void Awake()
     {
         lootPool = new ObjectPool<LootItem>(lootItemPrefab, lootPoolSize, lootPoolMaxSize, lootRoot);
+        floatingTextPool = new ObjectPool<FloatingText>(floatingTextPrefab, floatingTextPoolSize, floatingTextPoolMaxSize, floatingTextRoot);
     }
 }

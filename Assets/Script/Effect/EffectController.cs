@@ -14,8 +14,9 @@ public class EffectController : MonoBehaviour
 
         // Đặt material của renderer thành flash material
         renderer.material = flashMaterial;
-    
+
         yield return new WaitForSeconds(flashDuration);
+        
         if (renderer != null)
         {
 
@@ -26,14 +27,14 @@ public class EffectController : MonoBehaviour
 
     }
 
-    public void Flash(SpriteRenderer spriteRenderer, ref Coroutine flashRoutine)
+    public void Flash(SpriteRenderer spriteRenderer, Material defaultMaterial,  ref Coroutine flashRoutine)
     {
-        Material defaultMaterial ;
+        
         if (flashRoutine != null)
         {
             StopCoroutine(flashRoutine);
         }
-        defaultMaterial = spriteRenderer.material;
+        
         flashRoutine = StartCoroutine(FlashRoutine(spriteRenderer, defaultMaterial));
 
     }
