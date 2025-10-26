@@ -10,7 +10,7 @@ public class InventorySystem
 {
     private Dictionary<int, int> itemCount = new Dictionary<int, int>();
     public Dictionary<int, int> ItemCount => itemCount;
-    
+
     // List chua du lieu cac slot trong inven
     private List<InventorySlot> slots;
 
@@ -57,7 +57,7 @@ public class InventorySystem
         UIManageMent.Instance.TurnOnWarning();
         return false;
     }
-    public void Add(ItemData item, int amount)
+    public void Add(ItemData item, int amount, bool force = false)
     {
         foreach (var slot in slots)
         {
@@ -67,24 +67,33 @@ public class InventorySystem
 
                 if (item.Stackable)
                 {
-                    if (itemCount.TryGetValue(item.Index, out var cur))
-                        itemCount[item.Index] = cur + amount;
-                    else
-                        itemCount[item.Index] = amount;
-                   
+                    if (force == false)
+                    {
+                        if (itemCount.TryGetValue(item.Index, out var cur))
+                            itemCount[item.Index] = cur + amount;
+                        else
+                            itemCount[item.Index] = amount;
+                    }
+
                     slot.Set(item, amount);
                 }
                 else
                 {
-                    if (itemCount.TryGetValue(item.Index, out var cur))
-                        itemCount[item.Index] = cur + 1;
-                    else
-                        itemCount[item.Index] = 1;
+                    if (force == false)
+                    {
+                        if (itemCount.TryGetValue(item.Index, out var cur))
+                            itemCount[item.Index] = cur + 1;
+                        else
+                            itemCount[item.Index] = 1;
+                    }
+
                     slot.Set(item, 1);
                 }
 
-                UIManageMent.Instance.AddItemToQueue(item, amount);
+
                 OnChangeInventory?.Invoke();
+                if (force == false)
+                    UIManageMent.Instance.AddItemToQueue(item, amount);
                 return;
 
 
@@ -96,14 +105,21 @@ public class InventorySystem
                 {
                     if (item.Stackable && slot.ItemData.MaxStack >= slot.Count + amount)
                     {
-                        if (itemCount.TryGetValue(item.Index, out var cur))
-                            itemCount[item.Index] = cur + amount;
-                        else
-                            itemCount[item.Index] = amount;
+                        if (force == false)
+                        {
+                            if (itemCount.TryGetValue(item.Index, out var cur))
+                                itemCount[item.Index] = cur + amount;
+                            else
+                                itemCount[item.Index] = amount;
+                        }
                         slot.Add(amount);
                         OnChangeInventory?.Invoke();
-                        Debug.Log("ADD");
-                        UIManageMent.Instance.AddItemToQueue(item, amount);
+                        if (force == false)
+                        {
+                            UIManageMent.Instance.AddItemToQueue(item, amount);
+                        }
+
+
                         return;
 
                     }
@@ -113,17 +129,21 @@ public class InventorySystem
 
     }
 
-    public void RemoveByIndex(int index, int amount)
+    public void RemoveByIndex(int index, int amount, bool force = false)
     {
 
         if (index < slots.Count)
         {
-            
+
             if (slots[index].ItemData != null)
             {
                 // Xoa 1 vat pham
-                if (itemCount.TryGetValue(index, out var cur))
+                if (force == false)
+                {
+                    if (itemCount.TryGetValue(index, out var cur))
                         itemCount[index] = cur - amount;
+                }
+
                 slots[index].Add(-amount);
 
                 if (slots[index].Count == 0)
@@ -158,12 +178,12 @@ public class InventorySystem
             UIManageMent.Instance.TurnOnWarning();
             return;
         }
-        
+
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i].ItemData.Index == itemData.Index)
             {
-                
+
                 if (slots[i].Count >= amount)
                 {
                     GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount[itemData.Index] -= amount;
@@ -181,7 +201,7 @@ public class InventorySystem
             }
         }
     }
-    
+
 
     public void Swap(int index1, int index2)
     {

@@ -26,6 +26,7 @@ public class MaterialUI : MonoBehaviour
     }
     public void SetInfo(int _index, int _amount)
     {
+        GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.OnChangeInventory += UpdateAmount;
         icon.gameObject.SetActive(true);
         amountText.gameObject.SetActive(true);
         indexItem = _index;
@@ -40,6 +41,7 @@ public class MaterialUI : MonoBehaviour
     }
     void UpdateAmount()
     {
+        Debug.Log("Update Material UI");
 
         if (GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.ItemCount.TryGetValue(indexItem, out var cur))
         {
@@ -72,6 +74,6 @@ public class MaterialUI : MonoBehaviour
     }
     void Start()
     {
-        GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.OnChangeInventory += UpdateAmount;
+        
     }
 }

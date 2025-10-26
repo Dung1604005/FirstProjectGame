@@ -33,7 +33,7 @@ public class ContextMenu : MonoBehaviour
         {
             
             if (UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.TryEquip(itemData, amount)) {
-                UIManageMent.Instance.InventoryUI.Inven.RemoveByIndex(index, amount);
+                UIManageMent.Instance.InventoryUI.Inven.RemoveByIndex(index, amount, true);
             }
             
 

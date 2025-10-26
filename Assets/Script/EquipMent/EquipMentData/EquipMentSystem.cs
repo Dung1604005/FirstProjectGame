@@ -66,7 +66,7 @@ public class EquipMentSystem
     {
         if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(slots[index].ItemData, slots[index].Count))
         {
-            UIManageMent.Instance.InventoryUI.Inven.Add(slots[index].ItemData, slots[index].Count);
+            UIManageMent.Instance.InventoryUI.Inven.Add(slots[index].ItemData, slots[index].Count, true);
             slots[index].Set(null, 0);
 
             OnEquipmentChange?.Invoke();

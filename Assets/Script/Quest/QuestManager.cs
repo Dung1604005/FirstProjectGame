@@ -69,7 +69,7 @@ public class QuestManager : MonoBehaviour
     }
     public void UpdateProgressAllQuestCollect()
     {
-        Debug.Log("Update all quest collect");      
+            
         for (int i = 0; i < curQuestDefinitions.Count; i++)
         {
             UpdateProgressCollect(i);
