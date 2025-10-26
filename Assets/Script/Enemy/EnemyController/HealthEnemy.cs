@@ -30,7 +30,7 @@ public class HealthEnemy : MonoBehaviour
     private void UpdateHealthUIEnemy()
     {
         float scale = cur_health / max_health;
-        Debug.Log(cur_health);
+        
         Transform childPos = this.transform.GetChild(1).transform;
 
         this.transform.GetChild(1).transform.DOScaleX(scale * 0.8f, 0.2f);
@@ -58,9 +58,18 @@ public class HealthEnemy : MonoBehaviour
             GameManageMent.Instance.PlayerManager.Gold.AddGold(this.GetComponent<EnemyBase>().EnemyBaseData.GoldValue);
             GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(this.GetComponent<EnemyBase>().EnemyBaseData.ExpValue);
             //Nhan thuong
-            float randomOffset = Random.Range(2, 4f);
+            var gradient = new TMPro.VertexGradient(
+            new Color32(0xFF, 0xF8, 0xC5, 0xFF), // top-left
+            new Color32(0xFF, 0xF8, 0xC5, 0xFF), // top-right
+            new Color32(0xE5, 0xA1, 0x00, 0xFF), // bottom-left
+            new Color32(0xFF, 0xD8, 0x4A, 0xFF)  // bottom-right
+        );
+       
 
-            GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint(this.transform.position) + Vector3.up * randomOffset).SetUp("+" + this.GetComponent<EnemyBase>().EnemyBaseData.GoldValue.ToString() + " GOLD", Color.yellow);
+            int randomOffset = Random.Range(4, 10);
+        
+            GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint(this.gameObject.transform.position) + Vector3.up * randomOffset/2f).SetUp("+" + this.GetComponent<EnemyBase>().EnemyBaseData.GoldValue.ToString() + " GOLD", Color.yellow, gradient);
+             
 
 
         }

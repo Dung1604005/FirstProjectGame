@@ -20,7 +20,6 @@ public class EffectController : MonoBehaviour
         if (renderer != null)
         {
 
-            Debug.Log("End flash");
             renderer.material = clonedMaterial;
         }
 

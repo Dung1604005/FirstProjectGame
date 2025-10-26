@@ -22,6 +22,9 @@ public class GoldPlayer : MonoBehaviour
     }
     public void AddGold(int amount)
     {
+
+       
+        
         curGold += amount;
         UIManageMent.Instance.SetGoldText(curGold.ToString());
     }
