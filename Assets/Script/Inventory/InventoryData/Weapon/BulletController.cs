@@ -22,7 +22,7 @@ public class BulletController : MonoBehaviour
     //Kiem tra va cham voi dich
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Damaged");
+       
         if (collision.tag == GameConfig.HITBOX_ENEMY)
         {
             
@@ -30,7 +30,7 @@ public class BulletController : MonoBehaviour
         }
         if (collision.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
         {
-            collision.gameObject.GetComponent<Health>().OnDamaged(damaged);
+            collision.gameObject.GetComponent<ObjectController>().OnDamaged(damaged);
         }
 
         Destroy(this.gameObject);

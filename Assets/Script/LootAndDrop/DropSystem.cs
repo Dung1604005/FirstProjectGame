@@ -22,7 +22,6 @@ public class DropSystem : MonoBehaviour
         {
             LootItem obj = GameManageMent.Instance.PoolManager.LootPool.Spawn(posSpawn);
             obj.SetInfo(itemData.Index, 1);
-            
         }
     }
 

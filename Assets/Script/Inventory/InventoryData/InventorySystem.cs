@@ -64,26 +64,60 @@ public class InventorySystem
             //Neu rong thi push vao
             if (slot.ItemData == null)
             {
+                continue;
+            }
+            else
+            {
+                // Neu gap cung loai
+                if (item.Index == slot.ItemData.Index)
+                {
+                    if (item.Stackable && slot.ItemData.MaxStack >= slot.Count + amount)
+                    {
+
+                        if (itemCount.TryGetValue(item.Index, out var cur))
+                            itemCount[item.Index] = cur + amount;
+                        else
+                            itemCount[item.Index] = amount;
+
+                        slot.Add(amount);
+                        OnChangeInventory?.Invoke();
+                        if (force == false)
+                        {
+                            UIManageMent.Instance.AddItemToQueue(item, amount);
+                        }
+
+
+                        return;
+
+                    }
+                }
+            }
+        }
+        foreach (var slot in slots)
+        {
+            //Neu rong thi push vao
+            if (slot.ItemData == null)
+            {
 
                 if (item.Stackable)
                 {
-                    
+
                     if (itemCount.TryGetValue(item.Index, out var cur))
                         itemCount[item.Index] = cur + amount;
                     else
                         itemCount[item.Index] = amount;
-                    
+
 
                     slot.Set(item, amount);
                 }
                 else
                 {
-                    
+
                     if (itemCount.TryGetValue(item.Index, out var cur))
                         itemCount[item.Index] = cur + 1;
                     else
                         itemCount[item.Index] = 1;
-                    
+
 
                     slot.Set(item, 1);
                 }
@@ -98,29 +132,7 @@ public class InventorySystem
             }
             else
             {
-                // Neu gap cung loai
-                if (item.Index == slot.ItemData.Index)
-                {
-                    if (item.Stackable && slot.ItemData.MaxStack >= slot.Count + amount)
-                    {
-                        
-                        if (itemCount.TryGetValue(item.Index, out var cur))
-                            itemCount[item.Index] = cur + amount;
-                        else
-                            itemCount[item.Index] = amount;
-                        
-                        slot.Add(amount);
-                        OnChangeInventory?.Invoke();
-                        if (force == false)
-                        {
-                            UIManageMent.Instance.AddItemToQueue(item, amount);
-                        }
-
-
-                        return;
-
-                    }
-                }
+                continue;
             }
         }
 

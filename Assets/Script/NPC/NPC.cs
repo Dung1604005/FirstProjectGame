@@ -30,20 +30,20 @@ public class NPC : MonoBehaviour
     private int indexDialogue = 0;
 
     [SerializeField] private bool interacting = false;
-    
+
 
 
     public void StartDialogue()
     {
         if (onQuest)
         {
-            
+
             UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, onQuestDialogue, npcAvatar);
             UIManageMent.Instance.DialogueUI.TurnOnButton(CompleteQuest, OnGoingQuest);
             return;
         }
         int totalDialogue = npcDialogues[curNpcDialogues].Dialogues.Count;
-        
+
         if (UIManageMent.Instance.DialogueUI.Completed == true && indexDialogue < totalDialogue && curNpcDialogues < npcDialogues.Count)
         {
             Sprite curTalkerAva = npcAvatar;
@@ -79,23 +79,36 @@ public class NPC : MonoBehaviour
     }
     public void AcceptQuest()
     {
-        if (!interacting )
+        if (!interacting)
         {
             return;
         }
-        
+
         GameManageMent.Instance.QuestManager.AcceptQuest(npcDialogues[curNpcDialogues].QuestDefinition);
-        
+
         TurnOffInteract();
         onQuest = true;
-        
+
     }
     public void CompleteQuest()
     {
+        for (int i = 0; i < GameManageMent.Instance.QuestManager.CurQuestDefinitons.Count; i++)
+        {
+            if (GameManageMent.Instance.QuestManager.CurQuestDefinitons[i].Id == npcDialogues[curNpcDialogues].QuestDefinition.Id)
+            {
+                if (!GameManageMent.Instance.QuestManager.Complete(i))
+                {
+                    TurnOffInteract();
+                }
+                else
+                {
+                    TurnOffInteract();
+                    onQuest = false;
+                    curNpcDialogues++;
+                }
+            }
+        }
 
-        TurnOffInteract();
-        onQuest = false;
-        curNpcDialogues++;
     }
     public void OnGoingQuest()
     {
@@ -119,9 +132,9 @@ public class NPC : MonoBehaviour
         {
             StartDialogue();
         }
-        
+
     }
-    
+
 
 
 
@@ -134,9 +147,9 @@ public class NPC : MonoBehaviour
 
 public class NpcDialogue
 {
-    [SerializeField]private List<Pair<string, string>> dialogues;
+    [SerializeField] private List<Pair<string, string>> dialogues;
     public List<Pair<string, string>> Dialogues => dialogues;
-    
+
     [SerializeField] private QuestDefinition questDefinition;
     public QuestDefinition QuestDefinition => questDefinition;
 }

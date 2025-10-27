@@ -72,7 +72,7 @@ public class QuestProgress
         for (int i = 0; i < objectives.Count; i++)
         {
 
-            if (curCount[i] != objectives[i].requiredCount)
+            if (curCount[i] < objectives[i].requiredCount)
             {
                 return false;
             }

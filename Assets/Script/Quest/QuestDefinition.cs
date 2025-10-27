@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[System.Serializable]
 public class ItemStack
 {
-    private int itemId;
+    [SerializeField] private int itemId;
     public int ItemId => itemId;
-    private int count;
+    [SerializeField] private int count;
     public int Count => count;
 }
 [CreateAssetMenu(menuName = "Quest")]
@@ -33,6 +33,9 @@ public class QuestDefinition : ScriptableObject
     [SerializeField] private int goldReward;
 
     public int GoldReward => goldReward;
+
+    [SerializeField] private int expReward;
+    public int ExpReward => expReward;
 
     [SerializeField] private List<ItemStack> itemIdReward;
 

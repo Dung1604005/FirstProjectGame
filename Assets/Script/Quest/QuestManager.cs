@@ -26,19 +26,34 @@ public class QuestManager : MonoBehaviour
 
         curQuestDefinitions.Add(quest);
         questProgresses.Add(new QuestProgress(quest.Id, quest.Objectives));
-        Debug.Log("here"); 
+        Debug.Log("here");
 
         OnQuestChange?.Invoke();
 
 
     }
-    public void Complete(int id)
+    public bool Complete(int id)
     {
-
-
+        if (!questProgresses[id].checkProgress())
+        {
+            return false;
+        }
+        Debug.Log("Complete Quest: " + id);
+        List<ItemStack> rewards = curQuestDefinitions[id].ItemIdReward;
+        if (rewards != null)
+        {
+            for (int i = 0; i < rewards.Count; i++)
+            {
+                LootItem obj = GameManageMent.Instance.PoolManager.LootPool.Spawn(GameManageMent.Instance.PlayerManager.PlayerController.getPos());
+                obj.SetInfo(rewards[i].ItemId, rewards[i].Count);
+            }
+        }
+        GameManageMent.Instance.PlayerManager.Gold.AddGold(curQuestDefinitions[id].GoldReward);
+        GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(curQuestDefinitions[id].ExpReward);
         curQuestDefinitions.RemoveAt(id);
         questProgresses.RemoveAt(id);
         OnQuestChange?.Invoke();
+        return true;
 
 
     }
@@ -47,18 +62,18 @@ public class QuestManager : MonoBehaviour
     {
 
         questProgresses[idQuest].UpdateProgressKillOrReach(amount, objectiveType, id);
-        if (questProgresses[idQuest].checkProgress())
-        {
-            Complete(idQuest);
-        }
+        // if (questProgresses[idQuest].checkProgress())
+        // {
+        //     Complete(idQuest);
+        // }
     }
     public void UpdateProgressCollect(int idQuest)
     {
         questProgresses[idQuest].UpdateCollectProgress();
-        if (questProgresses[idQuest].checkProgress())
-        {
-            Complete(idQuest);
-        }
+        // if (questProgresses[idQuest].checkProgress())
+        // {
+        //     Complete(idQuest);
+        // }
     }
     public void UpdateProgressAllQuestKillOrReach(int amount, int id, ObjectiveType objectiveType)
     {
@@ -69,8 +84,8 @@ public class QuestManager : MonoBehaviour
     }
     public void UpdateProgressAllQuestCollect()
     {
-            
-        for (int i = 0; i < curQuestDefinitions.Count; i++)
+
+        for (int i = curQuestDefinitions.Count - 1; i >= 0; i--)
         {
             UpdateProgressCollect(i);
         }
@@ -79,5 +94,5 @@ public class QuestManager : MonoBehaviour
     {
         GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.OnChangeInventory += UpdateProgressAllQuestCollect;
     }
-    
+
 }
