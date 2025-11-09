@@ -68,38 +68,25 @@ public class GridBuilder : MonoBehaviour
         float y = originPosition.y + gridPosition.y * cellSize;
         return new Vector2(x, y);
     }
-    // void OnDrawGizmos()
-    // {
+    void OnDrawGizmos()
+    {
        
         
-    //     if (gridCells.Count == 0) return;
+        if (gridCells.Count == 0) return;
 
-    //     for (int x = 0; x < gridCells.Count; x++)
-    //     {
-    //         if(gridCells[x].Count == 0) continue;
-    //         foreach (var cell in gridCells[x])
-    //         {
+        for (int x = 0; x < gridCells.Count; x++)
+        {
+            if(gridCells[x].Count == 0) continue;
+            foreach (var cell in gridCells[x])
+            {
 
-    //             Vector3 worldPos = cell.WorldPosition;
-    //             Gizmos.color = Color.green;
-    //             if (cell.CellType == CellType.Walkable)
-    //             {
-    //                 Gizmos.color = Color.green;
-    //             }
-    //             else if (cell.CellType == CellType.Blocked)
-    //             {
-    //                 Gizmos.color = Color.red;
-    //             }
-    //             else if (cell.CellType == CellType.Breakable)
-    //             {
-    //                 Gizmos.color = Color.yellow;
-    //             }
-    //             Gizmos.DrawWireCube(worldPos, Vector3.one * cellSize);
-    //         }
-    //     }
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawRay(new Vector3(cell.WorldPosition.x, cell.WorldPosition.y, 0), cell.FlowDirection * 0.3f);
+            }
+        }
 
 
-    // }
+    }
     
 
 

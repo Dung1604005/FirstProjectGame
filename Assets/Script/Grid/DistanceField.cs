@@ -5,8 +5,8 @@ public class DistanceField
 {
     [SerializeField] private GridManagement gridManagement;
 
-    int[] dx = new int[] { -1, 1, 0, 0 };
-    int[] dy = new int[] { 0, 0, -1, 1 };
+    int[] dx = new int[] { -1, 1, 0, 0, 1, -1, 1, -1 };
+    int[] dy = new int[] { 0, 0, -1, 1, 1, -1, -1, 1 };
 
     public void ResetDistanceField()
     {
@@ -58,7 +58,7 @@ public class DistanceField
             int currentDistance = current.First;
             int x = (int)current.Second.x;
             int y = (int)current.Second.y;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 8; i++)
             {
                 int nextX = x + dx[i];
                 int nextY = y + dy[i];

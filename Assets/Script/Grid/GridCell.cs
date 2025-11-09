@@ -16,14 +16,23 @@ public class GridCell
    [SerializeField] private Vector2 gridPosition;
 
    [SerializeField] private float distanceFromPlayer;
+
+   [SerializeField] private Vector2 flowDirection;
    public Vector2 WorldPosition => worldPosition;
    public CellType CellType => cellType;
+
+   public Vector2 FlowDirection => flowDirection;
 
    public float DistanceFromPlayer => distanceFromPlayer;
    public void SetDistanceFromPlayer(float distance)
    {
       distanceFromPlayer = distance;
    }
+   public void SetFlowDirection(Vector2 direct)
+   {
+      flowDirection = direct;
+        
+    }
 
    public Vector2 GridPosition => gridPosition;
 
