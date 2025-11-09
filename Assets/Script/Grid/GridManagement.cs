@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class GridManagement : MonoBehaviour
 {
-    [SerializeField] private GridBuilder gridBuilder;
+    private GridBuilder gridBuilder;
     public GridBuilder GridBuilder => gridBuilder;
+    private DistanceField distanceField;
+    public DistanceField DistanceField => distanceField;
 
     void Awake()
     {
         gridBuilder = GetComponent<GridBuilder>();
-
+        distanceField = new DistanceField(this);
     }
+
+
     void Start()
     {
         gridBuilder.initGrid();
+    }
+    public void UpdateDistanceField(Vector2 playerPosition)
+    {
+        distanceField.CalculateDistanceField(playerPosition);
     }
 }

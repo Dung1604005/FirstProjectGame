@@ -32,6 +32,7 @@ public class GridCell
       worldPosition = position;
       cellType = type;
       this.gridPosition = gridPosition;
+      distanceFromPlayer = float.MaxValue;
    }
    public void SetCellType(CellType type)
    {

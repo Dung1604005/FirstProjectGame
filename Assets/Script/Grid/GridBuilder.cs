@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,10 @@ public class GridBuilder : MonoBehaviour
 {
 
     List<List<GridCell>> gridCells = new List<List<GridCell>>();
+
+    public List<List<GridCell>> GridCells => gridCells;
     [SerializeField] private float cellSize = 0.7f;
+    public float CellSize => cellSize;
     [SerializeField] private Vector2 gridSize = new Vector2(720, 515);
 
     [SerializeField] private Vector2 originPosition = new Vector2(-181, -240);
@@ -47,45 +51,55 @@ public class GridBuilder : MonoBehaviour
         int y = Mathf.FloorToInt((worldPosition.y - originPosition.y) / cellSize);
         return new Vector2(x, y);
     }
+    public bool IsValidGridPosition(Vector2 gridPosition)
+    {
+        int x = (int)gridPosition.x;
+        int y = (int)gridPosition.y;
+        if (x >= 0 && x < gridCells.Count && y >= 0 && y < gridCells[0].Count)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public Vector2 GridToWorldPosition(Vector2 gridPosition)
     {
-
         float x = originPosition.x + gridPosition.x * cellSize;
         float y = originPosition.y + gridPosition.y * cellSize;
         return new Vector2(x, y);
     }
-    void OnDrawGizmos()
-    {
+    // void OnDrawGizmos()
+    // {
        
         
-        if (gridCells.Count == 0) return;
+    //     if (gridCells.Count == 0) return;
 
-        for (int x = 0; x < gridCells.Count; x++)
-        {
-            if(gridCells[x].Count == 0) continue;
-            foreach (var cell in gridCells[x])
-            {
+    //     for (int x = 0; x < gridCells.Count; x++)
+    //     {
+    //         if(gridCells[x].Count == 0) continue;
+    //         foreach (var cell in gridCells[x])
+    //         {
 
-                Vector3 worldPos = cell.WorldPosition;
-                Gizmos.color = Color.green;
-                if (cell.CellType == CellType.Walkable)
-                {
-                    Gizmos.color = Color.green;
-                }
-                else if (cell.CellType == CellType.Blocked)
-                {
-                    Gizmos.color = Color.red;
-                }
-                else if (cell.CellType == CellType.Breakable)
-                {
-                    Gizmos.color = Color.yellow;
-                }
-                Gizmos.DrawWireCube(worldPos, Vector3.one * cellSize);
-            }
-        }
+    //             Vector3 worldPos = cell.WorldPosition;
+    //             Gizmos.color = Color.green;
+    //             if (cell.CellType == CellType.Walkable)
+    //             {
+    //                 Gizmos.color = Color.green;
+    //             }
+    //             else if (cell.CellType == CellType.Blocked)
+    //             {
+    //                 Gizmos.color = Color.red;
+    //             }
+    //             else if (cell.CellType == CellType.Breakable)
+    //             {
+    //                 Gizmos.color = Color.yellow;
+    //             }
+    //             Gizmos.DrawWireCube(worldPos, Vector3.one * cellSize);
+    //         }
+    //     }
 
 
-    }
+    // }
     
 
 

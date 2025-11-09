@@ -20,6 +20,7 @@ public class Pair<T1, T2>
         First = first;
         Second = second;
     }
+    
 }
 public class UIManageMent : MonoBehaviour
 {
