@@ -83,23 +83,6 @@ public class Gun : Weapon
             dirY = -1f;
 
         }
-        
-        
-        
-        // if (dirX > 0.01f || dirX < -0.01f)
-        // {
-        //     spriteRenderer.sortingOrder = 2;
-        // }
-        // else if (dirY < -0.01f)
-        // {
-        //     spriteRenderer.sortingOrder = 2;
-        // }
-        // else
-        // {
-        //     spriteRenderer.sortingOrder = 0;
-        // }
-
-        
         anim.SetFloat("DirX", dirX);
         anim.SetFloat("DirY", dirY);
         

@@ -1,0 +1,92 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GridBuilder : MonoBehaviour
+{
+
+    List<List<GridCell>> gridCells = new List<List<GridCell>>();
+    [SerializeField] private float cellSize = 0.7f;
+    [SerializeField] private Vector2 gridSize = new Vector2(720, 515);
+
+    [SerializeField] private Vector2 originPosition = new Vector2(-181, -240);
+
+    public void initGrid()
+    {
+        for (int x = 0; x < gridSize.x; x++)
+        {
+            List<GridCell> column = new List<GridCell>();
+            for (int y = 0; y < gridSize.y; y++)
+            {
+                GridCell newCell = new GridCell();
+                CellType type = CellType.Walkable; // Default type  
+                Collider2D hitCollider = Physics2D.OverlapBox(originPosition + new Vector2(x * cellSize, y * cellSize), new Vector2(cellSize, cellSize), 0f);
+                if (hitCollider != null)
+                {
+                    if (hitCollider.CompareTag(GameConfig.BLOCK_OBJECT_TAG) || hitCollider.CompareTag(GameConfig.DESTROYABLE_OBJECT_TAG))
+                    {
+                        type = CellType.Blocked;
+                    }
+                    else if (hitCollider.CompareTag(GameConfig.PLAYER_WALL))
+                    {
+                        type = CellType.Breakable;
+                    }
+                }
+                newCell.Initialize(new Vector2(x, y), originPosition + new Vector2(x * cellSize, y * cellSize), type);
+                column.Add(newCell);
+               
+            }
+            gridCells.Add(column);
+        }
+        Debug.Log("Grid Initialized with size: " + gridCells.Count + " x " + gridCells[0].Count);
+
+    }
+    public Vector2 WorldToGridPosition(Vector2 worldPosition)
+    {
+        int x = Mathf.FloorToInt((worldPosition.x - originPosition.x) / cellSize);
+        int y = Mathf.FloorToInt((worldPosition.y - originPosition.y) / cellSize);
+        return new Vector2(x, y);
+    }
+    public Vector2 GridToWorldPosition(Vector2 gridPosition)
+    {
+
+        float x = originPosition.x + gridPosition.x * cellSize;
+        float y = originPosition.y + gridPosition.y * cellSize;
+        return new Vector2(x, y);
+    }
+    void OnDrawGizmos()
+    {
+       
+        
+        if (gridCells.Count == 0) return;
+
+        for (int x = 0; x < gridCells.Count; x++)
+        {
+            if(gridCells[x].Count == 0) continue;
+            foreach (var cell in gridCells[x])
+            {
+
+                Vector3 worldPos = cell.WorldPosition;
+                Gizmos.color = Color.green;
+                if (cell.CellType == CellType.Walkable)
+                {
+                    Gizmos.color = Color.green;
+                }
+                else if (cell.CellType == CellType.Blocked)
+                {
+                    Gizmos.color = Color.red;
+                }
+                else if (cell.CellType == CellType.Breakable)
+                {
+                    Gizmos.color = Color.yellow;
+                }
+                Gizmos.DrawWireCube(worldPos, Vector3.one * cellSize);
+            }
+        }
+
+
+    }
+    
+
+
+}

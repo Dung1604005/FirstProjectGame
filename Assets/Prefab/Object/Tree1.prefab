@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8766106683336932682}
   m_Layer: 13
   m_Name: HitBox
-  m_TagString: Untagged
+  m_TagString: DestroyObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,4 +224,3 @@ MonoBehaviour:
   indexLootTable: 0
   amountDrop: 5
   maxHealth: 50
-  timeSpawn: 5

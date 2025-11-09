@@ -15,9 +15,13 @@ MonoBehaviour:
   id: 0
   nameQuest: Collect Wood
   description: Collect 10 Wood
+  npcId: 0
   objectives:
   - objectiveType: 0
     targetId: 6
     requiredCount: 10
   goldReward: 20
-  itemIdReward: 
+  expReward: 100
+  itemIdReward:
+  - itemId: 0
+    count: 1

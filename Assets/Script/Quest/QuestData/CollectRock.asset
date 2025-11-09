@@ -15,9 +15,11 @@ MonoBehaviour:
   id: 1
   nameQuest: Collect Rock
   description: Collect 20 Rock
+  npcId: 0
   objectives:
   - objectiveType: 0
     targetId: 7
     requiredCount: 20
   goldReward: 50
-  itemIdReward: 
+  expReward: 100
+  itemIdReward: []

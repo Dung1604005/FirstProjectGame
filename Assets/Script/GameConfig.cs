@@ -20,7 +20,12 @@ public class GameConfig : MonoBehaviour
 
     public static String ENEMY_TAG = "Enemy";
 
-    public static string GAMEMANAGER_TAG = "GameManager";
+    public static String BLOCK_OBJECT_TAG = "BlockObject";
+
+    public static String PLAYER_WALL = "PlayerWall";
+
+
+    public static String GAMEMANAGER_TAG = "GameManager";
 
     public static String HITBOX_ENEMY = "HitBox_Enemy";
 

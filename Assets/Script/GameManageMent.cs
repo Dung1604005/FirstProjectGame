@@ -29,11 +29,12 @@ public class GameManageMent : MonoBehaviour
 
     private PoolManager poolManager;
     public PoolManager PoolManager => poolManager;
-    
+
     [Header("Menu")]
 
     [SerializeField] private MenuController menuController;
     
+      
 
     [Header("BuildMode")] 
     
@@ -99,9 +100,11 @@ public class GameManageMent : MonoBehaviour
         questManager = GetComponent<QuestManager>();
         effectController = GetComponent<EffectController>();
         
+        
     }
     void Start()
     {
+       
 
         gameState = GameState.Continue;
         Application.targetFrameRate = 120;
