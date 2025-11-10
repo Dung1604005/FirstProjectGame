@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,12 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     private Context context;
 
-    [SerializeField] float whiskerAngle = 35f;
-
-    [SerializeField] int whiskerCount = 5; // 3: center, left, right
-    [SerializeField] float wAlign = 0.7f;
-    [SerializeField] float wClear = 1.3f;
-    [SerializeField] float turnLerp = 0.15f;
+    
 
     private String[] masks = { GameConfig.OBJECT_MASK, GameConfig.BUILDING_MASK, GameConfig.PLAYER_WALL_MASK };
     private LayerMask layerMask;
@@ -41,6 +37,8 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected Rigidbody2D rb;
 
     private ContactFilter2D filter;
+
+    private BoxCollider2D boxCollider2D;
 
     protected HealthEnemy healthSystem;
 
@@ -114,172 +112,50 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void OnMove(Vector2 flow)
     {
         Vector2 dir = flow.normalized;
-        Vector2[] candidates = new Vector2[whiskerCount];
-        int mid = whiskerCount / 2;
-        candidates[mid] = flow;
-
-        // nếu 5 whisker -> index 0..4, mid = 2
-        for (int i = 1; i <= mid; i++)
+        Vector2 pos = rb.position;
+        for (int i = 0; i < context.Interest.Length; i++)
         {
+            context.SetInterestElement(i, Mathf.Max(0, Vector2.Dot(context.Dirs[i].normalized, flow)));
 
-            float angle = i * (whiskerAngle / mid);
-            float rad = angle * Mathf.Deg2Rad;
-
-            // quay trái (+angle)
-            float cos = Mathf.Cos(rad);
-            float sin = Mathf.Sin(rad);
-            Vector2 left = new Vector2(
-                flow.x * cos - flow.y * sin,
-                flow.x * sin + flow.y * cos
-            );
-
-            // quay phải (-angle)
-            Vector2 right = new Vector2(
-                flow.x * cos + flow.y * sin,
-                -flow.x * sin + flow.y * cos
-            );
-
-            candidates[mid - i] = left;
-            candidates[mid + i] = right;
-
+            context.SetDangerElement(i, 0);
         }
-        for (int i = 0; i < candidates.Length; i++)
-        {
-
-            Debug.DrawRay(transform.position, candidates[i]);
-        }
-        RaycastHit2D[] hits = new RaycastHit2D[4];
-        float bestScore = float.NegativeInfinity;
-        Vector2 bestDir = flow;
-        RaycastHit2D bestHit = new RaycastHit2D();
-        int hitCount = 0;
-
-        for (int i = 0; i < whiskerCount; i++)
-        {
-            Vector2 canDir = candidates[i].normalized;
-            RaycastHit2D minRayCastHit = hits[0];
-            if (canDir == Vector2.zero) continue;
-            
-            int Count = rb.Cast(canDir, filter, hits, avoidDistance);
-            float minHit = avoidDistance;
-            hitCount += Count;
-
-
-            for (int j = 0; j < Count; j++)
-            {
-                var hit = hits[j];
-
-
-                if (hit.distance < minHit)
-                {
-                    minHit = hit.distance;
-                    minRayCastHit = hit;
-
-                }
-            }
-            float clear = Mathf.Clamp01(minHit / avoidDistance);
-            float align = Vector2.Dot(canDir.normalized, flow.normalized);
-
-            if (wClear * clear + wAlign * align >= bestScore)
-            {
-
-                bestScore = wClear * clear + wAlign * align;
-                bestDir = canDir;
-                if (minHit != avoidDistance)
-                {
-                    bestHit = minRayCastHit;
-                }
-
-            }
-            if(i == 4)
-            {
-                Debug.Log(wClear * clear + wAlign * align);
-            }
-
-        }
+        RaycastHit2D hit;
         
-
-        if (bestScore < 0.6f && hitCount > 0)
+        for (int i = 0; i < context.Directions; i++)
         {
-
-            Vector2 normal = hits[0].normal.normalized;
-            if (!bestHit.IsUnityNull())
+            hit = Physics2D.BoxCast(pos, new Vector2(boxCollider2D.size.x - 0.1f, boxCollider2D.size.y - 0.1f), 0, context.Dirs[i].normalized, avoidDistance,layerMask);
+            Color c = Color.red;
+            if (hit.collider != null)
             {
-                normal = bestHit.normal.normalized;
-
-            }
-
-
-
-            // Hướng trượt dọc tường (vuông góc normal)
-            Vector2 tangent = new Vector2(-normal.y, normal.x);
-
-
-            // Nếu tangent đi ngược flow -> đảo lại
-            if (Vector2.Dot(tangent, flow) < 0)
-            {
-                tangent = -tangent;
+                float t = 1f - Mathf.Clamp01(hit.distance / avoidDistance);
+                context.SetDangerElement(i, Mathf.Max(context.Danger[i], 2f*t));
             }
             else
             {
-                if (Vector2.Dot(tangent, flow) == 0 && new Vector2(-tangent.y, -tangent.x) == flow)
-                {
-                    tangent = -tangent;
-                }
+                c = Color.green;
             }
-            //Debug.Log(tangent + " " + flow);
-            // (0, -1)
-            bestDir = tangent; // đi dọc tường thay vì quay đầu
-
+            Debug.DrawRay(pos, context.Dirs[i] * avoidDistance, c);
         }
-        
+        float bestScore = float.NegativeInfinity;
+        Vector2 bestDir = flow;
+        for (int i = 0; i < context.Directions; i++)
+        {
+            float score = Mathf.Clamp01(context.Interest[i] - context.Danger[i]);
+            if (score > bestScore)
+            {
+                bestScore = score;
+                bestDir = context.Dirs[i];
+            }
+        }
+        currentDir = Vector2.Lerp(currentDir, bestDir, 0.05f);
+        Vector2 moveDir = currentDir.normalized;
+        dir = moveDir;
 
-        // int Count = rb.Cast(dir, filter, hits, avoidDistance);
-
-        // if (Count > 0)
-        // {
-        //     Vector2 avoidDir = Vector2.zero;
-        //     for (int i = 0; i < Count; i++)
-        //     {
-        //         if (Vector2.Dot(hits[i].normal, dir) > -0.1f) 
-        //             continue;
-        //         if (hits[i].distance > avoidDistance * 0.8f)
-        //         {
-        //             continue;
-
-        //         }
-        //         Vector2 away = (Vector2) transform.position - hits[i].point;
-        //         avoidDir += away.normalized;
-
-        //     }
-        //     if (avoidDir != Vector2.zero)
-        //     {
-        //         avoidDir = avoidDir.normalized;
-        //         Vector2 targetDir = (flow * wFlow + avoidDir * wAvoid).normalized;
-        //         currentDir = Vector2.Lerp(currentDir, targetDir, 0.1f);
-        //         dir = currentDir.normalized;
-        //         Debug.DrawRay(transform.position, dir * 1.0f, Color.cyan);
-        //         Debug.DrawRay(transform.position, targetDir, Color.yellow); ;
-        //         Debug.DrawRay(transform.position, avoidDir, Color.red);
-
-        //     }
-        //     else
-        //     {
-        //         Vector2 targetDir = flow;
-        //         currentDir = Vector2.Lerp(currentDir, targetDir, 0.1f);
-        //         dir = currentDir.normalized;
-        //     }
+        //Debug.DrawRay(pos, moveDir * avoidDistance, Color.yellow); // hướng chọn cuối
 
 
-        // }
-        // else
-        // {
-        //     Vector2 targetDir = flow;
-        //     currentDir = Vector2.Lerp(currentDir, targetDir, 0.1f);
-        //     dir = currentDir.normalized;
-        // }
-        currentDir = Vector2.Lerp(currentDir, bestDir, 0.1f);
-        dir = currentDir;
+
+
 
 
 
@@ -375,6 +251,7 @@ public abstract class EnemyBase : MonoBehaviour
         filter.SetLayerMask(layerMask);
         currentDir = Vector2.left;
         context = new Context();
+        boxCollider2D = GetComponent<BoxCollider2D>();
 
 
 

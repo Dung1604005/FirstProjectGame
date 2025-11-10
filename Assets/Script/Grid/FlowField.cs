@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlowField 
+public class FlowField
 {
     private GridManagement gridManagement;
     int[] dx = new int[] { -1, 1, 0, 0, 1, -1, 1, -1 };
@@ -17,26 +17,44 @@ public class FlowField
         List<List<GridCell>> gridCells = gridManagement.GridBuilder.GridCells;
         for (int x = 0; x < gridCells.Count; x++)
         {
-            for(int y = 0; y < gridCells[x].Count; y++)
+            for (int y = 0; y < gridCells[x].Count; y++)
             {
                 if (gridCells[x][y].CellType != CellType.Walkable) continue;
                 Vector2 dir = Vector2.zero;
                 float min_distance = float.MaxValue;
-                for(int i = 0; i < 8; i++)
+                int count = 0;
+                for (int i = 0; i < 8; i++)
                 {
                     int nextX = x + dx[i];
                     int nextY = y + dy[i];
-                    if(gridManagement.GridBuilder.IsValidGridPosition(new Vector2(nextX, nextY)))
+                    if (gridManagement.GridBuilder.IsValidGridPosition(new Vector2(nextX, nextY)))
                     {
                         if (gridCells[nextX][nextY].DistanceFromPlayer < min_distance)
                         {
                             min_distance = gridCells[nextX][nextY].DistanceFromPlayer;
                             dir = gridManagement.GridBuilder.GridToWorldPosition(new Vector2(nextX, nextY)) - gridManagement.GridBuilder.GridToWorldPosition(new Vector2(x, y));
                             dir = dir.normalized;
-                            gridCells[x][y].SetFlowDirection(dir);
+
                         }
                     }
                 }
+                
+                for (int i = 0; i < 8; i++)
+                {
+                    int nextX = x + dx[i];
+                    int nextY = y + dy[i];
+                    if (!gridManagement.GridBuilder.IsValidGridPosition(new Vector2(nextX, nextY))) continue;
+
+                    if (gridCells[nextX][nextY].DistanceFromPlayer == min_distance)
+                    {
+                        count++; ;
+                        dir += gridCells[nextX][nextY].FlowDirection;
+
+                    }
+
+                }
+                dir = (dir / count).normalized;
+                gridCells[x][y].SetFlowDirection(dir);
 
             }
         }

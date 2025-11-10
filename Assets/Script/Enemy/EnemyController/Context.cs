@@ -11,7 +11,9 @@ public class Context
     public float[] Danger => danger;
 
     private int directions = 8;
+    public int Directions => directions;
     Vector2[] dirs;
+    public Vector2[] Dirs => dirs;
 
     public Context()
     {
