@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,9 +16,22 @@ public enum MoveState
 }
 public abstract class EnemyBase : MonoBehaviour
 {
+    [SerializeField] protected GridManagement gridManagement;
 
-  
+    [SerializeField] protected float wFlow;
+
+    [SerializeField] protected float wAvoid;
+
+    [SerializeField] protected float avoidDistance;
+
+    private String[] masks = { GameConfig.OBJECT_MASK, GameConfig.BUILDING_MASK, GameConfig.PLAYER_WALL_MASK };
+    private LayerMask layerMask;
+
+    private Vector2 currentDir;
+
     [SerializeField] protected Rigidbody2D rb;
+
+    private ContactFilter2D filter;
 
     protected HealthEnemy healthSystem;
 
@@ -40,8 +55,8 @@ public abstract class EnemyBase : MonoBehaviour
     protected int animTypeAttack = 2;
 
     protected bool isDied = false;
-   
-    
+
+
 
     public float GetDamage()
     {
@@ -50,18 +65,23 @@ public abstract class EnemyBase : MonoBehaviour
     public void SetDie()
     {
         isDied = true;
-        
+
     }
     // State dung yen
     protected virtual void OnIdle()
     {
         float dis = (player.position - transform.position).sqrMagnitude;
+        Vector2 gridPosition = gridManagement.GridBuilder.WorldToGridPosition(transform.position);
+        Vector2 flow = gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].FlowDirection;
+        int distance = (int)gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].DistanceFromPlayer;
+
 
         if (dis <= enemyBaseData.RangeAtk * enemyBaseData.RangeAtk)
         {
             curState = State.Attack;
         }
-        else if (dis <= enemyBaseData.RangeChase * enemyBaseData.RangeChase)
+        else if (dis <= enemyBaseData.RangeChase * enemyBaseData.RangeChase &&
+        distance < int.MaxValue / 10 && distance > 0)
         {
             curState = State.Chase;
         }
@@ -77,9 +97,40 @@ public abstract class EnemyBase : MonoBehaviour
     }
 
     // Tinh toan de cho enemy di chuyen den player
-    protected virtual void OnMove()
+    protected virtual void OnMove(Vector2 flow)
     {
-        Vector2 dir = (player.position - transform.position).normalized;
+
+
+        Vector2 dir = flow;
+        RaycastHit2D[] hits = new RaycastHit2D[2];
+        int Count = rb.Cast(dir, filter, hits, avoidDistance);
+
+        if (Count > 0)
+        {
+            Vector2 avoidDir = Vector2.zero;
+            for (int i = 0; i < Count; i++)
+            {
+                if (hits[i].distance > avoidDistance * 0.8f)
+                {
+                    continue;
+
+                }
+                Vector2 away = ((Vector2)transform.position - hits[i].point).normalized;
+                avoidDir += away;
+
+            }
+            if (avoidDir != Vector2.zero)
+            {
+                avoidDir = avoidDir.normalized;
+                Vector2 targetDir = (flow * wFlow + avoidDir * wAvoid).normalized;
+                currentDir = Vector2.Lerp(currentDir, targetDir, 0.1f);
+                dir = currentDir;
+
+            }
+
+
+        }
+        Debug.DrawRay(transform.position, dir * 1.0f, Color.cyan);
         AnimMove(animTypeMove, dir.x, dir.y);
         Vector2 movePos = rb.position + dir * enemyBaseData.Speed * Time.fixedDeltaTime;
         rb.MovePosition(movePos);
@@ -90,7 +141,6 @@ public abstract class EnemyBase : MonoBehaviour
     {
 
         float dis = (player.position - transform.position).sqrMagnitude;
-        OnMove();
         if (dis > enemyBaseData.RangeChase * enemyBaseData.RangeChase)
         {
             curState = State.Idle;
@@ -99,6 +149,21 @@ public abstract class EnemyBase : MonoBehaviour
         {
             curState = State.Attack;
         }
+        Vector2 gridPosition = gridManagement.GridBuilder.WorldToGridPosition(transform.position);
+        int distance = (int)gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].DistanceFromPlayer;
+        if (distance >= int.MaxValue / 10)
+        {
+            curState = State.Idle;
+            return;
+        }
+        Vector2 flow = gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].FlowDirection;
+
+        if (distance > 0)
+        {
+            OnMove(flow);
+        }
+
+
 
     }
     public void SpawnEnemy(Vector3 pos)
@@ -110,7 +175,7 @@ public abstract class EnemyBase : MonoBehaviour
         this.gameObject.SetActive(true);
         // Reset thanh mau
         healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
-         float scale = healthSystem.CurHealth / healthSystem.MaxHealth;
+        float scale = healthSystem.CurHealth / healthSystem.MaxHealth;
         this.transform.GetChild(1).gameObject.SetActive(false);
         this.transform.GetChild(2).gameObject.SetActive(false);
     }
@@ -123,9 +188,9 @@ public abstract class EnemyBase : MonoBehaviour
 
     void Start()
     {
-        
-        
-        
+
+
+
         if (GameObject.FindWithTag(GameConfig.PLAYER_TAG0) != null)
         {
 
@@ -145,7 +210,12 @@ public abstract class EnemyBase : MonoBehaviour
         healthSystem = GetComponent<HealthEnemy>();
         healthSystem.SetMaxHealth(enemyBaseData.MaxHealth);
         healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
-        
+        filter = new ContactFilter2D();
+        layerMask = LayerMask.GetMask(masks);
+        filter.SetLayerMask(layerMask);
+        currentDir = Vector2.left;
+
+
 
     }
     protected void Update()
@@ -173,6 +243,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
         if (!isDied)
         {
+
             switch (curState)
             {
                 case State.Idle:

@@ -42,7 +42,7 @@ public class GridBuilder : MonoBehaviour
             }
             gridCells.Add(column);
         }
-        Debug.Log("Grid Initialized with size: " + gridCells.Count + " x " + gridCells[0].Count);
+        
 
     }
     public Vector2 WorldToGridPosition(Vector2 worldPosition)

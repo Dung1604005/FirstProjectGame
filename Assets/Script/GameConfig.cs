@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -38,6 +39,10 @@ public class GameConfig : MonoBehaviour
     public static string NPC_MASK = "NPC";
 
     public static string OBJECT_MASK = "ObjectLayer";
+
+    public static String BUILDING_MASK = "Building";
+
+    public static String PLAYER_WALL_MASK = "PlayerWall";
 
     public static string PUNCH_TRIGGER = "Punch";
 

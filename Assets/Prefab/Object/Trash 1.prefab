@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6132063591564787729}
   - component: {fileID: 2283126876518542963}
   - component: {fileID: 3041614328115458690}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Trash 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 839274785
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1a77b9e698c381b47b91c69d6f5063d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
