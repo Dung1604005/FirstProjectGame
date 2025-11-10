@@ -15,6 +15,7 @@ TagManager:
   - PlayerWall
   - GameManager
   - Tree
+  - BlockObject
   layers:
   - Default
   - TransparentFX
