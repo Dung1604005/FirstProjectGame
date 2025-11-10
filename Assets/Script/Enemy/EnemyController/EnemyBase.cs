@@ -71,7 +71,12 @@ public abstract class EnemyBase : MonoBehaviour
     protected virtual void OnIdle()
     {
         float dis = (player.position - transform.position).sqrMagnitude;
+
         Vector2 gridPosition = gridManagement.GridBuilder.WorldToGridPosition(transform.position);
+        if (!gridManagement.GridBuilder.IsValidGridPosition(gridPosition))
+        {
+            return;
+        }
         Vector2 flow = gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].FlowDirection;
         int distance = (int)gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].DistanceFromPlayer;
 
@@ -125,12 +130,27 @@ public abstract class EnemyBase : MonoBehaviour
                 Vector2 targetDir = (flow * wFlow + avoidDir * wAvoid).normalized;
                 currentDir = Vector2.Lerp(currentDir, targetDir, 0.1f);
                 dir = currentDir;
+                // Debug.DrawRay(transform.position, dir * 1.0f, Color.cyan);
+                // Debug.DrawRay(transform.position, targetDir, Color.yellow); ;
+                // Debug.DrawRay(transform.position, avoidDir, Color.red);
 
+            }
+            else
+            {
+                Vector2 targetDir = flow;
+                currentDir = Vector2.Lerp(currentDir, targetDir, 0.1f);
+                dir = currentDir;
             }
 
 
         }
-        Debug.DrawRay(transform.position, dir * 1.0f, Color.cyan);
+        else
+        {
+            Vector2 targetDir = flow;
+            currentDir = Vector2.Lerp(currentDir, targetDir, 0.1f);
+            dir = currentDir;
+        }
+        
         AnimMove(animTypeMove, dir.x, dir.y);
         Vector2 movePos = rb.position + dir * enemyBaseData.Speed * Time.fixedDeltaTime;
         rb.MovePosition(movePos);
@@ -158,7 +178,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
         Vector2 flow = gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].FlowDirection;
 
-        if (distance > 0)
+        if (distance > 0 && flow != Vector2.zero)
         {
             OnMove(flow);
         }

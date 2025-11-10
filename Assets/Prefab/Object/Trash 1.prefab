@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3041614328115458690}
   m_Layer: 13
   m_Name: Trash 1
-  m_TagString: Untagged
+  m_TagString: BlockObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

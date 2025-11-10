@@ -444,8 +444,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridManagement: {fileID: 0}
   wFlow: 1
-  wAvoid: 1.5
-  avoidDistance: 1.5
+  wAvoid: 1.4
+  avoidDistance: 1.4
   rb: {fileID: 0}
   enemyBaseData: {fileID: 11400000, guid: 583cac7a532019a409f4110ce51dcb67, type: 2}
 --- !u!114 &5109878037865345676
