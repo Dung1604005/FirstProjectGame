@@ -167,6 +167,7 @@ public class PlayerController : MonoBehaviour
             {
                 UpdatePunchAnim();
             }
+            attackCountDown = 0f;
         }
     }
      void UpdateCountDown()

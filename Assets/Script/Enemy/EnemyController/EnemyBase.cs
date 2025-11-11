@@ -27,6 +27,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     [SerializeField] protected float separationStrength;
 
+    [SerializeField] protected float wSeparation;
+
     [SerializeField] protected float separationRadius;
 
     private Context context;
@@ -163,6 +165,7 @@ public abstract class EnemyBase : MonoBehaviour
             if (enemy != boxCollider2D)
             {
                 enemyCount++;
+                Debug.Log("YES");
                 float distanceToZombie = Vector2.Distance(enemy.transform.position, transform.position);
                 separationForce += (1f - Mathf.Clamp01(distanceToZombie / separationRadius)) * separationStrength * ((Vector2)(transform.position - enemy.transform.position)).normalized;
 
@@ -170,9 +173,9 @@ public abstract class EnemyBase : MonoBehaviour
         }
         if(enemyCount > 0)
         {
-            separationForce /= Mathf.Sqrt(enemyCount);
+            separationForce /= enemyCount;
         }
-        bestDir = bestDir + separationForce ;
+        bestDir = bestDir.normalized + separationForce.normalized*wSeparation;
         currentDir = Vector2.Lerp(currentDir, bestDir, 0.1f);
         Vector2 moveDir = currentDir.normalized;
         dir = moveDir;
