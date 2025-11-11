@@ -68,6 +68,12 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected bool isDied = false;
 
+    [SerializeField] private float wanderingCooldown;
+
+    private float wanderingTimer = 0f;
+
+    private Vector2 wanderingDir = Vector2.zero;
+
 
 
     public float GetDamage()
@@ -103,6 +109,18 @@ public abstract class EnemyBase : MonoBehaviour
         {
             curState = State.Chase;
         }
+
+        //Wandering
+        wanderingTimer += Time.deltaTime;
+        if (wanderingTimer > wanderingCooldown)
+        {
+            wanderingDir = UnityEngine.Random.insideUnitCircle.normalized;
+            
+            wanderingTimer = 0f;
+        }
+        
+        OnMove(wanderingDir);
+
 
     }
 
