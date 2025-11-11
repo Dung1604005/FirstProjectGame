@@ -12,6 +12,14 @@ public class GridManagement : MonoBehaviour
     private FlowField flowField;
     public FlowField FlowField => flowField;
 
+    [SerializeField] private int chunkSize;
+    public int ChunkSize => chunkSize;
+
+    [SerializeField] private float timeUpdateGrid;
+
+    private bool isUpdating;
+    public bool IsUpdating => isUpdating;
+
     void Awake()
     {
         gridBuilder = GetComponent<GridBuilder>();
@@ -23,19 +31,28 @@ public class GridManagement : MonoBehaviour
     void Start()
     {
         gridBuilder.initGrid();
-        UpdateGridField();
+        StartCoroutine(UpdateGridField());
     }
-    public void UpdateGridField()
+    IEnumerator UpdateGridField()
     {
-        UpdateDistanceField(GameManageMent.Instance.PlayerManager.PlayerController.getPos());
-        UpdateFlowField();
+        while (true)
+        {
+            isUpdating = true;
+            UpdateDistanceField(GameManageMent.Instance.PlayerManager.PlayerController.getPos());
+            UpdateFlowField(GameManageMent.Instance.PlayerManager.PlayerController.getPos());
+
+            yield return null;
+            isUpdating = false;
+            yield return new WaitForSeconds(timeUpdateGrid);
+        }
+
     }
     public void UpdateDistanceField(Vector2 playerPosition)
     {
         distanceField.CalculateDistanceField(playerPosition);
     }
-    public void UpdateFlowField()
+    public void UpdateFlowField(Vector2 playerPosition)
     {
-        flowField.CalculateFlowField();
+        flowField.CalculateFlowField(playerPosition);
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 public class DistanceField 
 {
@@ -9,13 +11,17 @@ public class DistanceField
     int[] dx = new int[] { -1, 1, 0, 0, 1, -1, 1, -1 };
     int[] dy = new int[] { 0, 0, -1, 1, 1, -1, -1, 1 };
 
-    public void ResetDistanceField()
+    public void ResetDistanceField(int startX, int endX, int startY, int endY)
     {
         List<List<GridCell>> gridCells = gridManagement.GridBuilder.GridCells;
-        for (int x = 0; x < gridCells.Count; x++)
+        for (int x = startX; x <= endX; x++)
         {
-            for (int y = 0; y < gridCells[x].Count; y++)
+            for (int y = startY; y <= endY; y++)
             {
+                if(!gridManagement.GridBuilder.IsValidGridPosition(new Vector2(x, y)))
+                {
+                    continue;
+                }
                 gridCells[x][y].SetDistanceFromPlayer(float.MaxValue);
             }
 
@@ -42,14 +48,21 @@ public class DistanceField
     public void CalculateDistanceField(Vector2 playerPosition)
     {
         Vector2 playerGridPosition = gridManagement.GridBuilder.WorldToGridPosition(playerPosition);
-        if(gridManagement.GridBuilder.IsValidGridPosition(playerGridPosition) == false)
+        if (gridManagement.GridBuilder.IsValidGridPosition(playerGridPosition) == false)
         {
             Debug.LogError("Player position is out of grid bounds: " + playerPosition);
             return;
         }
-        ResetDistanceField();
+        int halfChunk = gridManagement.ChunkSize / 2;
+        int startX = (int)playerGridPosition.x - halfChunk;
+        int endX = (int)playerGridPosition.x + halfChunk;
+        int startY = (int)playerGridPosition.y - halfChunk;
+        int endY = (int)playerGridPosition.y + halfChunk;
+
+        ResetDistanceField(startX, endX, startY, endY);
+
         
-        
+
         Queue<Pair<int, Vector2>> queue = new Queue<Pair<int, Vector2>>();
         queue.Enqueue(new Pair<int, Vector2>(0, playerGridPosition));
         gridManagement.GridBuilder.GridCells[(int)playerGridPosition.x][(int)playerGridPosition.y].SetDistanceFromPlayer(0);
@@ -65,6 +78,10 @@ public class DistanceField
                 int nextY = y + dy[i];
                 if(gridManagement.GridBuilder.IsValidGridPosition(new Vector2(nextX, nextY)))
                 {
+                    if(nextX < startX || nextX > endX || nextY < startY || nextY > endY)
+                    {
+                        continue;
+                    }
                     GridCell nextCell = gridManagement.GridBuilder.GridCells[nextX][nextY];
                     if(nextCell.CellType == CellType.Walkable)
                     {

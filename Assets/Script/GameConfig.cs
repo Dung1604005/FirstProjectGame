@@ -44,6 +44,8 @@ public class GameConfig : MonoBehaviour
 
     public static String PLAYER_WALL_MASK = "PlayerWall";
 
+    public static String BODY_ENEMY_MASK = "Body_Enemy";
+
     public static string PUNCH_TRIGGER = "Punch";
 
     public static string LOOT_TRIGGER = "Loot";

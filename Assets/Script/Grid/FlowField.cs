@@ -12,13 +12,25 @@ public class FlowField
     {
         this.gridManagement = gridManagement;
     }
-    public void CalculateFlowField()
+    public void CalculateFlowField(Vector2 playerPosition)
     {
-        List<List<GridCell>> gridCells = gridManagement.GridBuilder.GridCells;
-        for (int x = 0; x < gridCells.Count; x++)
+        Vector2 playerGridPosition = gridManagement.GridBuilder.WorldToGridPosition(playerPosition);
+        if (gridManagement.GridBuilder.IsValidGridPosition(playerGridPosition) == false)
         {
-            for (int y = 0; y < gridCells[x].Count; y++)
+            Debug.LogError("Player position is out of grid bounds: " + playerPosition);
+            return;
+        }
+        List<List<GridCell>> gridCells = gridManagement.GridBuilder.GridCells;
+        int halfChunk = gridManagement.ChunkSize / 2;
+        int startX = (int)playerGridPosition.x - halfChunk;
+        int endX = (int)playerGridPosition.x + halfChunk;
+        int startY = (int)playerGridPosition.y - halfChunk;
+        int endY = (int)playerGridPosition.y + halfChunk;
+        for (int x = startX; x <= endX; x++)
+        {
+            for (int y = startY; y <= endY; y++)
             {
+                if (!gridManagement.GridBuilder.IsValidGridPosition(new Vector2(x, y))) continue;
                 if (gridCells[x][y].CellType != CellType.Walkable) continue;
                 Vector2 dir = Vector2.zero;
                 float min_distance = float.MaxValue;
@@ -27,21 +39,29 @@ public class FlowField
                 {
                     int nextX = x + dx[i];
                     int nextY = y + dy[i];
+                    if(nextX < startX || nextX > endX || nextY < startY || nextY > endY)
+                    {
+                        continue;
+                    }
                     if (gridManagement.GridBuilder.IsValidGridPosition(new Vector2(nextX, nextY)))
                     {
                         if (gridCells[nextX][nextY].DistanceFromPlayer < min_distance)
                         {
                             min_distance = gridCells[nextX][nextY].DistanceFromPlayer;
-                            
+
                         }
                     }
                 }
-                
+
                 for (int i = 0; i < 8; i++)
                 {
                     int nextX = x + dx[i];
                     int nextY = y + dy[i];
                     if (!gridManagement.GridBuilder.IsValidGridPosition(new Vector2(nextX, nextY))) continue;
+                    if (nextX < startX || nextX > endX || nextY < startY || nextY > endY)
+                    {
+                        continue;
+                    }
 
                     if (gridCells[nextX][nextY].DistanceFromPlayer == min_distance)
                     {
@@ -51,7 +71,11 @@ public class FlowField
                     }
 
                 }
-                dir = (dir / count).normalized;
+                if(count > 0)
+                {
+                    dir = (dir / count).normalized;
+                }
+                
                 gridCells[x][y].SetFlowDirection(dir);
 
             }

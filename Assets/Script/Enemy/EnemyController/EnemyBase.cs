@@ -27,7 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     private Context context;
 
-    
+
 
     private String[] masks = { GameConfig.OBJECT_MASK, GameConfig.BUILDING_MASK, GameConfig.PLAYER_WALL_MASK };
     private LayerMask layerMask;
@@ -36,7 +36,6 @@ public abstract class EnemyBase : MonoBehaviour
 
     [SerializeField] protected Rigidbody2D rb;
 
-    private ContactFilter2D filter;
 
     private BoxCollider2D boxCollider2D;
 
@@ -77,6 +76,7 @@ public abstract class EnemyBase : MonoBehaviour
     // State dung yen
     protected virtual void OnIdle()
     {
+        
         float dis = (player.position - transform.position).sqrMagnitude;
 
         Vector2 gridPosition = gridManagement.GridBuilder.WorldToGridPosition(transform.position);
@@ -115,26 +115,26 @@ public abstract class EnemyBase : MonoBehaviour
         Vector2 pos = rb.position;
         for (int i = 0; i < context.Interest.Length; i++)
         {
-            context.SetInterestElement(i, Mathf.Max(0, wFlow*Vector2.Dot(context.Dirs[i].normalized, flow)));
+            context.SetInterestElement(i, Mathf.Max(0, wFlow * Vector2.Dot(context.Dirs[i].normalized, flow)));
 
             context.SetDangerElement(i, 0);
         }
         RaycastHit2D hit;
-        
+
         for (int i = 0; i < context.Directions; i++)
         {
-            hit = Physics2D.BoxCast(pos+context.Dirs[i], new Vector2(boxCollider2D.size.x + 0.1f, boxCollider2D.size.y + 0.1f), 0, context.Dirs[i].normalized, avoidDistance,layerMask);
+            hit = Physics2D.BoxCast(pos + context.Dirs[i], new Vector2(boxCollider2D.size.x + 0.1f, boxCollider2D.size.y + 0.1f), 0, context.Dirs[i].normalized, avoidDistance, layerMask);
             Color c = Color.red;
             if (hit.collider != null)
             {
                 float t = 1f - Mathf.Clamp01(hit.distance / avoidDistance);
-                context.SetDangerElement(i, Mathf.Max(context.Danger[i], wAvoid*t));
+                context.SetDangerElement(i, Mathf.Max(context.Danger[i], wAvoid * t));
             }
             else
             {
                 c = Color.green;
             }
-            Debug.DrawRay(pos+ context.Dirs[i], context.Dirs[i] * avoidDistance, c);
+            Debug.DrawRay(pos + context.Dirs[i], context.Dirs[i] * avoidDistance, c);
         }
         float bestScore = float.NegativeInfinity;
         Vector2 bestDir = flow;
@@ -147,17 +147,11 @@ public abstract class EnemyBase : MonoBehaviour
                 bestDir = context.Dirs[i];
             }
         }
-        currentDir = Vector2.Lerp(currentDir, bestDir, 0.05f);
+        currentDir = Vector2.Lerp(currentDir, bestDir, 0.1f);
         Vector2 moveDir = currentDir.normalized;
         dir = moveDir;
 
         Debug.DrawRay(pos, moveDir * avoidDistance, Color.yellow); // hướng chọn cuối
-
-
-
-
-
-
 
         AnimMove(animTypeMove, dir.x, dir.y);
         Vector2 movePos = rb.position + dir * enemyBaseData.Speed * Time.fixedDeltaTime;
@@ -167,7 +161,10 @@ public abstract class EnemyBase : MonoBehaviour
     // Trang thai duoi theo player
     protected virtual void OnChase()
     {
-
+        if (gridManagement.IsUpdating)
+        {
+            return;
+        }
         float dis = (player.position - transform.position).sqrMagnitude;
         if (dis > enemyBaseData.RangeChase * enemyBaseData.RangeChase)
         {
@@ -178,6 +175,11 @@ public abstract class EnemyBase : MonoBehaviour
             curState = State.Attack;
         }
         Vector2 gridPosition = gridManagement.GridBuilder.WorldToGridPosition(transform.position);
+        if (!gridManagement.GridBuilder.IsValidGridPosition(gridPosition))
+        {
+            curState = State.Idle;
+            return; 
+        }
         int distance = (int)gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].DistanceFromPlayer;
         if (distance >= int.MaxValue / 10)
         {
@@ -210,7 +212,6 @@ public abstract class EnemyBase : MonoBehaviour
         healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
         this.gameObject.SetActive(true);
         // Reset thanh mau
-        healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
         float scale = healthSystem.CurHealth / healthSystem.MaxHealth;
         this.transform.GetChild(1).gameObject.SetActive(false);
         this.transform.GetChild(2).gameObject.SetActive(false);
@@ -246,10 +247,8 @@ public abstract class EnemyBase : MonoBehaviour
         healthSystem = GetComponent<HealthEnemy>();
         healthSystem.SetMaxHealth(enemyBaseData.MaxHealth);
         healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
-        filter = new ContactFilter2D();
         layerMask = LayerMask.GetMask(masks);
-        filter.SetLayerMask(layerMask);
-        currentDir = Vector2.left;
+        currentDir = Vector2.zero;
         context = new Context();
         boxCollider2D = GetComponent<BoxCollider2D>();
 
@@ -279,6 +278,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             return;
         }
+        if (GameObject.FindWithTag(GameConfig.PLAYER_TAG0) == null) return;
         if (!isDied)
         {
 
