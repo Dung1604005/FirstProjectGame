@@ -115,7 +115,7 @@ public abstract class EnemyBase : MonoBehaviour
         Vector2 pos = rb.position;
         for (int i = 0; i < context.Interest.Length; i++)
         {
-            context.SetInterestElement(i, Mathf.Max(0, Vector2.Dot(context.Dirs[i].normalized, flow)));
+            context.SetInterestElement(i, Mathf.Max(0, wFlow*Vector2.Dot(context.Dirs[i].normalized, flow)));
 
             context.SetDangerElement(i, 0);
         }
@@ -123,18 +123,18 @@ public abstract class EnemyBase : MonoBehaviour
         
         for (int i = 0; i < context.Directions; i++)
         {
-            hit = Physics2D.BoxCast(pos, new Vector2(boxCollider2D.size.x - 0.1f, boxCollider2D.size.y - 0.1f), 0, context.Dirs[i].normalized, avoidDistance,layerMask);
+            hit = Physics2D.BoxCast(pos+context.Dirs[i], new Vector2(boxCollider2D.size.x + 0.1f, boxCollider2D.size.y + 0.1f), 0, context.Dirs[i].normalized, avoidDistance,layerMask);
             Color c = Color.red;
             if (hit.collider != null)
             {
                 float t = 1f - Mathf.Clamp01(hit.distance / avoidDistance);
-                context.SetDangerElement(i, Mathf.Max(context.Danger[i], 2f*t));
+                context.SetDangerElement(i, Mathf.Max(context.Danger[i], wAvoid*t));
             }
             else
             {
                 c = Color.green;
             }
-            Debug.DrawRay(pos, context.Dirs[i] * avoidDistance, c);
+            Debug.DrawRay(pos+ context.Dirs[i], context.Dirs[i] * avoidDistance, c);
         }
         float bestScore = float.NegativeInfinity;
         Vector2 bestDir = flow;
@@ -151,7 +151,7 @@ public abstract class EnemyBase : MonoBehaviour
         Vector2 moveDir = currentDir.normalized;
         dir = moveDir;
 
-        //Debug.DrawRay(pos, moveDir * avoidDistance, Color.yellow); // hướng chọn cuối
+        Debug.DrawRay(pos, moveDir * avoidDistance, Color.yellow); // hướng chọn cuối
 
 
 

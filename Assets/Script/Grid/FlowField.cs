@@ -32,9 +32,7 @@ public class FlowField
                         if (gridCells[nextX][nextY].DistanceFromPlayer < min_distance)
                         {
                             min_distance = gridCells[nextX][nextY].DistanceFromPlayer;
-                            dir = gridManagement.GridBuilder.GridToWorldPosition(new Vector2(nextX, nextY)) - gridManagement.GridBuilder.GridToWorldPosition(new Vector2(x, y));
-                            dir = dir.normalized;
-
+                            
                         }
                     }
                 }
@@ -48,7 +46,7 @@ public class FlowField
                     if (gridCells[nextX][nextY].DistanceFromPlayer == min_distance)
                     {
                         count++; ;
-                        dir += gridCells[nextX][nextY].FlowDirection;
+                        dir += gridManagement.GridBuilder.GridToWorldPosition(new Vector2(nextX, nextY)) - gridManagement.GridBuilder.GridToWorldPosition(new Vector2(x, y));
 
                     }
 

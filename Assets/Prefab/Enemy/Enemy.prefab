@@ -443,14 +443,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridManagement: {fileID: 0}
-  wFlow: 1
-  wAvoid: 1.4
+  wFlow: 1.35
+  wAvoid: 2
   avoidDistance: 1.5
-  whiskerAngle: 70
-  whiskerCount: 5
-  wAlign: 0.6
-  wClear: 2
-  turnLerp: 0.1
   rb: {fileID: 0}
   enemyBaseData: {fileID: 11400000, guid: 583cac7a532019a409f4110ce51dcb67, type: 2}
 --- !u!114 &5109878037865345676
