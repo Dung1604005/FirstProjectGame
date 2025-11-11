@@ -25,6 +25,10 @@ public abstract class EnemyBase : MonoBehaviour
 
     [SerializeField] protected float avoidDistance;
 
+    [SerializeField] protected float separationStrength;
+
+    [SerializeField] protected float separationRadius;
+
     private Context context;
 
 
@@ -147,6 +151,28 @@ public abstract class EnemyBase : MonoBehaviour
                 bestDir = context.Dirs[i];
             }
         }
+        // Tach dan
+        LayerMask enemyMask = LayerMask.GetMask(GameConfig.BODY_ENEMY_MASK);
+
+        Vector2 separationForce = Vector2.zero;
+
+        Collider2D[] collider = Physics2D.OverlapCircleAll(pos, separationRadius, enemyMask);
+        int enemyCount = 0;
+        foreach (Collider2D enemy in collider)
+        {
+            if (enemy != boxCollider2D)
+            {
+                enemyCount++;
+                float distanceToZombie = Vector2.Distance(enemy.transform.position, transform.position);
+                separationForce += (1f - Mathf.Clamp01(distanceToZombie / separationRadius)) * separationStrength * ((Vector2)(transform.position - enemy.transform.position)).normalized;
+
+            }
+        }
+        if(enemyCount > 0)
+        {
+            separationForce /= Mathf.Sqrt(enemyCount);
+        }
+        bestDir = bestDir + separationForce ;
         currentDir = Vector2.Lerp(currentDir, bestDir, 0.1f);
         Vector2 moveDir = currentDir.normalized;
         dir = moveDir;
