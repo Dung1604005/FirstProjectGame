@@ -119,7 +119,7 @@ public abstract class EnemyBase : MonoBehaviour
             wanderingTimer = 0f;
         }
         
-        OnMove(wanderingDir);
+        OnMove(wanderingDir, enemyBaseData.WalkSpeed);
 
 
     }
@@ -133,7 +133,7 @@ public abstract class EnemyBase : MonoBehaviour
     }
 
     // Tinh toan de cho enemy di chuyen den player
-    protected virtual void OnMove(Vector2 flow)
+    protected virtual void OnMove(Vector2 flow, float speed)
     {
         Vector2 dir = flow.normalized;
         Vector2 pos = rb.position;
@@ -191,9 +191,10 @@ public abstract class EnemyBase : MonoBehaviour
         }
         if(enemyCount > 0)
         {
-            separationForce /= enemyCount;
+            separationForce /= Mathf.Sqrt(enemyCount);
         }
-        bestDir = bestDir.normalized + separationForce.normalized*wSeparation;
+        bestDir = bestDir + separationForce.normalized * wSeparation;
+        bestDir = bestDir.normalized;
         currentDir = Vector2.Lerp(currentDir, bestDir, 0.1f);
         Vector2 moveDir = currentDir.normalized;
         dir = moveDir;
@@ -201,7 +202,7 @@ public abstract class EnemyBase : MonoBehaviour
         Debug.DrawRay(pos, moveDir * avoidDistance, Color.yellow); // hướng chọn cuối
 
         AnimMove(animTypeMove, dir.x, dir.y);
-        Vector2 movePos = rb.position + dir * enemyBaseData.Speed * Time.fixedDeltaTime;
+        Vector2 movePos = rb.position + dir * speed* Time.fixedDeltaTime;
         rb.MovePosition(movePos);
     }
 
@@ -232,20 +233,20 @@ public abstract class EnemyBase : MonoBehaviour
         {
             //Debug.Log("Here");
             Vector2 randomDir = UnityEngine.Random.insideUnitCircle.normalized;
-            OnMove(randomDir);
+            OnMove(randomDir, enemyBaseData.RunSpeed);
             return;
         }
         Vector2 flow = gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].FlowDirection;
 
         if (distance > 0 && flow != Vector2.zero)
         {
-            OnMove(flow);
+            OnMove(flow, enemyBaseData.RunSpeed);
         }
         else
         {
             //Debug.Log("Here");
             Vector2 randomDir = UnityEngine.Random.insideUnitCircle.normalized;
-            OnMove(randomDir);
+            OnMove(randomDir,enemyBaseData.RunSpeed);
         }
 
 

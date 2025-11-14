@@ -18,8 +18,11 @@ public abstract class EnemyBaseData : ScriptableObject
 
     public float RangeChase => rangeChase;
 
-    [SerializeField] private float speed;
-    public float Speed => speed;
+    [SerializeField] private float runSpeed;
+    public float RunSpeed => runSpeed;
+
+    [SerializeField] private float walkSpeed;
+    public float WalkSpeed => walkSpeed;
 
     [SerializeField] private int goldValue;
     public int GoldValue => goldValue;

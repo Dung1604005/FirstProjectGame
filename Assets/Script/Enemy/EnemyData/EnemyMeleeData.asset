@@ -17,7 +17,8 @@ MonoBehaviour:
   coolDown: 2
   rangeAtk: 2
   rangeChase: 30
-  speed: 7
+  runSpeed: 7
+  walkSpeed: 4
   goldValue: 10
   expValue: 20
   indexEnemy: 0
