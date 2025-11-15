@@ -52,7 +52,7 @@ public class BulletController : MonoBehaviour
     
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg ;
         transform.rotation = Quaternion.Euler(0, 0, angle);
-        rb.velocity = dir * moveSpeed;
+        rb.linearVelocity = dir * moveSpeed;
 
         StartCoroutine(AutoDestroy());
     }
