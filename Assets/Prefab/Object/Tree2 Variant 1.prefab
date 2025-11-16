@@ -48,6 +48,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4418227744510865967, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_Size.x
+      value: 0.8594284
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418227744510865967, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_Size.y
+      value: 2.2305145
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418227744510865967, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.31113052
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418227744510865967, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_Offset.y
+      value: -2.9036026
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418227744510865967, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418227744510865967, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802537303847537689, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_Size.x
+      value: 0.6749878
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802537303847537689, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0604858
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802537303847537689, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.22240448
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802537303847537689, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_Offset.y
+      value: -2.51062
+      objectReference: {fileID: 0}
     - target: {fileID: 7260328141310449903, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
       propertyPath: m_Sprite
       value: 
