@@ -9,7 +9,7 @@ public class GunData : WeaponData
     [Header("Gun Stats")]
     
     [SerializeField] private GameObject bullet;
-    [SerializeField] private Gun gun;
+    [SerializeField] private Weapon gun;
 
     [SerializeField] private int magSize;
     public int MagSize => magSize;
@@ -20,6 +20,6 @@ public class GunData : WeaponData
 
     [SerializeField] private Sprite bulletUI;
     public Sprite BulletUI => bulletUI;
-    public Gun Gun => gun;
+    public Weapon Gun => gun;
     public GameObject Bullet => bullet;
 }

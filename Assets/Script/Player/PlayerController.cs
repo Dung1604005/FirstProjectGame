@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat(GameConfig.MOVEX_FLOAT, x);
         anim.SetFloat(GameConfig.MOVEY_FLOAT, y);
         anim.SetFloat(GameConfig.SPEED_PARAMETER, a.sqrMagnitude);
+        
     }
     public void UpdatePunchAnim()
     {

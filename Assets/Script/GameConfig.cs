@@ -21,6 +21,8 @@ public class GameConfig : MonoBehaviour
 
     public static String ENEMY_TAG = "Enemy";
 
+    public static String HITBOX_DESTROYOBJECT_TAG = "HitBox_DestroyObject";
+
     public static String BLOCK_OBJECT_TAG = "BlockObject";
 
     public static String PLAYER_WALL = "PlayerWall";

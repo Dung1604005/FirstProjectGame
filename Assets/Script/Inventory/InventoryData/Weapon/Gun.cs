@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Xml.Schema;
 using Cinemachine;
 using Unity.PlasticSCM.Editor.WebApi;
+using UnityEditor.U2D;
 using UnityEngine;
 
 public class Gun : Weapon
@@ -16,16 +17,16 @@ public class Gun : Weapon
     [SerializeField] private int curBullet;
     public int CurBullet => curBullet;
 
-    private int totalBullet;
+    protected int totalBullet;
     public int TotalBullet => totalBullet;
 
-    private bool reloading = false;
+    protected bool reloading = false;
     public bool Reloading => reloading;
 
     private float timeReload = 0f;
 
 
-    private CinemachineImpulseSource cinemachineImpulseSource;
+    protected CinemachineImpulseSource cinemachineImpulseSource;
     void UpdateCurStateBullet()
     {
         if (curBullet / (float)(WeaponData as GunData).MagSize >= 0.5f)
@@ -44,7 +45,11 @@ public class Gun : Weapon
     void Awake()
     {
         anim = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        
         cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         attacking = false;
         if (weaponData != null)

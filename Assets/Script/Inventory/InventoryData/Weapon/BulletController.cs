@@ -25,14 +25,29 @@ public class BulletController : MonoBehaviour
        
         if (collision.tag == GameConfig.HITBOX_ENEMY)
         {
+            if(collision.gameObject != null)
+            {
+                collision.gameObject.GetComponentInParent<HealthEnemy>().OnDamaged(damaged);
+            }
+        }
+        if (collision.tag == GameConfig.HITBOX_DESTROYOBJECT_TAG)
+        {
             
-            collision.gameObject.GetComponentInParent<HealthEnemy>().OnDamaged(damaged);
+                if(collision.gameObject != null)
+                {
+                    collision.gameObject.GetComponentInParent<ObjectController>().OnDamaged(damaged);
+                }
+            
         }
         if (collision.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
         {
-            collision.gameObject.GetComponent<ObjectController>().OnDamaged(damaged);
+            
+                if(collision.gameObject != null)
+                {
+                    collision.gameObject.GetComponent<ObjectController>().OnDamaged(damaged);
+                }
+            
         }
-
         Destroy(this.gameObject);
     }
     void Awake()

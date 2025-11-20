@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22583668536c6d74cb80a312cba6f968, type: 3}
+  m_Name: EnergyGun
+  m_EditorClassIdentifier: Assembly-CSharp::GunData
+  description: A gun from Alien
+  stackable: 0
+  maxStack: 1
+  type: 1
+  itemName: Gun
+  index: 14
+  icon: {fileID: -2103840770260788691, guid: 4931b520789181e41b376db67eb08d1b, type: 3}
+  value: 9999
+  damaged: 60
+  coolDown: 0.5
+  bullet: {fileID: 8671606415495258123, guid: bdd352d8b0da28849bc74b8c30ef7f49, type: 3}
+  gun: {fileID: 1380695179398605116, guid: 6557b5d7d8540dc46b69fe444bafa1c3, type: 3}
+  magSize: 20
+  reloadTime: 2
+  bulletUI: {fileID: 8861528632941982878, guid: afc1c2a9dd8805049adfe674da89dcb7, type: 3}
