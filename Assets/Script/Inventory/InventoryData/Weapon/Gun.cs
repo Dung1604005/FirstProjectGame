@@ -54,19 +54,19 @@ public class Gun : Weapon
         attacking = false;
         if (weaponData != null)
         {
-            if (weaponData.ItemName == "ShotGun")
+            if ((weaponData as GunData).GunType == GunType.SHOTGUN)
             {
 
                 totalBullet = GameManageMent.Instance.PlayerManager.ShotgunBullet;
                 curBullet = GameManageMent.Instance.PlayerManager.Cur_ShotgunBullet;
             }
-            else if (weaponData.ItemName == "Pistol")
+            else if ((weaponData as GunData).GunType == GunType.PISTOL)
             {
 
                 totalBullet = GameManageMent.Instance.PlayerManager.PistolBullet;
                 curBullet = GameManageMent.Instance.PlayerManager.Cur_PistolBullet;
             }
-            else if (weaponData.ItemName == "Gun")
+            else if ((weaponData as GunData).GunType == GunType.GUN)
             {
 
                 totalBullet = GameManageMent.Instance.PlayerManager.GunBullet;
@@ -115,8 +115,8 @@ public class Gun : Weapon
             totalBullet -= (weaponData as GunData).MagSize - curBullet;
 
             curBullet = (weaponData as GunData).MagSize;
-            GameManageMent.Instance.PlayerManager.UpdateTotalBullet(weaponData.ItemName, totalBullet);
-            GameManageMent.Instance.PlayerManager.UpdateCurrentBullet(weaponData.ItemName, curBullet);
+            GameManageMent.Instance.PlayerManager.UpdateTotalBullet((weaponData as GunData).GunType, totalBullet);
+            GameManageMent.Instance.PlayerManager.UpdateCurrentBullet((weaponData as GunData).GunType, curBullet);
 
         }
         else
@@ -126,8 +126,8 @@ public class Gun : Weapon
             curBullet += totalBullet;
 
             totalBullet = 0;
-            GameManageMent.Instance.PlayerManager.UpdateTotalBullet(weaponData.ItemName, totalBullet);
-            GameManageMent.Instance.PlayerManager.UpdateCurrentBullet(weaponData.ItemName, curBullet);
+            GameManageMent.Instance.PlayerManager.UpdateTotalBullet((weaponData as GunData).GunType, totalBullet);
+            GameManageMent.Instance.PlayerManager.UpdateCurrentBullet((weaponData as GunData).GunType, curBullet);
         }
         UIManageMent.Instance.TurnOffReloadingText();
         UIManageMent.Instance.BulletUIController.UpdateBulletUI((weaponData as GunData).BulletUI, curBullet, (weaponData as GunData).MagSize, totalBullet);
@@ -171,7 +171,7 @@ public class Gun : Weapon
         }
         
         curBullet -= 1;
-        GameManageMent.Instance.PlayerManager.UpdateCurrentBullet(weaponData.ItemName, curBullet);
+        GameManageMent.Instance.PlayerManager.UpdateCurrentBullet((weaponData as GunData).GunType, curBullet);
         UpdateCurStateBullet();
         UIManageMent.Instance.BulletUIController.UpdateCurrentBullet(curBullet);
 

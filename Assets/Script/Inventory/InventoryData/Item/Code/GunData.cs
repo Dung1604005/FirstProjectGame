@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[System.Serializable]
+public enum GunType
+{
+    PISTOL,
+    GUN,
+    SHOTGUN
+}
 [CreateAssetMenu(menuName = "Script/Item/GunData", fileName = "Gun")]
 
 public class GunData : WeaponData
@@ -10,6 +18,9 @@ public class GunData : WeaponData
     
     [SerializeField] private GameObject bullet;
     [SerializeField] private Weapon gun;
+
+    [SerializeField] private GunType gunType;
+    public GunType GunType => gunType;
 
     [SerializeField] private int magSize;
     public int MagSize => magSize;

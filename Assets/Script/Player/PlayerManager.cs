@@ -70,32 +70,32 @@ public class PlayerManager : MonoBehaviour
         
     }
 
-    public void UpdateCurrentBullet(string GunName, int amount)
+    public void UpdateCurrentBullet(GunType GunType, int amount)
     {
-        switch(GunName)
+        switch(GunType)
         {
-            case "ShotGun":
+            case GunType.SHOTGUN:
                 cur_ShotgunBullet = amount;
                 break;
-            case "Pistol":
+            case GunType.PISTOL:
                 cur_PistolBullet = amount;
                 break;
-            case "Gun":
+            case GunType.GUN:
                 cur_GunBullet = amount;
                 break;
         }
     }
-    public void UpdateTotalBullet(string GunName, int amount)
+    public void UpdateTotalBullet(GunType GunType, int amount)
     {
-        switch(GunName)
+        switch(GunType)
         {
-            case "ShotGun":
+            case GunType.SHOTGUN:
                 shotgunBullet = amount;
                 break;
-            case "Pistol":
+            case GunType.PISTOL:
                 pistolBullet = amount;
                 break;
-            case "Gun":
+            case GunType.GUN:
                 gunBullet = amount;
                 break;
         }
