@@ -80,7 +80,7 @@ public class LootItem : MonoBehaviour, IPoolable
         Vector2 dropPos = transform.position;
         dropPos.x += offsetX;
         dropPos.y += offsetY;
-        Debug.Log(dropPos + " " + transform.position);
+        
         StartCoroutine(ItemDrop(transform.position, dropPos));
         
 

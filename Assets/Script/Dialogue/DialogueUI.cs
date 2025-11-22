@@ -15,7 +15,10 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private float punctuationDelay = 0.25f; // dừng nhẹ sau . , ! ?
 
     [SerializeField] private Button buttonAccept;
+    [SerializeField] private TextMeshProUGUI buttonAcceptText;
     [SerializeField] private Button buttonRefuse;
+
+    [SerializeField] private TextMeshProUGUI buttonRefuseText;
 
     [SerializeField] private Image avatar;
 
@@ -106,6 +109,14 @@ public class DialogueUI : MonoBehaviour
     {
         AddOnClickAccept(actionAcc);
         AddOnClickRefuse(actionRefuse);
+    }
+    public void setTextButtonAccept(String text)
+    {
+        buttonAcceptText.text = text;
+    }
+    public void setTextButtonRefuse(String text)
+    {
+        buttonRefuseText.text = text;
     }
     public void TurnOn()
     {

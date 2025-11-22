@@ -17,6 +17,7 @@ public class QuestProgress
     public int QuestId => questId;
 
     private QuestState questState;
+    public QuestState QuestState => questState;
     [SerializeField] private List<Objective> objectives = new List<Objective>();
 
     public List<Objective> Objectives => objectives;

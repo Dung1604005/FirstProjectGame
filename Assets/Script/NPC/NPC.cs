@@ -17,6 +17,8 @@ public class NPC : MonoBehaviour
 
     [SerializeField] private List<NpcDialogue> npcDialogues;
 
+    [SerializeField] private String endTalk;
+
     [SerializeField] private Sprite npcAvatar;
 
     [SerializeField] private bool onQuest;
@@ -35,10 +37,19 @@ public class NPC : MonoBehaviour
 
     public void StartDialogue()
     {
+        if(curNpcDialogues >= npcDialogues.Count)
+        {
+            
+             Sprite curTalkerAva = npcAvatar;
+             UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, endTalk, curTalkerAva);
+             return;
+        }
         if (onQuest)
         {
 
             UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, onQuestDialogue, npcAvatar);
+            UIManageMent.Instance.DialogueUI.setTextButtonAccept(npcDialogues[curNpcDialogues].OnQuestCompleteDialogue);
+            UIManageMent.Instance.DialogueUI.setTextButtonRefuse(npcDialogues[curNpcDialogues].OnQuestNotCompleteDialogue);
             UIManageMent.Instance.DialogueUI.TurnOnButton(CompleteQuest, OnGoingQuest);
             return;
         }
@@ -50,15 +61,16 @@ public class NPC : MonoBehaviour
             if (npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First != nameNpc)
             {
                 curTalkerAva = GameManageMent.Instance.PlayerManager.PlayerAvatar;
-
-
             }
             UIManageMent.Instance.DialogueUI.SetInfoDialogue(npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First, npcDialogues[curNpcDialogues].Dialogues[indexDialogue].Second, curTalkerAva);
             indexDialogue++;
             if (indexDialogue == totalDialogue)
             {
+                UIManageMent.Instance.DialogueUI.setTextButtonAccept("Let's do it");
+                UIManageMent.Instance.DialogueUI.setTextButtonRefuse("Nah may be later");
                 UIManageMent.Instance.DialogueUI.TurnOnButton(AcceptQuest, Refuse);
             }
+
         }
 
     }
@@ -75,6 +87,7 @@ public class NPC : MonoBehaviour
     public void TurnOffInteract()
     {
         interacting = false;
+
         UIManageMent.Instance.DialogueUI.TurnOff();
     }
     public void AcceptQuest()
@@ -98,10 +111,13 @@ public class NPC : MonoBehaviour
             {
                 if (!GameManageMent.Instance.QuestManager.Complete(i))
                 {
+                    UIManageMent.Instance.DialogueUI.TurnOfButton();
                     TurnOffInteract();
+                    
                 }
                 else
                 {
+                    UIManageMent.Instance.DialogueUI.TurnOfButton();
                     TurnOffInteract();
                     onQuest = false;
                     curNpcDialogues++;
@@ -130,6 +146,11 @@ public class NPC : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && !onQuest)
         {
+            if(interacting && curNpcDialogues >= npcDialogues.Count)
+            {
+                TurnOffInteract();
+                return;
+            }
             StartDialogue();
         }
 
@@ -152,4 +173,10 @@ public class NpcDialogue
 
     [SerializeField] private QuestDefinition questDefinition;
     public QuestDefinition QuestDefinition => questDefinition;
+
+    [SerializeField] private String onQuestCompleteDialogue;
+    public String OnQuestCompleteDialogue  => onQuestCompleteDialogue;
+
+    [SerializeField] private String onQuestNotCompleteDialogue;
+    public String OnQuestNotCompleteDialogue =>onQuestNotCompleteDialogue;
 }

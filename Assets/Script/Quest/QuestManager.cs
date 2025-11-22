@@ -19,6 +19,7 @@ public class QuestManager : MonoBehaviour
 
 
     public event Action OnQuestChange;
+    public event Action OnCompleteQuest;
 
 
     public void AcceptQuest(QuestDefinition quest)
@@ -29,8 +30,6 @@ public class QuestManager : MonoBehaviour
         Debug.Log("here");
 
         OnQuestChange?.Invoke();
-
-
     }
     public bool Complete(int id)
     {
@@ -38,7 +37,6 @@ public class QuestManager : MonoBehaviour
         {
             return false;
         }
-        Debug.Log("Complete Quest: " + id);
         List<ItemStack> rewards = curQuestDefinitions[id].ItemIdReward;
         if (rewards != null)
         {
@@ -48,6 +46,8 @@ public class QuestManager : MonoBehaviour
                 obj.SetInfo(rewards[i].ItemId, rewards[i].Count);
             }
         }
+        OnCompleteQuest?.Invoke();
+        
         GameManageMent.Instance.PlayerManager.Gold.AddGold(curQuestDefinitions[id].GoldReward);
         GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(curQuestDefinitions[id].ExpReward);
         curQuestDefinitions.RemoveAt(id);
@@ -81,6 +81,7 @@ public class QuestManager : MonoBehaviour
         {
             UpdateProgressKillOrReach(amount, id, i, objectiveType);
         }
+        OnQuestChange?.Invoke();
     }
     public void UpdateProgressAllQuestCollect()
     {
@@ -89,6 +90,7 @@ public class QuestManager : MonoBehaviour
         {
             UpdateProgressCollect(i);
         }
+        OnQuestChange?.Invoke();
     }
     void Start()
     {
