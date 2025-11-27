@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: CollectRock
   m_EditorClassIdentifier: 
   id: 1
-  nameQuest: Collect Rock
+  nameQuest: Begginer Quest 2
   description: Collect 20 Rock
   npcId: 0
   objectives:
   - objectiveType: 0
     targetId: 7
-    requiredCount: 20
+    requiredCount: 15
   goldReward: 50
   expReward: 100
   itemIdReward: []

@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: CollectWood
   m_EditorClassIdentifier: 
   id: 0
-  nameQuest: Collect Wood
+  nameQuest: Begginer Quest 1
   description: Collect 10 Wood
   npcId: 0
   objectives:
   - objectiveType: 0
     targetId: 6
-    requiredCount: 10
+    requiredCount: 20
   goldReward: 20
   expReward: 100
   itemIdReward:

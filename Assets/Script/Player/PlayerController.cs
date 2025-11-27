@@ -27,6 +27,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float punchCountDown;
 
     private Animator anim;
+
+    private float moveX;
+    public float MoveX => moveX;
+
+    private float moveY;
+    public float MoveY => moveY;
+
+    private Vector2 playerDir;
+    public Vector2 PlayerDir => playerDir;
     // Kiem soat va cham
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -59,9 +68,13 @@ public class PlayerController : MonoBehaviour
     {
         
         Vector2 a = new Vector2(x, y).normalized;
-        anim.SetFloat(GameConfig.MOVEX_FLOAT, x);
-        anim.SetFloat(GameConfig.MOVEY_FLOAT, y);
-        anim.SetFloat(GameConfig.SPEED_PARAMETER, a.sqrMagnitude);
+        float speed = a.sqrMagnitude;
+        if(speed > 0)
+        {
+            anim.SetFloat(GameConfig.MOVEX_FLOAT, x);
+            anim.SetFloat(GameConfig.MOVEY_FLOAT, y);
+        }
+        anim.SetFloat(GameConfig.SPEED_PARAMETER, speed);
         
     }
     public void UpdatePunchAnim()
@@ -111,39 +124,52 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+    void GetInputMove()
+    {
+        float movex = Input.GetAxis(GameConfig.HORIZONTAL);
+        float movey = Input.GetAxis(GameConfig.VERTICAL);
+        moveX = movex;
+        moveY = movey;
+        Vector2 dir = new Vector2(moveX, moveY);
+        if(dir.sqrMagnitude > 0)
+        {
+            playerDir = dir;
+        }
+        
+        
+
+    }
     //Di chuyen
     void Move()
     {
         if(punching || (usingWeapon && slotPlayerController.Weapon.Attacking)){
             return;
         }
-        float movex = Input.GetAxis(GameConfig.HORIZONTAL);
-        float movey = Input.GetAxis(GameConfig.VERTICAL);
+        
         if (slotPlayerController.Weapon == null)
         {
             if (punching == false)
             {
-                AnimUpdate(movex, movey);
+                AnimUpdate(moveX, moveY);
             }
         }
         else
         {
             if (slotPlayerController.Weapon.Attacking == false)
-            {
+            {  
                 if (usingWeapon)
                 {
                     if (slotPlayerController.Weapon.WeaponData.Type == ItemType.Gun)
                     {
-                        slotPlayerController.Weapon.UpdateAnim(movex, movey);
+                        slotPlayerController.Weapon.UpdateAnim(moveX, moveY);
                     }
                     
                 }
-                AnimUpdate(movex, movey);
+                AnimUpdate(moveX, moveY);   
             }
         }
 
-        Vector2 dir = new Vector2(movex, movey).normalized;
+        Vector2 dir = new Vector2(moveX, moveY).normalized;
         Vector2 new_pos = rb.position + dir * Time.fixedDeltaTime * GameManageMent.Instance.PlayerManager.Stat.Speed;
         rb.MovePosition(new_pos);
     }
@@ -197,23 +223,27 @@ public class PlayerController : MonoBehaviour
             attackCountDown = 0f;
         }
     }
-
-
-
-    void Awake()
+    public void Init()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         slotPlayerController = GetComponent<SlotPlayerController>();
         lootSystem = GetComponent<LootSystem>();
+        moveX = 0f;
+        moveY = 0f;
+        playerDir = Vector2.zero;
+    }
+
+
+    void Awake()
+    {
+        Init();
     }
     
     void FixedUpdate()
     {
-        if (GameManageMent.Instance.GameState == GameState.Pause)
-        {
-            return;
-        }
+        
+        GetInputMove();
         // Khong cho di chuyen luc swap de weapon cap nhat anim
         // if (!swapping)
         // {
@@ -231,6 +261,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        
         if (!swapping)
         {
             Move();

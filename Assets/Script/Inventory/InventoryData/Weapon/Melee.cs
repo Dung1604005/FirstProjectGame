@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Interfaces;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -14,8 +15,12 @@ public class Melee : Weapon
     public override void UpdateAnim(float dirX, float dirY)
     {
         anim.SetTrigger("isAttack");
-        anim.SetFloat("DirX", dirX);
-        anim.SetFloat("DirY", dirY);
+        if(Mathf.Abs(dirX) + Mathf.Abs(dirY) > 0)
+        {
+            anim.SetFloat("DirX", dirX);
+            anim.SetFloat("DirY", dirY);
+        }
+        
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,6 +37,8 @@ public class Melee : Weapon
         float y = Mathf.Sin(angle);
         float x = Mathf.Cos(angle);
         attacking = true;
+
+        Debug.Log(x + " " + y);
         GameManageMent.Instance.PlayerManager.PlayerController.AnimUpdate(x, y);
         UpdateAnim(x, y);
 

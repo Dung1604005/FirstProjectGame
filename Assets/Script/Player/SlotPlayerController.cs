@@ -51,6 +51,7 @@ public class SlotPlayerController : MonoBehaviour
 
             weaponPrefab = Instantiate(gunData.Gun.gameObject, this.transform.GetChild(2).transform);
             weapon = weaponPrefab.GetComponent<Weapon>();
+            weapon.UpdateAnim(GameManageMent.Instance.PlayerManager.PlayerController.PlayerDir.x, GameManageMent.Instance.PlayerManager.PlayerController.PlayerDir.y);
             return;
         }
         else

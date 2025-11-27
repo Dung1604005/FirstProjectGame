@@ -15,16 +15,15 @@ public class SpecialGun: Gun
     public override void UpdateAnim(float dirX, float dirY)
     {
         Debug.Log(dirX + " " + dirY);
+        Vector2 a = new Vector2(dirX, dirY).normalized;
         Vector2 left = new Vector2(-1, 0);
         Vector2 right = new Vector2(1, 0);
         Vector2 up = new Vector2(0, 1);
         Vector2 down = new Vector2(0, -1);
-        if (dirX == 0f && dirY == 0f)
+        float speed = a.sqrMagnitude;
+        if (!(speed > 0.00001))
         {
-            // ANimation down
-            this.transform.rotation = Quaternion.Euler(0, 0, -90);
-            this.spriteRenderer.flipX =  false;
-            spriteRenderer.sortingOrder = 1;
+            return;
         }
         int distanceDir = 10;
         Vector2 animDir= Vector2.zero;

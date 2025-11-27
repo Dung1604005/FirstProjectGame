@@ -57,7 +57,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3821376407363761447}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.313997, y: -0.29899952, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -65,7 +65,7 @@ Transform:
   - {fileID: 7433810427437615934}
   - {fileID: 1248479113693244738}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!114 &1380695179398605116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,11 +81,6 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: d4d7314082a362440909966a22672e73, type: 2}
   spriteRenderer: {fileID: 2019680091208878288}
   anim: {fileID: 3092297065635725268}
-  radius_bullet: 2
-  delayTimeAfterShoot: 0.2
-  angleShotGun: 0
-  strengthShake: 0
-  curBullet: 30
   radius_bullet: 2
   delayTimeAfterShoot: 0.2
   angleShotGun: 0

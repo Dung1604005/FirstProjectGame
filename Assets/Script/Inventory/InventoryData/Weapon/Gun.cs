@@ -82,16 +82,11 @@ public class Gun : Weapon
     }
     public override void UpdateAnim(float dirX, float dirY)
     {
-        if (dirX == 0f && dirY == 0f)
+        if(dirX + dirY > 0)
         {
-            // ANimation down
-            dirY = -1f;
-
+            anim.SetFloat("DirX", dirX);
+            anim.SetFloat("DirY", dirY);
         }
-        anim.SetFloat("DirX", dirX);
-        anim.SetFloat("DirY", dirY);
-        
-
     }
     IEnumerator Couroutine(float time)
     {
