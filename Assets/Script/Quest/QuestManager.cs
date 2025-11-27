@@ -30,6 +30,10 @@ public class QuestManager : MonoBehaviour
         Debug.Log("here");
 
         OnQuestChange?.Invoke();
+        if(curQuestDefinitions.Count == 1)
+        {
+            UIManageMent.Instance.QuestUI.QuestViewInfo.SetInfo(0);
+        }
     }
     public bool Complete(int id)
     {
@@ -53,6 +57,10 @@ public class QuestManager : MonoBehaviour
         curQuestDefinitions.RemoveAt(id);
         questProgresses.RemoveAt(id);
         OnQuestChange?.Invoke();
+        if(curQuestDefinitions.Count > 0)
+        {
+            UIManageMent.Instance.QuestUI.QuestViewInfo.SetInfo(0);
+        }
         return true;
 
 

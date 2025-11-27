@@ -28,7 +28,7 @@ public class QuestViewInfo : MonoBehaviour
     {
         this.indexQuest = index;
         nameQuest.text = GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].NameQuest;
-        description.text = "Description:\n" + GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].Description;
+        description.text = GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].Description;
         objectives.text = "Objectives:";
         for(int i = 0; i < GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives.Count; i++)
         {
@@ -37,6 +37,13 @@ public class QuestViewInfo : MonoBehaviour
             objectives.text += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].CurCount[i]   + "/"  +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].requiredCount + "]" ;
+        }
+        rewards.text = "Rewards:";
+        rewards.text += "\n+" + GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].ExpReward + " Exp, +" + GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].GoldReward + " Gold";
+        for(int i = 0; i < GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].ItemIdReward.Count; i++)
+        {
+            int idItem =  GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].ItemIdReward[i].ItemId;
+            rewards.text += "\n+" + GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].ItemIdReward[i].Count + " " + GameManageMent.Instance.ItemDataBase.ItemDatas[idItem].ItemName;
         }
     }
 
