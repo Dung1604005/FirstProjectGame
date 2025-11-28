@@ -33,6 +33,9 @@ public class NPC : MonoBehaviour
 
     [SerializeField] private bool interacting = false;
 
+    [SerializeField] private bool isQuestGiver;
+    public bool IsQuestGiver => isQuestGiver;
+
 
 
     public void StartDialogue()
@@ -133,7 +136,7 @@ public class NPC : MonoBehaviour
 
     public void Refuse()
     {
-        indexDialogue = 0;
+        indexDialogue--;
         TurnOffInteract();
         UIManageMent.Instance.DialogueUI.TurnOfButton();
     }
@@ -179,4 +182,7 @@ public class NpcDialogue
 
     [SerializeField] private String onQuestNotCompleteDialogue;
     public String OnQuestNotCompleteDialogue =>onQuestNotCompleteDialogue;
+
+    [SerializeField] private int indexQuestDialogue;
+    public int IntQuestDialogue => indexQuestDialogue;
 }

@@ -18,19 +18,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3983861550350628747, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_Size.y
-      value: 2.757187
+      value: 2.8379364
       objectReference: {fileID: 0}
     - target: {fileID: 3983861550350628747, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_Offset.y
-      value: -2.8206253
+      value: -1.4276199
       objectReference: {fileID: 0}
     - target: {fileID: 3983861550350628747, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
-      value: 0.5
+      value: 0.5274088
       objectReference: {fileID: 0}
     - target: {fileID: 3983861550350628747, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.y
-      value: 0.5
+      value: 0.32676223
       objectReference: {fileID: 0}
     - target: {fileID: 5590143301285938097, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_Sprite
@@ -89,15 +89,24 @@ PrefabInstance:
       value: BlockObject
       objectReference: {fileID: 0}
     - target: {fileID: 8766106683336932682, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
+      propertyPath: m_Size.x
+      value: 0.66806793
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766106683336932682, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_Size.y
-      value: 1.6403961
+      value: 1.5192566
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766106683336932682, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.004459381
       objectReference: {fileID: 0}
     - target: {fileID: 8766106683336932682, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_Offset.y
-      value: -2.0822983
+      value: -0.7902374
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8009854772000670658, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
+    - {fileID: -8496290189044933742, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
