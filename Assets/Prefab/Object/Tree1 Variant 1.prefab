@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 896684865301107663, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 896684865301107663, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
+      propertyPath: m_TagString
+      value: BlockObject
+      objectReference: {fileID: 0}
     - target: {fileID: 3983861550350628747, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_Size.y
       value: 2.757187
@@ -71,6 +79,14 @@ PrefabInstance:
     - target: {fileID: 8488763984600414098, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_Name
       value: Tree1 Variant 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488763984600414098, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8488763984600414098, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
+      propertyPath: m_TagString
+      value: BlockObject
       objectReference: {fileID: 0}
     - target: {fileID: 8766106683336932682, guid: 6b090bc50c31ad4419bd8adb7be561c1, type: 3}
       propertyPath: m_Size.y
