@@ -33,8 +33,15 @@ public class NPC : MonoBehaviour
 
     [SerializeField] private bool interacting = false;
 
+    [SerializeField] private GameObject interactingKey;
+
     [SerializeField] private bool isQuestGiver;
     public bool IsQuestGiver => isQuestGiver;
+
+
+    private bool canContinueDialogue = true;
+
+
 
 
 
@@ -47,6 +54,7 @@ public class NPC : MonoBehaviour
              UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, endTalk, curTalkerAva);
              return;
         }
+        Debug.Log("IsOnQuest " + onQuest);
         if (onQuest)
         {
 
@@ -57,23 +65,37 @@ public class NPC : MonoBehaviour
             return;
         }
         int totalDialogue = npcDialogues[curNpcDialogues].Dialogues.Count;
-
+        int indexQuestDialogue = npcDialogues[curNpcDialogues].IndexQuestDialogue;
+        Debug.Log(indexDialogue);
+        if (!canContinueDialogue)
+        {
+            return;
+        }
         if (UIManageMent.Instance.DialogueUI.Completed == true && indexDialogue < totalDialogue && curNpcDialogues < npcDialogues.Count)
         {
+            canContinueDialogue = true;
             Sprite curTalkerAva = npcAvatar;
             if (npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First != nameNpc)
             {
                 curTalkerAva = GameManageMent.Instance.PlayerManager.PlayerAvatar;
             }
             UIManageMent.Instance.DialogueUI.SetInfoDialogue(npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First, npcDialogues[curNpcDialogues].Dialogues[indexDialogue].Second, curTalkerAva);
-            indexDialogue++;
-            if (indexDialogue == totalDialogue)
+            
+            if (indexDialogue == indexQuestDialogue)
             {
                 UIManageMent.Instance.DialogueUI.setTextButtonAccept("Let's do it");
                 UIManageMent.Instance.DialogueUI.setTextButtonRefuse("Nah may be later");
                 UIManageMent.Instance.DialogueUI.TurnOnButton(AcceptQuest, Refuse);
+                canContinueDialogue = false;
             }
-
+            indexDialogue++;
+            
+            
+        }
+        else if(UIManageMent.Instance.DialogueUI.Completed == true && indexDialogue >= totalDialogue && curNpcDialogues < npcDialogues.Count)
+        {
+            curNpcDialogues++;
+            indexDialogue = 0;
         }
 
     }
@@ -90,6 +112,7 @@ public class NPC : MonoBehaviour
     public void TurnOffInteract()
     {
         interacting = false;
+        
 
         UIManageMent.Instance.DialogueUI.TurnOff();
     }
@@ -116,14 +139,15 @@ public class NPC : MonoBehaviour
                 {
                     UIManageMent.Instance.DialogueUI.TurnOfButton();
                     TurnOffInteract();
-                    
+                    return;
                 }
                 else
                 {
                     UIManageMent.Instance.DialogueUI.TurnOfButton();
                     TurnOffInteract();
                     onQuest = false;
-                    curNpcDialogues++;
+                    canContinueDialogue = true;
+                    return;
                 }
             }
         }
@@ -145,8 +169,21 @@ public class NPC : MonoBehaviour
     {
         if (!interacting)
         {
+            if((GameManageMent.Instance.PlayerManager.PlayerController.getPos() - (Vector2)this.gameObject.transform.position).sqrMagnitude <= interactRadius * interactRadius)
+            {
+                interactingKey.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    TurnOnInteract();
+                }
+            }
+            else
+            {
+                interactingKey.SetActive(false);
+            }
             return;
         }
+        interactingKey.SetActive(false);
         if (Input.GetKeyDown(KeyCode.Space) && !onQuest)
         {
             if(interacting && curNpcDialogues >= npcDialogues.Count)
@@ -184,5 +221,5 @@ public class NpcDialogue
     public String OnQuestNotCompleteDialogue =>onQuestNotCompleteDialogue;
 
     [SerializeField] private int indexQuestDialogue;
-    public int IntQuestDialogue => indexQuestDialogue;
+    public int IndexQuestDialogue => indexQuestDialogue;
 }

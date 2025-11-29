@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: CollectRock
   m_EditorClassIdentifier: 
   id: 1
-  nameQuest: Begginer Quest 2
-  description: Collect 20 Rock
+  nameQuest: Gathering the Stones
+  description: Dung have assign a task for you who are a new member of The Walker.
+    You have to collect 15 rock for Dung who need rock to craft bullet.
   npcId: 0
   objectives:
   - objectiveType: 0
     targetId: 7
-    requiredCount: 15
+    requiredCount: 1
   goldReward: 50
   expReward: 100
   itemIdReward: []

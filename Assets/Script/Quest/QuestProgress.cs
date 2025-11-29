@@ -29,7 +29,7 @@ public class QuestProgress
 
     public QuestProgress(int _questId, List<Objective> _objectives)
     {
-        Debug.Log(_objectives.Count);
+        
         this.questId = _questId;
         this.objectives = _objectives;
         this.questState = QuestState.InProgress;
