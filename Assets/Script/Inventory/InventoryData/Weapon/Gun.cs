@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Xml.Schema;
 using Cinemachine;
 using Unity.PlasticSCM.Editor.WebApi;
+using Unity.VisualScripting;
 using UnityEditor.U2D;
 using UnityEngine;
 
@@ -82,7 +83,7 @@ public class Gun : Weapon
     }
     public override void UpdateAnim(float dirX, float dirY)
     {
-        if(dirX + dirY > 0)
+        if(Mathf.Abs(dirX) + Mathf.Abs(dirY) > 0)
         {
             anim.SetFloat("DirX", dirX);
             anim.SetFloat("DirY", dirY);

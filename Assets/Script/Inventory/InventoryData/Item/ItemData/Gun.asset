@@ -28,3 +28,4 @@ MonoBehaviour:
   magSize: 30
   reloadTime: 2
   bulletUI: {fileID: 21300000, guid: 8df124c3162748d498d76860b50dc7e7, type: 3}
+  indexBullet: 1
