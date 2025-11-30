@@ -32,6 +32,8 @@ public class GameConfig : MonoBehaviour
 
     public static String HITBOX_ENEMY = "HitBox_Enemy";
 
+    public static String HITBOX_PLAYER = "HitBox_Player";
+
     public static string SPEED_PARAMETER = "Speed";
 
     public static string HITBOX_PUNCH = "HitBox_Punch";

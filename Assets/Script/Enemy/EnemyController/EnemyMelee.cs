@@ -33,15 +33,13 @@ public class EnemyMelee : EnemyBase
             {
                 player.GetComponent<Health>().OnDamaged(enemyBaseData.Atk);
             }
-
-            
         }
         attacking = false;
     }
     // Quan li Trang thai tan cong
     protected override void OnAttack()
     {
-        Vector2 dir = (player.position - transform.position);
+        Vector2 dir = player.position - transform.position;
         float dis = dir.sqrMagnitude;
         AnimMove(animTypeAttack, dir.x, dir.y);
         if (dis > enemyBaseData.RangeAtk * enemyBaseData.RangeAtk)

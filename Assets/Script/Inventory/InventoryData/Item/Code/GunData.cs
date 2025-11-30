@@ -32,5 +32,8 @@ public class GunData : WeaponData
     [SerializeField] private Sprite bulletUI;
     public Sprite BulletUI => bulletUI;
     public Weapon Gun => gun;
-    public GameObject Bullet => bullet;
+    [SerializeField] private int indexBullet;
+
+    public int IndexBullet => indexBullet;
+    
 }

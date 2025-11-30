@@ -52,7 +52,7 @@ public class GhostPreview : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("COLLIDER");
+        
         curCollision += 1;
 
 

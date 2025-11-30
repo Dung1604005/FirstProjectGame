@@ -137,7 +137,7 @@ public class Gun : Weapon
 
         Vector2 dir = (mousePos - playerPos).normalized;
         Vector2 reach = playerPos + dir * radius_bullet;
-        GameObject bullet = Instantiate(gunData.Bullet, reach, Quaternion.identity);
+        BulletController bullet = GameManageMent.Instance.PoolManager.BulletPoolsList[(weaponData as GunData).IndexBullet].Spawn(reach);
 
 
         
@@ -145,18 +145,18 @@ public class Gun : Weapon
         {
             // Ban 2 vien lech goc angleShotGun
 
-            GameObject bullet2 = Instantiate(gunData.Bullet, reach, Quaternion.identity);
-            GameObject bullet3 = Instantiate(gunData.Bullet, reach, Quaternion.identity);
-            bullet2.GetComponent<BulletController>().SetDamaged(weaponData.Damaged);
+            BulletController bullet2 = GameManageMent.Instance.PoolManager.BulletPoolsList[(weaponData as GunData).IndexBullet].Spawn(reach);
+            BulletController bullet3 = GameManageMent.Instance.PoolManager.BulletPoolsList[(weaponData as GunData).IndexBullet].Spawn(reach);
+            bullet2.SetInfo(weaponData.Damaged, (weaponData as GunData).IndexBullet);
 
 
-            bullet2.GetComponent<BulletController>().Fire(Quaternion.Euler(0, 0, angleShotGun) * dir);
-            bullet3.GetComponent<BulletController>().SetDamaged(weaponData.Damaged);
-            bullet3.GetComponent<BulletController>().Fire(Quaternion.Euler(0, 0, -angleShotGun) * dir);
+            bullet2.Fire(Quaternion.Euler(0, 0, angleShotGun) * dir);
+            bullet3.SetInfo(weaponData.Damaged, (weaponData as GunData).IndexBullet);
+            bullet3.Fire(Quaternion.Euler(0, 0, -angleShotGun) * dir);
 
 
         }
-        bullet.GetComponent<BulletController>().SetDamaged(weaponData.Damaged);
+        bullet.GetComponent<BulletController>().SetInfo(weaponData.Damaged, (weaponData as GunData).IndexBullet);
         bullet.GetComponent<BulletController>().Fire(dir);
         // Them vao sau hieu ung shake
         if (weaponData.ItemName == "ShotGun")

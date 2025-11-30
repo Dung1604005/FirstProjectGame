@@ -22,7 +22,12 @@ public class GoldPlayer : MonoBehaviour
     }
     public void AddGold(int amount)
     {
-
+        curGold += amount;
+        UIManageMent.Instance.SetGoldText(curGold.ToString());
+        if(amount <= 0)
+        {
+            return;
+        }
         var gradient = new TMPro.VertexGradient(
             new Color32(0xFF, 0xF8, 0xC5, 0xFF), // top-left
             new Color32(0xFF, 0xF8, 0xC5, 0xFF), // top-right
@@ -35,8 +40,8 @@ public class GoldPlayer : MonoBehaviour
         
         GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint((Vector3)GameManageMent.Instance.PlayerManager.PlayerController.getPos()+ new Vector3(randomOffsetX/2f, randomOffsetY/2, 0f) )).SetUp("+" + amount.ToString() + " GOLD", Color.yellow, gradient);
         
-        curGold += amount;
-        UIManageMent.Instance.SetGoldText(curGold.ToString());
+        
+        
     }
     void Start()
     {

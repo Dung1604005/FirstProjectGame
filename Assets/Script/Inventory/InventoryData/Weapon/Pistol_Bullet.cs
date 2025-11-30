@@ -29,9 +29,10 @@ public class Pistol_Bullet : MonoBehaviour
 
         Vector2 dir = (mousePos - playerPos).normalized;
         Vector2 reach = playerPos + dir * radius_bullet;
-        GameObject bullet = Instantiate(weaponData.Bullet, reach, Quaternion.identity);       
+             
+        BulletController bullet = GameManageMent.Instance.PoolManager.BulletPoolsList[weaponData.IndexBullet].Spawn(reach);
         dir = (mousePos - (Vector2)bullet.transform.position).normalized;
-        bullet.GetComponent<BulletController>().SetDamaged(weaponData.Damaged);
+        bullet.GetComponent<BulletController>().SetInfo(weaponData.Damaged, weaponData.IndexBullet);
         bullet.GetComponent<BulletController>().Fire(dir);
     }
 

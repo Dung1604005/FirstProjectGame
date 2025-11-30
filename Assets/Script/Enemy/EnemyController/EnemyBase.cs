@@ -53,6 +53,8 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected Animator anim;
 
+    public Animator Anim => anim;
+
     protected bool attacking = false;
 
 
@@ -83,7 +85,7 @@ public abstract class EnemyBase : MonoBehaviour
     public void SetDie()
     {
         isDied = true;
-
+        this.gameObject.SetActive(false);
     }
     // State dung yen
     protected virtual void OnIdle()
@@ -275,7 +277,7 @@ public abstract class EnemyBase : MonoBehaviour
     {
 
 
-
+        Init();
         if (GameObject.FindWithTag(GameConfig.PLAYER_TAG0) != null)
         {
 
@@ -285,9 +287,8 @@ public abstract class EnemyBase : MonoBehaviour
 
 
     }
-    protected virtual void Awake()
+    protected void Init()
     {
-
         rb = GetComponent<Rigidbody2D>();
         curState = State.Idle;
         anim = GetComponent<Animator>();
@@ -299,8 +300,10 @@ public abstract class EnemyBase : MonoBehaviour
         currentDir = Vector2.zero;
         context = new Context();
         boxCollider2D = GetComponent<BoxCollider2D>();
-
-
+        gridManagement = GameManageMent.Instance.GridManagement;
+    }
+    protected virtual void Awake()
+    {
 
     }
     protected void Update()

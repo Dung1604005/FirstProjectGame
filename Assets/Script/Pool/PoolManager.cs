@@ -26,9 +26,36 @@ public class PoolManager : MonoBehaviour
 
     public ObjectPool<FloatingText> FloatingTextPool => floatingTextPool;
 
-    void Awake()
+    [Header("BulletPool")]
+
+    [SerializeField] private List<BulletController> bulletPrefabList;
+
+    [SerializeField] private Transform bulletRoot;
+
+    [SerializeField] private int bulletPoolSize;
+
+    [SerializeField] private int bulletPoolMaxSize;
+
+    private List<ObjectPool<BulletController>> bulletPoolsList;
+    public List<ObjectPool<BulletController>> BulletPoolsList => bulletPoolsList;
+
+    
+
+    public void Init()
     {
         lootPool = new ObjectPool<LootItem>(lootItemPrefab, lootPoolSize, lootPoolMaxSize, lootRoot);
         floatingTextPool = new ObjectPool<FloatingText>(floatingTextPrefab, floatingTextPoolSize, floatingTextPoolMaxSize, floatingTextRoot);
+        bulletPoolsList = new List<ObjectPool<BulletController>>();
+        for(int i =  0; i < bulletPrefabList.Count; i++)
+        {
+            bulletPoolsList.Add(new ObjectPool<BulletController>(bulletPrefabList[i], bulletPoolSize, bulletPoolMaxSize, bulletRoot));
+        }
+        
+    }
+
+    void Awake()
+    {
+        Init();
+    
     }
 }

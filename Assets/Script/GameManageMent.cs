@@ -30,6 +30,10 @@ public class GameManageMent : MonoBehaviour
     private PoolManager poolManager;
     public PoolManager PoolManager => poolManager;
 
+    [SerializeField] private GridManagement gridManagement;
+
+    public GridManagement GridManagement => gridManagement;
+
     [Header("Menu")]
 
     [SerializeField] private MenuController menuController;

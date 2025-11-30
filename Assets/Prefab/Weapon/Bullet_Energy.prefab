@@ -109,6 +109,8 @@ MonoBehaviour:
   moveSpeed: 20
   exist_time: 2
   damaged: 40
+  indexBullet: 3
+  bulletType: 0
 --- !u!50 &5080361920401709153
 Rigidbody2D:
   serializedVersion: 5

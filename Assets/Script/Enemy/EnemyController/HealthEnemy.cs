@@ -55,15 +55,12 @@ public class HealthEnemy : MonoBehaviour
             cur_health = 0f;
             // Enemy die
             this.GetComponent<EnemyBase>().SetDie();
-            this.gameObject.SetActive(false);
+            
             
             GameManageMent.Instance.PlayerManager.Gold.AddGold(this.GetComponent<EnemyBase>().EnemyBaseData.GoldValue);
             GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(this.GetComponent<EnemyBase>().EnemyBaseData.ExpValue);
             //Nhan thuong
            
-
-
-
         }
     }
     void Awake()

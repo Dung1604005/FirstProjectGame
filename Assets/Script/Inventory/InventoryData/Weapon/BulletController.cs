@@ -1,8 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+
+[Serializable]
+public enum TypeBullet
+{
+    PLAYER_BULLET,
+    ENEMY_BULLET
+}
+public class BulletController : MonoBehaviour, IPoolable
 {
 
 
@@ -11,18 +19,56 @@ public class BulletController : MonoBehaviour
 
     [SerializeField] private float damaged;
 
+    private int indexBullet;
+
+    [SerializeField] private TypeBullet bulletType;
+
+
     
-    
+    public void OnSpawn()
+    {
+        
+    }
+    public void OnDeSpawn()
+    {
+        
+    }
     private Rigidbody2D rb;
 
-    public void SetDamaged(float _damaged)
+    public void SetInfo(float _damaged, int _indexBullet)
     {
         this.damaged=_damaged;
+        this.indexBullet = _indexBullet;
     }
     //Kiem tra va cham voi dich
     void OnTriggerEnter2D(Collider2D collision)
     {
-       
+        switch (bulletType)
+        {
+            case TypeBullet.PLAYER_BULLET:
+            {
+                if (collision.tag == GameConfig.HITBOX_ENEMY)
+                {
+                   if(collision.gameObject != null)
+                   {
+                      collision.gameObject.GetComponentInParent<HealthEnemy>().OnDamaged(damaged);
+                   }
+                }
+                break;
+            }
+            case TypeBullet.ENEMY_BULLET:
+                if (collision.tag == GameConfig.HITBOX_PLAYER)
+                {
+                   if(collision.gameObject != null)
+                   {
+                      collision.gameObject.GetComponentInParent<Health>().OnDamaged(damaged);
+                   }
+                }
+                break;
+            default:
+            break;
+
+        }
         if (collision.tag == GameConfig.HITBOX_ENEMY)
         {
             if(collision.gameObject != null)
@@ -48,7 +94,7 @@ public class BulletController : MonoBehaviour
                 }
             
         }
-        Destroy(this.gameObject);
+        GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
     }
     void Awake()
     {
@@ -57,7 +103,7 @@ public class BulletController : MonoBehaviour
     IEnumerator AutoDestroy()
     {
         yield return new WaitForSeconds(exist_time);
-        Destroy(this.gameObject);
+        GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
     }
     
     // Ban theo huong
