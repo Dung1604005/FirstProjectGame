@@ -46,6 +46,7 @@ public class DialogueUI : MonoBehaviour
     public void StartTyping(string fullText)
     {
         if (typingCo != null || this.gameObject.activeInHierarchy == false) StopCoroutine(typingCo);
+        Debug.Log(fullText);
         typingCo = StartCoroutine(TypeRoutine(fullText));
     }
 

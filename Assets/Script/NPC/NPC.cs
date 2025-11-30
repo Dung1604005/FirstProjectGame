@@ -144,9 +144,9 @@ public class NPC : MonoBehaviour
                 else
                 {
                     UIManageMent.Instance.DialogueUI.TurnOfButton();
-                    TurnOffInteract();
                     onQuest = false;
                     canContinueDialogue = true;
+                    StartDialogue();
                     return;
                 }
             }
