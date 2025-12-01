@@ -61,6 +61,9 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected EnemyBaseData enemyBaseData;
 
     public EnemyBaseData EnemyBaseData => enemyBaseData;
+
+    protected float rangeChase;
+    protected float attack;
     protected State curState;
     protected MoveState moveState;
 
@@ -80,7 +83,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     public float GetDamage()
     {
-        return enemyBaseData.Atk;
+        return attack;
     }
     public void SetDie()
     {
@@ -106,7 +109,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             curState = State.Attack;
         }
-        else if (dis <= enemyBaseData.RangeChase * enemyBaseData.RangeChase &&
+        else if (dis <= rangeChase * rangeChase &&
         distance < int.MaxValue / 10 && distance > 0)
         {
             curState = State.Chase;
@@ -216,7 +219,7 @@ public abstract class EnemyBase : MonoBehaviour
             return;
         }
         float dis = (player.position - transform.position).sqrMagnitude;
-        if (dis > enemyBaseData.RangeChase * enemyBaseData.RangeChase)
+        if (dis > rangeChase * rangeChase)
         {
             curState = State.Idle;
         }
@@ -258,13 +261,24 @@ public abstract class EnemyBase : MonoBehaviour
     {
         transform.position = pos;
         curState = State.Idle;
+        cur_coolDown = 0f;
+        currentDir = Vector2.zero;
         isDied = false;
+        attacking = false;
         healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
         this.gameObject.SetActive(true);
         // Reset thanh mau
         float scale = healthSystem.CurHealth / healthSystem.MaxHealth;
         this.transform.GetChild(1).gameObject.SetActive(false);
         this.transform.GetChild(2).gameObject.SetActive(false);
+    }
+    public void SetAttack(float atk)
+    {
+        attack = atk;
+    }
+    public void SetRangeChase(float _rangeChase)
+    {
+        rangeChase = _rangeChase;
     }
 
     // Trang thai tan cong 
@@ -287,12 +301,13 @@ public abstract class EnemyBase : MonoBehaviour
 
 
     }
-    protected void Init()
+    protected virtual void Init()
     {
         rb = GetComponent<Rigidbody2D>();
         curState = State.Idle;
         anim = GetComponent<Animator>();
         cur_coolDown = 0f;
+        isDied = false;
         healthSystem = GetComponent<HealthEnemy>();
         healthSystem.SetMaxHealth(enemyBaseData.MaxHealth);
         healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
@@ -301,6 +316,8 @@ public abstract class EnemyBase : MonoBehaviour
         context = new Context();
         boxCollider2D = GetComponent<BoxCollider2D>();
         gridManagement = GameManageMent.Instance.GridManagement;
+        SetAttack(enemyBaseData.Atk);
+        SetRangeChase(enemyBaseData.RangeChase);
     }
     protected virtual void Awake()
     {

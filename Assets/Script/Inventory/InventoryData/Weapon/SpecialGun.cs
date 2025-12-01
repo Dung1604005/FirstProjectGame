@@ -14,7 +14,7 @@ public class SpecialGun: Gun
     
     public override void UpdateAnim(float dirX, float dirY)
     {
-        Debug.Log(dirX + " " + dirY);
+        
         Vector2 a = new Vector2(dirX, dirY).normalized;
         Vector2 left = new Vector2(-1, 0);
         Vector2 right = new Vector2(1, 0);

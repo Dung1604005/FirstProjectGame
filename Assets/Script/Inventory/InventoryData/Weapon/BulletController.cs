@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -22,6 +23,10 @@ public class BulletController : MonoBehaviour, IPoolable
     private int indexBullet;
 
     [SerializeField] private TypeBullet bulletType;
+
+    [SerializeField] private bool haveAnimDir;
+
+    private Animator anim;
 
 
     
@@ -59,6 +64,7 @@ public class BulletController : MonoBehaviour, IPoolable
             case TypeBullet.ENEMY_BULLET:
                 if (collision.tag == GameConfig.HITBOX_PLAYER)
                 {
+                    Debug.Log("colliderr player");
                    if(collision.gameObject != null)
                    {
                       collision.gameObject.GetComponentInParent<Health>().OnDamaged(damaged);
@@ -68,13 +74,6 @@ public class BulletController : MonoBehaviour, IPoolable
             default:
             break;
 
-        }
-        if (collision.tag == GameConfig.HITBOX_ENEMY)
-        {
-            if(collision.gameObject != null)
-            {
-                collision.gameObject.GetComponentInParent<HealthEnemy>().OnDamaged(damaged);
-            }
         }
         if (collision.tag == GameConfig.HITBOX_DESTROYOBJECT_TAG)
         {
@@ -96,9 +95,17 @@ public class BulletController : MonoBehaviour, IPoolable
         }
         GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
     }
+    private void UpdateAnimDir(Vector2 dir)
+    {
+        dir = dir.normalized;
+        anim.SetFloat("DirX", dir.x);
+        anim.SetFloat("DirY", dir.y);
+    }
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
     IEnumerator AutoDestroy()
     {
@@ -114,7 +121,10 @@ public class BulletController : MonoBehaviour, IPoolable
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg ;
         transform.rotation = Quaternion.Euler(0, 0, angle);
         rb.linearVelocity = dir * moveSpeed;
-
+        if (haveAnimDir)
+        {
+            UpdateAnimDir(dir);
+        }
         StartCoroutine(AutoDestroy());
     }
     void Start()

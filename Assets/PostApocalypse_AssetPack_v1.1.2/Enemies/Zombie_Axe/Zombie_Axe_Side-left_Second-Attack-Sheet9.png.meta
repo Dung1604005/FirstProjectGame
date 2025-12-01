@@ -121,7 +121,205 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Zombie_Axe_Side-left_Second-Attack-Sheet9_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: 0.35699156, y: 0.33050835}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d4de71742894f94a83e8739649d10ca
+      internalID: -344806279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_Axe_Side-left_Second-Attack-Sheet9_1
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 0
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: 0.3622883, y: 0.32521173}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6af59834148ab24ebba2afe5ae9e509
+      internalID: 2125072241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_Axe_Side-left_Second-Attack-Sheet9_2
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 0
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: 0.43114415, y: 0.34639817}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82185f7d87d071243a84078d8c82526c
+      internalID: 1558994111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_Axe_Side-left_Second-Attack-Sheet9_3
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 0
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: 0.25635612, y: 0.38347447}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d144f3432eb22ce408da4fd9c8bb9dab
+      internalID: -273702945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_Axe_Side-left_Second-Attack-Sheet9_4
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 0
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: 0.20339005, y: 0.3516948}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82ee0e632c278524f86feab9982945d3
+      internalID: -1592997792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_Axe_Side-left_Second-Attack-Sheet9_5
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 0
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: 0.2563567, y: 0.3516948}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1acd1aa4eb31374c88c99dd07d7c0ae
+      internalID: 1269386852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_Axe_Side-left_Second-Attack-Sheet9_6
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 0
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: 0.30402628, y: 0.34639785}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81ab9d2828dbb154a8dfce59ff05f8e1
+      internalID: -1026366617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_Axe_Side-left_Second-Attack-Sheet9_7
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 0
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: 0.36758536, y: 0.33580497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f151585a33412fc4fb1340ae5dc5a176
+      internalID: -586376250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_Axe_Side-left_Second-Attack-Sheet9_8
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 0
+        width: 27
+        height: 27
+      alignment: 9
+      pivot: {x: 0.4099579, y: 0.3411016}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a13989d6abc3e474fba8684c408c1607
+      internalID: 1586644111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -134,8 +332,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":27.0,"y":27.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Zombie_Axe_Side-left_Second-Attack-Sheet9_0: -344806279
+      Zombie_Axe_Side-left_Second-Attack-Sheet9_1: 2125072241
+      Zombie_Axe_Side-left_Second-Attack-Sheet9_2: 1558994111
+      Zombie_Axe_Side-left_Second-Attack-Sheet9_3: -273702945
+      Zombie_Axe_Side-left_Second-Attack-Sheet9_4: -1592997792
+      Zombie_Axe_Side-left_Second-Attack-Sheet9_5: 1269386852
+      Zombie_Axe_Side-left_Second-Attack-Sheet9_6: -1026366617
+      Zombie_Axe_Side-left_Second-Attack-Sheet9_7: -586376250
+      Zombie_Axe_Side-left_Second-Attack-Sheet9_8: 1586644111
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
