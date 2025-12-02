@@ -58,6 +58,7 @@ public class BulletController : MonoBehaviour, IPoolable
                    {
                       collision.gameObject.GetComponentInParent<HealthEnemy>().OnDamaged(damaged);
                    }
+                   GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
                 }
                 break;
             }
@@ -69,6 +70,7 @@ public class BulletController : MonoBehaviour, IPoolable
                    {
                       collision.gameObject.GetComponentInParent<Health>().OnDamaged(damaged);
                    }
+                   GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
                 }
                 break;
             default:
@@ -81,7 +83,9 @@ public class BulletController : MonoBehaviour, IPoolable
                 if(collision.gameObject != null)
                 {
                     collision.gameObject.GetComponentInParent<ObjectController>().OnDamaged(damaged);
+                    
                 }
+                GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
             
         }
         if (collision.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
@@ -90,10 +94,12 @@ public class BulletController : MonoBehaviour, IPoolable
                 if(collision.gameObject != null)
                 {
                     collision.gameObject.GetComponent<ObjectController>().OnDamaged(damaged);
+                    
                 }
+                GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
             
         }
-        GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
+        
     }
     private void UpdateAnimDir(Vector2 dir)
     {
@@ -119,11 +125,16 @@ public class BulletController : MonoBehaviour, IPoolable
 
     
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg ;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        
+        
         rb.linearVelocity = dir * moveSpeed;
         if (haveAnimDir)
         {
             UpdateAnimDir(dir);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, angle);
         }
         StartCoroutine(AutoDestroy());
     }
