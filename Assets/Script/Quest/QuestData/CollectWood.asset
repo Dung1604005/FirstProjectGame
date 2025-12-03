@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   nameQuest: The First Challenge
-  description: To improve yoursef to Dung , you have to collect 20 wood.
+  description: To improve yourself to Dung,you have to collect 20 wood.
   npcId: 0
   objectives:
   - objectiveType: 0

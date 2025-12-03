@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangeData
   maxHealth: 70
   atk: 40
-  coolDown: 3.5
+  coolDown: 2.5
   rangeAtk: 7
   rangeChase: 50
   runSpeed: 8

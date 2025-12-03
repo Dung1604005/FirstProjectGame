@@ -51,13 +51,14 @@ public class NPC : MonoBehaviour
         {
             
              Sprite curTalkerAva = npcAvatar;
+             UIManageMent.Instance.DialogueUI.TurnOn();
              UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, endTalk, curTalkerAva);
              return;
         }
         Debug.Log("IsOnQuest " + onQuest);
         if (onQuest)
         {
-
+            UIManageMent.Instance.DialogueUI.TurnOn();
             UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, onQuestDialogue, npcAvatar);
             UIManageMent.Instance.DialogueUI.setTextButtonAccept(npcDialogues[curNpcDialogues].OnQuestCompleteDialogue);
             UIManageMent.Instance.DialogueUI.setTextButtonRefuse(npcDialogues[curNpcDialogues].OnQuestNotCompleteDialogue);
@@ -73,6 +74,7 @@ public class NPC : MonoBehaviour
         }
         if (UIManageMent.Instance.DialogueUI.Completed == true && indexDialogue < totalDialogue && curNpcDialogues < npcDialogues.Count)
         {
+            UIManageMent.Instance.DialogueUI.TurnOn();
             canContinueDialogue = true;
             Sprite curTalkerAva = npcAvatar;
             if (npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First != nameNpc)

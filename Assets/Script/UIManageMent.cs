@@ -151,6 +151,7 @@ public class UIManageMent : MonoBehaviour
         inventoryUI.TurnOff();
         expStatSystemUI.TurnOff();
         ShopSystem.TurnOff();
+        dialogueUI.Init();
 
     }
     public void DoFadeIn(Image image, float duration)

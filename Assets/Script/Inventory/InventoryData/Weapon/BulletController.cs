@@ -88,14 +88,10 @@ public class BulletController : MonoBehaviour, IPoolable
                 GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
             
         }
-        if (collision.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
+        if (collision.tag == GameConfig.BLOCK_OBJECT_TAG)
         {
             
-                if(collision.gameObject != null)
-                {
-                    collision.gameObject.GetComponent<ObjectController>().OnDamaged(damaged);
-                    
-                }
+                
                 GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
             
         }

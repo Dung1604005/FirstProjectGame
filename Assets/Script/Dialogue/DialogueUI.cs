@@ -26,13 +26,12 @@ public class DialogueUI : MonoBehaviour
     public bool IsTyping { get; private set; }
     public bool Completed { get; private set; }
 
-    void Start()
+    public void Init()
     {
         IsTyping = false;
         Completed = true;
         TurnOff();
         TurnOfButton();
-
     }
     public void ShowInstant(string dialogue)
     {
