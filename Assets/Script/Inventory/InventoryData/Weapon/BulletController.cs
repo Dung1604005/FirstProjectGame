@@ -54,9 +54,10 @@ public class BulletController : MonoBehaviour, IPoolable
             {
                 if (collision.tag == GameConfig.HITBOX_ENEMY)
                 {
-                   if(collision.gameObject != null)
+                   if(collision.gameObject != null )
                    {
-                      collision.gameObject.GetComponentInParent<HealthEnemy>().OnDamaged(damaged);
+                      
+                      collision.gameObject.GetComponentInParent<HealthEnemy>()?.OnDamaged(damaged);
                    }
                    GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
                 }
@@ -68,7 +69,7 @@ public class BulletController : MonoBehaviour, IPoolable
                     Debug.Log("colliderr player");
                    if(collision.gameObject != null)
                    {
-                      collision.gameObject.GetComponentInParent<Health>().OnDamaged(damaged);
+                      collision.gameObject.GetComponentInParent<Health>()?.OnDamaged(damaged);
                    }
                    GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
                 }
@@ -82,7 +83,7 @@ public class BulletController : MonoBehaviour, IPoolable
             
                 if(collision.gameObject != null)
                 {
-                    collision.gameObject.GetComponentInParent<ObjectController>().OnDamaged(damaged);
+                    collision.gameObject.GetComponentInParent<ObjectController>()?.OnDamaged(damaged);
                     
                 }
                 GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
