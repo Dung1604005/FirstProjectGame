@@ -26,6 +26,9 @@ public class QuestProgress
 
     public List<int> CurCount => curCount;
 
+    private float progressRatio;
+    public float ProgressRatio => progressRatio;
+
 
     public QuestProgress(int _questId, List<Objective> _objectives)
     {
@@ -50,6 +53,7 @@ public class QuestProgress
                 }
             }
         }
+        UpdateProgressRatio();
 
     }
     public void UpdateProgressKillOrReach(int amount, ObjectiveType type, int _targetId)
@@ -66,6 +70,7 @@ public class QuestProgress
                 curCount[i] = Math.Min(objectives[i].requiredCount, amount);
             }
         }
+        UpdateProgressRatio();
 
     }
     public bool checkProgress()
@@ -81,5 +86,16 @@ public class QuestProgress
         }
         questState = QuestState.Complete;
         return true;
+    }
+    public void UpdateProgressRatio()
+    {
+        float ratio = 0f;
+        for(int i = 0; i < curCount.Count && i < objectives.Count; i++)
+        {
+            float ratioObjective = (float)curCount[i]/objectives[i].requiredCount;
+            ratioObjective /= curCount.Count;
+            ratio += ratioObjective;
+        }
+        progressRatio = ratio;
     }
 }

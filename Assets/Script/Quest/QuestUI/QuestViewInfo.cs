@@ -27,9 +27,11 @@ public class QuestViewInfo : MonoBehaviour
     public void SetInfo(int index)
     {
         this.indexQuest = index;
-        nameQuest.text = GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].NameQuest;
+        String _nameQuest = GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].NameQuest;
+        nameQuest.text = _nameQuest;
         description.text = GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].Description;
         objectives.text = "Objectives:";
+        String objectiveText = "";
         for(int i = 0; i < GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives.Count; i++)
         {
             int id = GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].targetId;    
@@ -37,6 +39,18 @@ public class QuestViewInfo : MonoBehaviour
             objectives.text += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].CurCount[i]   + "/"  +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].requiredCount + "]" ;
+            if(i == 0)
+            {
+                objectiveText += GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                GameManageMent.Instance.QuestManager.QuestProgresses[index].CurCount[i]   + "/"  +
+                GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].requiredCount + "]" ;
+            }
+            else
+            {
+                objectiveText += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                GameManageMent.Instance.QuestManager.QuestProgresses[index].CurCount[i]   + "/"  +
+                GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].requiredCount + "]" ;
+            }
         }
         rewards.text = "Rewards:";
         rewards.text += "\n+" + GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].ExpReward + " Exp, +" + GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].GoldReward + " Gold";
@@ -45,16 +59,19 @@ public class QuestViewInfo : MonoBehaviour
             int idItem =  GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].ItemIdReward[i].ItemId;
             rewards.text += "\n+" + GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].ItemIdReward[i].Count + " " + GameManageMent.Instance.ItemDataBase.ItemDatas[idItem].ItemName;
         }
+        UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOn();
+        UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(_nameQuest, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[index].ProgressRatio);
     }
 
     public void UpdateProgress()
     {
-        Debug.Log("UPDATED " + indexQuest);
+        
         if(indexQuest < 0)
         {
             return;
         }
          objectives.text = "Objectives:";
+         String objectiveText = "";
          for(int i = 0; i < GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives.Count; i++)
         {
             int id = GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].targetId;    
@@ -62,7 +79,21 @@ public class QuestViewInfo : MonoBehaviour
             objectives.text += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
                 GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].CurCount[i]   + "/"  +
                 GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].requiredCount + "]" ;
+            if(i == 0)
+            {
+                objectiveText += GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].CurCount[i]   + "/"  +
+                GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].requiredCount + "]" ;
+            }
+            else
+            {
+                objectiveText += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].CurCount[i]   + "/"  +
+                GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].requiredCount + "]" ;
+            }
         }
+        UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOn();
+        UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(nameQuest.text, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].ProgressRatio);
     }
     public void ResetQuestView()
     {
@@ -73,6 +104,7 @@ public class QuestViewInfo : MonoBehaviour
             description.text = "YOU HAVE NO QUEST NOW";
             objectives.text = "";
             rewards.text = "";
+            UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOff();
             return;
         }
         if(GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].QuestState != QuestState.Complete)
@@ -84,6 +116,7 @@ public class QuestViewInfo : MonoBehaviour
         description.text = "YOU HAVE NO QUEST NOW";
         objectives.text = "";
         rewards.text = "";
+        UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOff();
 
     }
     void Start()

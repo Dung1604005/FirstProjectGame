@@ -8,6 +8,10 @@ public class QuestUI : MenuLayOutUI
     [SerializeField] private List<QuestButton> questButtons = new List<QuestButton>();
     [SerializeField] private QuestViewInfo questViewInfo;
 
+    [SerializeField] private  QuestProgressUI questProgressUI;
+
+    public QuestProgressUI QuestProgressUI => questProgressUI;
+
     public QuestViewInfo QuestViewInfo => questViewInfo;
     void Start()
     {

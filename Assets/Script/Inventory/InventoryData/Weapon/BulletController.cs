@@ -105,6 +105,7 @@ public class BulletController : MonoBehaviour, IPoolable
         anim.SetFloat("DirY", dir.y);
     }
     
+    
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -112,6 +113,7 @@ public class BulletController : MonoBehaviour, IPoolable
     }
     IEnumerator AutoDestroy()
     {
+    
         yield return new WaitForSeconds(exist_time);
         GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
     }

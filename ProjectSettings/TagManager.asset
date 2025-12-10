@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
   - Bullet
   - EnemyMelee
@@ -16,6 +16,7 @@ TagManager:
   - GameManager
   - Tree
   - BlockObject
+  - HitBox_DestroyObject
   layers:
   - Default
   - TransparentFX
@@ -56,14 +57,14 @@ TagManager:
   - name: BackGround
     uniqueID: 574910451
     locked: 0
+  - name: Bullet
+    uniqueID: 4255496769
+    locked: 0
   - name: Character
     uniqueID: 1276704215
     locked: 0
   - name: TreeLayer
     uniqueID: 757073833
-    locked: 0
-  - name: Bullet
-    uniqueID: 4255496769
     locked: 0
   - name: Building
     uniqueID: 839274785
@@ -74,3 +75,5 @@ TagManager:
   - name: UI
     uniqueID: 3017644155
     locked: 0
+  m_RenderingLayers:
+  - Default

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public LootSystem LootSystem=> lootSystem;
     
     private Rigidbody2D rb;
+    
     private bool usingWeapon = false;
     private bool punching = false;
 
