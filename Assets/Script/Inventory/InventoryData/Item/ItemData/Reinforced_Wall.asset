@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa59169dfce8db459c4dabb28e263ce, type: 3}
   m_Name: Reinforced_Wall
   m_EditorClassIdentifier: 
-  description: a wall that cant be downed
+  description: a wall that can't be downed
   stackable: 1
   maxStack: 99
   type: 5

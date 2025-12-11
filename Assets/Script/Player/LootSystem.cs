@@ -32,15 +32,15 @@ public class LootSystem : MonoBehaviour
                 int damage = weaponHover.Damaged;
                 float cd = weaponHover.CoolDown;
                 string Stat = "DAME:" + damage.ToString() + "\n" + "CD:" + cd.ToString();
-                UIManageMent.Instance.InventoryUI.UpdatePanelClick(itemHover.Icon, itemHover.Description, itemHover.name, Stat);
+                
             }
 
             else
             {
-                UIManageMent.Instance.InventoryUI.UpdatePanelClick(itemHover.Icon, itemHover.Description, itemHover.name);
+                
             }
 
-            UIManageMent.Instance.InventoryUI.TurnOnPanelClick();
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
 
@@ -58,10 +58,7 @@ public class LootSystem : MonoBehaviour
                 lastFloatingObject.SetStateHover(false);
             }
             lastFloatingObject = null;
-            if (UIManageMent.Instance.InventoryUI.PanelClickUI.isActiveAndEnabled)
-            {
-                UIManageMent.Instance.InventoryUI.TurnOffPanelClick();
-            }
+            
         }
 
     }

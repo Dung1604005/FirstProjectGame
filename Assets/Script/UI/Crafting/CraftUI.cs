@@ -15,9 +15,10 @@ public class CraftUI : MenuLayOutUI
 
     void Awake()
     {
+        Init();
 
     }
-    void Start()
+    public void Init()
     {
         for (int i = 0; i < itemRecipeDatas.Count; i++)
         {
@@ -26,6 +27,10 @@ public class CraftUI : MenuLayOutUI
             recipeUIs.Add(new_slot);
 
         }
+    }
+    void Start()
+    {
+        
     }
     
 

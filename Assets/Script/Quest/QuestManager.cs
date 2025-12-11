@@ -103,6 +103,7 @@ public class QuestManager : MonoBehaviour
     void Start()
     {
         GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.OnChangeInventory += UpdateProgressAllQuestCollect;
+        UIManageMent.Instance.QuestUI.Init();
     }
 
 }

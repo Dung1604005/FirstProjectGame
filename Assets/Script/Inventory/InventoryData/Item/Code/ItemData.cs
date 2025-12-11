@@ -11,6 +11,8 @@ public enum ItemType
 
 public abstract class ItemData : ScriptableObject
 {
+
+    [TextArea(3, 10)]
     [SerializeField] protected string description;
     public string Description => description;
     [SerializeField] protected bool stackable;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class PanelClickUI : MonoBehaviour
 
     public void UpdateContent(Sprite Icon, string Description, string NameItem, string Stat = null)
     {
+        icon.gameObject.SetActive(true);
         stat.text = Stat;
         icon.sprite = Icon;
         name_item.text = NameItem;
@@ -28,15 +30,6 @@ public class PanelClickUI : MonoBehaviour
         
         
     }
-    public void TurnOff()
-    {
-        UIManageMent.Instance.DoFadeIn(this.gameObject.GetComponent<Image>(), 0.3f);
-        this.gameObject.SetActive(false);
-    }
-    public void TurnOn()
-    {
-        this.gameObject.SetActive(true);
-        UIManageMent.Instance.DoFadeOut(this.gameObject.GetComponent<Image>(), 0.3f);
-    }
+    
         
 }

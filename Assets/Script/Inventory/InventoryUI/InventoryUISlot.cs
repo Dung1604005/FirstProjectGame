@@ -34,8 +34,7 @@ public class InventoryUISlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
             ItemData item = inventoryUI.GetSlotData(index);
 
-            Debug.Log("CLICK");
-            inventoryUI.TurnOnPanelClick();
+            
             if (item.Type == ItemType.Melee || item.Type == ItemType.Gun)
             {
 

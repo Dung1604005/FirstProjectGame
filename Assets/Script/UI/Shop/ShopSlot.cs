@@ -23,7 +23,7 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
 
             ItemData item = GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem];
 
-            UIManageMent.Instance.InventoryUI.TurnOnPanelClick();
+            
             if (item.Type == ItemType.Melee || item.Type == ItemType.Gun)
             {
 

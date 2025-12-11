@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22583668536c6d74cb80a312cba6f968, type: 3}
   m_Name: ShotGun
   m_EditorClassIdentifier: 
-  description: a gun that have a powerful shot
+  description: "a gun that have a \npowerful shot"
   stackable: 0
   maxStack: 1
   type: 1

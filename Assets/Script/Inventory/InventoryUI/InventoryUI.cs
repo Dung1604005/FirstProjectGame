@@ -35,15 +35,7 @@ public class InventoryUI : MenuLayOutUI
         panelClickUI.UpdateContent(Icon, Description, NameItem, Stat);
     }
 
-    public void TurnOnPanelClick()
-    {
-        panelClickUI.TurnOn();
-    }
-
-    public void TurnOffPanelClick()
-    {
-        panelClickUI.TurnOff();
-    }
+    
 
     // Xu li drag icon
     public void SetDragIcon(Sprite _image)
@@ -108,7 +100,7 @@ public class InventoryUI : MenuLayOutUI
     }
     public override void TurnOff()
     {
-        panelClickUI.TurnOff();
+        
         this.gameObject.SetActive(false);
     }
     void Start()
