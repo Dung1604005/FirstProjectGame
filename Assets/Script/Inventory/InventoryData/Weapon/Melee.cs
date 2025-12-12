@@ -40,7 +40,9 @@ public class Melee : Weapon
 
         Debug.Log(x + " " + y);
         GameManageMent.Instance.PlayerManager.PlayerController.AnimUpdate(x, y);
+        GameManageMent.Instance.PlayerManager.PlayerController.UpdatePlayerDir(x, y);
         UpdateAnim(x, y);
+        
 
     }
     

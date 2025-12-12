@@ -191,31 +191,28 @@ public class GameManageMent : MonoBehaviour
     {
         
         Vector2 a = new Vector2(dirX, dirY).normalized;
-        Vector2 left = new Vector2(-1, 0);
-        Vector2 right = new Vector2(1, 0);
-        Vector2 up = new Vector2(0, 1);
-        Vector2 down = new Vector2(0, -1);
         
-        int distanceDir = 10;
-        Vector2 animDir= Vector2.zero;
+        
+        float distanceDir = float.MaxValue;
+        int animDir = 0;
         for(int i = 0; i < arrayDir.Length; i++)
         {
-            if(distanceDir > (int)(arrayDir[i] - new Vector2(dirX, dirY)).sqrMagnitude)
+            float distance = (arrayDir[i] - a).sqrMagnitude;
+            if(distance < distanceDir)
             {
-                distanceDir = Math.Min(distanceDir, (int)(arrayDir[i] - new Vector2(dirX, dirY)).sqrMagnitude);
-                animDir = arrayDir[i];
+                distanceDir = distance;
+                animDir = i;
             }
-    
         }
-        if (animDir == down)
+        if (animDir == 0)
         {
             return DirType.DOWN;
         }
-        else if(animDir == left)
+        else if(animDir == 1)
         {
             return DirType.LEFT;
         }
-        else if(animDir == right)
+        else if(animDir == 2)
         {
             return DirType.RIGHT;
         }

@@ -217,6 +217,7 @@ public class Gun : Weapon
         float x = Mathf.Cos(angle);
         attacking = true;
         GameManageMent.Instance.PlayerManager.PlayerController.AnimUpdate(x, y);
+        GameManageMent.Instance.PlayerManager.PlayerController.UpdatePlayerDir(x, y);
         UpdateAnim(x, y);
         Fire();
 

@@ -132,19 +132,25 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    void GetInputMove()
+    public void UpdatePlayerDir(float movex, float movey)
     {
-        float movex = Input.GetAxis(GameConfig.HORIZONTAL);
-        float movey = Input.GetAxis(GameConfig.VERTICAL);
-        moveX = movex;
-        moveY = movey;
-        Vector2 dir = new Vector2(moveX, moveY);
+        Vector2 dir = new Vector2(movex, movey);
         if(dir.sqrMagnitude > 0)
         {
             playerDir = dir;
             
         }
         
+
+
+    }
+    void GetInputMove()
+    {
+        float movex = Input.GetAxis(GameConfig.HORIZONTAL);
+        float movey = Input.GetAxis(GameConfig.VERTICAL);
+        moveX = movex;
+        moveY = movey;
+        UpdatePlayerDir(moveX, moveY);
         
 
     }
