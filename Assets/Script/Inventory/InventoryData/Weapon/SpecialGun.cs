@@ -16,45 +16,32 @@ public class SpecialGun: Gun
     {
         
         Vector2 a = new Vector2(dirX, dirY).normalized;
-        Vector2 left = new Vector2(-1, 0);
-        Vector2 right = new Vector2(1, 0);
-        Vector2 up = new Vector2(0, 1);
-        Vector2 down = new Vector2(0, -1);
+
         float speed = a.sqrMagnitude;
         if (!(speed > 0.00001))
         {
             return;
         }
-        int distanceDir = 10;
-        Vector2 animDir= Vector2.zero;
-        for(int i = 0; i < arrayDir.Length; i++)
-        {
-            if(distanceDir > (int)(arrayDir[i] - new Vector2(dirX, dirY)).sqrMagnitude)
-            {
-                distanceDir = Math.Min(distanceDir, (int)(arrayDir[i] - new Vector2(dirX, dirY)).sqrMagnitude);
-                animDir = arrayDir[i];
-            }
-    
-        }
-        if (animDir == down)
+        DirType dirType = GameManageMent.Instance.CalculateDirType(dirX, dirY);
+        if (dirType == DirType.DOWN)
         {
             this.transform.rotation = Quaternion.Euler(0, 0, -90);
                 spriteRenderer.sortingOrder = 1;
                 this.spriteRenderer.flipX = false;
         }
-        else if(animDir == left)
+        else if(dirType == DirType.LEFT)
         {
             this.transform.rotation = Quaternion.Euler(0, 0,0);
             this.spriteRenderer.flipX = true;
                 spriteRenderer.sortingOrder = 1;
         }
-        else if(animDir == right)
+        else if(dirType == DirType.RIGHT)
         {
             this.transform.rotation = Quaternion.Euler(0, 0,0);
             this.spriteRenderer.flipX = false;
                 spriteRenderer.sortingOrder = 1;
         }
-        else if(animDir == up)
+        else if(dirType == DirType.UP)
         {
             this.spriteRenderer.flipX = false;
             this.transform.rotation = Quaternion.Euler(0, 0, 90);

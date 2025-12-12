@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +7,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 using UnityEngine.UIElements;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public LootSystem LootSystem=> lootSystem;
     
     private Rigidbody2D rb;
+
     
     private bool usingWeapon = false;
     private bool punching = false;
@@ -35,8 +38,11 @@ public class PlayerController : MonoBehaviour
     private float moveY;
     public float MoveY => moveY;
 
+
     private Vector2 playerDir;
     public Vector2 PlayerDir => playerDir;
+
+    
     // Kiem soat va cham
     void OnTriggerStay2D(Collider2D collision)
     {
@@ -92,6 +98,7 @@ public class PlayerController : MonoBehaviour
         AnimUpdate(x, y);
     }
     
+    
     public void EndPunch()
     {
         punching = false;
@@ -135,6 +142,7 @@ public class PlayerController : MonoBehaviour
         if(dir.sqrMagnitude > 0)
         {
             playerDir = dir;
+            
         }
         
         

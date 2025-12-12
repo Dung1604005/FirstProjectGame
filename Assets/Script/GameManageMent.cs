@@ -1,13 +1,19 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.GameCenter;
 
-
+[Serializable]
+public enum DirType
+{
+    LEFT, RIGHT, UP, DOWN 
+}
 public enum GameState
 {
     Continue, Pause
 }
+
 public class GameManageMent : MonoBehaviour
 {
     public static GameManageMent Instance { get; private set; }
@@ -70,6 +76,8 @@ public class GameManageMent : MonoBehaviour
 
     private NPC npcInteracting = null;
     public NPC NpcInteracting => npcInteracting;
+
+    Vector2[] arrayDir = {new Vector2(0, -1),new Vector2(-1, 0), new Vector2(1, 0),  new Vector2(0, 1)};
     
     public void PauseGame()
     {
@@ -179,6 +187,43 @@ public class GameManageMent : MonoBehaviour
             
         }
     }
+    public DirType CalculateDirType(float dirX, float dirY)
+    {
+        
+        Vector2 a = new Vector2(dirX, dirY).normalized;
+        Vector2 left = new Vector2(-1, 0);
+        Vector2 right = new Vector2(1, 0);
+        Vector2 up = new Vector2(0, 1);
+        Vector2 down = new Vector2(0, -1);
+        
+        int distanceDir = 10;
+        Vector2 animDir= Vector2.zero;
+        for(int i = 0; i < arrayDir.Length; i++)
+        {
+            if(distanceDir > (int)(arrayDir[i] - new Vector2(dirX, dirY)).sqrMagnitude)
+            {
+                distanceDir = Math.Min(distanceDir, (int)(arrayDir[i] - new Vector2(dirX, dirY)).sqrMagnitude);
+                animDir = arrayDir[i];
+            }
+    
+        }
+        if (animDir == down)
+        {
+            return DirType.DOWN;
+        }
+        else if(animDir == left)
+        {
+            return DirType.LEFT;
+        }
+        else if(animDir == right)
+        {
+            return DirType.RIGHT;
+        }
+        else 
+        {
+            return DirType.UP;
+        }
+    }
     void Update()
     {
         //Mo Menu
@@ -239,4 +284,5 @@ public class GameManageMent : MonoBehaviour
        
 
     }
+
 }

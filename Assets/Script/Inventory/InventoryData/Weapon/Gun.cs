@@ -18,6 +18,10 @@ public class Gun : Weapon
     [SerializeField] private int curBullet;
     public int CurBullet => curBullet;
 
+    [SerializeField] private bool haveShootFire;
+
+    [SerializeField] private List<FireShoot> fireShoots;
+
     protected int totalBullet;
     public int TotalBullet => totalBullet;
 
@@ -141,7 +145,27 @@ public class Gun : Weapon
         BulletController bullet = GameManageMent.Instance.PoolManager.BulletPoolsList[(weaponData as GunData).IndexBullet].Spawn(reach);
 
 
+        if (haveShootFire)
+        {
+             DirType dirType = GameManageMent.Instance.CalculateDirType(dir.x, dir.y);
+             if (dirType == DirType.DOWN)
+            {
+                fireShoots[0].TurnOn();
+            }
+            else if(dirType == DirType.LEFT)
+            {
+                fireShoots[1].TurnOn();
+            }
+            else if(dirType == DirType.RIGHT)
+            {
+                fireShoots[2].TurnOn();
+            }
+            else
+            {
+                fireShoots[3].TurnOn();
+            }
         
+        }
         if (weaponData.ItemName == "ShotGun")
         {
             // Ban 2 vien lech goc angleShotGun
