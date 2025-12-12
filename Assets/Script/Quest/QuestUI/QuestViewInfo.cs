@@ -119,12 +119,16 @@ public class QuestViewInfo : MonoBehaviour
         UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOff();
 
     }
-    void Start()
+    public void Init()
     {
-        
         GameManageMent.Instance.QuestManager.OnQuestChange += UpdateProgress;
         GameManageMent.Instance.QuestManager.OnCompleteQuest += ResetQuestView;
         ResetQuestView();
+    }
+    void Start()
+    {
+        
+        
         
         
     }
