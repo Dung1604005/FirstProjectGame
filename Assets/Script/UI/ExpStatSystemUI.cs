@@ -26,14 +26,14 @@ public class ExpStatSystemUI : MenuLayOutUI
 
     public void UpdateHealthStatUI(string content)
     {
-        healthStatUI.text = content;
+        healthStatUI.text = "Health: "+content;
     }
     public void UpdateAtkStatUI(string content)
     {
-        atkStatUI.text = content;
+        atkStatUI.text = "Attack: " + content;
     }
     public void UpdateSpeedStatUI(string content)
     {
-        speedStatUI.text = content;
+        speedStatUI.text = "Critical: "+content;
     }
 }

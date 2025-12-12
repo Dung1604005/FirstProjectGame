@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3c51d4682fef34d8b77d0df984458a, type: 3}
   m_Name: Bat
   m_EditorClassIdentifier: 
-  description: a bat that from Dungprozzz
+  description: 'a bat that from
+
+    Dungprozzz'
   stackable: 0
   maxStack: 1
   type: 2
