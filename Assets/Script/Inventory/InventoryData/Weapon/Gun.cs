@@ -10,10 +10,18 @@ using UnityEngine;
 
 public class Gun : Weapon
 {
+
+    [Header("SETTING")]
+    [SerializeField] float recoilAmount;
+    [SerializeField] float recoverSpeed;
+
+    private Vector2 originPos;
     [SerializeField] private float radius_bullet;
     [SerializeField] private float delayTimeAfterShoot;
     [SerializeField] private float angleShotGun;
     [SerializeField] private float strengthShake;
+
+    
 
     [SerializeField] private int curBullet;
     public int CurBullet => curBullet;
@@ -32,6 +40,8 @@ public class Gun : Weapon
 
 
     protected CinemachineImpulseSource cinemachineImpulseSource;
+
+    private Transform weaponSocket;
     void UpdateCurStateBullet()
     {
         if (curBullet / (float)(WeaponData as GunData).MagSize >= 0.5f)
@@ -54,7 +64,8 @@ public class Gun : Weapon
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
-        
+        weaponSocket = transform.parent;
+        originPos = transform.parent.localPosition;
         cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
         attacking = false;
         if (weaponData != null)
@@ -84,6 +95,34 @@ public class Gun : Weapon
         
         UpdateCurStateBullet();
 
+    }
+
+    public void Recoil(float dirX, float dirY)
+    {
+        DirType dirType = GameManageMent.Instance.CalculateDirType(dirX, dirY);
+        Vector2 recoilVector = Vector2.zero;
+        if(dirType == DirType.DOWN)
+        {
+            recoilVector = Vector2.up*recoilAmount;
+
+        }
+        else if (dirType  == DirType.LEFT)
+        {
+            recoilVector = Vector2.right*recoilAmount;
+        }
+        else if(dirType == DirType.RIGHT)
+        {
+            recoilVector = Vector2.left*recoilAmount;
+        }
+        else
+        {
+            recoilVector = Vector2.down*recoilAmount;
+        }
+        
+        weaponSocket.localPosition += (Vector3)recoilVector;
+        
+        
+       
     }
     public override void UpdateAnim(float dirX, float dirY)
     {
@@ -141,31 +180,43 @@ public class Gun : Weapon
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Vector2 dir = (mousePos - playerPos).normalized;
-        Vector2 reach = playerPos + dir * radius_bullet;
-        BulletController bullet = GameManageMent.Instance.PoolManager.BulletPoolsList[(weaponData as GunData).IndexBullet].Spawn(reach);
-
-
+        Vector2 reach = Vector2.zero;
         if (haveShootFire)
         {
              DirType dirType = GameManageMent.Instance.CalculateDirType(dir.x, dir.y);
              if (dirType == DirType.DOWN)
             {
                 fireShoots[0].TurnOn();
+                reach += (Vector2)fireShoots[0].gameObject.transform.position;
             }
             else if(dirType == DirType.LEFT)
             {
                 fireShoots[1].TurnOn();
+                reach += (Vector2)fireShoots[1].gameObject.transform.position;
             }
             else if(dirType == DirType.RIGHT)
             {
                 fireShoots[2].TurnOn();
+                reach += (Vector2)fireShoots[2].gameObject.transform.position;
             }
             else
             {
                 fireShoots[3].TurnOn();
+                reach += (Vector2)fireShoots[3].gameObject.transform.position;
             }
         
         }
+
+        else
+        {
+            reach += (Vector2)this.gameObject.transform.position + dir * radius_bullet;
+        }
+        BulletController bullet = GameManageMent.Instance.PoolManager.BulletPoolsList[(weaponData as GunData).IndexBullet].Spawn(reach);
+
+        Recoil(dir.x, dir.y);
+
+
+       
         if (weaponData.ItemName == "ShotGun")
         {
             // Ban 2 vien lech goc angleShotGun
@@ -248,6 +299,12 @@ public class Gun : Weapon
 
     void Update()
     {
+        
+        weaponSocket.localPosition = Vector3.Lerp(weaponSocket.localPosition, originPos, Time.deltaTime * recoverSpeed);
+            
+            
+        
+
         if (!reloading)
         {
             

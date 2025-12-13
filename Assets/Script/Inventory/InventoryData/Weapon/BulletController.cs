@@ -45,6 +45,10 @@ public class BulletController : MonoBehaviour, IPoolable
         this.damaged=_damaged;
         this.indexBullet = _indexBullet;
     }
+    public void DeSpawn()
+    {
+        GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
+    }
     //Kiem tra va cham voi dich
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -59,7 +63,10 @@ public class BulletController : MonoBehaviour, IPoolable
                       
                       collision.gameObject.GetComponentInParent<HealthEnemy>()?.OnDamaged(damaged);
                    }
-                   GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
+                   rb.linearVelocity = Vector2.zero;
+                   anim.SetTrigger("Explo");
+                   
+                   
                 }
                 break;
             }
@@ -71,7 +78,8 @@ public class BulletController : MonoBehaviour, IPoolable
                    {
                       collision.gameObject.GetComponentInParent<Health>()?.OnDamaged(damaged);
                    }
-                   GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
+                   rb.linearVelocity = Vector2.zero;
+                   anim.SetTrigger("Explo");
                 }
                 break;
             default:
@@ -81,19 +89,20 @@ public class BulletController : MonoBehaviour, IPoolable
         if (collision.tag == GameConfig.HITBOX_DESTROYOBJECT_TAG)
         {
             
-                if(collision.gameObject != null)
-                {
-                    collision.gameObject.GetComponentInParent<ObjectController>()?.OnDamaged(damaged);
+                // if(collision.gameObject != null)
+                // {
+                //     collision.gameObject.GetComponentInParent<ObjectController>()?.OnDamaged(damaged);
                     
-                }
-                GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
+                // }
+                rb.linearVelocity = Vector2.zero;
+                anim.SetTrigger("Explo");
             
         }
         if (collision.tag == GameConfig.BLOCK_OBJECT_TAG)
         {
             
-                
-                GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
+                rb.linearVelocity = Vector2.zero;
+                anim.SetTrigger("Explo");
             
         }
         
