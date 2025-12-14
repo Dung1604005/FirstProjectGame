@@ -251,6 +251,7 @@ public class Gun : Weapon
     }
     public override void Attack(float dirX, float dirY)
     {
+        
         if(reloading)
         {
             UIManageMent.Instance.UpdateWarning("Reloading...");

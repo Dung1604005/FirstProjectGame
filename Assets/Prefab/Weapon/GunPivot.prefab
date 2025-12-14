@@ -81,11 +81,15 @@ MonoBehaviour:
   weaponData: {fileID: 11400000, guid: d4d7314082a362440909966a22672e73, type: 2}
   spriteRenderer: {fileID: 2019680091208878288}
   anim: {fileID: 3092297065635725268}
+  recoilAmount: 0.3
+  recoverSpeed: 12
   radius_bullet: 2
   delayTimeAfterShoot: 0.2
   angleShotGun: 0
   strengthShake: 0
   curBullet: 30
+  haveShootFire: 0
+  fireShoots: []
 --- !u!114 &2408730870924772748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +221,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1276704215
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: -5432001717991232922, guid: d5d82edbfd6afb14cba14c5ec0705c68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

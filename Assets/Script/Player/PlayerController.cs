@@ -197,20 +197,15 @@ public class PlayerController : MonoBehaviour
     // Ban
     void Attack()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && slotPlayerController.Weapon != null && slotPlayerController.Weapon.WeaponData.Type == ItemType.Gun)
         {
             Vector2 dir = GameManageMent.Instance.PlayerManager.GetDirFromMouseToPlayer();
-            if (slotPlayerController.Weapon != null)
-            {
-                if(slotPlayerController.Weapon.WeaponData.Type == ItemType.Gun)
-                {
-                    slotPlayerController.Weapon.Attack(dir.x, dir.y);
-                }
-                
-            }
+            
+            attackCountDown = 0f;
+            slotPlayerController.Weapon.Attack(dir.x, dir.y);
+            
         }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        else if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Vector2 dir = GameManageMent.Instance.PlayerManager.GetDirFromMouseToPlayer();
             if (slotPlayerController.Weapon != null)

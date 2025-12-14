@@ -30,6 +30,8 @@ public class InventoryUISlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
         if (eventData.button == PointerEventData.InputButton.Left)
         {
+            inventoryUI.ContextMenu.UpdateIndex(index);
+            inventoryUI.UpdatePosContextMenu(gameObject.GetComponent<Image>().rectTransform.anchoredPosition);
             // Mo panel click
 
             ItemData item = inventoryUI.GetSlotData(index);
@@ -53,15 +55,7 @@ public class InventoryUISlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
 
         }
-        else if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            // Mo menu context
-
-            inventoryUI.ContextMenu.UpdateIndex(index);
-            inventoryUI.UpdatePosContextMenu(gameObject.GetComponent<Image>().rectTransform.anchoredPosition);
-
-
-        }
+        
     }
 
     // Lay data khi bat dau drag
