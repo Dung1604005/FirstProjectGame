@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   nameQuest: Gathering the Stones
-  description: Dung have assign a task for you who are a new member of The Walker.
-    You have to collect 15 rock for Dung who need rock to craft bullet.
+  description: "Dung have assign a task for you who \nare a new member of The Walker.
+    \nYou have to collect 15 rock for Dung \nwho need rock to craft bullet."
   npcId: 0
   objectives:
   - objectiveType: 0

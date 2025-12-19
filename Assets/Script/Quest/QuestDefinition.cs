@@ -20,6 +20,8 @@ public class QuestDefinition : ScriptableObject
 
     public string NameQuest => nameQuest;
 
+    [TextArea(3, 10)]
+
     [SerializeField] private string description;
 
     public string Description => description;
