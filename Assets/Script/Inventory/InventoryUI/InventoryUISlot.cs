@@ -31,7 +31,9 @@ public class InventoryUISlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             inventoryUI.ContextMenu.UpdateIndex(index);
-            inventoryUI.UpdatePosContextMenu(gameObject.GetComponent<Image>().rectTransform.anchoredPosition);
+            Vector3 pos = gameObject.GetComponent<RectTransform>().anchoredPosition3D + new Vector3(gameObject.GetComponent<RectTransform>().rect.width/2, 0, 0);
+            inventoryUI.UpdatePosContextMenu(pos);
+            
             // Mo panel click
 
             ItemData item = inventoryUI.GetSlotData(index);
