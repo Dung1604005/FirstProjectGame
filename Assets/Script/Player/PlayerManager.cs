@@ -101,6 +101,22 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public bool CalculateCritDamage(ref float damage)
+    {
+         damage += stat.Atk;
+         int randomInt = Random.Range(0, 100);
+         if(randomInt <= stat.CritRate)
+        {
+            damage *= stat.CritDamagePercentage;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+
    
 
     void Awake()

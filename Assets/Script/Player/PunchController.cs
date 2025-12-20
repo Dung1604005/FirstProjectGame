@@ -24,10 +24,11 @@ public class PunchController : MonoBehaviour
         }
         else if (collision.tag == GameConfig.HITBOX_ENEMY)
         {
-
             try
             {
-                collision.GetComponentInParent<EnemyBase>().HealthSystem.OnDamaged(GameManageMent.Instance.PlayerManager.Stat.Atk);
+                float damaged = 0;
+                bool isCrit = GameManageMent.Instance.PlayerManager.CalculateCritDamage(ref damaged);
+                collision.GetComponentInParent<EnemyBase>().HealthSystem.OnDamaged(damaged, isCrit);
             }
             catch(Exception e)
             {

@@ -30,13 +30,14 @@ public class FloatingText : MonoBehaviour, IPoolable
     {
         
     }
-    public void SetUp(string text, Color color, VertexGradient gradient)
+    public void SetUp(string text, Color color, VertexGradient gradient, float _fontSize = 12)
     {
         textMesh.text = text;
         textMesh.color = color;
-       
         textMesh.enableVertexGradient = true;
         textMesh.colorGradient = gradient;
+        textMesh.fontSize = _fontSize;
+        
         
     }
     void Update()

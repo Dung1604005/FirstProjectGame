@@ -38,7 +38,7 @@ public class HealthEnemy : MonoBehaviour
         this.transform.GetChild(2).gameObject.SetActive(true);
     }
 
-    public void OnDamaged(float damaged)
+    public void OnDamaged(float damaged, bool isCritical = false)
     {
 
         if (cur_health < 0.1f)
@@ -46,7 +46,35 @@ public class HealthEnemy : MonoBehaviour
             return;
         }
 
-
+        Color color = Color.white;
+        if (isCritical)
+        {
+            // Color critTop = new Color(1f, 0.4f, 0f);       
+            // Color critBot = new Color(0.6f, 0f, 0f);
+           var gradient = new TMPro.VertexGradient(
+    new Color32(255, 235, 160, 255), // Top Left: Vàng kem sáng (Highlight)
+    new Color32(255, 235, 160, 255), // Top Right
+    new Color32(255, 140, 0, 255),   // Bottom Left: Cam đậm
+    new Color32(255, 140, 0, 255)    // Bottom Right
+);
+           
+            int randomOffsetY = Random.Range(2, 6); 
+            int randomOffsetX = Random.Range(-3,3);
+            
+            GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint(gameObject.transform.position+ new Vector3(randomOffsetX/2f, randomOffsetY/2, 0f) )).SetUp(((int)damaged).ToString(),Color.white, gradient, 16f);
+            
+        }
+            
+        else
+        {
+            Color normalTop = new Color(1f, 1f, 1f);       
+           Color normalBot = new Color(0.8f, 0.8f, 0.8f); 
+           var gradient = new TMPro.VertexGradient(normalTop, normalTop, normalTop, normalTop);
+            
+            int randomOffsetY = Random.Range(0, 6);
+            int randomOffsetX = Random.Range(-3,3);
+            GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint(gameObject.transform.position+ new Vector3(randomOffsetX/2f, randomOffsetY/2, 0f) )).SetUp(((int)damaged).ToString(), Color.white, gradient, 12f);
+        }
         cur_health -= damaged;
         OnDamagedEffect();
         UpdateHealthUIEnemy();

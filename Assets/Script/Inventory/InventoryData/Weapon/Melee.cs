@@ -26,7 +26,9 @@ public class Melee : Weapon
     {
         if (collision.tag == GameConfig.HITBOX_ENEMY)
         {
-            collision.gameObject.GetComponentInParent<HealthEnemy>().OnDamaged(weaponData.Damaged + GameManageMent.Instance.PlayerManager.Stat.Atk);
+            float damaged = weaponData.Damaged ;
+            bool isCrit = GameManageMent.Instance.PlayerManager.CalculateCritDamage(ref damaged);
+            collision.gameObject.GetComponentInParent<HealthEnemy>().OnDamaged(weaponData.Damaged , isCrit);
         }
     }
     

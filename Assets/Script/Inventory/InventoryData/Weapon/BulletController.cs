@@ -62,12 +62,15 @@ public class BulletController : MonoBehaviour, IPoolable
                 {
                    if(collision.gameObject != null )
                    {
-                      
-                      collision.gameObject.GetComponentInParent<HealthEnemy>()?.OnDamaged(damaged);
+                      bool isCrit = GameManageMent.Instance.PlayerManager.CalculateCritDamage(ref damaged);
+                      collision.gameObject.GetComponentInParent<HealthEnemy>()?.OnDamaged(damaged, isCrit);
                    }
                    rb.linearVelocity = Vector2.zero;
                    anim.SetTrigger("Explo");
-                   glow?.SetActive(false);
+                   if(glow != null)
+        {
+            glow?.SetActive(true);
+        }
                    
                    
                 }
@@ -83,7 +86,10 @@ public class BulletController : MonoBehaviour, IPoolable
                    }
                    rb.linearVelocity = Vector2.zero;
                    anim.SetTrigger("Explo");
-                   glow?.SetActive(false);
+                   if(glow != null)
+        {
+            glow?.SetActive(true);
+        }
                 }
                 break;
             default:
@@ -100,7 +106,10 @@ public class BulletController : MonoBehaviour, IPoolable
                 // }
                 rb.linearVelocity = Vector2.zero;
                 anim.SetTrigger("Explo");
-                glow?.SetActive(false);
+                if(glow != null)
+        {
+            glow?.SetActive(true);
+        }
             
         }
         if (collision.tag == GameConfig.BLOCK_OBJECT_TAG)
@@ -108,7 +117,10 @@ public class BulletController : MonoBehaviour, IPoolable
             
                 rb.linearVelocity = Vector2.zero;
                 anim.SetTrigger("Explo");
-                glow?.SetActive(false);
+                if(glow != null)
+        {
+            glow?.SetActive(true);
+        }
             
         }
         
@@ -136,7 +148,12 @@ public class BulletController : MonoBehaviour, IPoolable
     // Ban theo huong
     public void Fire(Vector2 dir)
     {
-        glow?.SetActive(true);
+
+        if(glow != null)
+        {
+            glow?.SetActive(true);
+        }
+        
     
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg ;
         

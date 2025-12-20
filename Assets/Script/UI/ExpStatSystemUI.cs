@@ -9,7 +9,7 @@ public class ExpStatSystemUI : MenuLayOutUI
 {
     [SerializeField] private TextMeshProUGUI healthStatUI;
     [SerializeField] private TextMeshProUGUI atkStatUI;
-    [SerializeField] private TextMeshProUGUI speedStatUI;
+    [SerializeField] private TextMeshProUGUI critRateStatUI;
 
     [SerializeField] private TextMeshProUGUI lvUI;
 
@@ -32,8 +32,8 @@ public class ExpStatSystemUI : MenuLayOutUI
     {
         atkStatUI.text = "Attack: " + content;
     }
-    public void UpdateSpeedStatUI(string content)
+    public void UpdateCritRateStatUI(string content)
     {
-        speedStatUI.text = "Critical: "+content;
+        critRateStatUI.text = "Critical: "+content;
     }
 }
