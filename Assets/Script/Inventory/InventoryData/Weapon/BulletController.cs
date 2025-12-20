@@ -26,6 +26,8 @@ public class BulletController : MonoBehaviour, IPoolable
 
     [SerializeField] private bool haveAnimDir;
 
+    [SerializeField] private GameObject glow;
+
     private Animator anim;
 
 
@@ -65,6 +67,7 @@ public class BulletController : MonoBehaviour, IPoolable
                    }
                    rb.linearVelocity = Vector2.zero;
                    anim.SetTrigger("Explo");
+                   glow?.SetActive(false);
                    
                    
                 }
@@ -80,6 +83,7 @@ public class BulletController : MonoBehaviour, IPoolable
                    }
                    rb.linearVelocity = Vector2.zero;
                    anim.SetTrigger("Explo");
+                   glow?.SetActive(false);
                 }
                 break;
             default:
@@ -96,6 +100,7 @@ public class BulletController : MonoBehaviour, IPoolable
                 // }
                 rb.linearVelocity = Vector2.zero;
                 anim.SetTrigger("Explo");
+                glow?.SetActive(false);
             
         }
         if (collision.tag == GameConfig.BLOCK_OBJECT_TAG)
@@ -103,6 +108,7 @@ public class BulletController : MonoBehaviour, IPoolable
             
                 rb.linearVelocity = Vector2.zero;
                 anim.SetTrigger("Explo");
+                glow?.SetActive(false);
             
         }
         
@@ -130,7 +136,7 @@ public class BulletController : MonoBehaviour, IPoolable
     // Ban theo huong
     public void Fire(Vector2 dir)
     {
-
+        glow?.SetActive(true);
     
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg ;
         

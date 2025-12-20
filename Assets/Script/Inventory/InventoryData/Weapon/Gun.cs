@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Xml.Schema;
 using Cinemachine;
+using Unity.Jobs;
 using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
+using UnityEditor.PackageManager;
 using UnityEditor.U2D;
 using UnityEngine;
 
@@ -128,8 +130,31 @@ public class Gun : Weapon
     {
         if(Mathf.Abs(dirX) + Mathf.Abs(dirY) > 0)
         {
-            anim.SetFloat("DirX", dirX);
-            anim.SetFloat("DirY", dirY);
+            float _dirX = dirX;
+            float _dirY = dirY;
+            DirType dirType = GameManageMent.Instance.CalculateDirType(dirX, dirY);
+            if(dirType == DirType.DOWN)
+            {
+                _dirX = 0f;
+                _dirY = -1f;
+            }
+            else if(dirType == DirType.LEFT)
+            {
+                _dirX = -1f;
+                _dirY = 0f;
+            }
+            else if(dirType == DirType.RIGHT)
+            {
+                _dirX = 1f;
+                _dirY = 0f;
+            }
+            else
+            {
+                _dirX = 0f;
+                _dirY = 1f;
+            }
+            anim.SetFloat("DirX", _dirX);
+            anim.SetFloat("DirY", _dirY);
         }
     }
     IEnumerator Couroutine(float time)

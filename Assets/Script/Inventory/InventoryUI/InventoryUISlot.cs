@@ -30,9 +30,13 @@ public class InventoryUISlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         }
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            inventoryUI.ContextMenu.UpdateIndex(index);
-            Vector3 pos = gameObject.GetComponent<RectTransform>().anchoredPosition3D ;
-            inventoryUI.UpdatePosContextMenu(pos);
+            if(eventData.clickCount >= 2)
+            {
+                inventoryUI.ContextMenu.UpdateIndex(index);
+                Vector3 pos = gameObject.GetComponent<RectTransform>().anchoredPosition3D ;
+                inventoryUI.UpdatePosContextMenu(pos);
+            }
+            
             
             // Mo panel click
 
