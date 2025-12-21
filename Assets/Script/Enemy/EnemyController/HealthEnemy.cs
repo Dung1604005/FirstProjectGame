@@ -59,7 +59,7 @@ public class HealthEnemy : MonoBehaviour
 );
            
             int randomOffsetY = Random.Range(2, 6); 
-            int randomOffsetX = Random.Range(-3,3);
+            int randomOffsetX = Random.Range(-2,4);
             
             GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint(gameObject.transform.position+ new Vector3(randomOffsetX/2f, randomOffsetY/2, 0f) )).SetUp(((int)damaged).ToString(),Color.white, gradient, 16f);
             
@@ -72,7 +72,7 @@ public class HealthEnemy : MonoBehaviour
            var gradient = new TMPro.VertexGradient(normalTop, normalTop, normalTop, normalTop);
             
             int randomOffsetY = Random.Range(0, 6);
-            int randomOffsetX = Random.Range(-3,3);
+            int randomOffsetX = Random.Range(-2,4);
             GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint(gameObject.transform.position+ new Vector3(randomOffsetX/2f, randomOffsetY/2, 0f) )).SetUp(((int)damaged).ToString(), Color.white, gradient, 12f);
         }
         cur_health -= damaged;
