@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,10 +24,24 @@ public class SceneLoader: MonoBehaviour
     }
     public void LoadScene(String sceneName)
     {
+        
         SceneManager.LoadSceneAsync(sceneName);
     }
     public void LoadSceneAdditive(String sceneName)
     {
-        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        UIManageMent.Instance.LoadingAdditive.TurnOn();
+        StartCoroutine(LoadSceneAsync(sceneName, LoadSceneMode.Additive));
+    }
+
+    IEnumerator LoadSceneAsync(String sceneName, LoadSceneMode loadSceneMode)
+    {
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName, loadSceneMode);
+        
+        while (!asyncOperation.isDone)
+        {
+            UIManageMent.Instance.LoadingAdditive.SetFillTarget(asyncOperation.progress);
+            yield return null;
+        }
+
     }
 }

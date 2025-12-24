@@ -83,6 +83,13 @@ public class UIManageMent : MonoBehaviour
     public QuestUI QuestUI => questUI;
 
 
+    [Header("Scene Loading")]
+
+    [SerializeField] private LoadingAdditive loadingAdditive;
+
+    public LoadingAdditive LoadingAdditive => loadingAdditive;
+
+
     [Header("OTHER")]
     [SerializeField] private Sprite tabBackground_Active;
     public Sprite TabBackground_Active => tabBackground_Active;

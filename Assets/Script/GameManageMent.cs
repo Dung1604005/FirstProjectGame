@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.GameCenter;
 
@@ -39,6 +40,11 @@ public class GameManageMent : MonoBehaviour
     [SerializeField] private GridManagement gridManagement;
 
     public GridManagement GridManagement => gridManagement;
+
+    [Header("Camera")]
+
+    [SerializeField] private CinemachineConfiner2D cinemachineConfiner2D;
+
 
     [Header("Menu")]
 
@@ -122,9 +128,16 @@ public class GameManageMent : MonoBehaviour
         Application.targetFrameRate = 120;
         Cursor.SetCursor(iconMouse, hotspot, cursorMode);
         Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+        
     
         
 
+    }
+
+    public void SetBoundMap(PolygonCollider2D polygonCollider2D)
+    {
+        
+        cinemachineConfiner2D.m_BoundingShape2D = polygonCollider2D;
     }
     public void SetCurSorInteract()
     {
