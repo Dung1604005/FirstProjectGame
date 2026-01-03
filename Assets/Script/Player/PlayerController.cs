@@ -154,6 +154,10 @@ public class PlayerController : MonoBehaviour
         
 
     }
+    public void SetPosition(Vector3 pos)
+    {
+        this.gameObject.transform.position = pos;
+    }
     //Di chuyen
     void Move()
     {

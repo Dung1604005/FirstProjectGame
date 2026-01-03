@@ -50,7 +50,7 @@ public class DistanceField
         Vector2 playerGridPosition = gridManagement.GridBuilder.WorldToGridPosition(playerPosition);
         if (gridManagement.GridBuilder.IsValidGridPosition(playerGridPosition) == false)
         {
-            Debug.LogError("Player position is out of grid bounds: " + playerPosition);
+            Debug.Log("Player position is out of grid bounds: " + playerPosition);
             return;
         }
         int halfChunk = gridManagement.ChunkSize / 2;
