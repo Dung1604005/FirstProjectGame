@@ -71,6 +71,10 @@ public class BulletController : MonoBehaviour, IPoolable
         {
             glow?.SetActive(true);
         }
+        else
+                    {
+                        DeSpawn();
+                    }
                    
                    
                 }
@@ -85,11 +89,15 @@ public class BulletController : MonoBehaviour, IPoolable
                       collision.gameObject.GetComponentInParent<Health>()?.OnDamaged(damaged);
                    }
                    rb.linearVelocity = Vector2.zero;
-                   anim.SetTrigger("Explo");
+                   //anim.SetTrigger("Explo");
                    if(glow != null)
-        {
-            glow?.SetActive(true);
-        }
+                   {
+                      glow?.SetActive(true);
+                    }
+                    else
+                    {
+                        DeSpawn();
+                    }
                 }
                 break;
             default:
@@ -110,6 +118,10 @@ public class BulletController : MonoBehaviour, IPoolable
         {
             glow?.SetActive(true);
         }
+        else
+                    {
+                        DeSpawn();
+                    }
             
         }
         if (collision.tag == GameConfig.BLOCK_OBJECT_TAG)
@@ -121,6 +133,10 @@ public class BulletController : MonoBehaviour, IPoolable
         {
             glow?.SetActive(true);
         }
+        else
+                    {
+                        DeSpawn();
+                    }
             
         }
         

@@ -44,12 +44,14 @@ public class SceneLoader: MonoBehaviour
         {
             return;
         }
-        UIManageMent.Instance.LoadingAdditive.TurnOn();
+        
         StartCoroutine(UnLoadAsync(currentSceneData, startPoint));
     }
 
     IEnumerator LoadSceneAsync(SceneData sceneData, LoadSceneMode loadSceneMode, Vector3 startPoint)
     {
+        // Nhuong 1 frame cho game de thuc hien UI Loading
+        yield  return null;
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneData.NameScene, loadSceneMode);
         
         while (!asyncOperation.isDone)
@@ -83,18 +85,6 @@ public class SceneLoader: MonoBehaviour
 
     IEnumerator UnLoadAsync(SceneData sceneData,Vector3 startPoint)
     {
-        AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(sceneData.NameScene);
-
-        while(!asyncOperation.isDone)
-        {
-            UIManageMent.Instance.LoadingAdditive.SetFillTarget(asyncOperation.progress);
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(1f);
-        
-        currentSceneData = sceneData.ParentSceneData;
-        UIManageMent.Instance.LoadingAdditive.TurnOff();
         GameManageMent.Instance.PlayerManager.PlayerController.SetPosition(startPoint);
         GameObject mapBound = GameObject.Find(currentSceneData.NameBounder);
         if(mapBound != null && mapBound.GetComponent<PolygonCollider2D>() != null)
@@ -105,6 +95,22 @@ public class SceneLoader: MonoBehaviour
         {
             Debug.LogError("CANNOT SET BOUND MAP");
         }
+        
+        yield  return null;
+
+        AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(sceneData.NameScene);
+
+        while(!asyncOperation.isDone)
+        {
+            
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+        
+        currentSceneData = sceneData.ParentSceneData;
+        
+        
     }
     
 }

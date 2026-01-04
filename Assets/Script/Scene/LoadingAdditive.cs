@@ -52,7 +52,7 @@ public class LoadingAdditive : MonoBehaviour
             text += ".";
         }
         loadingText.text = text;
-        Debug.Log(text);        
+        
         
         current_DotLoading += 1;
         current_DotLoading %= 4;
