@@ -20,7 +20,6 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             // Mo panel click
-
             ItemData item = GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem];
 
             

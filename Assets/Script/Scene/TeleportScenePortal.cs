@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR;
 
 public class TeleportScenePortal : MonoBehaviour
 {
@@ -36,8 +37,17 @@ public class TeleportScenePortal : MonoBehaviour
             
         }
     }
-    public void OnTriggerStay2D(Collider2D collision){
+    
+    void Start(){
+        interactKey.SetActive(false);
+        isInteract = false;
+    }
+    void Update()
+    {
         if(Input.GetKeyDown(KeyCode.E) && isInteract){
+
+
+            
 
             isInteract = false;
             if (sceneData.TypeMap == TypeMap.SECONDARYMAP)
@@ -60,10 +70,7 @@ public class TeleportScenePortal : MonoBehaviour
             
 
         }
+       
         
-    }
-    void Start(){
-        interactKey.SetActive(false);
-        isInteract = false;
     }
 }

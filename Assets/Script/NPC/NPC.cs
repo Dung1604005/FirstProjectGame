@@ -77,16 +77,16 @@ public class NPC : MonoBehaviour
             UIManageMent.Instance.DialogueUI.TurnOn();
             canContinueDialogue = true;
             Sprite curTalkerAva = npcAvatar;
-            if (npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First != nameNpc)
+            if (npcDialogues[curNpcDialogues].Dialogues[indexDialogue].Name != nameNpc)
             {
                 curTalkerAva = GameManageMent.Instance.PlayerManager.PlayerAvatar;
             }
-            UIManageMent.Instance.DialogueUI.SetInfoDialogue(npcDialogues[curNpcDialogues].Dialogues[indexDialogue].First, npcDialogues[curNpcDialogues].Dialogues[indexDialogue].Second, curTalkerAva);
+            UIManageMent.Instance.DialogueUI.SetInfoDialogue(npcDialogues[curNpcDialogues].Dialogues[indexDialogue].Name, npcDialogues[curNpcDialogues].Dialogues[indexDialogue].DialogueContent, curTalkerAva);
             
             if (indexDialogue == indexQuestDialogue)
             {
-                UIManageMent.Instance.DialogueUI.setTextButtonAccept("Let's do it");
-                UIManageMent.Instance.DialogueUI.setTextButtonRefuse("Nah may be later");
+                UIManageMent.Instance.DialogueUI.setTextButtonAccept(npcDialogues[curNpcDialogues].AcceptQuestLine);
+                UIManageMent.Instance.DialogueUI.setTextButtonRefuse(npcDialogues[curNpcDialogues].RefuseQuestLine);
                 UIManageMent.Instance.DialogueUI.TurnOnButton(AcceptQuest, Refuse);
                 canContinueDialogue = false;
             }
@@ -210,8 +210,8 @@ public class NPC : MonoBehaviour
 
 public class NpcDialogue
 {
-    [SerializeField] private List<Pair<string, string>> dialogues;
-    public List<Pair<string, string>> Dialogues => dialogues;
+    [SerializeField] private List<DialogueLine> dialogues;
+    public List<DialogueLine>  Dialogues => dialogues;
 
     [SerializeField] private QuestDefinition questDefinition;
     public QuestDefinition QuestDefinition => questDefinition;
@@ -224,4 +224,28 @@ public class NpcDialogue
 
     [SerializeField] private int indexQuestDialogue;
     public int IndexQuestDialogue => indexQuestDialogue;
+
+    [SerializeField] private String acceptQuestLine;
+
+    public String AcceptQuestLine => acceptQuestLine;
+
+    [SerializeField] private String refuseQuestLine;
+
+    public String RefuseQuestLine => refuseQuestLine;
+
+}
+
+[System.Serializable]
+
+public class DialogueLine
+{
+    
+    [SerializeField] private String name;
+    public String Name => name;
+
+
+    [TextArea(3, 10)]
+    [SerializeField] private String dialogueContent;
+
+    public String DialogueContent => dialogueContent;
 }
