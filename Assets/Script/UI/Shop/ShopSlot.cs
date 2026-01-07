@@ -15,6 +15,10 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] private int indexItem;
 
+    [SerializeField] private GameObject borderChosen;
+
+    [SerializeField] private GameObject bgChosen;
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Left)
@@ -51,7 +55,19 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
 
         indexItem = _index;
         icon.sprite = GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Icon;
-        price.text = GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Value.ToString();
+        price.text = GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Value.ToString() +"g";
+    }
+
+    public void OnChosen()
+    {
+        borderChosen.SetActive(true);
+        bgChosen.SetActive(true);
+    }
+
+    public void OnNotChosen(){
+        borderChosen.SetActive(false);
+
+        bgChosen.SetActive(false);
     }
 
     
