@@ -17,6 +17,8 @@ public class NPC : MonoBehaviour
 
     [SerializeField] private List<NpcDialogue> npcDialogues;
 
+    [TextArea(3, 10)]
+
     [SerializeField] private String endTalk;
 
     [SerializeField] private Sprite npcAvatar;

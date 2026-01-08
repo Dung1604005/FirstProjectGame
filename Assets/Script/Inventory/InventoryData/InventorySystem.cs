@@ -31,6 +31,11 @@ public class InventorySystem
     //Kiem tra xem co the add khong
     public bool TryAdd(ItemData item, int amount)
     {
+        if(item.Type == ItemType.Bullet)
+        {
+             
+             return true;
+        }
         foreach (var slot in slots)
         {
             //Neu rong thi push vao
@@ -59,6 +64,11 @@ public class InventorySystem
     }
     public void Add(ItemData item, int amount, bool force = false)
     {
+        if(item.Type == ItemType.Bullet)
+        {
+             GameManageMent.Instance.PlayerManager.AddBullet(item.ItemName, amount*(item as BulletData).Amount);
+             return;
+        }
         foreach (var slot in slots)
         {
             //Neu rong thi push vao

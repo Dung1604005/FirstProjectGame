@@ -7,4 +7,6 @@ public class BulletData : ItemData
 {
     [SerializeField] private int amount;
 
+    public int Amount => amount;
+
 }

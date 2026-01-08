@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class ShopSystem : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI nameShop;
+    
     [SerializeField] private BuySystem buySystem;
     public BuySystem BuySystem => buySystem;
     [SerializeField] private List<ShopSlot> shops;
@@ -17,37 +18,57 @@ public class ShopSystem : MonoBehaviour
 
     [SerializeField] private ShopSlot prefabSlot;
 
+    [SerializeField] private RectTransform contentRectTransform;
+
+    [SerializeField] private float cellSizeX;
+
+
+    [SerializeField] private float cellSizeY;
 
 
 
-    void Start()
+
+    void Awake()
     {
         shops = new List<ShopSlot>();
-        for (int i = 0; i < sizeShop; i++)
+         for(int i =  0; i < 20; i++)
         {
+            shops.Add(Instantiate(prefabSlot, contentRectTransform.transform));
             
-            shops.Add(Instantiate(prefabSlot, this.transform));
         }
-        
-        Refresh();
+    
     }
-    public void Refresh()
+    public void SetItemShop(List<int> listItemIndex)
     {
-
-        for (int i = 0; i < sizeShop; i++)
+        
+        //Reset cua hang
+        for(int i =  0; i < 20; i++)
         {
-            int rand = UnityEngine.Random.Range(0, GameManageMent.Instance.ItemDataBase.ItemDatas.Count);
-            shops[i].SetInfo(rand);
+            shops[i].TurnOff();
         }
+        sizeShop = listItemIndex.Count  ;
+        float contentHeight = cellSizeY * sizeShop + 5f*(sizeShop + 2);
+        contentRectTransform.sizeDelta = new Vector2(contentRectTransform.sizeDelta.x, contentHeight);
+        for(int i = 0; i < sizeShop; i++){
+            shops[i].TurnOn();
+            shops[i].SetInfo(listItemIndex[i]);
+        }
+        // mac dinh ban dau la item1
+        buySystem.TurnOnMultiBuy(listItemIndex[0]);
+
     }
+    
     public void TurnOn()
     {
-        nameShop.gameObject.SetActive(true);
         this.gameObject.SetActive(true);
+        
     }
     public void TurnOff()
     {
-        nameShop.gameObject.SetActive(false);
+        
         this.gameObject.SetActive(false);
     }
+
+    
+    
 }

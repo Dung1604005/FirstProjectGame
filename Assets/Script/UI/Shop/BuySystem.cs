@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,6 +21,16 @@ public class BuySystem : MonoBehaviour
     private int index;
     public int Index => index;
 
+    [SerializeField] private GameObject confirmPopup;
+
+    [SerializeField] private Image avaItemPopUp;
+
+    [SerializeField] private TextMeshProUGUI priceItemPopUp;
+
+    [SerializeField] private TextMeshProUGUI  itemNamePopUp;
+
+    public event Action<int> OnSelectedItemChanged;
+
     public void TurnOnMultiBuy(int _index)
     {
         this.gameObject.SetActive(true);
@@ -29,8 +40,9 @@ public class BuySystem : MonoBehaviour
         amountNumb = 1;
         priceNumb = GameManageMent.Instance.ItemDataBase.ItemDatas[_index].Value;
         amount.text = amountNumb.ToString();
-        price.text = priceNumb.ToString();
+        price.text = priceNumb.ToString() +"g";
         limit = GameManageMent.Instance.ItemDataBase.ItemDatas[_index].MaxStack;
+        OnSelectedItemChanged?.Invoke(_index);
     }
     public void AddItem()
     {
@@ -41,7 +53,7 @@ public class BuySystem : MonoBehaviour
         priceNumb += GameManageMent.Instance.ItemDataBase.ItemDatas[index].Value;
         amountNumb += 1;
         amount.text = amountNumb.ToString();
-        price.text = priceNumb.ToString();
+        price.text = priceNumb.ToString() + "g";
     }
     public void MinusItem()
     {
@@ -52,7 +64,7 @@ public class BuySystem : MonoBehaviour
         priceNumb -= GameManageMent.Instance.ItemDataBase.ItemDatas[index].Value;
         amountNumb -= 1;
         amount.text = amountNumb.ToString();
-        price.text = priceNumb.ToString();
+        price.text = priceNumb.ToString() + "g";
     }
     public void Buy()
     {
@@ -62,18 +74,30 @@ public class BuySystem : MonoBehaviour
             {
                 GameManageMent.Instance.PlayerManager.Gold.Buy(priceNumb);
                 UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[index], amountNumb);
-                Cancel();
+                
             }
 
         }
+        confirmPopup.SetActive(false);
 
     }
     public void Cancel()
     {
         gameObject.SetActive(false);
     }
+    public void TurnOnBuyPopUp()
+    {
+        confirmPopup.SetActive(true);
+        avaItemPopUp.sprite = icon.sprite;
+        priceItemPopUp.text = price.text;
+        itemNamePopUp.text = itemName.text + "x" + amount.text;
+    }
+    public void TurnOffBuyPopUp()
+    {
+        confirmPopup.SetActive(false);
+    }
     void Start()
     {
-        Cancel();
+        
     }
 }

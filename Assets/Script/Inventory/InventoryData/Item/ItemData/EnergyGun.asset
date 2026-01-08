@@ -19,7 +19,7 @@ MonoBehaviour:
   itemName: EnergyGun
   index: 14
   icon: {fileID: -2103840770260788691, guid: 4931b520789181e41b376db67eb08d1b, type: 3}
-  value: 9999
+  value: 1999
   damaged: 60
   coolDown: 0.5
   bullet: {fileID: 8671606415495258123, guid: bdd352d8b0da28849bc74b8c30ef7f49, type: 3}

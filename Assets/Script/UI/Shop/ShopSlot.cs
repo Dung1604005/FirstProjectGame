@@ -13,6 +13,8 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] private TextMeshProUGUI price;
 
+    [SerializeField] private TextMeshProUGUI nameItem;
+
     [SerializeField] private int indexItem;
 
     [SerializeField] private GameObject borderChosen;
@@ -23,32 +25,11 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            // Mo panel click
-            ItemData item = GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem];
-
-            
-            if (item.Type == ItemType.Melee || item.Type == ItemType.Gun)
-            {
-
-                int damage = (item as WeaponData).Damaged;
-                float cd = (item as WeaponData).CoolDown;
-                string Stat = "DAME:" + damage.ToString() + "\n" + "CD:" + cd.ToString();
-
-
-                UIManageMent.Instance.InventoryUI.UpdatePanelClick(item.Icon, item.Description, item.ItemName, Stat);
-            }
-            else
-            {
-                UIManageMent.Instance.InventoryUI.UpdatePanelClick(item.Icon, item.Description, item.ItemName);
-            }
-
-
-
-        }
-        else if (eventData.button == PointerEventData.InputButton.Right)
-        {
             UIManageMent.Instance.ShopSystem.BuySystem.TurnOnMultiBuy(indexItem);
+            // Mo panel click
+            
         }
+        
     }
     public void SetInfo(int _index)
     {
@@ -56,6 +37,7 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
         indexItem = _index;
         icon.sprite = GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Icon;
         price.text = GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Value.ToString() +"g";
+        nameItem.text =  GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].ItemName;
     }
 
     public void OnChosen()
@@ -68,6 +50,36 @@ public class ShopSlot : MonoBehaviour, IPointerClickHandler
         borderChosen.SetActive(false);
 
         bgChosen.SetActive(false);
+    }
+
+    private void UpdateSelectedState(int _index)
+    {
+        if(_index != indexItem)
+        {
+            OnNotChosen();
+        }
+        else
+        {
+            OnChosen();
+        }
+    }
+    public void TurnOn()
+    {
+        this.gameObject.SetActive(true);
+        if(UIManageMent.Instance.ShopSystem.BuySystem != null)
+        {
+            UIManageMent.Instance.ShopSystem.BuySystem.OnSelectedItemChanged += UpdateSelectedState;
+        }
+       
+    }
+    public void TurnOff()
+    {
+        if(UIManageMent.Instance.ShopSystem.BuySystem != null)
+        {
+            UIManageMent.Instance.ShopSystem.BuySystem.OnSelectedItemChanged -= UpdateSelectedState;
+        }
+    
+        this.gameObject.SetActive(false);
     }
 
     

@@ -18,6 +18,15 @@ public class GoldPlayer : MonoBehaviour
     public void Buy(int price)
     {
         curGold -= price;
+        var gradient = new TMPro.VertexGradient(
+    new Color32(0xFF, 0xAE, 0xAE, 0xFF), // top-left (Đỏ hồng sáng - Highlight)
+    new Color32(0xFF, 0xAE, 0xAE, 0xFF), // top-right (Đỏ hồng sáng - Highlight)
+    new Color32(0xB0, 0x00, 0x05, 0xFF), // bottom-left (Đỏ huyết đậm - Shadow)
+    new Color32(0xFF, 0x33, 0x33, 0xFF)  // bottom-right (Đỏ tươi - Main Color)
+);
+        int randomOffsetY = Random.Range(0, 6);
+        int randomOffsetX = Random.Range(-3,3);
+        GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition)+ new Vector3(randomOffsetX/2f, randomOffsetY/2, 0f) )).SetUp("-" + price.ToString() + " GOLD", Color.yellow, gradient);
         UIManageMent.Instance.SetGoldText(curGold.ToString());
     }
     public void AddGold(int amount)
