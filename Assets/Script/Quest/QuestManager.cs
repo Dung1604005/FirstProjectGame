@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -16,6 +17,8 @@ public class QuestManager : MonoBehaviour
     [SerializeField] private bool onQuest;
 
     public bool OnQuest => onQuest;
+
+    Dictionary<int, NpcDataValue> npcData;
 
 
     public event Action OnQuestChange;
@@ -100,11 +103,55 @@ public class QuestManager : MonoBehaviour
         }
         OnQuestChange?.Invoke();
     }
+    public void UpdateNpcData(int indexNpc, bool onQuest, int curNpcDialogues, int indexDialogue, bool canContinueDialogue)
+    {
+        NpcDataValue npcDataValue = new NpcDataValue(onQuest, curNpcDialogues, indexDialogue, canContinueDialogue);
+        if (npcData.ContainsKey(indexNpc))
+        {
+            npcData[indexNpc] =  npcDataValue;
+            
+        }
+        else
+        {
+            npcData.Add(indexNpc, npcDataValue);
+        }
+    }
+    public NpcDataValue  GetNpcData(int indexNpc)
+    {
+        NpcDataValue npcDataValue = new NpcDataValue(false, 0, 0, true);
+        if(npcData.ContainsKey(indexNpc))
+        {
+            return npcData[indexNpc];
+        }
+        else
+        {
+            return npcDataValue;
+        }
+    }
     void Start()
     {
+        npcData = new Dictionary<int, NpcDataValue>();
         GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.OnChangeInventory += UpdateProgressAllQuestCollect;
         UIManageMent.Instance.QuestUI.Init();
         UIManageMent.Instance.QuestUI.QuestViewInfo.Init();
     }
 
+}
+
+public  class NpcDataValue
+{
+    public bool onQuest {get; private set;}
+    public int curNpcDialogues {get; private set;}
+
+    public int indexDialogue {get; private set;}
+
+    public bool canContinueDialogue {get; private set;}
+
+    public NpcDataValue(bool _onQuest, int _curNpcDialogues, int _indexDialogue,bool _canContinueDialogue)
+    {
+        onQuest = _onQuest;
+        curNpcDialogues = _curNpcDialogues;
+        indexDialogue = _indexDialogue;
+        canContinueDialogue = _canContinueDialogue;
+    }
 }

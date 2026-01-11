@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49835a8441eb9644a13e1465dfba967, type: 3}
+  m_Name: GetTheFirstWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::QuestDefinition
+  id: 2
+  nameQuest: Get Your First Weapon
+  description: "Dung advised you to arm \nyourself. Head Northwest, \nfind the weapon
+    shop, \nand purchase a Pistol."
+  npcId: 0
+  objectives:
+  - objectiveType: 0
+    targetId: 0
+    requiredCount: 1
+  goldReward: 100
+  expReward: 100
+  itemIdReward: []

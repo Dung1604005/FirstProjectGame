@@ -275,17 +275,17 @@ public class GameManageMent : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.B))
         {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[4], 1))
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[6], 1))
             {
-                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[4], 1);
+                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[6], 1);
             }
 
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[5], 1))
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[7], 1))
             {
-                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[5], 1);
+                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[7], 1);
             }
 
         }

@@ -10163,6 +10163,132 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].acceptQuestLine
+      value: Copy it
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].questDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a72395ffd4425e4e8c3836310d9e7e1, type: 2}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].refuseQuestLine
+      value: i haven't ready yet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].indexQuestDialogue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[1].dialogues.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].onQuestCompleteDialogue
+      value: I have completed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].onQuestNotCompleteDialogue
+      value: I havent done yet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[1].dialogues.Array.data[9].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[0].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[1].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[2].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[3].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[4].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[5].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[6].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[7].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[8].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[9].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[1].dialogues.Array.data[9].dialogueContent
+      value: Good jobs.You have my recognition
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[0].dialogueContent
+      value: "Solid work on the stone. \nNow get yourself ready."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[1].dialogueContent
+      value: "You won't survive out there \nwith just your bare hands."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[2].dialogueContent
+      value: "Head Northwest. Find the cabin. \nBuy a Pistol from the dealer."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[3].dialogueContent
+      value: "Head Northwest. Find the cabin. \nBuy a Pistol from the dealer."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[4].dialogueContent
+      value: "It's loaded? Good. Keep it close. \nYou're gonna need it soon."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[5].dialogueContent
+      value: "You have strength, and you have obedience. \nThat is rare. Right now,
+        the Scavengers bring food, \nbut the walls are weak."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[6].dialogueContent
+      value: "Wood burns, Jake. We need something \npermanent. Something that lasts
+        forever."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[7].dialogueContent
+      value: "I need Stone. Lots of it. We are going to \nturn this camp into a fortress."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[8].dialogueContent
+      value: "Solid work. Wood rots, but stone... \nstone is forever."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[9].dialogueContent
+      value: Good jobs.You have my recognition
+      objectReference: {fileID: 0}
     - target: {fileID: 3369559889407715249, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: m_Name
       value: Dung

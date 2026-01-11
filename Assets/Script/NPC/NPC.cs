@@ -30,8 +30,8 @@ public class NPC : MonoBehaviour
 
     [SerializeField] private float interactRadius;
 
-    private int curNpcDialogues = 0;
-    private int indexDialogue = 0;
+    [SerializeField] private int curNpcDialogues = 0;
+    [SerializeField] private int indexDialogue = 0;
 
     [SerializeField] private bool interacting = false;
 
@@ -101,6 +101,7 @@ public class NPC : MonoBehaviour
             curNpcDialogues++;
             indexDialogue = 0;
         }
+        GameManageMent.Instance.QuestManager.UpdateNpcData(npcId, onQuest, curNpcDialogues, indexDialogue, canContinueDialogue);
 
     }
     public void TurnOnInteract()
@@ -109,6 +110,10 @@ public class NPC : MonoBehaviour
         {
             return;
         }
+        NpcDataValue npcDataValue = GameManageMent.Instance.QuestManager.GetNpcData(npcId);
+        onQuest  = npcDataValue.onQuest;
+        curNpcDialogues = npcDataValue.curNpcDialogues;
+        indexDialogue = npcDataValue.indexDialogue;
         interacting = true;
         UIManageMent.Instance.DialogueUI.TurnOn();
         StartDialogue();
@@ -131,6 +136,7 @@ public class NPC : MonoBehaviour
 
         TurnOffInteract();
         onQuest = true;
+        GameManageMent.Instance.QuestManager.UpdateNpcData(npcId, onQuest, curNpcDialogues, indexDialogue, canContinueDialogue);
 
     }
     public void CompleteQuest()
