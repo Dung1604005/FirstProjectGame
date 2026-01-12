@@ -28,13 +28,10 @@ public class SceneLoader: MonoBehaviour
     }
     public void LoadScene(SceneData sceneData, Vector3 startPoint)
     {
-        
-        UIManageMent.Instance.LoadingAdditive.TurnOn();
         StartCoroutine(LoadSceneAsync(sceneData, LoadSceneMode.Single, startPoint));
     }
     public void LoadSceneAdditive(SceneData sceneData, Vector3 startPoint)
     {
-        UIManageMent.Instance.LoadingAdditive.TurnOn();
         StartCoroutine(LoadSceneAsync(sceneData, LoadSceneMode.Additive, startPoint));
     }
 
@@ -50,6 +47,8 @@ public class SceneLoader: MonoBehaviour
 
     IEnumerator LoadSceneAsync(SceneData sceneData, LoadSceneMode loadSceneMode, Vector3 startPoint)
     {
+        // Hien thi UI Loading
+        UIManageMent.Instance.LoadingAdditive.TurnOn();
         // Nhuong 1 frame cho game de thuc hien UI Loading
         yield  return null;
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneData.NameScene, loadSceneMode);
@@ -86,7 +85,7 @@ public class SceneLoader: MonoBehaviour
     IEnumerator UnLoadAsync(SceneData sceneData,Vector3 startPoint)
     {
         GameManageMent.Instance.PlayerManager.PlayerController.SetPosition(startPoint);
-        GameObject mapBound = GameObject.Find(currentSceneData.NameBounder);
+        GameObject mapBound = GameObject.Find(sceneData.ParentSceneData.NameBounder);
         if(mapBound != null && mapBound.GetComponent<PolygonCollider2D>() != null)
         {
             GameManageMent.Instance.SetBoundMap(mapBound.GetComponent<PolygonCollider2D>());
@@ -106,7 +105,7 @@ public class SceneLoader: MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1f);
         
         currentSceneData = sceneData.ParentSceneData;
         

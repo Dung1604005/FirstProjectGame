@@ -18,6 +18,10 @@ public class QuestManager : MonoBehaviour
 
     public bool OnQuest => onQuest;
 
+    [SerializeField] private ArrowQuest arrowQuest;
+
+    public ArrowQuest ArrowQuest => arrowQuest;
+
     Dictionary<int, NpcDataValue> npcData;
 
 

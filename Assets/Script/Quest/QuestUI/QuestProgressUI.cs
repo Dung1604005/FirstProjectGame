@@ -13,11 +13,18 @@ public class QuestProgressUI : MonoBehaviour
 
     private float expectedProgress;
 
-    public void SetInfo(String _nameQuest, String _objectiveText, float progress)
+    public void SetInfo(String _nameQuest, String _objectiveText, float progress, bool haveDirection, Vector3 destinationPosition)
     {
         nameQuest.text = _nameQuest;
         objectiveText.text = _objectiveText;
         expectedProgress = progress;
+        if (haveDirection)
+        {
+            GameManageMent.Instance.QuestManager.ArrowQuest.TurnOn();
+            GameManageMent.Instance.QuestManager.ArrowQuest.SetGoalPosition(destinationPosition);
+        }
+        
+        
     }
 
     
@@ -37,6 +44,7 @@ public class QuestProgressUI : MonoBehaviour
     public void TurnOff()
     {
         this.gameObject.SetActive(false);
+        GameManageMent.Instance.QuestManager.ArrowQuest.TurnOff();
     }
     void Start()
     {

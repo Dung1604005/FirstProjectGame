@@ -60,7 +60,7 @@ public class QuestViewInfo : MonoBehaviour
             rewards.text += "\n+" + GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].ItemIdReward[i].Count + " " + GameManageMent.Instance.ItemDataBase.ItemDatas[idItem].ItemName;
         }
         UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOn();
-        UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(_nameQuest, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[index].ProgressRatio);
+        UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(_nameQuest, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[index].ProgressRatio, GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].HaveDirection, GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].DestinationPosition);
     }
 
     public void UpdateProgress()
@@ -93,7 +93,7 @@ public class QuestViewInfo : MonoBehaviour
             }
         }
         UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOn();
-        UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(nameQuest.text, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].ProgressRatio);
+        UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(nameQuest.text, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].ProgressRatio, GameManageMent.Instance.QuestManager.CurQuestDefinitons[indexQuest].HaveDirection, GameManageMent.Instance.QuestManager.CurQuestDefinitons[indexQuest].DestinationPosition);
     }
     public void ResetQuestView()
     {

@@ -115,6 +115,7 @@ public class NPC : MonoBehaviour
         curNpcDialogues = npcDataValue.curNpcDialogues;
         indexDialogue = npcDataValue.indexDialogue;
         interacting = true;
+        canContinueDialogue = npcDataValue.canContinueDialogue;
         UIManageMent.Instance.DialogueUI.TurnOn();
         StartDialogue();
     }

@@ -45,6 +45,14 @@ public class GameManageMent : MonoBehaviour
 
     [SerializeField] private CinemachineConfiner2D cinemachineConfiner2D;
 
+    [SerializeField] private float heightCamera;
+
+    public float HeightCamera   => heightCamera;
+
+    [SerializeField] private float widthCamera;
+
+    public float WidthCamera => widthCamera;
+
 
     [Header("Menu")]
 
@@ -118,20 +126,20 @@ public class GameManageMent : MonoBehaviour
         questManager = GetComponent<QuestManager>();
         effectController = GetComponent<EffectController>();
         
+        gameState = GameState.Continue;
+        Application.targetFrameRate = 120;
+        Cursor.SetCursor(iconMouse, hotspot, cursorMode);
+        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+        Camera mainCamera = Camera.main;
+        heightCamera = 2f *mainCamera.orthographicSize;
+        widthCamera = heightCamera* mainCamera.aspect;
         
     }
     void Start()
     {
        
-
-        gameState = GameState.Continue;
-        Application.targetFrameRate = 120;
-        Cursor.SetCursor(iconMouse, hotspot, cursorMode);
-        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
         
-    
         
-
     }
 
     public void SetBoundMap(PolygonCollider2D polygonCollider2D)
