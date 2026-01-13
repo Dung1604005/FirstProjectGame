@@ -24,3 +24,5 @@ MonoBehaviour:
   goldReward: 100
   expReward: 100
   itemIdReward: []
+  haveDirection: 1
+  destinationPosition: {x: -130, y: -88, z: 0}

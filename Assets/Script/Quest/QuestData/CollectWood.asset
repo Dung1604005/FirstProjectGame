@@ -25,3 +25,5 @@ MonoBehaviour:
   itemIdReward:
   - itemId: 0
     count: 1
+  haveDirection: 1
+  destinationPosition: {x: -95, y: -202, z: 0}

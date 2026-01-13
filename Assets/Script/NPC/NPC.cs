@@ -57,7 +57,7 @@ public class NPC : MonoBehaviour
              UIManageMent.Instance.DialogueUI.SetInfoDialogue(nameNpc, endTalk, curTalkerAva);
              return;
         }
-        Debug.Log("IsOnQuest " + onQuest);
+    
         if (onQuest)
         {
             UIManageMent.Instance.DialogueUI.TurnOn();
@@ -69,7 +69,7 @@ public class NPC : MonoBehaviour
         }
         int totalDialogue = npcDialogues[curNpcDialogues].Dialogues.Count;
         int indexQuestDialogue = npcDialogues[curNpcDialogues].IndexQuestDialogue;
-        Debug.Log(indexDialogue);
+        
         if (!canContinueDialogue)
         {
             return;
@@ -91,6 +91,7 @@ public class NPC : MonoBehaviour
                 UIManageMent.Instance.DialogueUI.setTextButtonRefuse(npcDialogues[curNpcDialogues].RefuseQuestLine);
                 UIManageMent.Instance.DialogueUI.TurnOnButton(AcceptQuest, Refuse);
                 canContinueDialogue = false;
+                Debug.Log("TURN ON QUEST BUTTON");
             }
             indexDialogue++;
             
@@ -101,7 +102,7 @@ public class NPC : MonoBehaviour
             curNpcDialogues++;
             indexDialogue = 0;
         }
-        GameManageMent.Instance.QuestManager.UpdateNpcData(npcId, onQuest, curNpcDialogues, indexDialogue, canContinueDialogue);
+        
 
     }
     public void TurnOnInteract()
@@ -122,23 +123,22 @@ public class NPC : MonoBehaviour
     public void TurnOffInteract()
     {
         interacting = false;
-        
+        GameManageMent.Instance.QuestManager.UpdateNpcData(npcId, onQuest, curNpcDialogues, indexDialogue, canContinueDialogue);
 
         UIManageMent.Instance.DialogueUI.TurnOff();
     }
     public void AcceptQuest()
     {
-        if (!interacting)
+        if (interacting)
         {
-            return;
-        }
-
+            
         GameManageMent.Instance.QuestManager.AcceptQuest(npcDialogues[curNpcDialogues].QuestDefinition);
-
-        TurnOffInteract();
         onQuest = true;
-        GameManageMent.Instance.QuestManager.UpdateNpcData(npcId, onQuest, curNpcDialogues, indexDialogue, canContinueDialogue);
-
+        TurnOffInteract();
+        EventSystem.current.SetSelectedGameObject(null);
+            
+        }
+        
     }
     public void CompleteQuest()
     {
@@ -150,6 +150,7 @@ public class NPC : MonoBehaviour
                 {
                     UIManageMent.Instance.DialogueUI.TurnOfButton();
                     TurnOffInteract();
+                    EventSystem.current.SetSelectedGameObject(null);
                     return;
                 }
                 else
@@ -158,6 +159,7 @@ public class NPC : MonoBehaviour
                     onQuest = false;
                     canContinueDialogue = true;
                     StartDialogue();
+                    EventSystem.current.SetSelectedGameObject(null);
                     return;
                 }
             }
@@ -167,13 +169,17 @@ public class NPC : MonoBehaviour
     public void OnGoingQuest()
     {
         TurnOffInteract();
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void Refuse()
     {
         indexDialogue--;
+        canContinueDialogue = true;
         TurnOffInteract();
+        EventSystem.current.SetSelectedGameObject(null);
         UIManageMent.Instance.DialogueUI.TurnOfButton();
+        
     }
 
     void Update()

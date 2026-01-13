@@ -91,6 +91,7 @@ public class DialogueUI : MonoBehaviour
     {
         buttonAccept.onClick.RemoveAllListeners(); 
         buttonAccept.gameObject.SetActive(true);
+        
         buttonAccept.onClick.AddListener(action);
     }
     public void AddOnClickRefuse(UnityAction action)

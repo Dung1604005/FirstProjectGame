@@ -10165,7 +10165,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[2].acceptQuestLine
@@ -10180,8 +10180,24 @@ PrefabInstance:
       value: i haven't ready yet
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].acceptQuestLine
+      value: I'll try my best
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].questDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ae49ac4ce5d4764e97a8e4a11a0f941, type: 2}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].refuseQuestLine
+      value: I can't do it
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[2].indexQuestDialogue
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].indexQuestDialogue
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[1].dialogues.Array.size
@@ -10192,11 +10208,23 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.size
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[2].onQuestCompleteDialogue
       value: I have completed
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].onQuestCompleteDialogue
+      value: I have completed
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[2].onQuestNotCompleteDialogue
+      value: I havent done yet
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].onQuestNotCompleteDialogue
       value: I havent done yet
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
@@ -10244,6 +10272,90 @@ PrefabInstance:
       value: Dung
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[0].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[1].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[2].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[3].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[4].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[5].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[6].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[7].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[8].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[9].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[10].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[11].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[12].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[13].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[14].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[15].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[16].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[17].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[18].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[19].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[20].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[1].dialogues.Array.data[9].dialogueContent
       value: Good jobs.You have my recognition
       objectReference: {fileID: 0}
@@ -10288,6 +10400,111 @@ PrefabInstance:
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[2].dialogues.Array.data[9].dialogueContent
       value: Good jobs.You have my recognition
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[0].dialogueContent
+      value: "(Shivering slightly) It\u2019s too quiet \nout there, D\u0169ng. Does
+        the wind \nalways sound like\u2026 whispering?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[1].dialogueContent
+      value: "(Stops sharpening, looks up) \nYou get used to it. Or you go crazy.
+        \nThose are your only two options here."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[2].dialogueContent
+      value: You talk like this forest is alive.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[3].dialogueContent
+      value: "It is, Jake. But not in the way\nyou think. Listen to me. There \nis
+        a secret about this soil."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[4].dialogueContent
+      value: A secret?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[5].dialogueContent
+      value: "The things out there ,the walkers \ndon't migrate here. They manifest.\nOne
+        minute, you\u2019re standing in a\nclear meadow, and the next,\na monstrosity
+        is breathing down\nyour neck. No warning. No origin."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[6].dialogueContent
+      value: "That\u2019s impossible. Things \nhave to come from somewhere."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[7].dialogueContent
+      value: 'Not here. When I first arrived with the
+
+        pioneers... God, it
+        was different.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[8].dialogueContent
+      value: How different?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[9].dialogueContent
+      value: 'It was a paradise, Jake.The sun actually felt warm. We slept on the
+        grass without guards
+
+        Then came the "Silent Night." We woke up, and
+        half our group was just... gone. Replaced
+
+        by those things. Since
+        then, the forest has
+
+        been trying to swallow us whole.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[10].dialogueContent
+      value: "So, we\u2019re just sitting ducks \nwaiting to die?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[11].dialogueContent
+      value: "No. We are survivors. But \nsurvival isn't given, it\u2019s earned."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[12].dialogueContent
+      value: What do you mean?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[13].dialogueContent
+      value: "I can\u2019t babysit you forever. \nIf you want to stay in this camp,
+        \nyou need to prove you\u2019re not a liability."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[14].dialogueContent
+      value: "You want me to fight? Now?\nIt\u2019s pitch black!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[15].dialogueContent
+      value: "Fear is the best teacher. There\u2019s \na cluster of them, near the
+        old creek. \nThey are mindless, but they bite hard."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[16].dialogueContent
+      value: "You\u2019re joking."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[17].dialogueContent
+      value: "Look at my face. Do I look like \nI\u2019m joking? You need reflexes.
+        \nYou need to harden your heart."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[18].dialogueContent
+      value: How many?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[19].dialogueContent
+      value: "Kill 15 of them. Don't come back \nuntil you do. If you can handle
+        \nfifteen slow ones, maybe you\u2019ll\nsurvive when the fast ones spawn."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[20].dialogueContent
+      value: Greattttt! I know you can do it.
       objectReference: {fileID: 0}
     - target: {fileID: 3369559889407715249, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: m_Name

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4fb72ef62fec644a9626bc12238e35, type: 3}
   m_Name: SmallZombie
   m_EditorClassIdentifier: 
+  nameEnemy: Small Zombie
   maxHealth: 40
   atk: 20
   coolDown: 2

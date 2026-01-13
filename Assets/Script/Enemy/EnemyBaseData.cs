@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class EnemyBaseData : ScriptableObject
 {
+    [SerializeField] private String nameEnemy;
+    public String NameEnemy => nameEnemy;
     [SerializeField] private float maxHealth;
     public float MaxHealth => maxHealth;
     [SerializeField] private float atk;
