@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class TimeManager : MonoBehaviour
     public TimeState TimeState => timeState;
 
     [SerializeField] private float timerPerDay;
+
+    public float TimerPerDay => timerPerDay;
     [SerializeField] private float dayIntense;
     [SerializeField] private float midDayIntense;
     [SerializeField] private float nightIntense;
@@ -24,6 +27,13 @@ public class TimeManager : MonoBehaviour
     [SerializeField] private ParticleSystem rainEffect;
     private bool IsRainEffectRandom = false;
     private float elapseTime = 0f;
+
+    public float ElapseTime => elapseTime;
+
+    public event Action ChangeToDay;
+
+    public event Action ChangeToMidDay, ChangeToNight, ChangeToMidNight;
+    
     private void Awake()
     {
         light2D = GetComponent<Light2D>();
@@ -59,22 +69,42 @@ public class TimeManager : MonoBehaviour
         
         if (t <= 0.15f)
         {
+            if(timeState != TimeState.Day)
+            {
+                ChangeToDay?.Invoke();
+                timeState = TimeState.Day;
+            }
             
             RandomRain();
             OnDay();
         }
         else if (t <= 0.4f)
         {
+            if(timeState != TimeState.MidDay)
+            {
+                ChangeToMidDay?.Invoke();
+                timeState = TimeState.MidDay;
+            }
             IsRainEffectRandom = false;
             OnMidDay();
         }
         else if (t <= 0.55f)
         {
+            if(timeState != TimeState.Night)
+            {
+                ChangeToNight?.Invoke();
+                timeState = TimeState.Night;
+            }
             RandomRain();
             OnNight();
         }
         else if (t <= 1f)
         {
+            if(timeState != TimeState.MidNight)
+            {
+                ChangeToMidNight?.Invoke();
+                timeState = TimeState.MidNight;
+            }
             IsRainEffectRandom = false;
             OnMidNight();
         }
