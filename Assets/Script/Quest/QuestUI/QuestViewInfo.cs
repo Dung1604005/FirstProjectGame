@@ -35,32 +35,32 @@ public class QuestViewInfo : MonoBehaviour
         for(int i = 0; i < GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives.Count; i++)
         {
             int id = GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].targetId;    
-            String nameTarget = "";  
+            String objectiveRequirement = "";  
             if(GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType == ObjectiveType.Collect)
             {
-                nameTarget = GameManageMent.Instance.ItemDataBase.ItemDatas[id].ItemName;
+                objectiveRequirement =  GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + GameManageMent.Instance.ItemDataBase.ItemDatas[id].ItemName;
             }
             else if (GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType == ObjectiveType.Kill)
             {
-                nameTarget = GameManageMent.Instance.EnemyDataBase.EnemyDataList[id].NameEnemy;
+                objectiveRequirement =  GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + GameManageMent.Instance.EnemyDataBase.EnemyDataList[id].NameEnemy;
             }
 
             else
             {
-                Debug.Log("DONT HAVE NAME FOR REACH YET");
+                objectiveRequirement = GameManageMent.Instance.QuestManager.CurQuestDefinitons[index].Objectives[i].objectiveRequirement;
             } 
-            objectives.text += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+            objectives.text += "\n" + objectiveRequirement + " " + "[" +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].CurCount[i]   + "/"  +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].requiredCount + "]" ;
             if(i == 0)
             {
-                objectiveText += GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                objectiveText += objectiveRequirement + " " + "[" +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].CurCount[i]   + "/"  +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].requiredCount + "]" ;
             }
             else
             {
-                objectiveText += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                objectiveText += "\n"  + objectiveRequirement + " " + "[" +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].CurCount[i]   + "/"  +
                 GameManageMent.Instance.QuestManager.QuestProgresses[index].Objectives[i].requiredCount + "]" ;
             }
@@ -89,32 +89,32 @@ public class QuestViewInfo : MonoBehaviour
         {
             int id = GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].targetId;  
               
-            String nameTarget = "";  
+            String objectiveRequirement = "";  
             if(GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType == ObjectiveType.Collect)
             {
-                nameTarget = GameManageMent.Instance.ItemDataBase.ItemDatas[id].ItemName;
+                objectiveRequirement =  GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType.ToString() + " " + GameManageMent.Instance.ItemDataBase.ItemDatas[id].ItemName;
             }
             else if (GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType == ObjectiveType.Kill)
             {
-                nameTarget = GameManageMent.Instance.EnemyDataBase.EnemyDataList[id].NameEnemy;
+                objectiveRequirement =  GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType.ToString() + " " + GameManageMent.Instance.EnemyDataBase.EnemyDataList[id].NameEnemy;
             }
 
             else
             {
-                Debug.Log("DONT HAVE NAME FOR REACH YET");
-            }
-            objectives.text += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                objectiveRequirement = GameManageMent.Instance.QuestManager.CurQuestDefinitons[indexQuest].Objectives[i].objectiveRequirement;
+            } 
+            objectives.text += "\n" + objectiveRequirement + " " + "[" +
                 GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].CurCount[i]   + "/"  +
                 GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].requiredCount + "]" ;
             if(i == 0)
             {
-                objectiveText += GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                objectiveText +=   objectiveRequirement + " " + "[" +
                 GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].CurCount[i]   + "/"  +
                 GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].requiredCount + "]" ;
             }
             else
             {
-                objectiveText += "\n" + GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].objectiveType.ToString() + " " + nameTarget + " " + "[" +
+                objectiveText += "\n" + objectiveRequirement + " " + "[" +
                 GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].CurCount[i]   + "/"  +
                 GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].requiredCount + "]" ;
             }

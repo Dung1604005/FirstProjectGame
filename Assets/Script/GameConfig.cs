@@ -13,6 +13,10 @@ public class GameConfig : MonoBehaviour
     public static string INVENTORY_FULL_WARNING = "INVENTORY FULL!";
 
     public static string NOT_ENOUGH_ITEM_WARNING = "NOT ENOUGH ITEM!";
+
+    public static String CANT_REMOVE_QUEST_ITEM = "CAN'T REMOVE QUEST ITEM!";
+
+    public static string CANT_ACCEPT_QUEST = "CAN'T ACCEPT QUEST!";
     public static string HORIZONTAL = "Horizontal";
 
     public static string VERTICAL = "Vertical";

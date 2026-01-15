@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: e3a18f468f0c8e24eb378f69aa1096df
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6167755082009176617
+    second: officer_0_0
+  - first:
+      213: 5794771904189558232
+    second: officer_0_1
+  - first:
+      213: -3100854746948810335
+    second: officer_0_2
+  - first:
+      213: -4339550561835542684
+    second: officer_0_3
+  - first:
+      213: 7023296331584505399
+    second: officer_0_4
+  - first:
+      213: -6758897106788711868
+    second: officer_0_5
+  - first:
+      213: -3469906104496190604
+    second: officer_0_6
+  - first:
+      213: 8277961173831122080
+    second: officer_0_7
+  - first:
+      213: 7773236935662048282
+    second: officer_0_8
+  - first:
+      213: 8116032938230580986
+    second: officer_0_9
+  - first:
+      213: -525581459105771068
+    second: officer_0_10
+  - first:
+      213: -1354161965044594792
+    second: officer_0_11
+  - first:
+      213: -4888925391953710651
+    second: officer_0_12
+  - first:
+      213: -7181137172810135789
+    second: officer_0_13
+  - first:
+      213: 602501111981634598
+    second: officer_0_14
+  - first:
+      213: -8185150350562434809
+    second: officer_0_15
+  - first:
+      213: -2732561759775239978
+    second: officer_0_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: officer_0_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 80
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92a64c4a194489550800000000000000
+      internalID: 6167755082009176617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 80
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dde1a7485a2b6050800000000000000
+      internalID: 5794771904189558232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_2
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 80
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a94804690d87f4d0800000000000000
+      internalID: -3100854746948810335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_3
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 80
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46712f481c1d6c3c0800000000000000
+      internalID: -4339550561835542684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_4
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 80
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73606647dc2c77160800000000000000
+      internalID: 7023296331584505399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_5
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 80
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 442817c34e29332a0800000000000000
+      internalID: -6758897106788711868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_6
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 80
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47b8b8548ca68dfc0800000000000000
+      internalID: -3469906104496190604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_7
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 80
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0acfdae34d931e270800000000000000
+      internalID: 8277961173831122080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_8
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 40
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1415110fc510eb60800000000000000
+      internalID: 7773236935662048282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_9
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 40
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af68a9ce4f0f1a070800000000000000
+      internalID: 8116032938230580986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_10
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 40
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c118759272c4b8f0800000000000000
+      internalID: -525581459105771068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_11
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 40
+        width: 33
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8970c211edc053de0800000000000000
+      internalID: -1354161965044594792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_12
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 40
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c13637324c072cb0800000000000000
+      internalID: -4888925391953710651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_13
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 40
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3178c43e9c9775c90800000000000000
+      internalID: -7181137172810135789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_14
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 40
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6247174b1938c5800800000000000000
+      internalID: 602501111981634598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_15
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 40
+        width: 33
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 701ef897f11886e80800000000000000
+      internalID: -8185150350562434809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: officer_0_16
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 0
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d0d7c5ae8df31ad0800000000000000
+      internalID: -2732561759775239978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      officer_0_0: 6167755082009176617
+      officer_0_1: 5794771904189558232
+      officer_0_10: -525581459105771068
+      officer_0_11: -1354161965044594792
+      officer_0_12: -4888925391953710651
+      officer_0_13: -7181137172810135789
+      officer_0_14: 602501111981634598
+      officer_0_15: -8185150350562434809
+      officer_0_16: -2732561759775239978
+      officer_0_2: -3100854746948810335
+      officer_0_3: -4339550561835542684
+      officer_0_4: 7023296331584505399
+      officer_0_5: -6758897106788711868
+      officer_0_6: -3469906104496190604
+      officer_0_7: 8277961173831122080
+      officer_0_8: 7773236935662048282
+      officer_0_9: 8116032938230580986
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -56,11 +56,11 @@ public class QuestProgress
         UpdateProgressRatio();
 
     }
-    public void UpdateProgressKillOrReach(int amount, ObjectiveType type, int _targetId)
+    public void UpdateProgressKill(int amount, ObjectiveType type, int _targetId)
     {
-        if(type == ObjectiveType.Collect)
+        if(type != ObjectiveType.Kill)
         {
-            UpdateCollectProgress();
+            
             return;
         }
         for (int i = 0; i < objectives.Count; i++)
@@ -72,6 +72,18 @@ public class QuestProgress
         }
         UpdateProgressRatio();
 
+    }
+    public void UpdateProgressTalkToNpc(int npcId)
+    {
+        
+        for(int i  =  0; i < objectives.Count; i++)
+        {
+            if(objectives[i].objectiveType == ObjectiveType.TalkToNpc && objectives[i].targetId == npcId)
+            {
+                curCount[i] = Math.Min(objectives[i].requiredCount, 1);
+            }
+        }
+        UpdateProgressRatio();
     }
     public bool checkProgress()
     {

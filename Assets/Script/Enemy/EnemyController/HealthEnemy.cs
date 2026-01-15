@@ -84,7 +84,7 @@ public class HealthEnemy : MonoBehaviour
             // Enemy die
             this.GetComponent<EnemyBase>().SetDie();
             
-            
+            GameManageMent.Instance.QuestManager.UpdateProgressAllQuestKill(1, this.GetComponent<EnemyBase>().EnemyBaseData.IndexEnemy, ObjectiveType.Kill);
             GameManageMent.Instance.PlayerManager.Gold.AddGold(this.GetComponent<EnemyBase>().EnemyBaseData.GoldValue);
             GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(this.GetComponent<EnemyBase>().EnemyBaseData.ExpValue);
             //Nhan thuong

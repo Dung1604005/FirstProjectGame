@@ -69,7 +69,7 @@ public class DialogueUI : MonoBehaviour
             float t = 0;
             while (t < delay)
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     ShowInstant(dialogue);
                     yield break;

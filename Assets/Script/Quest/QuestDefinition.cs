@@ -29,6 +29,10 @@ public class QuestDefinition : ScriptableObject
     [SerializeField] private int npcId;
     public int NpcId => npcId;
 
+    [SerializeField] private List<ItemStack> itemQuestList;
+
+    public List<ItemStack> ItemQuestList => itemQuestList;
+
     [SerializeField] private List<Objective> objectives;
     public List<Objective> Objectives => objectives;
 

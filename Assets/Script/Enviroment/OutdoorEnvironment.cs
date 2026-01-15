@@ -30,7 +30,8 @@ public class OutdoorEnvironment : EnviromentBase
         animationCurve = new AnimationCurve();
         animationCurve.AddKey(0f, midNightIntense);
         animationCurve.AddKey(0.1f, dayIntense);
-        animationCurve.AddKey(0.3f, midDayIntense);
+        animationCurve.AddKey(new Keyframe(0.2f, midDayIntense, 0f, 0f));
+        animationCurve.AddKey(new Keyframe(0.4f, midDayIntense, 0f, 0f));
         animationCurve.AddKey(0.5f, nightIntense);
         animationCurve.AddKey(0.65f, midNightIntense);
         animationCurve.AddKey(1f, midNightIntense);
@@ -55,7 +56,18 @@ public class OutdoorEnvironment : EnviromentBase
     }
     public override void SetActive(bool active)
     {
-        
+        if(active){
+            GameManageMent.Instance.TimeManager.ChangeToDay += OnDay;
+            GameManageMent.Instance.TimeManager.ChangeToMidDay += OnMidDay;
+            GameManageMent.Instance.TimeManager.ChangeToNight += OnNight;
+            GameManageMent.Instance.TimeManager.ChangeToMidNight += OnMidNight;
+        }
+        else{
+            GameManageMent.Instance.TimeManager.ChangeToDay -= OnDay;
+            GameManageMent.Instance.TimeManager.ChangeToMidDay -= OnMidDay;
+            GameManageMent.Instance.TimeManager.ChangeToNight -= OnNight;
+            GameManageMent.Instance.TimeManager.ChangeToMidNight -= OnMidNight;
+        }
         this.gameObject.SetActive(active);
         weatherSystem.SetActive(active);
         Apply();
@@ -82,10 +94,7 @@ public class OutdoorEnvironment : EnviromentBase
     }
     void Start()
     {
-        GameManageMent.Instance.TimeManager.ChangeToDay += OnDay;
-        GameManageMent.Instance.TimeManager.ChangeToMidDay += OnMidDay;
-        GameManageMent.Instance.TimeManager.ChangeToNight += OnNight;
-        GameManageMent.Instance.TimeManager.ChangeToMidNight += OnMidNight;
+        
         
     }
     void Update()

@@ -14,3 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SceneData
   nameScene: Map1
   nameBounder: Map1Bound
+  typeMap: 0
+  environmentType: 1
+  lightIntense: 0
+  lightColor:
+    serializedVersion: 2
+    rgba: 0
+  parentSceneData: {fileID: 0}

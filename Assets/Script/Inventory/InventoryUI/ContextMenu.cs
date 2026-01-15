@@ -50,11 +50,23 @@ public class ContextMenu : MonoBehaviour
     }
     public void Drop()
     {
+        if(UIManageMent.Instance.InventoryUI.Inven.GetSlotData(index).ItemData.Type == ItemType.QuestItem)
+        {
+            UIManageMent.Instance.UpdateWarning(GameConfig.CANT_REMOVE_QUEST_ITEM);
+            UIManageMent.Instance.TurnOnWarning();
+            return;
+        }
         UIManageMent.Instance.InventoryUI.Inven.RemoveByIndex(index, 1);
         TurnOff();
     }
     public void Sell()
     {
+        if(UIManageMent.Instance.InventoryUI.Inven.GetSlotData(index).ItemData.Type == ItemType.QuestItem)
+        {
+            UIManageMent.Instance.UpdateWarning(GameConfig.CANT_REMOVE_QUEST_ITEM);
+            UIManageMent.Instance.TurnOnWarning();
+            return;
+        }
         GameManageMent.Instance.PlayerManager.Gold.AddGold(price);
         UIManageMent.Instance.InventoryUI.Inven.RemoveByIndex(index, 1);
         TurnOff();

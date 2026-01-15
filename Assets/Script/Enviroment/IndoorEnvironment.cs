@@ -12,6 +12,7 @@ public class IndoorEnvironment : EnviromentBase
     {
         lightIntense = _lightIntense;
         lightColor = _lightColor;
+        Apply();
     }
     public override void Apply()
     {
@@ -23,7 +24,7 @@ public class IndoorEnvironment : EnviromentBase
     public override void SetActive(bool active)
     {
         this.gameObject.SetActive(true);
-        Apply();
+        
         
     }
 }

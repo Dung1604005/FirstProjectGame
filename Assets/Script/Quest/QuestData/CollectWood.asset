@@ -22,8 +22,6 @@ MonoBehaviour:
     requiredCount: 1
   goldReward: 20
   expReward: 100
-  itemIdReward:
-  - itemId: 0
-    count: 1
+  itemIdReward: []
   haveDirection: 1
   destinationPosition: {x: -95, y: -202, z: 0}

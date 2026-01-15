@@ -15,4 +15,9 @@ MonoBehaviour:
   nameScene: House
   nameBounder: BoundHouseShopKeeper
   typeMap: 1
+  environmentType: 0
+  lightIntense: 1
+  lightColor:
+    serializedVersion: 2
+    rgba: 4294967295
   parentSceneData: {fileID: 11400000, guid: fd49c4fcf5ca0c1438a5b0ee76fc99b3, type: 2}

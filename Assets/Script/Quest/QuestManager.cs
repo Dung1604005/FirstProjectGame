@@ -2,10 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
+
+    [SerializeField] private List<QuestDefinition> completedQuest = new List<QuestDefinition>();
+
+    public List<QuestDefinition> CompletedQuest => completedQuest;
     [SerializeField] private List<QuestDefinition> curQuestDefinitions = new List<QuestDefinition>();
 
     public List<QuestDefinition> CurQuestDefinitons => curQuestDefinitions;
@@ -57,6 +62,7 @@ public class QuestManager : MonoBehaviour
                 obj.SetInfo(rewards[i].ItemId, rewards[i].Count);
             }
         }
+        completedQuest.Add(curQuestDefinitions[id]);
         OnCompleteQuest?.Invoke();
         
         GameManageMent.Instance.PlayerManager.Gold.AddGold(curQuestDefinitions[id].GoldReward);
@@ -73,10 +79,10 @@ public class QuestManager : MonoBehaviour
 
     }
 
-    public void UpdateProgressKillOrReach(int amount, int id, int idQuest, ObjectiveType objectiveType)
+    public void UpdateProgressKill(int amount, int id, int idQuest, ObjectiveType objectiveType)
     {
 
-        questProgresses[idQuest].UpdateProgressKillOrReach(amount, objectiveType, id);
+        questProgresses[idQuest].UpdateProgressKill(amount, objectiveType, id);
         // if (questProgresses[idQuest].checkProgress())
         // {
         //     Complete(idQuest);
@@ -90,11 +96,15 @@ public class QuestManager : MonoBehaviour
         //     Complete(idQuest);
         // }
     }
-    public void UpdateProgressAllQuestKillOrReach(int amount, int id, ObjectiveType objectiveType)
+    public void UpdateProgressTalkToNpc(int idQuest, int npcId)
+    {
+        questProgresses[idQuest].UpdateProgressTalkToNpc(npcId);
+    }
+    public void UpdateProgressAllQuestKill(int amount, int id, ObjectiveType objectiveType)
     {
         for (int i = curQuestDefinitions.Count - 1; i >= 0; i--)
         {
-            UpdateProgressKillOrReach(amount, id, i, objectiveType);
+            UpdateProgressKill(amount, id, i, objectiveType);
         }
         OnQuestChange?.Invoke();
     }
@@ -104,6 +114,15 @@ public class QuestManager : MonoBehaviour
         for (int i = curQuestDefinitions.Count - 1; i >= 0; i--)
         {
             UpdateProgressCollect(i);
+        }
+        OnQuestChange?.Invoke();
+    }
+    public void UpdateProgressAllQuestTalkToNpc(int npcId)
+    {
+
+        for (int i = curQuestDefinitions.Count - 1; i >= 0; i--)
+        {
+            UpdateProgressTalkToNpc(i, npcId);
         }
         OnQuestChange?.Invoke();
     }

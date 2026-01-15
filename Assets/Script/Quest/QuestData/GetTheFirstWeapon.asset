@@ -17,10 +17,12 @@ MonoBehaviour:
   description: "Dung advised you to arm \nyourself. Head Northwest, \nfind the weapon
     shop, \nand purchase a Pistol."
   npcId: 0
+  itemQuestList: []
   objectives:
   - objectiveType: 0
     targetId: 0
     requiredCount: 1
+    objectiveRequirement: 
   goldReward: 100
   expReward: 100
   itemIdReward: []
