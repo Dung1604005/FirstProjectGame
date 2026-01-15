@@ -79,7 +79,11 @@ public class SceneLoader: MonoBehaviour
         {
             Debug.LogError("CANNOT SET BOUND MAP");
         }
-        
+        GameManageMent.Instance.EnviromentManager.SwitchEnvironment(sceneData.EnvironmentType);
+        if(sceneData.EnvironmentType == EnvironmentType.Indoor)
+        {
+            GameManageMent.Instance.EnviromentManager.SetInfoForIndoorEnvironment(sceneData.LightIntense, sceneData.LightColor);
+        }
     }
 
     IEnumerator UnLoadAsync(SceneData sceneData,Vector3 startPoint)
@@ -94,7 +98,12 @@ public class SceneLoader: MonoBehaviour
         {
             Debug.LogError("CANNOT SET BOUND MAP");
         }
+        GameManageMent.Instance.EnviromentManager.SwitchEnvironment(sceneData.ParentSceneData.EnvironmentType);
         
+        if(sceneData.ParentSceneData.EnvironmentType == EnvironmentType.Indoor)
+        {
+            GameManageMent.Instance.EnviromentManager.SetInfoForIndoorEnvironment(sceneData.ParentSceneData.LightIntense, sceneData.ParentSceneData.LightColor);
+        }
         yield  return null;
 
         AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(sceneData.NameScene);

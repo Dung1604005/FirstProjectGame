@@ -8,8 +8,5 @@ public abstract class EnviromentBase : MonoBehaviour
 
     public abstract void SetActive(bool active);
 
-    protected  virtual void Awake()
-    {
-        light2D  = GetComponent<Light2D>();
-    }
+    
 }

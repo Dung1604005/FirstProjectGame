@@ -82,6 +82,11 @@ public class GameManageMent : MonoBehaviour
     private TimeManager timeManager;
     public TimeManager TimeManager => timeManager;
 
+    [Header("Environment")]
+    private EnviromentManager enviromentManager;
+
+    public EnviromentManager EnviromentManager => enviromentManager;
+
     [Header("Cursor")]
     [SerializeField] private Texture2D iconMouse;
     public Texture2D IconMouse => iconMouse;
@@ -131,6 +136,7 @@ public class GameManageMent : MonoBehaviour
         questManager = GetComponent<QuestManager>();
         effectController = GetComponent<EffectController>();
         timeManager = GetComponent<TimeManager>();
+        enviromentManager = GetComponent<EnviromentManager>();
         gameState = GameState.Continue;
         Application.targetFrameRate = 120;
         Cursor.SetCursor(iconMouse, hotspot, cursorMode);

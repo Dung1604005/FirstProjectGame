@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 
 
@@ -15,7 +16,7 @@ public class EnviromentManager : MonoBehaviour
 
     [SerializeField] private OutdoorEnvironment outdoorEnvironment;
 
-    [SerializeField] private WeatherSystem weatherSystem;
+    
 
     
 
@@ -25,9 +26,17 @@ public class EnviromentManager : MonoBehaviour
         indoorEnvironment.SetActive(currentType == EnvironmentType.Indoor);
         outdoorEnvironment.SetActive(currentType == EnvironmentType.Outdoor);
             
-        
     }
 
+    public void SetInfoForIndoorEnvironment(float lightIntense, Color32 lightColor)
+    {
+        indoorEnvironment.SetInfo(lightIntense, lightColor);
+    }
+    void Awake()
+    {
+        
+        SwitchEnvironment(EnvironmentType.Outdoor);
+    }
 
 
 

@@ -22,6 +22,18 @@ public class SceneData : ScriptableObject
 
     public TypeMap TypeMap => typeMap;
 
+    [SerializeField] private EnvironmentType environmentType;
+
+    public EnvironmentType EnvironmentType => environmentType;
+
+    [SerializeField] private float lightIntense;
+
+    public float LightIntense => lightIntense;
+
+    [SerializeField] private Color32 lightColor;
+
+    public Color32 LightColor => lightColor;
+
     [SerializeField] private SceneData parentSceneData;
 
     public SceneData ParentSceneData => parentSceneData;

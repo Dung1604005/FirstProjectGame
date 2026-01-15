@@ -19,6 +19,8 @@ public class OutdoorEnvironment : EnviromentBase
 
     [SerializeField] private Color32 lightColorMidNight;
 
+    [SerializeField] private WeatherSystem weatherSystem;
+
     
     public AnimationCurve animationCurve;
 
@@ -32,25 +34,50 @@ public class OutdoorEnvironment : EnviromentBase
         animationCurve.AddKey(0.5f, nightIntense);
         animationCurve.AddKey(0.65f, midNightIntense);
         animationCurve.AddKey(1f, midNightIntense);
+
+        TimeState timeState = GameManageMent.Instance.TimeManager.TimeState;
+        if (timeState == TimeState.Day)
+        {
+            light2D.color = lightColorDay;
+        }
+        else if(timeState == TimeState.MidDay)
+        {
+            light2D.color = lightColorMidDay;
+        }
+        else if (timeState == TimeState.Night)
+        {
+            light2D.color = lightColorNight;
+        }
+        else
+        {
+            light2D.color = lightColorMidNight;
+        }
     }
     public override void SetActive(bool active)
     {
+        
         this.gameObject.SetActive(active);
+        weatherSystem.SetActive(active);
+        Apply();
     }
     private void OnDay()
     {
+        weatherSystem.RandomWeatherState();
         light2D.color = lightColorDay;
     }
     private void OnMidDay()
     {
+        weatherSystem.RandomWeatherState();
         light2D.color = lightColorMidDay;
     }
     private void OnNight()
     {
+        weatherSystem.RandomWeatherState();
         light2D.color = lightColorNight;
     }
     private void OnMidNight()
     {
+        weatherSystem.RandomWeatherState();
         light2D.color = lightColorMidNight;
     }
     void Start()
