@@ -148,7 +148,7 @@ public class LootItem : MonoBehaviour, IPoolable
                 if (GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Type == ItemType.Bullet)
                 {
                     GameManageMent.Instance.PlayerManager.AddBullet(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].ItemName, amount);
-
+                    GameManageMent.Instance.PoolManager.LootPool.DeSpawn(this);
                 }
                 else
                 {

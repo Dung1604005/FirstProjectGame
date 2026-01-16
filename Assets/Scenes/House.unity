@@ -10169,8 +10169,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[0].questDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 72d51abea6d5e2545ba914aa06472934, type: 2}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[2].acceptQuestLine
       value: Copy it
@@ -10208,6 +10212,18 @@ PrefabInstance:
       value: No way, Dung
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].acceptQuestLine
+      value: I'll go now
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].questDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 7eabc724f89cbe745949f4f036f4f2a8, type: 2}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].refuseQuestLine
+      value: I'm so confused
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[2].indexQuestDialogue
       value: 2
       objectReference: {fileID: 0}
@@ -10217,6 +10233,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[4].indexQuestDialogue
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].indexQuestDialogue
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
@@ -10236,6 +10256,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[2].onQuestCompleteDialogue
       value: I have completed
       objectReference: {fileID: 0}
@@ -10248,6 +10272,10 @@ PrefabInstance:
       value: "You can\u2019t challenge me"
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].onQuestCompleteDialogue
+      value: "You can\u2019t challenge me"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[2].onQuestNotCompleteDialogue
       value: I havent done yet
       objectReference: {fileID: 0}
@@ -10257,6 +10285,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[4].onQuestNotCompleteDialogue
+      value: Give me more time
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].onQuestNotCompleteDialogue
       value: Give me more time
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
@@ -10381,6 +10413,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[4].dialogues.Array.data[9].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[0].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[1].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[2].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[3].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[4].name
+      value: Dung
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[5].name
+      value: Jake
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[6].name
       value: Dung
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
@@ -10641,6 +10701,39 @@ PrefabInstance:
         Since then, the forest has
 
         been trying to swallow us whole.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[0].dialogueContent
+      value: "You handled the Officer well. \nNow, you need to integrate. \nYou cannot
+        survive alone."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[1].dialogueContent
+      value: "Integration? I thought this was \njust a survival camp, not a social
+        club."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[2].dialogueContent
+      value: "Connections are armor, Jake. \nGo meet the others. Start with Hoang.\nHe
+        is my right hand; if I am not here, \nhis word is law."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[3].dialogueContent
+      value: Got it. Anyone else?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[4].dialogueContent
+      value: "There is Mu. She is usually near the \nleft down corner. She is...
+        quiet, \nbut sharp. Get to know them. \nThey will be your family soon."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[5].dialogueContent
+      value: "Understood. Just a delivery to \nthe graveyard."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
+      propertyPath: npcDialogues.Array.data[5].dialogues.Array.data[6].dialogueContent
+      value: "Go. He needs to know exactly how \nbig of a grave to dig for the new
+        arrival \nmentioned inside."
       objectReference: {fileID: 0}
     - target: {fileID: 2597713784979025642, guid: 9cc81567f03c34f4284842a5b397a14f, type: 3}
       propertyPath: npcDialogues.Array.data[3].dialogues.Array.data[10].dialogueContent
