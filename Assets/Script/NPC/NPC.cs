@@ -170,6 +170,7 @@ public class NPC : MonoBehaviour
             {
                 if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(GameManageMent.Instance.ItemDataBase.ItemDatas[itemStack.ItemId], itemStack.Count))
                 {
+                    
                     UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[itemStack.ItemId], itemStack.Count);
                     addedItemStack.Add(itemStack);
                 }

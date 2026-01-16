@@ -152,9 +152,14 @@ public class LootItem : MonoBehaviour, IPoolable
                 }
                 else
                 {
-                    UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount);
+                    if(UIManageMent.Instance.InventoryUI.Inven.TryAdd(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount))
+                    {
+                        UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount);
+                        GameManageMent.Instance.PoolManager.LootPool.DeSpawn(this);
+                    }
+                    
                 }
-                GameManageMent.Instance.PoolManager.LootPool.DeSpawn(this);
+                
             }
         }
         
@@ -167,8 +172,12 @@ public class LootItem : MonoBehaviour, IPoolable
         {
             if (range <= rangePick*rangePick)
             {
-                UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount);
-                GameManageMent.Instance.PoolManager.LootPool.DeSpawn(this);
+                if(UIManageMent.Instance.InventoryUI.Inven.TryAdd(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount))
+                {
+                    UIManageMent.Instance.InventoryUI.Inven.Add(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount);
+                    GameManageMent.Instance.PoolManager.LootPool.DeSpawn(this);
+                }
+                
             }
         }
     }

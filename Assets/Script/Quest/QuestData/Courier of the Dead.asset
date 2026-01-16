@@ -17,7 +17,9 @@ MonoBehaviour:
   description: "Dung has tasked you with \ndelivering a sealed message to \n'The
     Officer'. "
   npcId: 0
-  itemQuestList: []
+  itemQuestList:
+  - itemId: 19
+    count: 1
   objectives:
   - objectiveType: 2
     targetId: 2

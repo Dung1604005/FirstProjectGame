@@ -69,7 +69,7 @@ public class StatPlayer : MonoBehaviour
         {
             GameManageMent.Instance.PlayerManager.ExpSystem.UsePoint();
             critRate += critRateGrowth;
-            UIManageMent.Instance.ExpStatSystemUI.UpdateCritRateStatUI(speed.ToString());
+            UIManageMent.Instance.ExpStatSystemUI.UpdateCritRateStatUI(critRate.ToString());
         }
 
     }
