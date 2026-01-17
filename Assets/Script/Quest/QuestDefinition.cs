@@ -47,12 +47,6 @@ public class QuestDefinition : ScriptableObject
 
     public List<ItemStack> ItemIdReward=> itemIdReward;
 
-    [SerializeField] private bool haveDirection;
-
-    public bool HaveDirection => haveDirection;
-
-    [SerializeField] private Vector3 destinationPosition;
-    public Vector3 DestinationPosition => destinationPosition;
 
     
 }

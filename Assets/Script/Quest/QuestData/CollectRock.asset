@@ -17,12 +17,14 @@ MonoBehaviour:
   description: "Dung have assign a task for you. \nYou have to collect 15 rock for
     Dung \nwho need rock to build camp."
   npcId: 0
+  itemQuestList: []
   objectives:
   - objectiveType: 0
     targetId: 7
     requiredCount: 1
+    objectiveRequirement: 
+    haveDirection: 1
+    destinationPosition: {x: 92, y: -225, z: 0}
   goldReward: 50
   expReward: 100
   itemIdReward: []
-  haveDirection: 1
-  destinationPosition: {x: 104, y: -222, z: 0}

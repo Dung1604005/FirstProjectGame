@@ -25,12 +25,14 @@ MonoBehaviour:
     targetId: 3
     requiredCount: 1
     objectiveRequirement: 
+    haveDirection: 1
+    destinationPosition: {x: 53, y: -217, z: 0}
   - objectiveType: 2
     targetId: 4
     requiredCount: 1
     objectiveRequirement: 
+    haveDirection: 0
+    destinationPosition: {x: 0, y: 0, z: 0}
   goldReward: 100
   expReward: 200
   itemIdReward: []
-  haveDirection: 0
-  destinationPosition: {x: 0, y: 0, z: 0}

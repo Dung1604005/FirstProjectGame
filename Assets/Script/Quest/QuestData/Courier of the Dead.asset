@@ -25,8 +25,8 @@ MonoBehaviour:
     targetId: 2
     requiredCount: 1
     objectiveRequirement: Bring letter to Officer
+    haveDirection: 1
+    destinationPosition: {x: 305, y: -95, z: 0}
   goldReward: 150
   expReward: 50
   itemIdReward: []
-  haveDirection: 1
-  destinationPosition: {x: 305, y: -94, z: 0}

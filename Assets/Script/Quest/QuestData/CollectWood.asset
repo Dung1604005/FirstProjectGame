@@ -16,12 +16,14 @@ MonoBehaviour:
   nameQuest: The First Challenge
   description: "To improve yourself to Dung,you \nhave to collect 20 wood."
   npcId: 0
+  itemQuestList: []
   objectives:
   - objectiveType: 0
     targetId: 6
     requiredCount: 1
+    objectiveRequirement: 
+    haveDirection: 1
+    destinationPosition: {x: -98, y: -202, z: 0}
   goldReward: 20
   expReward: 100
   itemIdReward: []
-  haveDirection: 1
-  destinationPosition: {x: -95, y: -202, z: 0}

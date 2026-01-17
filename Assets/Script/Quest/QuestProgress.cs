@@ -22,12 +22,17 @@ public class QuestProgress
 
     public List<Objective> Objectives => objectives;
 
+
     [SerializeField] private List<int> curCount = new List<int>();
 
     public List<int> CurCount => curCount;
 
     private float progressRatio;
     public float ProgressRatio => progressRatio;
+
+    [SerializeField] private Objective firstObjectiveNotCompleted;
+
+    public Objective FirstObjectiveNotCompleted => firstObjectiveNotCompleted;
 
 
     public QuestProgress(int _questId, List<Objective> _objectives)
@@ -39,7 +44,9 @@ public class QuestProgress
         for (int i = 0; i < _objectives.Count; i++)
         {
             curCount.Add(0);
+            
         }
+        firstObjectiveNotCompleted = _objectives[0];
     }
     public void UpdateCollectProgress()
     {
@@ -102,12 +109,26 @@ public class QuestProgress
     public void UpdateProgressRatio()
     {
         float ratio = 0f;
+        int tempId = 99;
         for(int i = 0; i < curCount.Count && i < objectives.Count; i++)
         {
+            if(curCount[i] < objectives[i].requiredCount)
+            {
+                // Lay id cua Objective be nhat chua hoan thanh 
+                tempId = Math.Min(i, tempId);
+            }
             float ratioObjective = (float)curCount[i]/objectives[i].requiredCount;
             ratioObjective /= curCount.Count;
             ratio += ratioObjective;
         }
         progressRatio = ratio;
+        if(tempId < 99)
+        {
+            firstObjectiveNotCompleted = objectives[tempId];
+        }
+        else
+        {
+            firstObjectiveNotCompleted = null;
+        }
     }
 }

@@ -20,4 +20,8 @@ public class Objective
 
     public String objectiveRequirement;
 
+    public bool haveDirection;
+
+    public Vector3 destinationPosition;
+
 }
