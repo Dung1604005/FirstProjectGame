@@ -26,6 +26,7 @@ public class SceneNavigationManager : MonoBehaviour
         foreach(SceneEdge sceneEdge in sceneEdges)
         {
             mapPositionPortal.Add(new Pair<int, int> (sceneEdge.From, sceneEdge.To), sceneEdge.PosPortal);
+            
             adj[sceneEdge.From].Add(sceneEdge.To);
         }
 
@@ -73,6 +74,7 @@ public class SceneNavigationManager : MonoBehaviour
         // Day path bi nguoc nen start la vi tri cuoi  
         int _from = startId;
         int _to = path[path.Count - 2];
+        
         if(mapPositionPortal.ContainsKey(new Pair<int, int>(_from, _to)))
         {
             return mapPositionPortal[new Pair<int, int>(_from, _to)];

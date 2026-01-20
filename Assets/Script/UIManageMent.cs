@@ -20,6 +20,27 @@ public class Pair<T1, T2>
         First = first;
         Second = second;
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == null || GetType() != obj.GetType())
+            return false;
+        
+        Pair<T1, T2> other = (Pair<T1, T2>)obj;
+        return EqualityComparer<T1>.Default.Equals(First, other.First) &&
+               EqualityComparer<T2>.Default.Equals(Second, other.Second);
+    }
+
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 31 + (First != null ? First.GetHashCode() : 0);
+            hash = hash * 31 + (Second != null ? Second.GetHashCode() : 0);
+            return hash;
+        }
+    }
     
 }
 public class UIManageMent : MonoBehaviour

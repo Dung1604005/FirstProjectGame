@@ -12,4 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33ce6bc738f3c6419c11e108f2dd5d4, type: 3}
   m_Name: SceneGraph
   m_EditorClassIdentifier: Assembly-CSharp::SceneGraph
-  sceneEdges: []
+  sceneEdges:
+  - from: 0
+    to: 1
+    posPortal: {x: -46.59, y: -189.19, z: 0}
+  - from: 1
+    to: 0
+    posPortal: {x: -15.59, y: -517.64, z: 0}
+  - from: 2
+    to: 0
+    posPortal: {x: 95.93012, y: -510.54, z: 0}
+  - from: 0
+    to: 2
+    posPortal: {x: -129.323, y: -83.928, z: 0}
+  - from: 0
+    to: 3
+    posPortal: {x: -147, y: -183.2, z: 0}
+  - from: 3
+    to: 0
+    posPortal: {x: 198.8286, y: -507.47, z: 0}

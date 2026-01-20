@@ -79,8 +79,8 @@ public class QuestViewInfo : MonoBehaviour
         else
         {
              UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOn();
-            UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(_nameQuest, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[index].ProgressRatio, GameManageMent.Instance.QuestManager.QuestProgresses[index].FirstObjectiveNotCompleted.haveDirection, 
-            GameManageMent.Instance.QuestManager.QuestProgresses[index].FirstObjectiveNotCompleted.destinationPosition);
+            UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(_nameQuest, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[index].ProgressRatio, GameManageMent.Instance.QuestManager.QuestProgresses[index].FirstObjectiveNotCompleted.haveDirection);
+            UpdatePositionArrowQuest();
         }
        
     }
@@ -135,12 +135,17 @@ public class QuestViewInfo : MonoBehaviour
         else
         {
             UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOn();
-            UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(nameQuest.text, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].ProgressRatio, GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].FirstObjectiveNotCompleted.haveDirection, 
-            GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].FirstObjectiveNotCompleted.destinationPosition);
+            UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(nameQuest.text, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].ProgressRatio, GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].FirstObjectiveNotCompleted.haveDirection);
+            UpdatePositionArrowQuest();
         }
     }
     public void UpdatePositionArrowQuest()
     {
+        if(indexQuest == -1)
+        {
+            // DONT HAVE QUEST NOW
+            return;
+        }
         Objective objective = GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].FirstObjectiveNotCompleted;
         GameManageMent.Instance.QuestManager.ArrowQuest.SetGoalPosition(SceneLoader.Instance.SceneNavigationManager.GetNextPosition(SceneLoader.Instance.CurrentSceneData.IdSceneData, objective.destinationIdSceneData, objective.destinationPosition));
     }

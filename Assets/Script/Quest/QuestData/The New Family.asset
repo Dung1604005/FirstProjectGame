@@ -24,15 +24,17 @@ MonoBehaviour:
   - objectiveType: 2
     targetId: 3
     requiredCount: 1
-    objectiveRequirement: 
+    objectiveRequirement: Talk To Hoang
     haveDirection: 1
     destinationPosition: {x: 53, y: -217, z: 0}
+    destinationIdSceneData: 0
   - objectiveType: 2
     targetId: 4
     requiredCount: 1
-    objectiveRequirement: 
-    haveDirection: 0
-    destinationPosition: {x: 0, y: 0, z: 0}
+    objectiveRequirement: Talk To Hoang
+    haveDirection: 1
+    destinationPosition: {x: 204, y: -497, z: 0}
+    destinationIdSceneData: 3
   goldReward: 100
   expReward: 200
   itemIdReward: []
