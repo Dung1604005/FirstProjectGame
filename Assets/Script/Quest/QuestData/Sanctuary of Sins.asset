@@ -12,12 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c49835a8441eb9644a13e1465dfba967, type: 3}
   m_Name: Sanctuary of Sins
   m_EditorClassIdentifier: Assembly-CSharp::QuestDefinition
-  id: 0
-  nameQuest: 
-  description: 
-  npcId: 0
+  id: 6
+  nameQuest: Sanctuary of Sins
+  description: "Mu believes you are D\u0169ng's next victim, \nmirroring her sister's
+    fate. To prove your \nindependence, you must break camp rules, \ninfiltrate the
+    forbidden Old Church, \nand retrieve Chi's lost wooden doll."
+  npcId: 4
   itemQuestList: []
-  objectives: []
-  goldReward: 0
-  expReward: 0
+  objectives:
+  - objectiveType: 0
+    targetId: 20
+    requiredCount: 1
+    objectiveRequirement: 
+    haveDirection: 1
+    destinationPosition: {x: 0, y: 0, z: 0}
+  goldReward: 300
+  expReward: 400
   itemIdReward: []

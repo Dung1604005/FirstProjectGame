@@ -24,4 +24,6 @@ public class Objective
 
     public Vector3 destinationPosition;
 
+    public int destinationIdSceneData;
+
 }

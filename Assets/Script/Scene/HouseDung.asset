@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1edfa209694b65f45a70d5be8969cd65, type: 3}
   m_Name: HouseDung
   m_EditorClassIdentifier: Assembly-CSharp::SceneData
+  idSceneData: 1
   nameScene: House
   nameBounder: BoundDungHouse
   typeMap: 1

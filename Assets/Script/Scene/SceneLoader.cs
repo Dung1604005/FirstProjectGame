@@ -11,6 +11,15 @@ public class SceneLoader: MonoBehaviour
 
 
     [SerializeField]  private SceneData currentSceneData;
+    public SceneData CurrentSceneData => currentSceneData;
+
+    [SerializeField] private int totalSceneData;
+
+    public int TotalSceneData => totalSceneData;
+
+    [SerializeField] private SceneNavigationManager sceneNavigationManager;
+    public SceneNavigationManager SceneNavigationManager => sceneNavigationManager;
+
 
     void Awake()
     {
@@ -69,6 +78,7 @@ public class SceneLoader: MonoBehaviour
         GameManageMent.Instance.PlayerManager.PlayerController.SetPosition(startPoint);
         
         currentSceneData = sceneData;
+        UIManageMent.Instance.QuestUI.QuestViewInfo.UpdatePositionArrowQuest();
 
         GameObject mapBound = GameObject.Find(sceneData.NameBounder);
         if(mapBound != null && mapBound.GetComponent<PolygonCollider2D>() != null)
@@ -114,9 +124,17 @@ public class SceneLoader: MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(1f);
-        
+
         currentSceneData = sceneData.ParentSceneData;
+
+        UIManageMent.Instance.QuestUI.QuestViewInfo.UpdatePositionArrowQuest();
+        yield return new WaitForSeconds(1f);
+
+        
+        
+        
+
+        
         
         
     }

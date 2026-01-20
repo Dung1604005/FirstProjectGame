@@ -23,8 +23,6 @@ public class QuestProgressUI : MonoBehaviour
             GameManageMent.Instance.QuestManager.ArrowQuest.TurnOn();
             GameManageMent.Instance.QuestManager.ArrowQuest.SetGoalPosition(destinationPosition);
         }
-        
-        
     }
 
     

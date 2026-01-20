@@ -10,6 +10,10 @@ public enum TypeMap
 [CreateAssetMenu(fileName = "SceneData", menuName = "Script/SceneData")]
 public class SceneData : ScriptableObject
 {
+
+    [SerializeField] private int idSceneData;
+
+    public int IdSceneData => idSceneData;
     [SerializeField] private String nameScene;
     public String NameScene => nameScene;
 

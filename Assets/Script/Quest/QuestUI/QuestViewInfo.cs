@@ -134,10 +134,15 @@ public class QuestViewInfo : MonoBehaviour
         }
         else
         {
-             UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOn();
+            UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOn();
             UIManageMent.Instance.QuestUI.QuestProgressUI.SetInfo(nameQuest.text, objectiveText, GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].ProgressRatio, GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].FirstObjectiveNotCompleted.haveDirection, 
             GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].FirstObjectiveNotCompleted.destinationPosition);
         }
+    }
+    public void UpdatePositionArrowQuest()
+    {
+        Objective objective = GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].FirstObjectiveNotCompleted;
+        GameManageMent.Instance.QuestManager.ArrowQuest.SetGoalPosition(SceneLoader.Instance.SceneNavigationManager.GetNextPosition(SceneLoader.Instance.CurrentSceneData.IdSceneData, objective.destinationIdSceneData, objective.destinationPosition));
     }
     public void ResetQuestView()
     {

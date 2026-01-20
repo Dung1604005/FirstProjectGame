@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c2ca621d56e2d4a903456447c03de9, type: 3}
   m_Name: Chi's Doll
   m_EditorClassIdentifier: Assembly-CSharp::MaterialData
-  description: 
+  description: An old doll
   stackable: 0
   maxStack: 1
   type: 6
-  itemName: 
-  index: 0
-  icon: {fileID: 0}
+  itemName: Chi's Doll
+  index: 20
+  icon: {fileID: 592146245836718159, guid: 0a819e2d9ef8ddf49af6163d9dd9f6a6, type: 3}
   value: 0
