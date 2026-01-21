@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using NUnit.Framework.Internal;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class SceneNavigationManager : MonoBehaviour
@@ -52,7 +53,7 @@ public class SceneNavigationManager : MonoBehaviour
             for(int i = 0; i < adj[from].Count; i++)
             {
                 int to = adj[from][i];
-                if(trace[to] == -1)
+                if(trace[to] == -1 && to != startId)
                 {
                     trace[to] = from;
                     if(to == endId)
@@ -70,6 +71,11 @@ public class SceneNavigationManager : MonoBehaviour
         {
             current = trace[current];
             path.Add(current);
+
+            if(current == startId)
+            {
+                break;
+            }
         }
         // Day path bi nguoc nen start la vi tri cuoi  
         int _from = startId;
