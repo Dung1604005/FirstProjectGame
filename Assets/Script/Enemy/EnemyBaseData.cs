@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public abstract class EnemyBaseData : ScriptableObject
+[CreateAssetMenu(menuName = "Script/Enemy/Enemy", fileName = "Enemy")]
+public class EnemyBaseData : ScriptableObject
 {
+    [SerializeField] private EnemyType enemyType;
+    public EnemyType EnemyType => enemyType;
     [SerializeField] private String nameEnemy;
     public String NameEnemy => nameEnemy;
     [SerializeField] private float maxHealth;
@@ -34,4 +36,12 @@ public abstract class EnemyBaseData : ScriptableObject
 
     [SerializeField] private int indexEnemy;
     public int IndexEnemy => indexEnemy;
+}
+
+[Serializable]
+public enum EnemyType
+{
+    EnemyMelee,
+    EnemyRange,
+    Boss
 }
