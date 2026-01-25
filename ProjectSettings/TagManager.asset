@@ -17,6 +17,8 @@ TagManager:
   - Tree
   - BlockObject
   - HitBox_DestroyObject
+  - Boss
+  - HitBox_Boss
   layers:
   - Default
   - TransparentFX
