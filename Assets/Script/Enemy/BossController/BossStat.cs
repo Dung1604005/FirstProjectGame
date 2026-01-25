@@ -1,5 +1,7 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class BossStat : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class BossStat : MonoBehaviour
     [SerializeField] private float currentHealth;
     public float CurrentHealth => currentHealth;
 
+    private float targetHealth;
+
     [SerializeField] private bool isDead;
 
     public bool  IsDead => isDead;
@@ -17,9 +21,16 @@ public class BossStat : MonoBehaviour
     [SerializeField] private bool isAbsorbing;
     public bool IsAbsorbing => isAbsorbing;
 
-   // [SerializeField] private 
+    [SerializeField] private  Image healthUI;
 
-    public void TakeDamage(float damage)
+    private void UpdateHealthUI()
+    {
+        healthUI.fillAmount = Mathf.Lerp( healthUI.fillAmount, targetHealth/bossData.MaxHealth, 0.1f);
+    }
+
+
+
+    public void TakeDamage(float damage,  bool isCrit)
     {
         if (isDead)
         {
@@ -33,7 +44,10 @@ public class BossStat : MonoBehaviour
         if(currentHealth <= 0f)
         {
             Die();
+            return;
         }
+        targetHealth = currentHealth;
+
     }
     public void Heal(float health)
     {
@@ -50,6 +64,13 @@ public class BossStat : MonoBehaviour
     public void  SetAbsorbingState(bool state)
     {
         isAbsorbing = state;
+    }
+    void Update()
+    {
+        if(currentHealth/bossData.MaxHealth != healthUI.fillAmount)
+        {
+            UpdateHealthUI();
+        }
     }
 
 

@@ -37,5 +37,21 @@ public class PunchController : MonoBehaviour
             }
             
         }
+
+
+        else if (collision.tag == GameConfig.HITBOX_BOSS)
+        {
+            try
+            {
+                float damaged = 0;
+                bool isCrit = GameManageMent.Instance.PlayerManager.CalculateCritDamage(ref damaged);
+                collision.GetComponentInParent<BossStat>().TakeDamage(damaged, isCrit);
+            }
+            catch(Exception e)
+            {
+                Debug.LogError("CANNOT ATTACK BOSS BY PUNCH");
+                throw e;
+            }
+        }
     }
 }

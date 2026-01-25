@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57314ce9d4fbcd24d9974a25aeeab9ce, type: 3}
   m_Name: AxeZombie
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangeData
+  enemyType: 1
   nameEnemy: Axe Zombie
   maxHealth: 70
   atk: 40

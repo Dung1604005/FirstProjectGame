@@ -36,5 +36,21 @@ public class Context
         danger[index] = val;
     }
 
+    public Vector2 GetDirection()
+    {
+        float bestChoice = float.MinValue;
+        Vector2 bestDir = Vector2.zero;;
+        for(int i = 0;  i < directions; i++)
+        {
+            float value = Mathf.Clamp01(interest[i] - danger[i]);
+            if(value > bestChoice)
+            {
+                bestChoice = value;
+                bestDir = dirs[i];
+            }
+        }
+        return bestDir;
+    }
+
 
 }

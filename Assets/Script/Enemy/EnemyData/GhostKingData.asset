@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2022c22222933ca459f968959f611c74, type: 3}
   m_Name: GhostKingData
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBaseData
-  enemyType: 0
-  nameEnemy: 
-  maxHealth: 0
+  enemyType: 2
+  nameEnemy: Ghost King
+  maxHealth: 5000
   atk: 0
   coolDown: 0
   rangeAtk: 0
-  rangeChase: 0
-  runSpeed: 0
-  walkSpeed: 0
-  goldValue: 0
-  expValue: 0
-  indexEnemy: 0
+  rangeChase: 99
+  runSpeed: 7
+  walkSpeed: 5
+  goldValue: 500
+  expValue: 1000
+  indexEnemy: 2
