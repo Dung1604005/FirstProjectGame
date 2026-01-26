@@ -47,6 +47,10 @@ public class BulletController : MonoBehaviour, IPoolable
         this.damaged = _damaged;
         this.indexBullet = _indexBullet;
     }
+    public void SetSpeed(float _speed)
+    {
+        moveSpeed =   _speed;
+    }
     public void DeSpawn()
     {
         GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);

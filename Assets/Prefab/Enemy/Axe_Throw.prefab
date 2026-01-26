@@ -80,9 +80,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1276704215
+  m_SortingLayer: 3
+  m_SortingOrder: 2
   m_Sprite: {fileID: -940722710, guid: 35ba781abb441db4aa4371e4ef21eb38, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   damaged: 0
   bulletType: 1
   haveAnimDir: 1
+  glow: {fileID: 0}
 --- !u!50 &6961539112609354033
 Rigidbody2D:
   serializedVersion: 5

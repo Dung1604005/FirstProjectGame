@@ -15,6 +15,8 @@ public class BossMovement : MonoBehaviour
 
     [SerializeField] private float currentSpeed;
 
+    [SerializeField] private float maxSpeed ;
+
     [SerializeField]  private float acceleration;
 
     [SerializeField] private float wFlow;
@@ -110,6 +112,18 @@ public class BossMovement : MonoBehaviour
 
         Vector2 direction = GetDirection();
         ApplyForce(direction);
+        if(canMove == false || currentSpeed  == 0f || direction == Vector2.zero)
+        {
+            visualRoot.SetMove(false);
+        }
+        else
+        {
+            visualRoot.SetMove(true);
+        }
+        if(rb.linearVelocity.magnitude > maxSpeed)
+        {
+            rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxSpeed);
+        }
         FaceTarget();
 
 

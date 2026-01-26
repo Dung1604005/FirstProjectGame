@@ -9,6 +9,8 @@ public class BossStat : MonoBehaviour
 
     public EnemyBaseData BossData => bossData;
 
+    [SerializeField] private BossVisual bossVisual;
+
     [SerializeField] private float currentHealth;
     public float CurrentHealth => currentHealth;
 
@@ -59,7 +61,10 @@ public class BossStat : MonoBehaviour
     }
     private void Die()
     {
+        
         isDead = true;
+        bossVisual.SetDie();
+    
     }
     public void  SetAbsorbingState(bool state)
     {

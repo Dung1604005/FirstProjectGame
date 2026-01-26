@@ -25,6 +25,8 @@ public class BossVisual : MonoBehaviour
 
     [SerializeField] private float shakeFrequency;
 
+    [SerializeField] private float lerpSpeed;
+
     private bool isShaking = false;
 
 
@@ -63,14 +65,14 @@ public class BossVisual : MonoBehaviour
         {
             if(noisePerlin != null)
             {
-                noisePerlin.m_AmplitudeGain = Mathf.Lerp(noisePerlin.m_AmplitudeGain, shakeAmplitude, 0.1f);
+                noisePerlin.m_AmplitudeGain = Mathf.Lerp(noisePerlin.m_AmplitudeGain, shakeAmplitude, lerpSpeed*Time.deltaTime);
             }
         }
         else
         {
             if(noisePerlin != null)
             {
-                noisePerlin.m_AmplitudeGain = Mathf.Lerp(noisePerlin.m_AmplitudeGain, 0f, 0.1f);
+                noisePerlin.m_AmplitudeGain = Mathf.Lerp(noisePerlin.m_AmplitudeGain, 0f, lerpSpeed*Time.deltaTime);
             }
         }
     }
@@ -83,8 +85,6 @@ public class BossVisual : MonoBehaviour
     public void EndShakingNoise()
     {
         isShaking = false;
-        noisePerlin.m_FrequencyGain = 0f;
-        
     }
     public void ShakingImpulse()
     {
@@ -94,11 +94,35 @@ public class BossVisual : MonoBehaviour
         }
     }
 
+    public void SetMove(bool isMoving)
+    {
+        animator.SetBool("moving", isMoving);
+    }
+
+    public void SetDie()
+    {
+        animator.SetTrigger("die");
+    }
+
     public void PlayShootEffect()
     {
         EndShakingNoise();
         novaVFX.Play();
         ShakingImpulse();
+    }
+
+    public void PlayChargeEffect(bool isCharge)
+    {
+        if (isCharge)
+        {
+            StartShakingNoise();
+            chargeVFX.Play();
+        }
+        else
+        {
+            chargeVFX.Stop();
+        }
+        
 
     }
     
