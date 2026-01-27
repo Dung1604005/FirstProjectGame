@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEditor.MPE;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class GhostKingCombat : MonoBehaviour
 
     [SerializeField] private float delayAttack;
 
-    [SerializeField] private float rangeSpawnSkill1;
+    [SerializeField] private Vector2 rangeSpawnSkill1;
 
     [SerializeField] private SkillBoss skill1Boss;
 
@@ -33,7 +34,17 @@ public class GhostKingCombat : MonoBehaviour
 
     [SerializeField] private int idBulletSkill2;
 
-    [SerializeField] private float delayPerTurn;
+    [SerializeField] private float delayPerTurnSkill2;
+
+    [Header("SKILL 3")]
+
+    [SerializeField] private float skill3AttackRange;
+
+    [SerializeField] private float skill3CoolDown;
+
+    [SerializeField] private List<TurnShoot> listTurnSpawnSkill3;
+
+    [SerializeField] private float delayPerTurnSkill3;
 
 
 
@@ -52,22 +63,38 @@ public class GhostKingCombat : MonoBehaviour
 
     public void CastSkill1(Vector2 dir)
     {
-        if (dir.x > 0)
+        DirType dirType = GameManageMent.Instance.CalculateDirType(dir.x, dir.y);
+        if(dirType == DirType.RIGHT)
         {
-            skill1Boss.transform.localPosition = new Vector3(rangeSpawnSkill1, 0f);
+            skill1Boss.transform.localPosition = new Vector3(rangeSpawnSkill1.x, 0f);
+            skill1Boss.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
 
             skill1Boss.gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
-            skill1Boss.gameObject.SetActive(true);
+        }
+        else if(dirType == DirType.LEFT)
+        {
+            skill1Boss.transform.localPosition = new Vector3(-rangeSpawnSkill1.x, 0f);
+            skill1Boss.transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
+
+            skill1Boss.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else if(dirType == DirType.DOWN)
+        {
+            skill1Boss.transform.localPosition = new Vector3(0, -rangeSpawnSkill1.y);
+            skill1Boss.transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
+
+            skill1Boss.gameObject.GetComponent<SpriteRenderer>().flipX = false;
         }
         else
         {
-            skill1Boss.transform.localPosition = new Vector3(-rangeSpawnSkill1, 0f);
+            skill1Boss.transform.localPosition = new Vector3(0, rangeSpawnSkill1.y);
+            skill1Boss.transform.rotation = Quaternion.Euler(new Vector3(0,0,90));
 
-            skill1Boss.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-
-            skill1Boss.gameObject.SetActive(true);
+            skill1Boss.gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
+
+        skill1Boss.gameObject.SetActive(true);
 
     }
 
@@ -75,14 +102,15 @@ public class GhostKingCombat : MonoBehaviour
     {
 
         int turns = Random.Range(2, listTurnShootSkill2.Count + 1);
-        StartCoroutine(CastSkill2AllTurn(listTurnShootSkill2.Count));
+        StartCoroutine(CastSkill2AllTurn(7));
 
     }
 
     IEnumerator CastSkill2AllTurn(int turns)
     {
-        for (int turn = 0; turn < turns; turn++)
+        for (int s = 0; s < turns; s++)
         {
+            int turn =  Random.Range(0,listTurnShootSkill2.Count);
             TurnShoot curTurnShoot = listTurnShootSkill2[turn];
             float angleStep = 360 / curTurnShoot.amount;
 
@@ -124,19 +152,20 @@ public class GhostKingCombat : MonoBehaviour
                 }
 
             }
-            yield return new WaitForSeconds(delayPerTurn);
+            yield return new WaitForSeconds(delayPerTurnSkill2);
         }
+    }
 
 
-
-
-
-
+    public void CastSkill3()
+    {
+        
     }
 
 
     void Update()
     {
+        // Test
         if (Input.GetKeyDown(KeyCode.J))
         {
             CastSkill1((GameManageMent.Instance.PlayerManager.PlayerController.getPos() - (Vector2)this.transform.position).normalized);
