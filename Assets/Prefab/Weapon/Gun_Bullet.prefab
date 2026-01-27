@@ -113,6 +113,7 @@ MonoBehaviour:
   bulletType: 0
   haveAnimDir: 0
   glow: {fileID: 5659593984346681994}
+  haveAnimExplo: 1
 --- !u!50 &6522303207568021363
 Rigidbody2D:
   serializedVersion: 5

@@ -39,8 +39,12 @@ public class BossMovement : MonoBehaviour
         defaultSpeed = GetComponent<BossStat>().BossData.RunSpeed;
 
         currentSpeed = defaultSpeed;
+        if(GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0) != null)
+        {
+            target = GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0).transform;
+        }
 
-        target = GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0).transform;
+       
 
         canMove = true;
     }

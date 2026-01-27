@@ -252,6 +252,11 @@ public class NPC : MonoBehaviour
     {
         if (!interacting)
         {
+            if(GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0) == null)
+            {
+                Debug.Log("KHONG CO MAIN");
+                return;
+            }
             if ((GameManageMent.Instance.PlayerManager.PlayerController.getPos() - (Vector2)this.gameObject.transform.position).sqrMagnitude <= interactRadius * interactRadius)
             {
                 interactingKey.SetActive(true);

@@ -23,8 +23,6 @@ public class GhostKingCombat : MonoBehaviour
 
     [Header("SKILL 2")]
 
-    [SerializeField] private float skill2Damage;
-
     [SerializeField] private float skill2AttackRange;
 
     [SerializeField] private float skill2CoolDown;
@@ -37,7 +35,7 @@ public class GhostKingCombat : MonoBehaviour
 
     [SerializeField] private float delayPerTurn;
 
-    
+
 
 
 
@@ -54,7 +52,7 @@ public class GhostKingCombat : MonoBehaviour
 
     public void CastSkill1(Vector2 dir)
     {
-        if(dir.x > 0)
+        if (dir.x > 0)
         {
             skill1Boss.transform.localPosition = new Vector3(rangeSpawnSkill1, 0f);
 
@@ -70,65 +68,87 @@ public class GhostKingCombat : MonoBehaviour
 
             skill1Boss.gameObject.SetActive(true);
         }
-    
+
     }
 
-    public void CastSkill2(int turns)
+    public void CastSkill2()
     {
-        
-        TurnShoot turnShoot = listTurnShootSkill2[0];
-        StartCoroutine(CastSkill2OneTurn(turnShoot.amount, turnShoot.first_Angle, turnShoot.delayAttack, turnShoot.speedBullet, 0, turns - 1));
-        
+
+        int turns = Random.Range(2, listTurnShootSkill2.Count + 1);
+        StartCoroutine(CastSkill2AllTurn(listTurnShootSkill2.Count));
+
     }
-    
-    IEnumerator CastSkill2OneTurn(int amount, float first_Angle, float delayAttack, float speed, int curTurn, int endTurn)
+
+    IEnumerator CastSkill2AllTurn(int turns)
     {
-        
-        float angleStep = 360/amount;
-
-        float currentAngle = first_Angle;
-
-        for(int i = 0;i < amount; i++)
+        for (int turn = 0; turn < turns; turn++)
         {
-            float dirX = Mathf.Cos(currentAngle*Mathf.Deg2Rad);
+            TurnShoot curTurnShoot = listTurnShootSkill2[turn];
+            float angleStep = 360 / curTurnShoot.amount;
 
-            float dirY = Mathf.Sin(currentAngle*Mathf.Deg2Rad);
+            float currentAngle = curTurnShoot.first_Angle;
 
-            Vector2 dir = new Vector2(dirX, dirY).normalized;
-
-            Vector2 posSpawn = (Vector2)this.transform.position + dir*rangeSpawnSkill2;
-            BulletController bullet = GameManageMent.Instance.PoolManager.BulletPoolsList[idBulletSkill2].Spawn(posSpawn);
-
-
-            if(bullet != null)
+            for (int i = 0; i < curTurnShoot.amount; i++)
             {
-                bullet.SetInfo(skill2Damage, idBulletSkill2);
-                bullet.SetSpeed(speed);
+                float dirX = Mathf.Cos(currentAngle * Mathf.Deg2Rad);
 
-                bullet.Fire(dir);
-                yield return new WaitForSeconds(delayAttack);           
-            }
-            else
-            {
-                Debug.LogError("CANNOT SPAWN BULLET FROM BOSS");
-            }
-            currentAngle += angleStep;
+                float dirY = Mathf.Sin(currentAngle * Mathf.Deg2Rad);
 
+                Vector2 dir = new Vector2(dirX, dirY).normalized;
+
+                Vector2 posSpawn = (Vector2)this.transform.position + dir * rangeSpawnSkill2;
+                for (int j = 0; j < curTurnShoot.amountBulletPerAngle; j++)
+                {
+                    BulletController bullet = GameManageMent.Instance.PoolManager.BulletPoolsList[idBulletSkill2].Spawn(posSpawn);
+
+
+                    if (bullet != null)
+                    {
+                        bullet.SetInfo(curTurnShoot.damage, idBulletSkill2);
+                        float speedVar = curTurnShoot.speedBullet + (j * 2f); 
+                        bullet.SetSpeed(speedVar);
+
+                        bullet.Fire(dir);
+                        
+                    }
+                    else
+                    {
+                        Debug.LogError("CANNOT SPAWN BULLET FROM BOSS");
+                    }
+                }
+                
+                currentAngle += angleStep;
+                if(curTurnShoot.delayAttack > 0f)
+                {
+                    yield return new WaitForSeconds(curTurnShoot.delayAttack );
+                }
+
+            }
+            yield return new WaitForSeconds(delayPerTurn);
         }
 
 
-        yield return new WaitForSeconds(delayPerTurn);
 
-        if(curTurn < endTurn)
-        {
-            TurnShoot turnShoot = listTurnShootSkill2[curTurn + 1];
-            StartCoroutine(CastSkill2OneTurn(turnShoot.amount, turnShoot.first_Angle, turnShoot.delayAttack, turnShoot.speedBullet, curTurn + 1, endTurn));
-        }
-        
-        
+
+
+
     }
 
-    
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            CastSkill1((GameManageMent.Instance.PlayerManager.PlayerController.getPos() - (Vector2)this.transform.position).normalized);
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            CastSkill2();
+        }
+    }
+
+
 }
 
 

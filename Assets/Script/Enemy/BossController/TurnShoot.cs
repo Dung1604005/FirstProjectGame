@@ -11,6 +11,12 @@ public class TurnShoot
 
     public float delayAttack;
 
+    public float damage;
+
     public float speedBullet;
+
+    public int amountBulletPerAngle;
+
+    
     
 }

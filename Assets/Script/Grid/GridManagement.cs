@@ -35,9 +35,15 @@ public class GridManagement : MonoBehaviour
     }
     IEnumerator UpdateGridField()
     {
-        while (true)
+        bool canUpdate = true;
+        if(GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0) == null)
+        {
+            canUpdate = false;
+        }
+        while (canUpdate)
         {
             isUpdating = true;
+
             UpdateDistanceField(GameManageMent.Instance.PlayerManager.PlayerController.getPos());
             UpdateFlowField(GameManageMent.Instance.PlayerManager.PlayerController.getPos());
 

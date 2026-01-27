@@ -28,6 +28,8 @@ public class BulletController : MonoBehaviour, IPoolable
 
     [SerializeField] private GameObject glow;
 
+    [SerializeField] private bool haveAnimExplo;
+
     private Animator anim;
 
 
@@ -49,7 +51,7 @@ public class BulletController : MonoBehaviour, IPoolable
     }
     public void SetSpeed(float _speed)
     {
-        moveSpeed =   _speed;
+        moveSpeed = _speed;
     }
     public void DeSpawn()
     {
@@ -70,19 +72,21 @@ public class BulletController : MonoBehaviour, IPoolable
                             collision.gameObject.GetComponentInParent<HealthEnemy>()?.OnDamaged(damaged, isCrit);
                         }
                         rb.linearVelocity = Vector2.zero;
-                        anim.SetTrigger("Explo");
+                        if (haveAnimExplo)
+                        {
+                            anim.SetTrigger("Explo");
+                        }
+
                         if (glow != null)
                         {
                             glow?.SetActive(true);
                         }
-                        else
-                        {
-                            DeSpawn();
-                        }
+                        
+                        DeSpawn();
 
 
                     }
-                    else  if(collision.tag == GameConfig.HITBOX_BOSS)
+                    else if (collision.tag == GameConfig.HITBOX_BOSS)
                     {
                         if (collision.gameObject != null)
                         {
@@ -90,15 +94,17 @@ public class BulletController : MonoBehaviour, IPoolable
                             collision.gameObject.GetComponentInParent<BossStat>()?.TakeDamage(damaged, isCrit);
                         }
                         rb.linearVelocity = Vector2.zero;
-                        anim.SetTrigger("Explo");
+                        if (haveAnimExplo)
+                        {
+                            anim.SetTrigger("Explo");
+                        }
                         if (glow != null)
                         {
                             glow?.SetActive(true);
                         }
-                        else
-                        {
-                            DeSpawn();
-                        }
+                        
+                        DeSpawn();
+                        
                     }
                     break;
                 }
@@ -116,10 +122,9 @@ public class BulletController : MonoBehaviour, IPoolable
                     {
                         glow?.SetActive(true);
                     }
-                    else
-                    {
-                        DeSpawn();
-                    }
+                    
+                    DeSpawn();
+                    
                 }
                 break;
             default:
@@ -135,30 +140,33 @@ public class BulletController : MonoBehaviour, IPoolable
 
             // }
             rb.linearVelocity = Vector2.zero;
-            anim.SetTrigger("Explo");
+            if (haveAnimExplo)
+            {
+                anim.SetTrigger("Explo");
+            }
             if (glow != null)
             {
                 glow?.SetActive(true);
             }
-            else
-            {
-                DeSpawn();
-            }
+            DeSpawn();
+            
 
         }
         if (collision.tag == GameConfig.BLOCK_OBJECT_TAG)
         {
 
             rb.linearVelocity = Vector2.zero;
-            anim.SetTrigger("Explo");
+            if (haveAnimExplo)
+            {
+                anim.SetTrigger("Explo");
+            }
             if (glow != null)
             {
                 glow?.SetActive(true);
             }
-            else
-            {
-                DeSpawn();
-            }
+            
+            DeSpawn();
+            
 
         }
 
