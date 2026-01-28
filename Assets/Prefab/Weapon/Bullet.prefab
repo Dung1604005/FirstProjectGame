@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  exist_time: 2
+  exist_time: 1
   damaged: 20
   bulletType: 0
   haveAnimDir: 0

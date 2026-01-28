@@ -30,6 +30,8 @@ public class BossMovement : MonoBehaviour
 
     private Transform target;
 
+    public Transform Target => target;
+
     public void Init()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -94,9 +96,7 @@ public class BossMovement : MonoBehaviour
     {
         if (isStationary)
         {
-            currentSpeed = 0f;
-
-            
+            currentSpeed = 0f;            
         }
         else
         {

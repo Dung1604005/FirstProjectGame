@@ -35,6 +35,7 @@ public class Health : MonoBehaviour
     
     private void OnDamagedEffect()
     {
+        
         GameManageMent.Instance.EffectController.Flash(this.GetComponent<SpriteRenderer>(), defaultMaterial, ref flashRoutine);
 
     }
@@ -49,6 +50,7 @@ public class Health : MonoBehaviour
     
     public void OnDamaged(float damaged)
     {
+       
         
         if (cur_health < 0.1f)
         {

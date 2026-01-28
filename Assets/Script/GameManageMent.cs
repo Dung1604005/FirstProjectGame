@@ -262,9 +262,9 @@ public class GameManageMent : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[0], 1))
+            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[5], 1))
             {
-                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[0], 1);
+                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[5], 1);
             }
 
         }

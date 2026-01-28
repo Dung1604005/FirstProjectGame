@@ -7,6 +7,8 @@ public class BossVisual : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
+    public SpriteRenderer SpriteRenderer => spriteRenderer;
+
 
     [Header("VFX")]
 
@@ -39,6 +41,8 @@ public class BossVisual : MonoBehaviour
         {
             noisePerlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
+        chargeVFX.Stop();
+        novaVFX.Stop();
         
     }
 
@@ -102,6 +106,10 @@ public class BossVisual : MonoBehaviour
     public void SetDie()
     {
         animator.SetTrigger("die");
+    }
+    public void SetAnimAttack(bool state)
+    {
+        animator.SetBool("attack", state);
     }
 
     public void PlayShootEffect()

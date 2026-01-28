@@ -25,9 +25,19 @@ public class BossStat : MonoBehaviour
 
     [SerializeField] private  Image healthUI;
 
+    private Coroutine flashRoutine;
+    private Material defaultMaterial;
+
     private void UpdateHealthUI()
     {
         healthUI.fillAmount = Mathf.Lerp( healthUI.fillAmount, targetHealth/bossData.MaxHealth, 0.1f);
+    }
+
+    private void OnDamagedEffect()
+    {
+        
+        GameManageMent.Instance.EffectController.Flash(bossVisual.SpriteRenderer, defaultMaterial, ref flashRoutine);
+
     }
 
 
@@ -38,15 +48,19 @@ public class BossStat : MonoBehaviour
         {
             return;
         }
+        OnDamagedEffect();
         if (isAbsorbing)
         {
             Heal(damage);
+            return;
         }
         currentHealth  = Mathf.Max(0f, currentHealth - damage);
+        
         if(currentHealth <= 0f)
         {
             Die();
             return;
+            
         }
         targetHealth = currentHealth;
 
@@ -57,18 +71,29 @@ public class BossStat : MonoBehaviour
         {
             return;
         }
-        currentHealth  = Mathf.Max(bossData.MaxHealth, currentHealth + health);
+        currentHealth  = Mathf.Min(bossData.MaxHealth, currentHealth + health);
     }
     private void Die()
     {
         
         isDead = true;
         bossVisual.SetDie();
+        
     
     }
     public void  SetAbsorbingState(bool state)
     {
         isAbsorbing = state;
+    }
+    void Awake()
+    {
+        currentHealth = bossData.MaxHealth;
+        targetHealth = bossData.MaxHealth;
+    }
+    void Start()
+    {
+        defaultMaterial = bossVisual.SpriteRenderer
+        .material;
     }
     void Update()
     {

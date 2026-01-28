@@ -107,8 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42064b1b4c1a8b248bdbb2b8dbd677b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
-  exist_time: 2
+  moveSpeed: 15
+  exist_time: 1
   damaged: 20
   bulletType: 0
   haveAnimDir: 0
