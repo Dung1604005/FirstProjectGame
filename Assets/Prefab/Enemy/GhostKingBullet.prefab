@@ -83,7 +83,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1276704215
   m_SortingLayer: 3
-  m_SortingOrder: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1202900778, guid: 870c70459ee603347baec87d36da061e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -108,11 +108,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletController
   moveSpeed: 5
-  exist_time: 2
+  exist_time: 4
   damaged: 30
   bulletType: 1
   haveAnimDir: 0
   glow: {fileID: 7975443800047451645}
+  haveAnimExplo: 0
 --- !u!50 &2030138844418875965
 Rigidbody2D:
   serializedVersion: 5

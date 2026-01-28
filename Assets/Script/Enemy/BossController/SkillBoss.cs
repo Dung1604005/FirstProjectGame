@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SkillBoss : MonoBehaviour
+public class SkillBoss : MonoBehaviour, IPoolable
 {
     [SerializeField] private float damage;
 
@@ -23,5 +23,15 @@ public class SkillBoss : MonoBehaviour
     public void EndAttack()
     {
         this.gameObject.SetActive(false);
+    }
+
+    public void OnSpawn()
+    {
+        
+    }
+    public void OnDeSpawn()
+    {
+        
+
     }
 }

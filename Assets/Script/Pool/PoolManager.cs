@@ -39,6 +39,19 @@ public class PoolManager : MonoBehaviour
     private List<ObjectPool<BulletController>> bulletPoolsList;
     public List<ObjectPool<BulletController>> BulletPoolsList => bulletPoolsList;
 
+    [Header("Skill3GhostKingPool")]
+
+    [SerializeField] private SkillBoss skill3GhostKingPrefab;
+
+    [SerializeField] private Transform skill3GhostKingRoot;
+
+    [SerializeField] private int skill3GhostKingPoolSize;
+
+    [SerializeField] private int skill3GhostKingPoolMaxSize;
+
+    private ObjectPool<SkillBoss> skill3GhostKingPool;
+    public ObjectPool<SkillBoss> Skill3GhostKingPool => skill3GhostKingPool;
+
     
 
     public void Init()
@@ -52,6 +65,14 @@ public class PoolManager : MonoBehaviour
         }
         
     }
+
+    public void InitSkillGhostKing()
+    {
+        skill3GhostKingPool  = new ObjectPool<SkillBoss>(skill3GhostKingPrefab, skill3GhostKingPoolSize, skill3GhostKingPoolMaxSize, skill3GhostKingRoot);
+    
+    }
+
+    
 
     void Awake()
     {

@@ -17,6 +17,8 @@ public class TurnShoot
 
     public int amountBulletPerAngle;
 
+    public float delayAttackInOneAngle;
+
     
     
 }
