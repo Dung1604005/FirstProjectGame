@@ -226,6 +226,11 @@ public class GhostKingCombat : MonoBehaviour
         }
     }
 
+    public void UnlockSkill3()
+    {
+        unlockedSkill3 = true;
+    }
+
 
     public void CastSkill3(Vector2 posSpawn)
     {
@@ -275,6 +280,11 @@ public class GhostKingCombat : MonoBehaviour
             }
             yield return new WaitForSeconds(delay);
         }
+    }
+
+    public void UnlockSkill4()
+    {
+        unlockedSkill4 = true;
     }
 
     public void CastSkill4()

@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -23,10 +24,16 @@ public class BossStat : MonoBehaviour
     [SerializeField] private bool isAbsorbing;
     public bool IsAbsorbing => isAbsorbing;
 
+    [SerializeField] private GameObject healthObject;
+
     [SerializeField] private  Image healthUI;
 
     private Coroutine flashRoutine;
     private Material defaultMaterial;
+
+    public event Action<float> OnHealthBossChange;
+    
+    public event Action OnBossDie;
 
     private void UpdateHealthUI()
     {
@@ -56,13 +63,15 @@ public class BossStat : MonoBehaviour
         }
         currentHealth  = Mathf.Max(0f, currentHealth - damage);
         
+        
+        targetHealth = currentHealth;
+        OnHealthBossChange?.Invoke(currentHealth/bossData.MaxHealth);
         if(currentHealth <= 0f)
         {
             Die();
-            return;
+            
             
         }
-        targetHealth = currentHealth;
 
     }
     public void Heal(float health)
@@ -72,14 +81,20 @@ public class BossStat : MonoBehaviour
             return;
         }
         currentHealth  = Mathf.Min(bossData.MaxHealth, currentHealth + health);
+        targetHealth = currentHealth;
+        OnHealthBossChange?.Invoke(currentHealth/bossData.MaxHealth);
     }
     private void Die()
     {
-        
+        OnBossDie?.Invoke();
         isDead = true;
-        bossVisual.SetDie();
+        healthObject.SetActive(false);
         
-    
+    }
+
+    public void DestroyObject()
+    {
+        Destroy(gameObject);
     }
     public void  SetAbsorbingState(bool state)
     {

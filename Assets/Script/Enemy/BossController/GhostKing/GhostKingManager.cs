@@ -34,6 +34,7 @@ public class GhostKingManager : MonoBehaviour
         skill2CoolDownTimer = ghostKingCombat.Skill2CoolDown;
         skill3CoolDownTimer = ghostKingCombat.Skill3CoolDown;
         skill4CoolDownTimer = ghostKingCombat.Skill4CoolDown;
+        bossStat.OnHealthBossChange += UnlockedSkill;
 
 
     }
@@ -106,6 +107,19 @@ public class GhostKingManager : MonoBehaviour
         bossStat.SetAbsorbingState(false);
         
     }
+
+    public void UnlockedSkill(float healthPercentage)
+    {
+        if(healthPercentage <= 0.75f)
+        {
+            ghostKingCombat.UnlockSkill3();
+        }
+        if(healthPercentage  <= 0.5f)
+        {
+            ghostKingCombat.UnlockSkill4();
+        }
+    }
+    
 
     private void CastSkill()
     {

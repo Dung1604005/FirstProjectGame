@@ -564,6 +564,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   enemyBaseData: {fileID: 11400000, guid: 583cac7a532019a409f4110ce51dcb67, type: 2}
   wanderingCooldown: 1
+  spawnPosition: {x: 0, y: 0}
+  maxMoveRadius: 50
 --- !u!114 &5109878037865345676
 MonoBehaviour:
   m_ObjectHideFlags: 0

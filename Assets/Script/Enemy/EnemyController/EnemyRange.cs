@@ -55,9 +55,11 @@ public class EnemyRange: EnemyBase
         Vector2 dir = player.position - transform.position;
         float dis = dir.sqrMagnitude;
         AnimMove(animTypeAttack, dir.x, dir.y);
+        float disPlayerFromSpawn = ((Vector2)player.position - spawnPosition).sqrMagnitude;
+        float disEnemyFromSpawn = ((Vector2)transform.position - spawnPosition).sqrMagnitude;
         if (dis > enemyBaseData.RangeAtk * enemyBaseData.RangeAtk)
         {
-            if (dis <= enemyBaseData.RangeChase * enemyBaseData.RangeChase)
+            if (dis <= enemyBaseData.RangeChase * enemyBaseData.RangeChase && disEnemyFromSpawn <= maxMoveRadius*maxMoveRadius)
             {
 
                 curState = State.Chase;

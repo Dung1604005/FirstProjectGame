@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BossVisual : MonoBehaviour
 {
+    [Header("Reference")]
+
     [Header("Components")]
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -49,6 +51,14 @@ public class BossVisual : MonoBehaviour
     void Awake()
     {
         Init();
+    }
+    void Start()
+    {
+        BossStat bossStat = GetComponentInParent<BossStat>();
+        if(bossStat != null)
+        {
+            bossStat.OnBossDie += SetAnimDie;
+        }
     }
 
     public void SetFlip(float xDirection)
@@ -103,9 +113,19 @@ public class BossVisual : MonoBehaviour
         animator.SetBool("moving", isMoving);
     }
 
-    public void SetDie()
+    public void SetAnimDie()
     {
         animator.SetTrigger("die");
+    }
+    public void Die()
+    {
+        EndShakingNoise();
+        PlayChargeEffect(false);
+        BossStat bossStat = GetComponentInParent<BossStat>();
+        if(bossStat != null)
+        {
+            bossStat.DestroyObject();
+        }
     }
     public void SetAnimAttack(bool state)
     {

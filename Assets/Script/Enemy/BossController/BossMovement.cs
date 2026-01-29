@@ -78,14 +78,11 @@ public class BossMovement : MonoBehaviour
         visualRoot.SetFlip(dir.x);
         
     }
-    public void StopMoving(bool immediate)
+    public void StopMoving()
     {
         canMove = false;
 
-        if (immediate)
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
+        
     }
     public void ResumeMoving()
     {
@@ -106,6 +103,10 @@ public class BossMovement : MonoBehaviour
     void Awake()
     {
         Init();
+    }
+    void Start()
+    {
+        GetComponent<BossStat>().OnBossDie += StopMoving;
     }
     void FixedUpdate()
     {

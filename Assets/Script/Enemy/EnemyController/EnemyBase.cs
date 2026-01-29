@@ -79,6 +79,10 @@ public abstract class EnemyBase : MonoBehaviour
 
     private Vector2 wanderingDir = Vector2.zero;
 
+    [SerializeField] protected Vector2 spawnPosition;
+
+    [SerializeField] protected float maxMoveRadius;
+
 
 
     public float GetDamage()
@@ -105,16 +109,20 @@ public abstract class EnemyBase : MonoBehaviour
         int distance = (int)gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].DistanceFromPlayer;
 
 
-        if (dis <= enemyBaseData.RangeAtk * enemyBaseData.RangeAtk)
+        float disPlayerFromSpawn = ((Vector2)player.position - spawnPosition).sqrMagnitude;
+        float disEnemyFromSpawn = ((Vector2)transform.position - spawnPosition).sqrMagnitude;
+
+        if (dis <= enemyBaseData.RangeAtk * enemyBaseData.RangeAtk && disPlayerFromSpawn <= maxMoveRadius*maxMoveRadius
+        && disEnemyFromSpawn <= maxMoveRadius*maxMoveRadius)
         {
             curState = State.Attack;
         }
         else if (dis <= rangeChase * rangeChase &&
-        distance < int.MaxValue / 10 && distance > 0)
+        distance < int.MaxValue / 10 && distance > 0 && disPlayerFromSpawn <= maxMoveRadius*maxMoveRadius
+        && disEnemyFromSpawn <= maxMoveRadius*maxMoveRadius)
         {
             curState = State.Chase;
         }
-
         //Wandering
         wanderingTimer += Time.deltaTime;
         if (wanderingTimer > wanderingCooldown)
@@ -122,6 +130,11 @@ public abstract class EnemyBase : MonoBehaviour
             wanderingDir = UnityEngine.Random.insideUnitCircle.normalized;
             
             wanderingTimer = 0f;
+        }
+        if(disEnemyFromSpawn > maxMoveRadius * maxMoveRadius )
+        {
+            wanderingDir = (spawnPosition- (Vector2)transform.position).normalized;
+        
         }
         
         OnMove(wanderingDir, enemyBaseData.WalkSpeed);
@@ -140,6 +153,8 @@ public abstract class EnemyBase : MonoBehaviour
     // Tinh toan de cho enemy di chuyen den player
     protected virtual void OnMove(Vector2 flow, float speed)
     {
+
+
         Vector2 dir = flow.normalized;
         Vector2 pos = rb.position;
         for (int i = 0; i < context.Interest.Length; i++)
@@ -219,7 +234,10 @@ public abstract class EnemyBase : MonoBehaviour
             return;
         }
         float dis = (player.position - transform.position).sqrMagnitude;
-        if (dis > rangeChase * rangeChase)
+        float disPlayerFromSpawn = ((Vector2)player.position - spawnPosition).sqrMagnitude;
+        float disEnemyFromSpawn = ((Vector2)transform.position - spawnPosition).sqrMagnitude;
+        if (dis > rangeChase * rangeChase || disPlayerFromSpawn > maxMoveRadius*maxMoveRadius ||
+         disEnemyFromSpawn > maxMoveRadius*maxMoveRadius)
         {
             curState = State.Idle;
         }
@@ -260,6 +278,7 @@ public abstract class EnemyBase : MonoBehaviour
     public void SpawnEnemy(Vector3 pos)
     {
         transform.position = pos;
+
         curState = State.Idle;
         cur_coolDown = 0f;
         currentDir = Vector2.zero;
@@ -318,6 +337,7 @@ public abstract class EnemyBase : MonoBehaviour
         gridManagement = GameManageMent.Instance.GridManagement;
         SetAttack(enemyBaseData.Atk);
         SetRangeChase(enemyBaseData.RangeChase);
+        spawnPosition = this.transform.position;
     }
     protected virtual void Awake()
     {

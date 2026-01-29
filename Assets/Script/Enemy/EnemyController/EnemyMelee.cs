@@ -44,9 +44,11 @@ public class EnemyMelee : EnemyBase
         Vector2 dir = player.position - transform.position;
         float dis = dir.sqrMagnitude;
         AnimMove(animTypeAttack, dir.x, dir.y);
+        float disPlayerFromSpawn = ((Vector2)player.position - spawnPosition).sqrMagnitude;
+        float disEnemyFromSpawn = ((Vector2)transform.position - spawnPosition).sqrMagnitude;
         if (dis > enemyBaseData.RangeAtk * enemyBaseData.RangeAtk || attacking)
         {
-            if (dis <= rangeChase * rangeChase)
+            if (dis <= rangeChase * rangeChase && disPlayerFromSpawn <= maxMoveRadius*maxMoveRadius && disEnemyFromSpawn <= maxMoveRadius*maxMoveRadius)
             {
 
                 curState = State.Chase;
