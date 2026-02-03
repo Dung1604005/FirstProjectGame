@@ -58,18 +58,38 @@ public class SceneLoader: MonoBehaviour
     {
         // Hien thi UI Loading
         UIManageMent.Instance.LoadingAdditive.TurnOn();
-        // Nhuong 1 frame cho game de thuc hien UI Loading
-        yield  return null;
+        // Nhuong vai frame cho game de thuc hien UI Loading hoan toan
+        yield return null;
+        yield return null;
+        
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneData.NameScene, loadSceneMode);
         
+        // Tam dung kich hoat scene de tranh bi dong man hinh
+        asyncOperation.allowSceneActivation = false;
+        
+        // Load scene den 90% (Unity chi cho load den 0.9 khi allowSceneActivation = false)
+        while (asyncOperation.progress < 0.9f)
+        {
+            // Hien thi progress tu 0 -> 0.9 thanh 0 -> 0.95 de nguoi choi thay muot hon
+            float displayProgress = Mathf.Clamp01(asyncOperation.progress / 0.9f) * 0.95f;
+            UIManageMent.Instance.LoadingAdditive.SetFillTarget(displayProgress);
+            yield return null;
+        }
+        
+        // Scene da load xong 90%, cho phep kich hoat
+        UIManageMent.Instance.LoadingAdditive.SetFillTarget(1f);
+        yield return null;
+        
+        // Kich hoat scene (luc nay moi chay Awake, Start cua cac object)
+        asyncOperation.allowSceneActivation = true;
+        
+        // Cho scene kich hoat hoan toan
         while (!asyncOperation.isDone)
         {
-            UIManageMent.Instance.LoadingAdditive.SetFillTarget(asyncOperation.progress);
             yield return null;
         }
 
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         
 
