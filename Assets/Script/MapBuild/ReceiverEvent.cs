@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ReceiverEvent : MonoBehaviour
 {
-    [SerializeField] private List<Pair<String, bool>> requiredEvents;
+    [SerializeField] private List<Pair<string, bool>> requiredEvents;
 
-
+    protected bool isUnlocked = false;
 
     private void OnEnable()
     {
@@ -20,10 +20,10 @@ public class ReceiverEvent : MonoBehaviour
         EventManager.Instance().OnSignalSent -= CheckCondition;
     }
 
-    public void CheckCondition(String eventName)
+    public void CheckCondition(string eventName)
     {
         bool satisfied = true;
-        foreach(Pair<String, bool> eventState in requiredEvents)
+        foreach(Pair<string, bool> eventState in requiredEvents)
         {
             if (eventState.First.Equals(eventName))
             {
@@ -35,5 +35,17 @@ public class ReceiverEvent : MonoBehaviour
                 break;
             }
         }
+        Debug.Log("Event received: " + eventName + ", satisfied: " + satisfied);
+        if (satisfied)
+        {
+            
+            Unlock();
+        }
+        
+    }
+
+    protected virtual void Unlock()
+    {
+        
     }
 }

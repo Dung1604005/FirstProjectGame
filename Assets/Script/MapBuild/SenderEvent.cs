@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class SenderEvent : MonoBehaviour
 {
-    [SerializeField] private List<String> eventSend;
+    [SerializeField] private List<string> eventSend;
+
+    protected bool eventSended;
+
+    
 
     public void SendEvent()
     {
