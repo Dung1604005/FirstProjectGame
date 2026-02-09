@@ -6,13 +6,28 @@ public class UnlockedStatue : SenderEvent
 {
     [SerializeField] private GameObject unlockedObject;
 
+    [SerializeField] private GameObject maskObject;
+ 
     [SerializeField] private GameObject interactKey;
 
     [SerializeField] private float radiousInteract;
 
+    [SerializeField] private float speedUnlock;
+
+    [SerializeField] private Vector2 unlockDistance;
+
+    private Vector2 maskDefaultPosition;
+
+    private bool  isEndUnlocking = false;
+
     private Transform playerTransform;
 
-    
+    void Awake()
+    {
+        maskDefaultPosition = maskObject.transform.position;
+    }
+
+
 
     void Start()
     {
@@ -27,6 +42,7 @@ public class UnlockedStatue : SenderEvent
     {
         unlockedObject.SetActive(true);
         eventSended = true;
+        
         SendEvent();
     }
 
@@ -34,6 +50,21 @@ public class UnlockedStatue : SenderEvent
     {
         if(playerTransform == null || eventSended)
         {
+            interactKey.SetActive(false);
+            if (eventSended)
+            {
+                if (isEndUnlocking)
+                {
+                    return;
+                }
+
+                maskObject.transform.position = Vector3.MoveTowards(maskObject.transform.position, maskDefaultPosition + unlockDistance, speedUnlock*Time.deltaTime);
+                if(((Vector2)maskObject.transform.position-maskDefaultPosition -unlockDistance).sqrMagnitude <= 0.001f)
+                {
+                    isEndUnlocking = true;
+                }
+        
+            }
             return;
         }
         if((playerTransform.position - this.transform.position).sqrMagnitude <= radiousInteract * radiousInteract)

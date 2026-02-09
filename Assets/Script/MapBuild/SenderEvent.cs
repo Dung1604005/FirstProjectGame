@@ -12,9 +12,13 @@ public class SenderEvent : MonoBehaviour
 
     public void SendEvent()
     {
+        
         foreach (string eventName in eventSend)
         {
+            
             EventManager.Instance().OnSignalSent?.Invoke(eventName);
+            
         }
+        eventSended = true;
     }
 }

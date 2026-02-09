@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Door : ReceiverEvent
@@ -8,6 +9,8 @@ public class Door : ReceiverEvent
 
     private Vector3 defaultPosition;
 
+    [SerializeField] private bool isEndOpening = false;
+
     void Awake()
     {
         
@@ -17,14 +20,24 @@ public class Door : ReceiverEvent
     protected override void Unlock()
     {
         isUnlocked = true;
+        
     }
 
     public void Update()
     {
         if (isUnlocked)
         {
+            if (isEndOpening)
+            {
+                return;
+            }
             
-            this.transform.position = Vector2.Lerp(this.transform.position, (Vector2)defaultPosition + openDistance, openSpeed * Time.deltaTime);
+            this.transform.position = Vector2.MoveTowards(this.transform.position, (Vector2)defaultPosition + openDistance, openSpeed * Time.deltaTime);
+
+            if(((Vector2)this.transform.position - (Vector2)defaultPosition - openDistance).sqrMagnitude <= 0.001f)
+            {
+                isEndOpening = true;
+            }
         }
     }
 

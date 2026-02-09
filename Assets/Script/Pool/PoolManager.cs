@@ -52,6 +52,19 @@ public class PoolManager : MonoBehaviour
     private ObjectPool<SkillBoss> skill3GhostKingPool;
     public ObjectPool<SkillBoss> Skill3GhostKingPool => skill3GhostKingPool;
 
+    [Header("EnemyPool")]
+
+    [SerializeField] private List<EnemyBase> enemyPrefabList;
+
+    [SerializeField] private Transform enemyRoot;
+
+    [SerializeField] private int enemyPoolSize;
+
+    [SerializeField] private int enemyPoolMaxSize;
+
+    private List<ObjectPool<EnemyBase>> enemyPoolsList;
+    public List<ObjectPool<EnemyBase>> EnemytPoolsList => enemyPoolsList;
+
     
 
     public void Init()
@@ -63,9 +76,14 @@ public class PoolManager : MonoBehaviour
         {
             bulletPoolsList.Add(new ObjectPool<BulletController>(bulletPrefabList[i], bulletPoolSize, bulletPoolMaxSize, bulletRoot));
         }
-        
-    }
 
+        enemyPoolsList = new  List<ObjectPool<EnemyBase>>();
+
+        for(int i = 0; i < enemyPrefabList.Count; i++)
+        {
+            enemyPoolsList.Add(new ObjectPool<EnemyBase>(enemyPrefabList[i], enemyPoolSize, enemyPoolMaxSize, enemyRoot));
+        }
+    }
     public void InitSkillGhostKing()
     {
         skill3GhostKingPool  = new ObjectPool<SkillBoss>(skill3GhostKingPrefab, skill3GhostKingPoolSize, skill3GhostKingPoolMaxSize, skill3GhostKingRoot);
