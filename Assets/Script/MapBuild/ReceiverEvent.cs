@@ -12,15 +12,17 @@ public class ReceiverEvent : MonoBehaviour
     {
 
         EventManager.Instance().OnSignalSent += CheckCondition;
+        EventManager.Instance().OnSignalRecall += CheckCondition;
     }
 
     private void OnDisable()
     {
 
         EventManager.Instance().OnSignalSent -= CheckCondition;
+        EventManager.Instance().OnSignalRecall -= CheckCondition;
     }
 
-    public void CheckCondition(string eventName)
+    public void CheckCondition(string eventName , bool type)
     {
         
         if (this.GetComponent<SpriteRenderer>() != null)
@@ -38,7 +40,7 @@ public class ReceiverEvent : MonoBehaviour
         {
             if (eventState.First.Equals(eventName))
             {
-                eventState.Second = true;
+                eventState.Second = type;
             }
             if (eventState.Second == false)
             {

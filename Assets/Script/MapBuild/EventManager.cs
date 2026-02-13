@@ -5,7 +5,9 @@ using UnityEngine;
 public  class EventManager 
 {
     private static EventManager _instance;
-    public  Action<string> OnSignalSent;
+    public  Action<string, bool> OnSignalSent;
+
+    public Action<string, bool> OnSignalRecall;
     protected EventManager(){
 
 

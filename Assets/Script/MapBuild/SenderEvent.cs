@@ -16,7 +16,18 @@ public class SenderEvent : MonoBehaviour
         foreach (string eventName in eventSend)
         {
             
-            EventManager.Instance().OnSignalSent?.Invoke(eventName);
+            EventManager.Instance().OnSignalSent?.Invoke(eventName, true);
+            
+        }
+        eventSended = true;
+    }
+    public void RecallEvent()
+    {
+        
+        foreach (string eventName in eventSend)
+        {
+            
+            EventManager.Instance().OnSignalSent?.Invoke(eventName, false);
             
         }
         eventSended = true;
