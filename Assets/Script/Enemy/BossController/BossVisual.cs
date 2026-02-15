@@ -38,13 +38,23 @@ public class BossVisual : MonoBehaviour
     {
         animator  = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
+        if(GetComponent<CinemachineImpulseSource>() != null)
+        {
+            cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
+        }
         if(virtualCamera != null)
         {
             noisePerlin = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         }
-        chargeVFX.Stop();
-        novaVFX.Stop();
+        if(chargeVFX != null)
+        {
+            chargeVFX.Stop();
+        }
+        if(novaVFX != null)
+        {
+            novaVFX.Stop();
+        }
+        
         
     }
 

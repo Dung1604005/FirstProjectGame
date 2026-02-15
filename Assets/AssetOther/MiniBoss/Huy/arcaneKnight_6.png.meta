@@ -1,0 +1,561 @@
+fileFormatVersion: 2
+guid: 9289718a4e5c10f47b3938b25b3fd50f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5721414209011358179
+    second: arcaneKnight_6_0
+  - first:
+      213: 9150430892974423994
+    second: arcaneKnight_6_1
+  - first:
+      213: 175212668262695728
+    second: arcaneKnight_6_2
+  - first:
+      213: -5268057057380440319
+    second: arcaneKnight_6_3
+  - first:
+      213: 8568329761514908436
+    second: arcaneKnight_6_4
+  - first:
+      213: 1601696148160450692
+    second: arcaneKnight_6_5
+  - first:
+      213: 8381378541614232078
+    second: arcaneKnight_6_6
+  - first:
+      213: -1052771809055390090
+    second: arcaneKnight_6_7
+  - first:
+      213: -4996318418716246996
+    second: arcaneKnight_6_8
+  - first:
+      213: -602062362674904876
+    second: arcaneKnight_6_9
+  - first:
+      213: -2606788467254151672
+    second: arcaneKnight_6_10
+  - first:
+      213: 19749745998172089
+    second: arcaneKnight_6_11
+  - first:
+      213: 2063658722889078416
+    second: arcaneKnight_6_12
+  - first:
+      213: 3374236652290165440
+    second: arcaneKnight_6_13
+  - first:
+      213: -5791731036133210952
+    second: arcaneKnight_6_14
+  - first:
+      213: -7432956873013597434
+    second: arcaneKnight_6_15
+  - first:
+      213: 5511872889578948070
+    second: arcaneKnight_6_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 12
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: arcaneKnight_6_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 90
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.6129943, y: 0.39014435}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e99ef4e8eb866f40800000000000000
+      internalID: 5721414209011358179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_1
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 90
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.6082862, y: 0.37696144}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abf30858a6cdcfe70800000000000000
+      internalID: 9150430892974423994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_2
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 90
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.62241054, y: 0.37256742}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03342f35efa7e6200800000000000000
+      internalID: 175212668262695728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_3
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 90
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.61299425, y: 0.3813558}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1076956840a14e6b0800000000000000
+      internalID: -5268057057380440319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_4
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 90
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.61770195, y: 0.39453855}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41be0896582d8e670800000000000000
+      internalID: 8568329761514908436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_5
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 90
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.6129939, y: 0.41650966}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 480173d192e5a3610800000000000000
+      internalID: 1601696148160450692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_6
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 90
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.61770195, y: 0.41650966}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e027ffc8063a05470800000000000000
+      internalID: 8381378541614232078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_7
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 90
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.61770195, y: 0.41211548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67645b31e9dc361f0800000000000000
+      internalID: -1052771809055390090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 45
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.66478336, y: 0.4033271}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2c3dabaed289aab0800000000000000
+      internalID: -4996318418716246996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_9
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 45
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.6647835, y: 0.38135597}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d04124987b05a7f0800000000000000
+      internalID: -602062362674904876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_10
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 45
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.66949135, y: 0.3725675}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8063bbc43b3d2dbd0800000000000000
+      internalID: -2606788467254151672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_11
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 45
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.6647833, y: 0.37696177}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf00a21a4a264000800000000000000
+      internalID: 19749745998172089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_12
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 45
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.66478294, y: 0.3945386}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 096907bbca693ac10800000000000000
+      internalID: 2063658722889078416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_13
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 45
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.66478294, y: 0.42090404}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cacbd79b52b3de20800000000000000
+      internalID: 3374236652290165440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_14
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 45
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.6647833, y: 0.42090404}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b4ccacfe43af9fa0800000000000000
+      internalID: -5791731036133210952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_15
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 45
+        width: 42
+        height: 45
+      alignment: 9
+      pivot: {x: 0.6600749, y: 0.42090404}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60be9310b15d8d890800000000000000
+      internalID: -7432956873013597434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arcaneKnight_6_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 42
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e5857e903b1e7c40800000000000000
+      internalID: 5511872889578948070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 856bf14d1298a114ea5517768c520d01
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":42.0,"y":45.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      arcaneKnight_6_0: 5721414209011358179
+      arcaneKnight_6_1: 9150430892974423994
+      arcaneKnight_6_10: -2606788467254151672
+      arcaneKnight_6_11: 19749745998172089
+      arcaneKnight_6_12: 2063658722889078416
+      arcaneKnight_6_13: 3374236652290165440
+      arcaneKnight_6_14: -5791731036133210952
+      arcaneKnight_6_15: -7432956873013597434
+      arcaneKnight_6_16: 5511872889578948070
+      arcaneKnight_6_2: 175212668262695728
+      arcaneKnight_6_3: -5268057057380440319
+      arcaneKnight_6_4: 8568329761514908436
+      arcaneKnight_6_5: 1601696148160450692
+      arcaneKnight_6_6: 8381378541614232078
+      arcaneKnight_6_7: -1052771809055390090
+      arcaneKnight_6_8: -4996318418716246996
+      arcaneKnight_6_9: -602062362674904876
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

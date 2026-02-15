@@ -21,11 +21,12 @@ public class FlowField
             return;
         }
         List<List<GridCell>> gridCells = gridManagement.GridBuilder.GridCells;
-        int halfChunk = gridManagement.ChunkSize / 2;
-        int startX = (int)playerGridPosition.x - halfChunk;
-        int endX = (int)playerGridPosition.x + halfChunk;
-        int startY = (int)playerGridPosition.y - halfChunk;
-        int endY = (int)playerGridPosition.y + halfChunk;
+        int halfChunkX = gridManagement.ChunkX / 2;
+        int halfChunkY = gridManagement.ChunkY / 2;
+        int startX = (int)playerGridPosition.x - halfChunkX;
+        int endX = (int)playerGridPosition.x + halfChunkX;
+        int startY = (int)playerGridPosition.y - halfChunkY;
+        int endY = (int)playerGridPosition.y + halfChunkY;
         for (int x = startX; x <= endX; x++)
         {
             for (int y = startY; y <= endY; y++)

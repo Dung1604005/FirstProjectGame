@@ -53,11 +53,12 @@ public class DistanceField
             Debug.Log("Player position is out of grid bounds: " + playerPosition);
             return;
         }
-        int halfChunk = gridManagement.ChunkSize / 2;
-        int startX = (int)playerGridPosition.x - halfChunk;
-        int endX = (int)playerGridPosition.x + halfChunk;
-        int startY = (int)playerGridPosition.y - halfChunk;
-        int endY = (int)playerGridPosition.y + halfChunk;
+        int halfChunkX = gridManagement.ChunkX / 2;
+        int halfChunkY = gridManagement.ChunkY / 2;
+        int startX = (int)playerGridPosition.x - halfChunkX;
+        int endX = (int)playerGridPosition.x + halfChunkX;
+        int startY = (int)playerGridPosition.y - halfChunkY;
+        int endY = (int)playerGridPosition.y + halfChunkY;
 
         ResetDistanceField(startX, endX, startY, endY);
 

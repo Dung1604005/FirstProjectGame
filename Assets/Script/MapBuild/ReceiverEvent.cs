@@ -60,6 +60,7 @@ public class ReceiverEvent : MonoBehaviour
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(true);
+                this.gameObject.SetActive(true);
 
             }
         }

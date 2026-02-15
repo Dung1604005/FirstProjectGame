@@ -12,8 +12,11 @@ public class GridManagement : MonoBehaviour
     private FlowField flowField;
     public FlowField FlowField => flowField;
 
-    [SerializeField] private int chunkSize;
-    public int ChunkSize => chunkSize;
+    [SerializeField] private int chunkX;
+    public int ChunkX => chunkX;
+
+    [SerializeField] private int chunkY;
+    public int ChunkY => chunkY;
 
     [SerializeField] private float timeUpdateGrid;
 
