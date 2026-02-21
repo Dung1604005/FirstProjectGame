@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Linq.Expressions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BossMovement : MonoBehaviour
@@ -14,17 +16,17 @@ public class BossMovement : MonoBehaviour
 
     [Header("Movement Stats")]
 
-    [SerializeField] private float defaultSpeed ;
+    [SerializeField] private float defaultSpeed;
 
     [SerializeField] private float currentSpeed;
 
-    [SerializeField] private float maxSpeed ;
+    [SerializeField] private float maxSpeed;
 
-    [SerializeField]  private float acceleration;
+    [SerializeField] private float acceleration;
 
     [SerializeField] private float wFlow;
 
-     [SerializeField] protected float wAvoid;
+    [SerializeField] protected float wAvoid;
 
     [SerializeField] protected float avoidDistance;
 
@@ -43,7 +45,7 @@ public class BossMovement : MonoBehaviour
     [SerializeField] private float directionSmoothSpeed = 0.1f; // Smoothing for direction changes (lower = smoother)
     [SerializeField] private float unstuckCooldown = 2f; // Cooldown after unstuck before detecting stuck again
     [SerializeField] private float flipThreshold = 0.2f; // Minimum x value to change facing direction
-    
+
     private float stuckTimer = 0f;
     private Vector2 lastPosition;
     private bool isStuck = false;
@@ -60,11 +62,24 @@ public class BossMovement : MonoBehaviour
 
     [Header("State")]
 
-    private bool canMove;
+
+    [SerializeField] private bool isDashing;
+
+    [SerializeField] private float dashDuration;
+
+    [SerializeField] private bool canMove;
 
     private Transform target;
 
     public Transform Target => target;
+
+    [Header("Ghost Stat")]
+
+    [SerializeField] private float ghostTimer;
+
+    [SerializeField] private float ghostSpawnInterval;
+
+    [SerializeField] private Color ghostSpriteColor = new Color(0.2f, 1f, 0.8f, 0.6f);
 
 
 
@@ -77,13 +92,13 @@ public class BossMovement : MonoBehaviour
         defaultSpeed = GetComponent<BossStat>().BossData.RunSpeed;
 
         currentSpeed = defaultSpeed;
-        if(GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0) != null)
+        if (GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0) != null)
         {
             target = GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0).transform;
         }
 
         // Auto-find GridManagement if not assigned
-        if(gridManagement == null)
+        if (gridManagement == null)
         {
             gridManagement = FindFirstObjectByType<GridManagement>();
         }
@@ -96,12 +111,13 @@ public class BossMovement : MonoBehaviour
     }
     Vector2 GetDirection()
     {
-        if((target.position - this.transform.position).sqrMagnitude < rangeStop){
+        if ((target.position - this.transform.position).sqrMagnitude < rangeStop)
+        {
             return Vector2.zero;
         }
 
-        
-        Vector2 flow = (target.position - this.transform.position).normalized; 
+
+        Vector2 flow = (target.position - this.transform.position).normalized;
         bool usingFlowField = false;
         if (gridManagement != null)
         {
@@ -115,7 +131,7 @@ public class BossMovement : MonoBehaviour
                 {
                     flow = fieldFlow;
                     usingFlowField = true;
-                    Debug.DrawRay(transform.position, flow * 2f, Color.blue); 
+                    Debug.DrawRay(transform.position, flow * 2f, Color.blue);
                 }
                 else
                 {
@@ -131,7 +147,7 @@ public class BossMovement : MonoBehaviour
         {
             Debug.LogWarning("Boss: gridManagement is null!");
         }
-        if(!usingFlowField)
+        if (!usingFlowField)
         {
             Debug.DrawRay(transform.position, flow * 2f, Color.magenta); // Direct line fallback
         }
@@ -206,19 +222,19 @@ public class BossMovement : MonoBehaviour
             if (enemy != boxCollider2D)
             {
                 enemyCount++;
-                
+
                 float distanceToZombie = Vector2.Distance(enemy.transform.position, transform.position);
                 separationForce += (1f - Mathf.Clamp01(distanceToZombie / separationRadius)) * separationStrength * ((Vector2)(transform.position - enemy.transform.position)).normalized;
 
             }
         }
-        if(enemyCount > 0)
+        if (enemyCount > 0)
         {
             separationForce /= Mathf.Sqrt(enemyCount);
         }
         bestDir = bestDir + separationForce.normalized * wSeparation;
         bestDir = bestDir.normalized;
-        
+
         // Smooth direction changes to prevent oscillation
         // When stuck or near stuck, smooth even more
         float smoothFactor = directionSmoothSpeed;
@@ -230,30 +246,88 @@ public class BossMovement : MonoBehaviour
         {
             smoothFactor = 1f; // Immediate when stuck to commit to escape direction
         }
-        
+
         currentDirection = Vector2.Lerp(currentDirection, bestDir, smoothFactor);
         dir = currentDirection.normalized;
 
         Debug.DrawRay(pos, dir * avoidDistance, Color.yellow); // hướng chọn cuối
 
-        
-        
-        
+
+
+
         return dir;
     }
 
     private void ApplyForce(Vector2 dir)
     {
-      
-        rb.AddForce(dir*currentSpeed*acceleration);
+
+        rb.AddForce(dir * currentSpeed * acceleration);
     }
+
+    void SpawnGhostSprite()
+    {
+        GhostSprite ghostSprite = GameManageMent.Instance.PoolManager.GhostSpritePools.Spawn(this.transform.position);
+        ghostSprite.SetInfo(visualRoot.SpriteRenderer.sprite, visualRoot.SpriteRenderer.flipX, ghostSpriteColor);
+    }
+
+    // Gọi hàm này khi boss quyết định lướt
+    public void StartDash(Vector2 dashDirection)
+    {
+        StartCoroutine(DashRoutine(dashDirection));
+    }
+
+    private IEnumerator DashRoutine(Vector2 direction)
+    {
+        
+        isDashing = true;
+
+        // 1. Dọn dẹp quán tính cũ để lướt không bị trượt
+        rb.linearVelocity = Vector2.zero;
+
+        // 2. Setup thông số
+        Vector2 startPos = rb.position;
+
+        Vector2 targetPos = rb.position + direction; 
+        float time = 0f;
+        ghostTimer = 0f;
+
+        // 3. Quá trình lướt
+        while (time < dashDuration)
+        {
+            ghostTimer  += Time.fixedDeltaTime;
+            time += Time.fixedDeltaTime;
+            float t = time / dashDuration;
+
+            // Công thức Ease-Out: Nhanh ở đầu, chậm về cuối
+            float easeT = t * (2f - t);
+            if(ghostTimer >= ghostSpawnInterval)
+            {
+                SpawnGhostSprite();
+                ghostTimer = 0f;
+            }
+
+            // Lerp và MovePosition
+            Vector2 nextPosition = Vector2.Lerp(startPos, targetPos, easeT);
+            rb.MovePosition(nextPosition);
+
+            // Chờ đến frame vật lý tiếp theo
+            yield return new WaitForFixedUpdate();
+        }
+
+        // 4. Kết thúc lướt
+        isDashing = false;
+    }
+
+
+
 
     private void FaceTarget(Vector2 dir)
     {
-        if(dir == Vector2.zero){
+        if (dir == Vector2.zero)
+        {
             dir = (target.position - this.transform.position).normalized;
         }
-        
+
         // Don't change facing when stuck to prevent oscillation
         if (!isStuck && stuckTimer < stuckTime * 0.5f) // Only update when not near stuck state
         {
@@ -263,15 +337,15 @@ public class BossMovement : MonoBehaviour
                 lastFacingX = dir.x;
             }
         }
-        
+
         visualRoot.SetFlip(lastFacingX);
-        
+
     }
     public void StopMoving()
     {
         canMove = false;
 
-        
+
     }
     public void ResumeMoving()
     {
@@ -282,7 +356,7 @@ public class BossMovement : MonoBehaviour
     {
         if (isStationary)
         {
-            currentSpeed = 0f;            
+            currentSpeed = 0f;
         }
         else
         {
@@ -299,7 +373,13 @@ public class BossMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(!canMove || target == null)
+
+        if (isDashing)
+        {
+            return;
+        }
+       
+        if (!canMove || target == null)
         {
             return;
         }
@@ -331,7 +411,7 @@ public class BossMovement : MonoBehaviour
         lastPosition = rb.position;
 
         Vector2 direction = GetDirection();
-        
+
         // Apply stronger force when stuck
         if (isStuck)
         {
@@ -347,7 +427,7 @@ public class BossMovement : MonoBehaviour
         {
             ApplyForce(direction);
         }
-        if(canMove == false || currentSpeed  == 0f || direction == Vector2.zero)
+        if (canMove == false || currentSpeed == 0f || direction == Vector2.zero)
         {
             visualRoot.SetMove(false);
         }
@@ -355,15 +435,29 @@ public class BossMovement : MonoBehaviour
         {
             visualRoot.SetMove(true);
         }
-        if(rb.linearVelocity.magnitude > maxSpeed)
+        if (rb.linearVelocity.magnitude > maxSpeed)
         {
             rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxSpeed);
         }
         FaceTarget(direction);
 
+        
+
 
 
     }
+    void Update()
+    {
+        if (isDashing)
+        {
+            return;
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            StartDash((GameManageMent.Instance.PlayerManager.PlayerController.getPos() - (Vector2)this.transform.position));
 
-    
+        }
+    }
+
+
 }

@@ -76,7 +76,7 @@ public class BulletController : MonoBehaviour, IPoolable
 
                         if (glow != null)
                         {
-                            glow?.SetActive(true);
+                            glow?.SetActive(false);
                         }
                         if (haveAnimExplo)
                         {
@@ -100,7 +100,7 @@ public class BulletController : MonoBehaviour, IPoolable
 
                         if (glow != null)
                         {
-                            glow?.SetActive(true);
+                            glow?.SetActive(false);
                         }
 
                         if (haveAnimExplo)
@@ -127,7 +127,7 @@ public class BulletController : MonoBehaviour, IPoolable
                     //anim.SetTrigger("Explo");
                     if (glow != null)
                     {
-                        glow?.SetActive(true);
+                        glow?.SetActive(false);
                     }
 
                     if (haveAnimExplo)
@@ -157,7 +157,7 @@ public class BulletController : MonoBehaviour, IPoolable
 
             if (glow != null)
             {
-                glow?.SetActive(true);
+                glow?.SetActive(false);
             }
             if (haveAnimExplo)
             {
@@ -177,7 +177,7 @@ public class BulletController : MonoBehaviour, IPoolable
 
             if (glow != null)
             {
-                glow?.SetActive(true);
+                glow?.SetActive(false);
             }
 
             if (haveAnimExplo)

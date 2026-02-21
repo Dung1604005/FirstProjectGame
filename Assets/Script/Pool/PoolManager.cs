@@ -65,6 +65,20 @@ public class PoolManager : MonoBehaviour
     private List<ObjectPool<EnemyBase>> enemyPoolsList;
     public List<ObjectPool<EnemyBase>> EnemytPoolsList => enemyPoolsList;
 
+
+    [Header("Ghost Sprite Pool")]
+
+    [SerializeField] private GhostSprite ghostSpritePrefab;
+
+    [SerializeField] private Transform ghostSpriteRoot;
+
+    [SerializeField] private int ghostSpritePoolSize;
+
+    [SerializeField] private int ghostSpritePoolMaxSize;
+
+    private ObjectPool<GhostSprite> ghostSpritePools;
+    public ObjectPool<GhostSprite> GhostSpritePools => ghostSpritePools;
+
     
 
     public void Init()
@@ -72,17 +86,19 @@ public class PoolManager : MonoBehaviour
         lootPool = new ObjectPool<LootItem>(lootItemPrefab, lootPoolSize, lootPoolMaxSize, lootRoot);
         floatingTextPool = new ObjectPool<FloatingText>(floatingTextPrefab, floatingTextPoolSize, floatingTextPoolMaxSize, floatingTextRoot);
         bulletPoolsList = new List<ObjectPool<BulletController>>();
+        ghostSpritePools = new ObjectPool<GhostSprite>(ghostSpritePrefab, ghostSpritePoolSize, ghostSpritePoolMaxSize, ghostSpriteRoot);
         for(int i =  0; i < bulletPrefabList.Count; i++)
         {
             bulletPoolsList.Add(new ObjectPool<BulletController>(bulletPrefabList[i], bulletPoolSize, bulletPoolMaxSize, bulletRoot));
         }
-
         enemyPoolsList = new  List<ObjectPool<EnemyBase>>();
 
         for(int i = 0; i < enemyPrefabList.Count; i++)
         {
             enemyPoolsList.Add(new ObjectPool<EnemyBase>(enemyPrefabList[i], enemyPoolSize, enemyPoolMaxSize, enemyRoot));
         }
+
+
     }
     public void InitSkillGhostKing()
     {
