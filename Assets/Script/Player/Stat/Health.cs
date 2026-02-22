@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
+using System;
 public class Health : MonoBehaviour
 {
     [SerializeField] private float max_health;
@@ -10,6 +11,8 @@ public class Health : MonoBehaviour
 
     // Su kien thay doi HP
     public UnityEvent<float, float> OnHealthChanged = new UnityEvent<float, float>();
+
+    public event Action OnPlayerDie;
 
     private SpriteRenderer spriteRenderer;
     private Color defaultColor;
@@ -82,6 +85,10 @@ public class Health : MonoBehaviour
             if (this.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
             {
                 Destroy(gameObject);
+            }
+            else
+            {
+                
             }
         }
 

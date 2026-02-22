@@ -79,13 +79,21 @@ public class BossMovement : MonoBehaviour
 
     [SerializeField] private float ghostSpawnInterval;
 
-    [SerializeField] private Color ghostSpriteColor = new Color(0.2f, 1f, 0.8f, 0.6f);
+    [SerializeField] private Color ghostSpriteColor = new Color(0.2f, 1f, 0.8f, 0.8f);
+
+    public event Action OnDashEnd;
+
+
 
 
 
     public void Init()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        isDashing = false;
+
+        isStuck = false;
 
         context = new Context();
 
@@ -94,7 +102,7 @@ public class BossMovement : MonoBehaviour
         currentSpeed = defaultSpeed;
         if (GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0) != null)
         {
-            target = GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0).transform;
+            SetTarget(GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0).transform);
         }
 
         // Auto-find GridManagement if not assigned
@@ -316,6 +324,7 @@ public class BossMovement : MonoBehaviour
 
         // 4. Kết thúc lướt
         isDashing = false;
+        OnDashEnd?.Invoke();
     }
 
 
@@ -363,6 +372,49 @@ public class BossMovement : MonoBehaviour
             currentSpeed = defaultSpeed;
         }
     }
+    public void SetTargetNull()
+    {
+        target = null;
+    }
+    public void SetTarget(Transform _target)
+    {
+        target = _target;
+    }
+
+    /// <summary>
+    /// Reset boss movement to initial state
+    /// </summary>
+    public void ResetMovement()
+    {
+        // Reset speed
+        currentSpeed = defaultSpeed;
+        
+        // Reset dash state
+        isDashing = false;
+        
+        // Reset stuck detection
+        isStuck = false;
+        stuckTimer = 0f;
+        stuckDirection = Vector2.zero;
+        unstuckTimer = 0f;
+        
+        // Reset movement state
+        canMove = true;
+        
+        // Reset direction and facing
+        currentDirection = Vector2.right;
+        lastFacingX = 1f;
+        
+        // Reset position tracking
+        lastPosition = rb.position;
+        
+        // Reset velocity
+        rb.linearVelocity = Vector2.zero;
+        
+        // Reset ghost effect timer
+        ghostTimer = 0f;
+    }
+
     void Awake()
     {
         Init();
@@ -370,6 +422,8 @@ public class BossMovement : MonoBehaviour
     void Start()
     {
         GetComponent<BossStat>().OnBossDie += StopMoving;
+        GameManageMent.Instance.PlayerManager.Health.OnPlayerDie += SetTargetNull;
+
     }
     void FixedUpdate()
     {
@@ -446,18 +500,7 @@ public class BossMovement : MonoBehaviour
 
 
     }
-    void Update()
-    {
-        if (isDashing)
-        {
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            StartDash((GameManageMent.Instance.PlayerManager.PlayerController.getPos() - (Vector2)this.transform.position));
-
-        }
-    }
+    
 
 
 }

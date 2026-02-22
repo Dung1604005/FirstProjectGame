@@ -163,7 +163,39 @@ public class BossVisual : MonoBehaviour
         
 
     }
-    
+
+    /// <summary>
+    /// Reset boss visual to initial state
+    /// </summary>
+    public void ResetVisual()
+    {
+        // Reset shaking
+        isShaking = false;
+        EndShakingNoise();
+        
+        // Stop all VFX
+        if (chargeVFX != null)
+        {
+            chargeVFX.Stop();
+        }
+        if (novaVFX != null)
+        {
+            novaVFX.Stop();
+        }
+        
+        // Reset animation states
+        if (animator != null)
+        {
+            animator.SetBool("moving", false);
+            animator.SetBool("attack", false);
+        }
+        
+        // Reset sprite facing
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.flipX = false;
+        }
+    }
 
 
 

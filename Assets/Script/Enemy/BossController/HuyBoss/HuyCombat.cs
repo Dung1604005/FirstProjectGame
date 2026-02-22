@@ -1,9 +1,12 @@
 using System.Collections;
+
 using NUnit.Framework.Internal;
 using UnityEngine;
 
 public class HuyCombat : MonoBehaviour
 {
+
+    private HuyBossManagement huyBossManagement;
     [Header("SKILL 1")]
 
     [SerializeField] private float skill1Damage;
@@ -50,11 +53,19 @@ public class HuyCombat : MonoBehaviour
 
     [SerializeField] private float delayAttackSkill3;
 
+    [SerializeField] private float skill3AttackRange;
+
+    public float Skill3AttackRange => skill3AttackRange;
+
 
     [SerializeField] private GameObject warningIcon;
 
 
 
+    void Awake()
+    {
+        huyBossManagement = GetComponent<HuyBossManagement>();
+    }
 
     void Init()
     {
@@ -111,6 +122,7 @@ public class HuyCombat : MonoBehaviour
         }
 
         skill1Boss.gameObject.SetActive(true);
+        huyBossManagement.EndSkill1();
 
     }
 
@@ -124,6 +136,12 @@ public class HuyCombat : MonoBehaviour
 
     IEnumerator CastSkill2Coroutine()
     {
+        if(huyBossManagement.BossMovement.Target == null)
+        {
+            huyBossManagement.EndSkill2();
+            yield break;
+        }
+        
         warningIcon.SetActive(true);
         yield return new WaitForSeconds(delayAttackSkill2);
         warningIcon.SetActive(false);
@@ -140,41 +158,46 @@ public class HuyCombat : MonoBehaviour
         {
             Debug.LogError("CANNOT SPAWN BULLET FROM BOSS");
         }
+        huyBossManagement.EndSkill2();
     }
 
     public void CastSkill3()
     {
-        
+        StartCoroutine(CastSkill3Routine());
     }
+
+    IEnumerator CastSkill3Routine()
+    {
+        Vector2 posTarget = Vector2.zero;
+        if(huyBossManagement.BossMovement.Target != null)
+        {
+            posTarget = huyBossManagement.BossMovement.Target.position - this.transform.position;
+        }
+        else
+        {
+            huyBossManagement.EndSkill3();
+            yield break;
+        }
+        warningIcon.SetActive(true);
+
+        yield return new WaitForSeconds(delayAttackSkill3);
+        warningIcon.SetActive(false);
+        Debug.Log("Dash To " + posTarget);
+
+        huyBossManagement.BossMovement.StartDash(posTarget);
+
+        
+        
+
+
+
+
+    }
+
+
     void Update()
     {
         // Test
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            if (GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0) != null)
-            {
-
-
-            }
-            CastSkill1((GameManageMent.Instance.PlayerManager.PlayerController.getPos() - (Vector2)this.transform.position).normalized);
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            if (GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0) != null)
-            {
-
-
-            }
-            CastSkill2();
-        }
-        // if (Input.GetKeyDown(KeyCode.L))
-        // {
-        //     if (GameObject.FindGameObjectWithTag(GameConfig.PLAYER_TAG0) != null)
-        //     {
-        //         CastSkill3(GameManageMent.Instance.PlayerManager.PlayerController.getPos());
-        //     }
-
-        // }
+        
     }
 }

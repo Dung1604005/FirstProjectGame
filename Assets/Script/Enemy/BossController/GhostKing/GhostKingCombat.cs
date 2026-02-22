@@ -160,6 +160,7 @@ public class GhostKingCombat : MonoBehaviour
 
     IEnumerator CastSkill2AllTurn(int turns)
     {
+        
         ghostKingManager.StartTurnSkill2();
         yield return new WaitForSeconds(delayPerTurnSkill2);
         

@@ -100,6 +100,32 @@ public class BossStat : MonoBehaviour
     {
         isAbsorbing = state;
     }
+    
+    /// <summary>
+    /// Reset boss stats to initial state
+    /// </summary>
+    public void ResetStats()
+    {
+        // Reset health
+        currentHealth = bossData.MaxHealth;
+        targetHealth = bossData.MaxHealth;
+        
+        // Reset states
+        isDead = false;
+        isAbsorbing = false;
+        
+        // Show health UI
+        if (healthObject != null)
+        {
+            healthObject.SetActive(true);
+        }
+        
+        // Reset health UI
+        if (healthUI != null)
+        {
+            healthUI.fillAmount = 1f;
+        }
+    }
     void Awake()
     {
         currentHealth = bossData.MaxHealth;

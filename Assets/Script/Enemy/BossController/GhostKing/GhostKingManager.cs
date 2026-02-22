@@ -24,6 +24,10 @@ public class GhostKingManager : MonoBehaviour
 
     [SerializeField] private float skill4CoolDownTimer;
 
+    [SerializeField] private bool isActive;
+
+    public bool IsActive => isActive;
+
 
 
     public void InitOutSide()
@@ -163,11 +167,67 @@ public class GhostKingManager : MonoBehaviour
     void Start()
     {
         InitOutSide();
+        GameManageMent.Instance.PlayerManager.Health.OnPlayerDie += DeActiveBoss;
+    }
+
+    /// <summary>
+    /// Reset Ghost King Boss to initial state
+    /// </summary>
+    public void ResetBoss()
+    {
+        // Reset attack state
+        isAttacking = false;
+        
+        // Reset cooldown timers
+        skill1CoolDownTimer = 0f;
+        skill2CoolDownTimer = 0f;
+        skill3CoolDownTimer = 0f;
+        skill4CoolDownTimer = 0f;
+        
+        // Reset all components
+        if (bossStat != null)
+        {
+            bossStat.ResetStats();
+        }
+        
+        if (bossMovement != null)
+        {
+            bossMovement.ResetMovement();
+        }
+        
+        if (bossVisual != null)
+        {
+            bossVisual.ResetVisual();
+        }
+        
+        // Reset absorbing state
+        if (bossStat != null)
+        {
+            bossStat.SetAbsorbingState(false);
+        }
+    }
+
+    public void ActiveBoss(){
+        ResetBoss();
+        ghostKingCombat.enabled = true;
+        bossMovement.enabled = true;
+        bossVisual.enabled = true;
+        bossStat.enabled = true;
+        isActive = true;
+    }
+
+    public void DeActiveBoss(){
+        ghostKingCombat.enabled = false;
+        bossMovement.enabled = false;
+        bossVisual.enabled = false;
+        bossStat.enabled = false;
+        isActive = false;
+
     }
 
     void Update()
     {
-        if(GameManageMent.Instance.GameState == GameState.Pause)
+        if(GameManageMent.Instance.GameState == GameState.Pause || !isActive)
         {
             return;
         }
