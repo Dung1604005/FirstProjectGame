@@ -8,10 +8,16 @@ public class SenderEvent : MonoBehaviour
 
     protected bool eventSended;
 
+    [SerializeField] protected bool sendOneTime;
+
     
 
     public void SendEvent()
     {
+        if(sendOneTime && eventSended)
+        {
+            return;
+        }
         
         foreach (string eventName in eventSend)
         {
@@ -23,6 +29,10 @@ public class SenderEvent : MonoBehaviour
     }
     public void RecallEvent()
     {
+        if(sendOneTime && eventSended)
+        {
+            return;
+        }
         
         foreach (string eventName in eventSend)
         {

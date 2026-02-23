@@ -25,6 +25,8 @@ public class HuyCombat : MonoBehaviour
 
     [SerializeField] private SkillBoss skill1Boss;
 
+    public SkillBoss Skill1Boss => skill1Boss;
+
 
 
     [Header("SKILL 2")]
@@ -59,12 +61,15 @@ public class HuyCombat : MonoBehaviour
 
 
     [SerializeField] private GameObject warningIcon;
+    public GameObject WarningIcon => warningIcon;
 
 
 
     void Awake()
     {
         huyBossManagement = GetComponent<HuyBossManagement>();
+        skill1Boss.gameObject.SetActive(false);
+        warningIcon.SetActive(false);
     }
 
     void Init()
@@ -88,6 +93,7 @@ public class HuyCombat : MonoBehaviour
     {
         warningIcon.SetActive(true);
         yield return new WaitForSeconds(delayAttackSkill1);
+
         warningIcon.SetActive(false);
         DirType dirType = GameManageMent.Instance.CalculateDirType(dir.x, dir.y);
         if (dirType == DirType.RIGHT)
@@ -121,6 +127,7 @@ public class HuyCombat : MonoBehaviour
 
         }
 
+        
         skill1Boss.gameObject.SetActive(true);
         huyBossManagement.EndSkill1();
 

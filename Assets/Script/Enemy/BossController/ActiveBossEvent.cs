@@ -3,9 +3,16 @@ using UnityEngine;
 
 public class ActiveBossTrigger: ReceiverEvent
 {
-    public event Action OnActiveBossEvent;
+
+    
     protected override void Unlock()
     {
-        OnActiveBossEvent?.Invoke();
+        
+        BossManagerInterface bossManager = GetComponent<BossManagerInterface>();
+
+        if(bossManager != null)
+        {
+            bossManager.ActiveBoss();
+        }
     }
 }

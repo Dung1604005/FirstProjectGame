@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HuyBossManagement : MonoBehaviour
+public class HuyBossManagement : MonoBehaviour, BossManagerInterface
 {
      [SerializeField] private BossStat bossStat;
 
@@ -33,6 +33,7 @@ public class HuyBossManagement : MonoBehaviour
 
      private void ChooseSkill1(){
         bossMovement.SetStationary(true);
+        skill1CoolDownTimer = 0f;
 
         isAttacking = true;
     }
@@ -46,6 +47,7 @@ public class HuyBossManagement : MonoBehaviour
     }
 
      private void ChooseSkill2(){
+        skill2CoolDownTimer = 0f;
         bossMovement.SetStationary(true);
         isAttacking = true;
     }
@@ -58,6 +60,7 @@ public class HuyBossManagement : MonoBehaviour
     }
 
      private void ChooseSkill3(){
+        skill3CoolDownTimer = 0f;
 
         isAttacking = true;
     }
@@ -77,14 +80,14 @@ public class HuyBossManagement : MonoBehaviour
         float rangeSqr = (bossMovement.Target.position - transform.position).sqrMagnitude;
         
 
-        if(huyCombat && skill3CoolDownTimer >= huyCombat.Skill3CoolDown 
+        if(skill3CoolDownTimer >= huyCombat.Skill3CoolDown 
         && rangeSqr >= huyCombat.Skill3AttackRange*huyCombat.Skill3AttackRange)
         {
             ChooseSkill3();
             huyCombat.CastSkill3();
             return;
         }
-        if(huyCombat && skill2CoolDownTimer >= huyCombat.Skill2CoolDown 
+        if( skill2CoolDownTimer >= huyCombat.Skill2CoolDown 
         && rangeSqr <= huyCombat.Skill2AttackRange*huyCombat.Skill2AttackRange)
         {
             ChooseSkill2();
@@ -92,7 +95,7 @@ public class HuyBossManagement : MonoBehaviour
             return;
         }
        
-        if(huyCombat && skill1CoolDownTimer >= huyCombat.Skill1CoolDown && rangeSqr <= huyCombat.Skill1AttackRange*huyCombat.Skill1AttackRange)
+        if(skill1CoolDownTimer >= huyCombat.Skill1CoolDown && rangeSqr <= huyCombat.Skill1AttackRange*huyCombat.Skill1AttackRange)
         {
             ChooseSkill1();
             huyCombat.CastSkill1(bossMovement.Target.position - transform.position);
@@ -146,14 +149,23 @@ public class HuyBossManagement : MonoBehaviour
 
     public void ActiveBoss(){
         ResetBoss();
+       
+        huyCombat.Skill1Boss.gameObject.SetActive(false);
+        huyCombat.WarningIcon.gameObject.SetActive(false);
+        
         huyCombat.enabled = true;
+        
         bossMovement.enabled = true;
         bossVisual.enabled = true;
         bossStat.enabled = true;
         isActive = true;
+        isAttacking = false;
     }
 
     public void DeActiveBoss(){
+        huyCombat.StopAllCoroutines();
+        huyCombat.Skill1Boss.gameObject.SetActive(false);
+        huyCombat.WarningIcon.gameObject.SetActive(false);
         huyCombat.enabled = false;
         bossMovement.enabled = false;
         bossVisual.enabled = false;
@@ -168,15 +180,15 @@ public class HuyBossManagement : MonoBehaviour
         {
             return;
         }
-        if(skill1CoolDownTimer < huyCombat.Skill1CoolDown)
+        if(skill1CoolDownTimer <= huyCombat.Skill1CoolDown)
         {
             skill1CoolDownTimer += Time.deltaTime;
         }
-        if(skill2CoolDownTimer <  huyCombat.Skill2CoolDown)
+        if(skill2CoolDownTimer <=  huyCombat.Skill2CoolDown)
         {
             skill2CoolDownTimer += Time.deltaTime;
         }
-        if(skill3CoolDownTimer <  huyCombat.Skill3CoolDown)
+        if(skill3CoolDownTimer <=  huyCombat.Skill3CoolDown)
         {
             skill3CoolDownTimer += Time.deltaTime;
         }

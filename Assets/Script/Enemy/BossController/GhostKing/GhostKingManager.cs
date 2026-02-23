@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GhostKingManager : MonoBehaviour
+public class GhostKingManager : MonoBehaviour, BossManagerInterface
 {
 
     [SerializeField] private BossStat bossStat;
@@ -214,9 +214,11 @@ public class GhostKingManager : MonoBehaviour
         bossVisual.enabled = true;
         bossStat.enabled = true;
         isActive = true;
+        isAttacking = false;
     }
 
     public void DeActiveBoss(){
+        ghostKingCombat.StopAllCoroutines();
         ghostKingCombat.enabled = false;
         bossMovement.enabled = false;
         bossVisual.enabled = false;

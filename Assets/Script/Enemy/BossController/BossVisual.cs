@@ -75,11 +75,11 @@ public class BossVisual : MonoBehaviour
     {
         if(xDirection < 0)
         {
-            spriteRenderer.flipX = true;
+            this.transform.localScale = new Vector3(-1, 1 , 1);
         }
         else
         {
-            spriteRenderer.flipX = false;
+            this.transform.localScale = new Vector3(1, 1 , 1);
         }
     }
 
@@ -190,11 +190,8 @@ public class BossVisual : MonoBehaviour
             animator.SetBool("attack", false);
         }
         
-        // Reset sprite facing
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.flipX = false;
-        }
+        
+        this.transform.localScale = new Vector3(1,1,1);
     }
 
 

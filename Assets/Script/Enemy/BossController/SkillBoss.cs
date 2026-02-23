@@ -5,7 +5,6 @@ public class SkillBoss : MonoBehaviour, IPoolable
     [SerializeField] private float damage;    
 
     
-
     public void SetDamage(float _damage)
     {
         damage = _damage;
