@@ -12,6 +12,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree6 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 867543167716412089, guid: 1322962d7874b7a4c9c56ef8ecae1655, type: 3}
+      propertyPath: m_TagString
+      value: DestroyObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 2004361388871099260, guid: 1322962d7874b7a4c9c56ef8ecae1655, type: 3}
+      propertyPath: m_TagString
+      value: HitBox_DestroyObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530745092848367091, guid: 1322962d7874b7a4c9c56ef8ecae1655, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5017159
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530745092848367091, guid: 1322962d7874b7a4c9c56ef8ecae1655, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.25986937
+      objectReference: {fileID: 0}
     - target: {fileID: 4848699921280223281, guid: 1322962d7874b7a4c9c56ef8ecae1655, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -60,5 +76,28 @@ PrefabInstance:
     - {fileID: -7259317905639469848, guid: 1322962d7874b7a4c9c56ef8ecae1655, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 867543167716412089, guid: 1322962d7874b7a4c9c56ef8ecae1655, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1333591875626248838}
   m_SourcePrefab: {fileID: 100100000, guid: 1322962d7874b7a4c9c56ef8ecae1655, type: 3}
+--- !u!1 &6766095767856954891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 867543167716412089, guid: 1322962d7874b7a4c9c56ef8ecae1655, type: 3}
+  m_PrefabInstance: {fileID: 5903130227825898674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1333591875626248838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6766095767856954891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd776dbe57c70544fbd8e28e5f20182e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreeController
+  indexLootTable: 0
+  amountDrop: 2
+  maxHealth: 20

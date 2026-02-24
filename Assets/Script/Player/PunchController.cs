@@ -45,7 +45,11 @@ public class PunchController : MonoBehaviour
             {
                 float damaged = 0;
                 bool isCrit = GameManageMent.Instance.PlayerManager.CalculateCritDamage(ref damaged);
-                collision.GetComponentInParent<BossStat>().TakeDamage(damaged, isCrit);
+                if(collision.GetComponentInParent<BossStat>() != null)
+                {
+                    collision.GetComponentInParent<BossStat>().TakeDamage(damaged, isCrit);
+                }
+                
             }
             catch(Exception e)
             {

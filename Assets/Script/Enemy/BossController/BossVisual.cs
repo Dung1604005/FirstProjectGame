@@ -68,6 +68,7 @@ public class BossVisual : MonoBehaviour
         if(bossStat != null)
         {
             bossStat.OnBossDie += SetAnimDie;
+            bossStat.OnBossDie += Die;
         }
     }
 
@@ -131,11 +132,7 @@ public class BossVisual : MonoBehaviour
     {
         EndShakingNoise();
         PlayChargeEffect(false);
-        BossStat bossStat = GetComponentInParent<BossStat>();
-        if(bossStat != null)
-        {
-            bossStat.DestroyObject();
-        }
+        
     }
     public void SetAnimAttack(bool state)
     {
@@ -151,6 +148,10 @@ public class BossVisual : MonoBehaviour
 
     public void PlayChargeEffect(bool isCharge)
     {
+        if(chargeVFX == null)
+        {
+            return;
+        }
         if (isCharge)
         {
             StartShakingNoise();

@@ -299,6 +299,11 @@ public class GhostKingCombat : MonoBehaviour
         skill4Prefab.SetActive(false);
         ghostKingManager.EndSkill4();
     }
+    public void ResetGhostKingCombat()
+    {
+        unlockedSkill3 = false;
+        unlockedSkill4 = false;
+    }
 
 
 

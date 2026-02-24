@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.45
       objectReference: {fileID: 0}
+    - target: {fileID: 3207828379581621839, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_TagString
+      value: HitBox_DestroyObject
+      objectReference: {fileID: 0}
     - target: {fileID: 3952362739933086414, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: -104.96804
@@ -96,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8166308689369231346, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      propertyPath: m_TagString
+      value: DestroyObject
+      objectReference: {fileID: 0}
     - target: {fileID: 8811477976415641171, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.86
@@ -116,5 +124,28 @@ PrefabInstance:
     - {fileID: 2809799810948000494, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8166308689369231346, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1550943907903459973}
   m_SourcePrefab: {fileID: 100100000, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+--- !u!1 &6549874043294231807 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8166308689369231346, guid: 4da87531dedf7bb4292cd569bdff42cc, type: 3}
+  m_PrefabInstance: {fileID: 3148400698925990669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1550943907903459973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6549874043294231807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd776dbe57c70544fbd8e28e5f20182e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreeController
+  indexLootTable: 0
+  amountDrop: 3
+  maxHealth: 30

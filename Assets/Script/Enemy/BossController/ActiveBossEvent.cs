@@ -10,8 +10,9 @@ public class ActiveBossTrigger: ReceiverEvent
         
         BossManagerInterface bossManager = GetComponent<BossManagerInterface>();
 
-        if(bossManager != null)
+        if(bossManager != null && !isUnlocked)
         {
+            isUnlocked = true;
             bossManager.ActiveBoss();
         }
     }

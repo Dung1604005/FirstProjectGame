@@ -202,24 +202,7 @@ public class GameManageMent : MonoBehaviour
     }
     
     
-    public void OpenShop()
-    {
-         if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (UIManageMent.Instance.ShopSystem.gameObject.activeInHierarchy)
-            {
-                UIManageMent.Instance.ShopSystem.TurnOff();
-                Continue();
-            }
-            else
-            {
-                PauseGame();
-                UIManageMent.Instance.ShopSystem.TurnOn();
-            }
-            
-        }
-    }
-    public DirType CalculateDirType(float dirX, float dirY)
+        public DirType CalculateDirType(float dirX, float dirY)
     {
         
         Vector2 a = new Vector2(dirX, dirY).normalized;
@@ -257,8 +240,6 @@ public class GameManageMent : MonoBehaviour
     {
         //Mo Menu
         ControlMenu();
-
-        OpenShop();
 
         if (Input.GetKeyDown(KeyCode.Z))
         {

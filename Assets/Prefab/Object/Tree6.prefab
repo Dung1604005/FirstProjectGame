@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4530745092848367091}
   m_Layer: 13
   m_Name: Tree6
-  m_TagString: DestroyObject
+  m_TagString: BlockObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 1695879090631389774}
   m_Layer: 13
   m_Name: HitBox
-  m_TagString: HitBox_DestroyObject
+  m_TagString: BlockObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

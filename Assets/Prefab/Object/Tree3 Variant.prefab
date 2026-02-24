@@ -12,10 +12,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2545399557979231270, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
+      propertyPath: m_TagString
+      value: DestroyObject
+      objectReference: {fileID: 0}
     - target: {fileID: 4403986461666869563, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 03d0e6ecee3b886469b7281c06855cb1, type: 3}
+    - target: {fileID: 7242782324904198825, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
+      propertyPath: m_TagString
+      value: HitBox_DestroyObject
+      objectReference: {fileID: 0}
     - target: {fileID: 7553384534896380325, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -87.896385
@@ -56,9 +64,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8318958706217217972, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.4870767
+      objectReference: {fileID: 0}
+    - target: {fileID: 8318958706217217972, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.17201428
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -516687350325413269, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2545399557979231270, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2245559130222195374}
   m_SourcePrefab: {fileID: 100100000, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
+--- !u!1 &3877830242278538758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2545399557979231270, guid: be6252b19c4ee2743937fcb3f0c4f6b4, type: 3}
+  m_PrefabInstance: {fileID: 1622352935596763680}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2245559130222195374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3877830242278538758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd776dbe57c70544fbd8e28e5f20182e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreeController
+  indexLootTable: 0
+  amountDrop: 2
+  maxHealth: 20

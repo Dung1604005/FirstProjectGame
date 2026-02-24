@@ -55,9 +55,13 @@ public class HuyCombat : MonoBehaviour
 
     [SerializeField] private float delayAttackSkill3;
 
-    [SerializeField] private float skill3AttackRange;
+    [SerializeField] private float skill3MinAttackRange;
 
-    public float Skill3AttackRange => skill3AttackRange;
+    public float Skill3MinAttackRange => skill3MinAttackRange;
+
+    [SerializeField] private float skill3MaxAttackRange;
+
+    public float Skill3MaxAttackRange => skill3MaxAttackRange;
 
 
     [SerializeField] private GameObject warningIcon;

@@ -29,10 +29,7 @@ public class SenderEvent : MonoBehaviour
     }
     public void RecallEvent()
     {
-        if(sendOneTime && eventSended)
-        {
-            return;
-        }
+        
         
         foreach (string eventName in eventSend)
         {
@@ -40,6 +37,6 @@ public class SenderEvent : MonoBehaviour
             EventManager.Instance().OnSignalSent?.Invoke(eventName, false);
             
         }
-        eventSended = true;
+        
     }
 }

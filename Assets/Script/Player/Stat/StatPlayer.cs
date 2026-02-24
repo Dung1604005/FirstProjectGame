@@ -9,18 +9,22 @@ public class StatPlayer : MonoBehaviour
     public float MaxHP => maxHP;
     [SerializeField] private float healthGrowth;
     public float HealthGrowth => healthGrowth;
+
+    private int pointMaxHp = 0;
     [SerializeField] private float atk;
     public float Atk => atk;
+
+    private int pointAtk = 0;
     [SerializeField] private float atkGrowth;
     public float AtkGrowth => atkGrowth;
     [SerializeField] private float speed;
     public float Speed => speed;
-    [SerializeField] private float speedGrowth;
-    public float SpeedGrowth => speedGrowth;
 
     [SerializeField] private int critRate;
 
     public int CritRate => critRate;
+
+    private int pointCritRate = 0;
 
     [SerializeField] private int critRateGrowth;
 
@@ -48,6 +52,7 @@ public class StatPlayer : MonoBehaviour
         {
             GameManageMent.Instance.PlayerManager.ExpSystem.UsePoint();
             maxHP += healthGrowth;
+            pointMaxHp += 1;
             UIManageMent.Instance.ExpStatSystemUI.UpdateHealthStatUI(maxHP.ToString());
             GameManageMent.Instance.PlayerManager.Health.SetMaxHp(maxHP);
         }
@@ -59,6 +64,7 @@ public class StatPlayer : MonoBehaviour
         {
             GameManageMent.Instance.PlayerManager.ExpSystem.UsePoint();
             atk += atkGrowth;
+            pointAtk += 1;
             UIManageMent.Instance.ExpStatSystemUI.UpdateAtkStatUI(atk.ToString());
         }
 
@@ -69,6 +75,7 @@ public class StatPlayer : MonoBehaviour
         {
             GameManageMent.Instance.PlayerManager.ExpSystem.UsePoint();
             critRate += critRateGrowth;
+            pointCritRate += 1;
             UIManageMent.Instance.ExpStatSystemUI.UpdateCritRateStatUI(critRate.ToString());
         }
 

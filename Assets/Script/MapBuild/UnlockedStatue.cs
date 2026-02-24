@@ -75,6 +75,10 @@ public class UnlockedStatue : SenderEvent
                 Unlock();
             }
         }
+        else
+        {
+            interactKey.SetActive(true);
+        }
     }
 
     

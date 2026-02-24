@@ -81,7 +81,8 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface
         
 
         if(skill3CoolDownTimer >= huyCombat.Skill3CoolDown 
-        && rangeSqr >= huyCombat.Skill3AttackRange*huyCombat.Skill3AttackRange)
+        && rangeSqr >= huyCombat.Skill3MinAttackRange*huyCombat.Skill3MinAttackRange && 
+        rangeSqr <= huyCombat.Skill3MaxAttackRange*huyCombat.Skill3MaxAttackRange)
         {
             ChooseSkill3();
             huyCombat.CastSkill3();
@@ -112,9 +113,10 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface
     void Start()
     {
         bossMovement.OnDashEnd+=EndSkill3;
+        bossStat.OnBossDie += BossDie;
         huyCombat.enabled = false;
         bossMovement.enabled = false;
-        bossVisual.enabled = false;
+        
         bossStat.enabled = false;
     }
     /// <summary>
@@ -156,7 +158,7 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface
         huyCombat.enabled = true;
         
         bossMovement.enabled = true;
-        bossVisual.enabled = true;
+        
         bossStat.enabled = true;
         isActive = true;
         isAttacking = false;
@@ -164,19 +166,28 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface
 
     public void DeActiveBoss(){
         huyCombat.StopAllCoroutines();
+        bossStat.StopAllCoroutines();
+        bossMovement.StopAllCoroutines();
         huyCombat.Skill1Boss.gameObject.SetActive(false);
         huyCombat.WarningIcon.gameObject.SetActive(false);
         huyCombat.enabled = false;
         bossMovement.enabled = false;
-        bossVisual.enabled = false;
+        
         bossStat.enabled = false;
         isActive = false;
 
     }
 
+    public void BossDie()
+    {
+        this.GetComponent<SenderEvent>().SendEvent();
+        DeActiveBoss();
+        this.GetComponent<SenderEvent>().RecallEvent();
+    }
+
     void Update()
     {
-         if(GameManageMent.Instance.GameState == GameState.Pause || !isActive)
+         if(GameManageMent.Instance.GameState == GameState.Pause || !isActive || bossStat.IsDead)
         {
             return;
         }

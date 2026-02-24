@@ -9,6 +9,7 @@ public class TriggerEvent: SenderEvent
         if(collider2D.tag == GameConfig.PLAYER_TAG0)
         {
             SendEvent();
+            RecallEvent();
         }
     }
 }

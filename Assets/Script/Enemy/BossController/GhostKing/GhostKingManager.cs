@@ -34,13 +34,11 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
     {
         
         GameManageMent.Instance.PoolManager.InitSkillGhostKing();
-        skill1CoolDownTimer = ghostKingCombat.Skill1CoolDown;
-        skill2CoolDownTimer = ghostKingCombat.Skill2CoolDown;
-        skill3CoolDownTimer = ghostKingCombat.Skill3CoolDown;
-        skill4CoolDownTimer = ghostKingCombat.Skill4CoolDown;
+        skill1CoolDownTimer = ghostKingCombat.Skill1CoolDown/2;
+        skill2CoolDownTimer = ghostKingCombat.Skill2CoolDown/2;
+        skill3CoolDownTimer = ghostKingCombat.Skill3CoolDown/2;
+        skill4CoolDownTimer = ghostKingCombat.Skill4CoolDown/2;
         bossStat.OnHealthBossChange += UnlockedSkill;
-
-
     }
 
     private void ChooseSkill1(){
@@ -168,6 +166,12 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
     {
         InitOutSide();
         GameManageMent.Instance.PlayerManager.Health.OnPlayerDie += DeActiveBoss;
+        bossMovement.OnDashEnd+=EndSkill3;
+        bossStat.OnBossDie += BossDie;
+        ghostKingCombat.enabled = false;
+        bossMovement.enabled = false;
+        
+        bossStat.enabled = false;
     }
 
     /// <summary>
@@ -179,10 +183,10 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
         isAttacking = false;
         
         // Reset cooldown timers
-        skill1CoolDownTimer = 0f;
-        skill2CoolDownTimer = 0f;
-        skill3CoolDownTimer = 0f;
-        skill4CoolDownTimer = 0f;
+        skill1CoolDownTimer = ghostKingCombat.Skill1CoolDown/2;
+        skill2CoolDownTimer = ghostKingCombat.Skill2CoolDown/2;
+        skill3CoolDownTimer = ghostKingCombat.Skill3CoolDown/2;
+        skill4CoolDownTimer = ghostKingCombat.Skill4CoolDown/2;
         
         // Reset all components
         if (bossStat != null)
@@ -199,6 +203,8 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
         {
             bossVisual.ResetVisual();
         }
+
+        ghostKingCombat.ResetGhostKingCombat();
         
         // Reset absorbing state
         if (bossStat != null)
@@ -211,7 +217,7 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
         ResetBoss();
         ghostKingCombat.enabled = true;
         bossMovement.enabled = true;
-        bossVisual.enabled = true;
+        
         bossStat.enabled = true;
         isActive = true;
         isAttacking = false;
@@ -221,15 +227,28 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
         ghostKingCombat.StopAllCoroutines();
         ghostKingCombat.enabled = false;
         bossMovement.enabled = false;
-        bossVisual.enabled = false;
+        
         bossStat.enabled = false;
         isActive = false;
 
     }
 
+    public void BossDie()
+    {
+        if(this.GetComponent<SenderEvent>() != null)
+        {
+             this.GetComponent<SenderEvent>().SendEvent();
+            this.GetComponent<SenderEvent>().RecallEvent();
+        }
+        
+        DeActiveBoss();
+
+       
+    }
+
     void Update()
     {
-        if(GameManageMent.Instance.GameState == GameState.Pause || !isActive)
+        if(GameManageMent.Instance.GameState == GameState.Pause || !isActive || bossStat.IsDead)
         {
             return;
         }

@@ -21,11 +21,12 @@ public class WallHaveAnim : ReceiverEvent
         isUnlocked = true;
     }
 
-    public void SetColliderOff()
+
+    public void WallUp()
     {
-        collider2D.enabled = false;
+        collider2D.enabled = true;
     }
-    public void SetColliderOn()
+    public void WallDown()
     {
         collider2D.enabled = false;
     }
