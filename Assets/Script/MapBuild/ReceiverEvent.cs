@@ -2,11 +2,27 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReceiverEvent : MonoBehaviour
+public class ReceiverEvent : MonoBehaviour, IActivatable
 {
+    [SerializeField] private string uniqueId;
     [SerializeField] private List<Pair<string, bool>> requiredEvents;
 
     protected bool isUnlocked = false;
+
+    [ContextMenu("Tạo Lại ID Mới")]
+
+    public void GenerateNewID()
+    {
+        uniqueId = System.Guid.NewGuid().ToString();
+    }
+
+    void OnValidate()
+    {
+        if (uniqueId == null)
+        {
+            uniqueId = System.Guid.NewGuid().ToString();
+        }
+    }
 
     private void OnEnable()
     {
@@ -65,6 +81,30 @@ public class ReceiverEvent : MonoBehaviour
             }
         }
 
+    }
+
+    public virtual void Activate()
+    {
+        isUnlocked = true;
+        if (this.GetComponent<SpriteRenderer>() != null)
+        {
+            this.GetComponent<SpriteRenderer>().enabled = true;
+        }
+
+        if (this.GetComponent<Animator>() != null)
+        {
+            this.GetComponent<Animator>().enabled = true;
+        }
+         if (this.GetComponent<SenderEvent>() != null)
+            {
+                this.GetComponent<SenderEvent>().enabled = true;
+            }
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(true);
+                this.gameObject.SetActive(true);
+
+            }
     }
 
     protected virtual void Unlock()

@@ -17,8 +17,17 @@ public class WallHaveAnim : ReceiverEvent
 
     protected override void Unlock()
     {
-        animator.SetTrigger(nameAnimPlay);
+        animator.SetBool("down", false);
+        animator.SetBool("up", false);
+        animator.SetBool(nameAnimPlay, true);
         isUnlocked = true;
+    }
+
+    public override void Activate()
+    {
+        base.Activate();
+        animator.SetBool("down", true);
+        
     }
 
 

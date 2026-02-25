@@ -2,13 +2,34 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SenderEvent : MonoBehaviour
+public class SenderEvent : MonoBehaviour, IActivatable
 {
+    [SerializeField] private string uniqueId;
     [SerializeField] private List<string> eventSend;
 
     protected bool eventSended;
 
     [SerializeField] protected bool sendOneTime;
+
+    public virtual void Activate()
+    {
+        eventSended = true;
+    }
+
+    [ContextMenu("Tạo Lại ID Mới")]
+
+    public void GenerateNewID()
+    {
+        uniqueId = System.Guid.NewGuid().ToString();
+    }
+
+    void OnValidate()
+    {
+        if (uniqueId == null)
+        {
+            uniqueId = System.Guid.NewGuid().ToString();
+        }
+    }
 
     
 

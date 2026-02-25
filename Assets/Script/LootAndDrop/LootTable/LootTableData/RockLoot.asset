@@ -15,3 +15,4 @@ MonoBehaviour:
   entries:
   - {fileID: 11400000, guid: 7edafe27ebe154f4993e9b9c574a7553, type: 2}
   weights: 64000000
+  sumWeight: 100

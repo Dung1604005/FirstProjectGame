@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-public class Door : ReceiverEvent
+public class Door : ReceiverEvent, IActivatable
 {
+    
     [SerializeField] private float openSpeed;
 
     [SerializeField] private Vector2 openDistance;

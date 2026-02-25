@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class BackGroundUI : MonoBehaviour, IPointerClickHandler
 {
     
-    [SerializeField] private ContextMenu contextMenu;
+    [SerializeField] private ContextMenu2 contextMenu;
 
     public void OnPointerClick(PointerEventData eventData)
     {

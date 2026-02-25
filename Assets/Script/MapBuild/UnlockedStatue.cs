@@ -38,6 +38,12 @@ public class UnlockedStatue : SenderEvent
         }
     }
 
+    public override void Activate()
+    {
+        base.Activate();
+        unlockedObject.SetActive(true);
+    }
+
     public void Unlock()
     {
         unlockedObject.SetActive(true);
