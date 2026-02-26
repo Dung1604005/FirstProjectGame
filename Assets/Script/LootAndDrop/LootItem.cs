@@ -198,11 +198,13 @@ public class LootItem : MonoBehaviour, IPoolable
             {
                 Floating();
             }
+            
 
         }
         else
         {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount))
+            if ((GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Type == ItemType.Material||GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem].Type == ItemType.Bullet) &&
+            UIManageMent.Instance.InventoryUI.Inven.TryAdd(GameManageMent.Instance.ItemDataBase.ItemDatas[indexItem], amount))
             {
                 AutoPick();
                 

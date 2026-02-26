@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HuyBossManagement : MonoBehaviour, BossManagerInterface
+public class HuyBossManagement : MonoBehaviour, BossManagerInterface, IRestorable
 {
      [SerializeField] private BossStat bossStat;
 
@@ -28,8 +28,10 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface
 
 
 
-
-
+    public void Restore()
+    {
+        bossStat.TakeDamage(99999, false);
+    }
 
      private void ChooseSkill1(){
         bossMovement.SetStationary(true);
@@ -150,6 +152,10 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface
     }
 
     public void ActiveBoss(){
+        if (bossStat.IsDead)
+        {
+            return;
+        }
         ResetBoss();
        
         huyCombat.Skill1Boss.gameObject.SetActive(false);

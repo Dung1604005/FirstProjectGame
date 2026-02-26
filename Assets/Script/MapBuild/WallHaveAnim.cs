@@ -15,6 +15,20 @@ public class WallHaveAnim : ReceiverEvent
         collider2D = GetComponent<Collider2D>();
     }
 
+    public override void GenerateNewID()
+    {
+        base.GenerateNewID();
+        uniqueId = "Wall_"+uniqueId;
+    }
+
+    public override void OnValidate()
+    {
+        if (uniqueId == null|| uniqueId == "")
+        {
+            uniqueId = "Wall_" + System.Guid.NewGuid().ToString();
+        }
+    }
+
     protected override void Unlock()
     {
         animator.SetBool("down", false);
@@ -23,9 +37,9 @@ public class WallHaveAnim : ReceiverEvent
         isUnlocked = true;
     }
 
-    public override void Activate()
+    public override void Restore()
     {
-        base.Activate();
+        base.Restore();
         animator.SetBool("down", true);
         
     }

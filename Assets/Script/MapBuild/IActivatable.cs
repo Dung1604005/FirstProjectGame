@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public interface IActivatable
+public interface IRestorable
 {
 
-    
-    public void Activate();
+
+    public void Restore();
 }

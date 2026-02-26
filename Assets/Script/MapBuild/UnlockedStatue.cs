@@ -37,10 +37,24 @@ public class UnlockedStatue : SenderEvent
             Unlock();
         }
     }
-
-    public override void Activate()
+    public override void GenerateNewID()
     {
-        base.Activate();
+        base.GenerateNewID();
+        uniqueId = "UnlockedStatue_" + uniqueId;
+    }
+    public override void OnValidate()
+    {
+        if(uniqueId == null || uniqueId == "")
+        {
+            uniqueId =  "UnlockedStatue_" +System.Guid.NewGuid().ToString();
+        }
+    }
+
+
+
+    public override void Restore()
+    {
+        base.Restore();
         unlockedObject.SetActive(true);
     }
 

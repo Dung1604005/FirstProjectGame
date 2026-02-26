@@ -5,8 +5,8 @@ using TMPro;
 using UnityEngine.UI;
 public class InventoryUI : MenuLayOutUI
 {
-    [SerializeField] private ContextMenu2 contextMenu;
-    public ContextMenu2 ContextMenu => contextMenu;
+    [SerializeField] private ContextMenuUI contextMenu;
+    public ContextMenuUI ContextMenu => contextMenu;
 
     [SerializeField] private PanelClickUI panelClickUI;
     public PanelClickUI PanelClickUI => panelClickUI;

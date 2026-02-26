@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class ActiveBossTrigger: ReceiverEvent
 {
-
-    
+   
     protected override void Unlock()
     {
         

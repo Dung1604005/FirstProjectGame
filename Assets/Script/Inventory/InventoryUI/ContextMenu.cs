@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class ContextMenu2 : MonoBehaviour
+public class ContextMenuUI : MonoBehaviour
 {
    
 

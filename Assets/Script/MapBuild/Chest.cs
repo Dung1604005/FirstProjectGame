@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Chest : MonoBehaviour, IActivatable
+public class Chest : MonoBehaviour, IRestorable
 {
 
 
@@ -26,14 +26,14 @@ public class Chest : MonoBehaviour, IActivatable
 
     public void GenerateNewID()
     {
-        uniqueId = System.Guid.NewGuid().ToString();
+        uniqueId = "Chest_"+System.Guid.NewGuid().ToString();
     }
 
     void OnValidate()
     {
-        if (uniqueId == null)
+        if (uniqueId == null|| uniqueId == "")
         {
-            uniqueId = System.Guid.NewGuid().ToString();
+            uniqueId = "Chest_"+System.Guid.NewGuid().ToString();
         }
     }
 
@@ -48,7 +48,7 @@ public class Chest : MonoBehaviour, IActivatable
         GameManageMent.Instance.DropSystem.DropItem(indexLootTable, amountDrop, this.gameObject.transform.position);
 
     }
-    public void Activate()
+    public void Restore()
     {
         isOpened = true;
         animator.enabled = true;

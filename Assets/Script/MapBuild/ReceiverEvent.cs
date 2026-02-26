@@ -2,23 +2,23 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReceiverEvent : MonoBehaviour, IActivatable
+public class ReceiverEvent : MonoBehaviour, IRestorable
 {
-    [SerializeField] private string uniqueId;
+    [SerializeField] protected string uniqueId;
     [SerializeField] private List<Pair<string, bool>> requiredEvents;
 
     protected bool isUnlocked = false;
 
     [ContextMenu("Tạo Lại ID Mới")]
 
-    public void GenerateNewID()
+    public virtual void GenerateNewID()
     {
         uniqueId = System.Guid.NewGuid().ToString();
     }
 
-    void OnValidate()
+    public virtual void OnValidate()
     {
-        if (uniqueId == null)
+        if (uniqueId == null|| uniqueId == "")
         {
             uniqueId = System.Guid.NewGuid().ToString();
         }
@@ -83,7 +83,7 @@ public class ReceiverEvent : MonoBehaviour, IActivatable
 
     }
 
-    public virtual void Activate()
+    public virtual void Restore()
     {
         isUnlocked = true;
         if (this.GetComponent<SpriteRenderer>() != null)

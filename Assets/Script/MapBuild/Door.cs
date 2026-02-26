@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Door : ReceiverEvent, IActivatable
+public class Door : ReceiverEvent, IRestorable
 {
     
     [SerializeField] private float openSpeed;
@@ -17,6 +17,22 @@ public class Door : ReceiverEvent, IActivatable
         
         defaultPosition = this.transform.position;
     }
+
+    public override void GenerateNewID()
+    {
+        base.GenerateNewID();
+        uniqueId = "Door_"+uniqueId;
+    }
+
+    public override void OnValidate()
+    {
+        if (uniqueId == null|| uniqueId == "")
+        {
+            uniqueId = "Door_"+System.Guid.NewGuid().ToString();
+        }
+    }
+
+    
 
     protected override void Unlock()
     {

@@ -34,6 +34,14 @@ public class QuestProgress
 
     public Objective FirstObjectiveNotCompleted => firstObjectiveNotCompleted;
 
+    public void RestoreFromSave(List<int> savedCounts)
+    {
+        curCount = new List<int>(savedCounts);
+
+        UpdateProgressRatio();
+        checkProgress();
+    }
+
 
     public QuestProgress(int _questId, List<Objective> _objectives)
     {
