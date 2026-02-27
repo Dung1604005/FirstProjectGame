@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: BigZombie
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMeleeData
   enemyType: 0
-  nameEnemy: 
-  maxHealth: 0
-  atk: 0
-  coolDown: 0
-  rangeAtk: 0
-  rangeChase: 0
-  runSpeed: 0
-  walkSpeed: 0
+  nameEnemy: BigZombie
+  maxHealth: 100
+  atk: 50
+  coolDown: 3
+  rangeAtk: 3
+  rangeChase: 50
+  runSpeed: 6.5
+  walkSpeed: 4.5
   goldValue: 0
-  expValue: 0
-  indexEnemy: 0
+  expValue: 60
+  indexEnemy: 2

@@ -23,4 +23,4 @@ MonoBehaviour:
   walkSpeed: 3
   goldValue: 500
   expValue: 1000
-  indexEnemy: 2
+  indexEnemy: 3
