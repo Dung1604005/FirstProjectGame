@@ -131,6 +131,14 @@ public class QuestManager : MonoBehaviour
         OnQuestChange?.Invoke();
     }
 
+    public void LoadQuestData(QuestData questData)
+    {
+        if (questData == null) return;
+
+        LoadCompletedQuests(questData.completedQuestId);
+        LoadQuestProgress(questData.questProgressSaveDatas);
+        LoadNpcData(questData.savedNpcList);
+    }
 
     public void AcceptQuest(QuestDefinition quest)
     {

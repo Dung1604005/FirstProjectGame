@@ -59,6 +59,16 @@ public class ExpSystem : MonoBehaviour
         
         LvUp();
     }
+    public void LoadData(int savedLv, int savedExpToLvUp, int savedPointStat)
+    {
+        lv = savedLv;
+        expToLvUp = savedExpToLvUp;
+        pointStat = savedPointStat;
+        UIManageMent.Instance.ExpStatSystemUI.UpdateLvUI(lv.ToString());
+        UIManageMent.Instance.ExpStatSystemUI.UpdatePointStatUI(pointStat.ToString());
+        OnExpChange?.Invoke(curExp, expToLvUp);
+    }
+
     void Start()
     {
         lv = 1;

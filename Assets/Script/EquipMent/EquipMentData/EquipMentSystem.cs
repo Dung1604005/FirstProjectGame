@@ -18,6 +18,35 @@ public class EquipMentSystem
 
     public event Action OnEquipmentChange;
 
+    public List<ItemSaveData> GetEquipmentSaveData()
+    {
+        List<ItemSaveData> saveDatas = new List<ItemSaveData>();
+        
+        for(int i = 0 ; i < slots.Count; i++)
+        {
+            if(slots[i].ItemData != null && slots[i].Count > 0)
+            {
+                saveDatas.Add(new ItemSaveData(slots[i].ItemData.Index, slots[i].Count));
+            }
+            
+        }
+        return saveDatas;
+    }
+
+    public void LoadEquipmentSaveData(List<ItemSaveData> itemSaveDatas)
+    {
+        for(int i = 0; i < slots.Count && i < itemSaveDatas.Count; i++)
+        {
+            slots[i] = new EquipMentSlot(null, 0); 
+            if(TryEquip(GameManageMent.Instance.ItemDataBase.ItemDatas[itemSaveDatas[i].itemId], itemSaveDatas[i].count))
+            {
+                
+            }
+            
+            
+        }
+    }
+
     public EquipMentSystem(int _size)
     {
         slots = new List<EquipMentSlot>();

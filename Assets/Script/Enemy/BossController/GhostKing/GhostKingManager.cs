@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GhostKingManager : MonoBehaviour, BossManagerInterface, IRestorable
+public class GhostKingManager : MonoBehaviour, BossManagerInterface
 {
 
     [SerializeField] private BossStat bossStat;
@@ -28,8 +28,13 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface, IRestorable
 
     public bool IsActive => isActive;
 
-    public void Restore()
+    public void Restore(int id)
     {
+        if(id != bossStat.BossData.IndexEnemy)
+        {
+            return;
+        }
+        ActiveBoss();
         bossStat.TakeDamage(999999, false);
     }
 
@@ -175,6 +180,7 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface, IRestorable
         bossStat.OnBossDie += BossDie;
         ghostKingCombat.enabled = false;
         bossMovement.enabled = false;
+        GameManageMent.Instance._WorldManager.OnLoadDataBoss += Restore;
         
         bossStat.enabled = false;
     }

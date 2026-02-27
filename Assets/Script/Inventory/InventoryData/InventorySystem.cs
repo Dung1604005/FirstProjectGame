@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.VersionControl;
@@ -18,6 +19,32 @@ public class InventorySystem
 
     // Mot event de thong bao inventory bi thay doi
     public event Action OnChangeInventory;
+
+    public List<ItemSaveData> GetSaveInventoryData()
+    {
+        List<ItemSaveData> saveDatas = new List<ItemSaveData>();
+        
+        for(int i = 0 ; i < slots.Count; i++)
+        {
+            if(slots[i].ItemData != null && slots[i].Count > 0)
+            {
+                saveDatas.Add(new ItemSaveData(slots[i].ItemData.Index, slots[i].Count));
+            }
+            
+        }
+        return saveDatas;
+        
+    }
+    public void LoadInventoryData(List<ItemSaveData> itemSaveDatas)
+    {
+        itemCount.Clear();
+        for(int i = 0; i < slots.Count && i < itemSaveDatas.Count; i++)
+        {
+            slots[i] = new InventorySlot(null, 0); 
+            Add(GameManageMent.Instance.ItemDataBase.ItemDatas[itemSaveDatas[i].itemId], itemSaveDatas[i].count, true);
+            
+        }
+    }
 
     // Khoi tao inven
     public InventorySystem(int size)

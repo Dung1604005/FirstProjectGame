@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Chest : MonoBehaviour, IRestorable
@@ -7,6 +9,8 @@ public class Chest : MonoBehaviour, IRestorable
 
 
     [SerializeField] private string uniqueId;
+
+    
     [SerializeField] private int indexLootTable;
     [SerializeField] private int amountDrop;
     [SerializeField] private float radInteract;
@@ -20,6 +24,10 @@ public class Chest : MonoBehaviour, IRestorable
     {
         animator = GetComponent<Animator>();
         animator.enabled = false;
+    }
+    void Start()
+    {
+        GameManageMent.Instance._WorldManager.OnLoadDataObject += Restore;
     }
 
     [ContextMenu("Tạo Lại ID Mới")]
@@ -45,11 +53,16 @@ public class Chest : MonoBehaviour, IRestorable
             return;
         }
         isOpened = true;
+        GameManageMent.Instance._WorldManager.AddOpenedChest(uniqueId);
         GameManageMent.Instance.DropSystem.DropItem(indexLootTable, amountDrop, this.gameObject.transform.position);
 
     }
-    public void Restore()
+    public void Restore(string _id)
     {
+        if(_id != uniqueId)
+        {
+            return;
+        }
         isOpened = true;
         animator.enabled = true;
     }
@@ -59,7 +72,9 @@ public class Chest : MonoBehaviour, IRestorable
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (GameManageMent.Instance.PlayerManager.PlayerController!= null 
+        &&(GameManageMent.Instance.PlayerManager.PlayerController.getPos() - (Vector2)this.transform.position).sqrMagnitude <= radInteract*radInteract
+        &&Input.GetKeyDown(KeyCode.E))
         {
             animator.enabled = true;
 

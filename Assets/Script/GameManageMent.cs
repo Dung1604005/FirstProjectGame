@@ -21,6 +21,9 @@ public class GameManageMent : MonoBehaviour
     private  GameState gameState;
     public GameState GameState => gameState;
 
+    public WorldManager _WorldManager {get; private set;}
+
+
     [SerializeField] private EffectController effectController;
     public EffectController EffectController => effectController;
     [SerializeField] private ItemDataBase itemDataBase;
@@ -137,6 +140,7 @@ public class GameManageMent : MonoBehaviour
         effectController = GetComponent<EffectController>();
         timeManager = GetComponent<TimeManager>();
         enviromentManager = GetComponent<EnviromentManager>();
+        _WorldManager = new WorldManager();
         gameState = GameState.Continue;
         Application.targetFrameRate = 120;
         Cursor.SetCursor(iconMouse, hotspot, cursorMode);

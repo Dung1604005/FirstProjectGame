@@ -5,6 +5,8 @@ using UnityEngine;
 public class ReceiverEvent : MonoBehaviour, IRestorable
 {
     [SerializeField] protected string uniqueId;
+
+    
     [SerializeField] private List<Pair<string, bool>> requiredEvents;
 
     protected bool isUnlocked = false;
@@ -28,14 +30,14 @@ public class ReceiverEvent : MonoBehaviour, IRestorable
     {
 
         EventManager.Instance().OnSignalSent += CheckCondition;
-        EventManager.Instance().OnSignalRecall += CheckCondition;
+        
     }
 
     private void OnDisable()
     {
 
         EventManager.Instance().OnSignalSent -= CheckCondition;
-        EventManager.Instance().OnSignalRecall -= CheckCondition;
+        
     }
 
     public void CheckCondition(string eventName , bool type)
@@ -83,8 +85,12 @@ public class ReceiverEvent : MonoBehaviour, IRestorable
 
     }
 
-    public virtual void Restore()
+    public virtual void Restore(string _id)
     {
+        if(_id != uniqueId)
+        {
+            return;
+        }
         isUnlocked = true;
         if (this.GetComponent<SpriteRenderer>() != null)
         {
@@ -109,10 +115,14 @@ public class ReceiverEvent : MonoBehaviour, IRestorable
 
     protected virtual void Unlock()
     {
-
+        GameManageMent.Instance._WorldManager.AddActivatedObject(uniqueId);
     }
     void Awake()
     {
         
+    }
+    void Start()
+    {
+        GameManageMent.Instance._WorldManager.OnLoadDataObject += Restore;
     }
 }

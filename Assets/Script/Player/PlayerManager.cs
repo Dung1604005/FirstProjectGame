@@ -117,7 +117,59 @@ public class PlayerManager : MonoBehaviour
         
     }
 
-   
+    public PlayerData GetSavePlayerData()
+    {
+        Vector3 pos = playerController.getPos();
+        return new PlayerData(
+            health.CurHp(),
+            expSystem.Lv,
+            expSystem.ExpToLvUp,
+            expSystem.PointStat,
+            stat.PointMaxHp,
+            stat.PointAtk,
+            stat.PointCritRate,
+            gold.CurGold,
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
+            pos.x,
+            pos.y,
+            pos.z,
+            shotgunBullet,
+            cur_ShotgunBullet,
+            pistolBullet,
+            cur_PistolBullet,
+            gunBullet,
+            cur_GunBullet
+        );
+    }
+
+    public void LoadPlayerData(PlayerData data)
+    {
+        if (data == null) return;
+
+        // Load stat points
+        stat.LoadData(data.pointMaxHp, data.pointAtk, data.pointCritRate);
+
+        // Load health
+        health.SetMaxHp(stat.MaxHP, false);
+        health.SetCurHp(data.currentHpPlayer);
+
+        // Load exp
+        expSystem.LoadData(data.levelPlayer, data.expToLevelUp, data.pointStat);
+
+        // Load gold
+        gold.LoadData(data.curGold);
+
+        // Load bullets
+        shotgunBullet = data.shotgunBullet;
+        cur_ShotgunBullet = data.cur_ShotgunBullet;
+        pistolBullet = data.pistolBullet;
+        cur_PistolBullet = data.cur_PistolBullet;
+        gunBullet = data.gunBullet;
+        cur_GunBullet = data.cur_GunBullet;
+
+        // Load position
+        playerController.SetPosition(new Vector3(data.posX, data.posY, data.posZ));
+    }
 
     void Awake()
     {

@@ -26,6 +26,16 @@ public class TimeManager : MonoBehaviour
     public event Action ChangeToDay;
 
     public event Action ChangeToMidDay, ChangeToNight, ChangeToMidNight;
+
+    public float GetTimeSaveData()
+    {
+        return elapseTime;
+    }
+
+    public void LoadTimeSaveData(float timeSaveData)
+    {
+        elapseTime = timeSaveData;
+    }
     
     private void Awake()
     {

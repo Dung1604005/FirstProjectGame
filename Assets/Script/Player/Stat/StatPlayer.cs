@@ -11,10 +11,12 @@ public class StatPlayer : MonoBehaviour
     public float HealthGrowth => healthGrowth;
 
     private int pointMaxHp = 0;
+    public int PointMaxHp => pointMaxHp;
     [SerializeField] private float atk;
     public float Atk => atk;
 
     private int pointAtk = 0;
+    public int PointAtk => pointAtk;
     [SerializeField] private float atkGrowth;
     public float AtkGrowth => atkGrowth;
     [SerializeField] private float speed;
@@ -25,6 +27,7 @@ public class StatPlayer : MonoBehaviour
     public int CritRate => critRate;
 
     private int pointCritRate = 0;
+    public int PointCritRate => pointCritRate;
 
     [SerializeField] private int critRateGrowth;
 
@@ -80,6 +83,22 @@ public class StatPlayer : MonoBehaviour
         }
 
     }
+    public void LoadData(int savedPointMaxHp, int savedPointAtk, int savedPointCritRate)
+    {
+        maxHP += savedPointMaxHp * healthGrowth;
+        pointMaxHp = savedPointMaxHp;
+
+        atk += savedPointAtk * atkGrowth;
+        pointAtk = savedPointAtk;
+
+        critRate += savedPointCritRate * critRateGrowth;
+        pointCritRate = savedPointCritRate;
+
+        UIManageMent.Instance.ExpStatSystemUI.UpdateHealthStatUI(maxHP.ToString());
+        UIManageMent.Instance.ExpStatSystemUI.UpdateAtkStatUI(atk.ToString());
+        UIManageMent.Instance.ExpStatSystemUI.UpdateCritRateStatUI(critRate.ToString());
+    }
+
     void Start()
     {
         UIManageMent.Instance.ExpStatSystemUI.UpdateHealthStatUI(maxHP.ToString());

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Door : ReceiverEvent, IRestorable
+public class Door : ReceiverEvent
 {
     
     [SerializeField] private float openSpeed;
@@ -37,7 +37,7 @@ public class Door : ReceiverEvent, IRestorable
     protected override void Unlock()
     {
         isUnlocked = true;
-        
+        GameManageMent.Instance._WorldManager.AddActivatedObject(uniqueId);
     }
 
     public void Update()

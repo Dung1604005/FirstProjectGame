@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HuyBossManagement : MonoBehaviour, BossManagerInterface, IRestorable
+public class HuyBossManagement : MonoBehaviour, BossManagerInterface
 {
      [SerializeField] private BossStat bossStat;
 
@@ -28,8 +28,13 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface, IRestorabl
 
 
 
-    public void Restore()
+    public void Restore(int id)
     {
+        if(id != bossStat.BossData.IndexEnemy)
+        {
+            return;
+        }
+        ActiveBoss();
         bossStat.TakeDamage(99999, false);
     }
 
@@ -120,6 +125,8 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface, IRestorabl
         bossMovement.enabled = false;
         
         bossStat.enabled = false;
+
+        GameManageMent.Instance._WorldManager.OnLoadDataBoss += Restore;
     }
     /// <summary>
     /// Reset Huy Boss to initial state
@@ -130,9 +137,9 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface, IRestorabl
         isAttacking = false;
         
         // Reset cooldown timers
-        skill1CoolDownTimer = 0f;
-        skill2CoolDownTimer = 0f;
-        skill3CoolDownTimer = 0f;
+        skill1CoolDownTimer = huyCombat.Skill1CoolDown/2f;
+        skill2CoolDownTimer = huyCombat.Skill2CoolDown/2f;
+        skill3CoolDownTimer = huyCombat.Skill3CoolDown/2f;
         
         // Reset all components
         if (bossStat != null)

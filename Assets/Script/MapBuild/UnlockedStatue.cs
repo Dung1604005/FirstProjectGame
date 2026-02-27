@@ -36,6 +36,7 @@ public class UnlockedStatue : SenderEvent
         {
             Unlock();
         }
+        GameManageMent.Instance._WorldManager.OnLoadDataObject += Restore;
     }
     public override void GenerateNewID()
     {
@@ -52,9 +53,9 @@ public class UnlockedStatue : SenderEvent
 
 
 
-    public override void Restore()
+    public override void Restore(string _id)
     {
-        base.Restore();
+        base.Restore(_id);
         unlockedObject.SetActive(true);
     }
 
@@ -64,6 +65,7 @@ public class UnlockedStatue : SenderEvent
         eventSended = true;
         
         SendEvent();
+        GameManageMent.Instance._WorldManager.AddActivatedObject(uniqueId);
     }
 
     void Update()

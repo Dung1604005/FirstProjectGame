@@ -5,18 +5,29 @@ using UnityEngine;
 public class SenderEvent : MonoBehaviour, IRestorable
 {
     [SerializeField] protected string uniqueId;
+
+    
     [SerializeField] private List<string> eventSend;
 
-    protected bool eventSended;
+    [SerializeField] protected bool eventSended;
 
     [SerializeField] protected bool sendOneTime;
 
-    public virtual void Restore()
+    public virtual void Restore(string _id)
     {
+        if(_id != uniqueId)
+        {
+            return;
+        }
         eventSended = true;
     }
 
     [ContextMenu("Tạo Lại ID Mới")]
+
+    void Start()
+    {
+        GameManageMent.Instance._WorldManager.OnLoadDataObject += Restore;
+    }
 
     public virtual void GenerateNewID()
     {
@@ -47,6 +58,7 @@ public class SenderEvent : MonoBehaviour, IRestorable
             
         }
         eventSended = true;
+        GameManageMent.Instance._WorldManager.AddActivatedObject(uniqueId);
     }
     public void RecallEvent()
     {

@@ -52,6 +52,12 @@ public class GoldPlayer : MonoBehaviour
         
         
     }
+    public void LoadData(int savedGold)
+    {
+        curGold = savedGold;
+        UIManageMent.Instance.SetGoldText(curGold.ToString());
+    }
+
     void Start()
     {
         UIManageMent.Instance.SetGoldText(curGold.ToString());

@@ -126,6 +126,7 @@ public class BossStat : MonoBehaviour
         GameManageMent.Instance.QuestManager.UpdateProgressAllQuestKill(1, bossData.IndexEnemy, ObjectiveType.Kill);
         GameManageMent.Instance.PlayerManager.Gold.AddGold(bossData.GoldValue);
         GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(bossData.ExpValue);
+        GameManageMent.Instance._WorldManager.AddDefeatedBoss(bossData.IndexEnemy);
         OnBossDie?.Invoke();
 
     }

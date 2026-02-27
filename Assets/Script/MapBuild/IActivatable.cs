@@ -4,5 +4,5 @@ public interface IRestorable
 {
 
 
-    public void Restore();
+    public void Restore(string _id);
 }

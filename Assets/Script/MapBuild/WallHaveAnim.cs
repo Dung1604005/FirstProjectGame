@@ -35,11 +35,12 @@ public class WallHaveAnim : ReceiverEvent
         animator.SetBool("up", false);
         animator.SetBool(nameAnimPlay, true);
         isUnlocked = true;
+        GameManageMent.Instance._WorldManager.AddActivatedObject(uniqueId);
     }
 
-    public override void Restore()
+    public override void Restore(string _id)
     {
-        base.Restore();
+        base.Restore(_id);
         animator.SetBool("down", true);
         
     }
