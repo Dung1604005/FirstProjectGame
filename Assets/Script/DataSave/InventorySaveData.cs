@@ -8,6 +8,8 @@ public class InventorySaveData
 {
     public List<ItemSaveData> savedItems = new List<ItemSaveData>();
 
+    public InventorySaveData() { }
+
     public InventorySaveData(List<ItemSaveData> itemSaveDatas)
     {
         savedItems = new List<ItemSaveData>(itemSaveDatas);
@@ -22,6 +24,8 @@ public class ItemSaveData
     public int itemId;
 
     public int count;
+
+    public ItemSaveData() { }
 
     public ItemSaveData(int id, int _count)
     {

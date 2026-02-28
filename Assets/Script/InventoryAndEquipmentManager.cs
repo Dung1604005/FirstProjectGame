@@ -35,10 +35,7 @@ public class InventoryAndEquipmentManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            GameManageMent.Instance.PlayerManager.ExpSystem.GainExp(1000);
-        }
+        
         
        
     }

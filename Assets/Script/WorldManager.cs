@@ -22,17 +22,19 @@ public class WorldManager
 
     public WorldData GetWorldSaveData()
     {
-        WorldData worldData = new WorldData(chestOpenedId, defeatedBossId, activatedObjectId, GameManageMent.Instance.TimeManager.GetTimeSaveData());
+        int currentSceneId = SceneLoader.Instance.CurrentSceneData.IdSceneData;
+        WorldData worldData = new WorldData(chestOpenedId, defeatedBossId, activatedObjectId, GameManageMent.Instance.TimeManager.GetTimeSaveData(), currentSceneId);
         return worldData;
     }
 
     public void LoadWorldSaveData(WorldData worldData)
     {
-        chestOpenedId = new List<string>(worldData.chestOpenedId);
+        if (worldData == null) return;
+        chestOpenedId = new List<string>(worldData.chestOpenedId ?? new List<string>());
 
-        defeatedBossId = new List<int>(worldData.defeatedBossId);
+        defeatedBossId = new List<int>(worldData.defeatedBossId ?? new List<int>());
 
-        activatedObjectId = new List<string>(worldData.activatedObjectId);
+        activatedObjectId = new List<string>(worldData.activatedObjectId ?? new List<string>());
 
         GameManageMent.Instance.TimeManager.LoadTimeSaveData(worldData.timeSaveData);
         for(int i = 0; i < chestOpenedId.Count; i++)

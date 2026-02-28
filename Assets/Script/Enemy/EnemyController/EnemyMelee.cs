@@ -6,6 +6,8 @@ using UnityEngine;
 public class EnemyMelee : EnemyBase
 {
 
+    private float lastDamageTime = 0f;
+
     private void AttackMelee(float x, float y)
     {
         if (cur_coolDown >= enemyBaseData.CoolDown)
@@ -21,19 +23,25 @@ public class EnemyMelee : EnemyBase
 
     }
 
-    // Ket thuc tan cong va Gay damage
-    public void EndAttack()
+    public void CauseDamage()
     {
+        if (Time.time - lastDamageTime < 0.1f) return;
+    
+        lastDamageTime = Time.time; // Cập nhật lại mốc thời gian
         Vector2 dir = (player.position - transform.position);
         float dis = dir.sqrMagnitude;
 
         if (dis <= enemyBaseData.RangeAtk * enemyBaseData.RangeAtk)
         {
-            if (attacking)
-            {
-                player.GetComponent<Health>().OnDamaged(attack);
-            }
+            
+            player.GetComponent<Health>().OnDamaged(attack);
+            
         }
+    }
+
+    // Ket thuc tan cong va Gay damage
+    public void EndAttack()
+    {
         attacking = false;
 
         cur_coolDown = 0f;
@@ -41,12 +49,13 @@ public class EnemyMelee : EnemyBase
     // Quan li Trang thai tan cong
     protected override void OnAttack()
     {
+        if (attacking) return;
         Vector2 dir = player.position - transform.position;
         float dis = dir.sqrMagnitude;
         AnimMove(animTypeAttack, dir.x, dir.y);
         float disPlayerFromSpawn = ((Vector2)player.position - spawnPosition).sqrMagnitude;
         float disEnemyFromSpawn = ((Vector2)transform.position - spawnPosition).sqrMagnitude;
-        if (dis > enemyBaseData.RangeAtk * enemyBaseData.RangeAtk || attacking)
+        if (dis > enemyBaseData.RangeAtk * enemyBaseData.RangeAtk)
         {
             if (dis <= rangeChase * rangeChase && disPlayerFromSpawn <= maxMoveRadius*maxMoveRadius && disEnemyFromSpawn <= maxMoveRadius*maxMoveRadius)
             {

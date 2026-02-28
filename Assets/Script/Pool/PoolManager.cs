@@ -96,6 +96,7 @@ public class PoolManager : MonoBehaviour
         for(int i = 0; i < enemyPrefabList.Count; i++)
         {
             enemyPoolsList.Add(new ObjectPool<EnemyBase>(enemyPrefabList[i], enemyPoolSize, enemyPoolMaxSize, enemyRoot));
+            
         }
 
 

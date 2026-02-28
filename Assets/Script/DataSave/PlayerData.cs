@@ -1,46 +1,46 @@
 [System.Serializable]
 public class PlayerData
 {
-    public float currentHpPlayer;
+    public float currentHpPlayer = 100;
 
-    public int levelPlayer;
+    public int levelPlayer = 1;
 
-    public int expToLevelUp ;
+    public int expToLevelUp = 50 ;
 
-    public int pointStat ;
+    public int pointStat = 0 ;
 
-    public int pointMaxHp ;
+    public int pointMaxHp = 0 ;
 
-    public int pointAtk ;
+    public int pointAtk = 0 ;
 
-    public int pointCritRate ;
+    public int pointCritRate = 0;
 
-    public int curGold ;
+    public int curGold = 0 ;
 
-    public string currentMapName ;
+    public float posX = -116.5f  ;
 
-    public float posX ;
+    public float posY = -214.8f;
 
-    public float posY ;
+    public float posZ = 0f;
 
-    public float posZ ;
-
-    public int shotgunBullet;
+    public int shotgunBullet  = 0;
     
-    public int cur_ShotgunBullet;
+    public int cur_ShotgunBullet = 0;
     
 
-    public  int pistolBullet;   
+    public  int pistolBullet = 0;   
     
-    public int cur_PistolBullet;
+    public int cur_PistolBullet = 0;
 
-   public int gunBullet;    
+   public int gunBullet = 0;    
     
-    public int cur_GunBullet;
+    public int cur_GunBullet = 0;
+
+    public PlayerData() { }
 
     public PlayerData(float currentHpPlayer, int levelPlayer, int expToLevelUp, int pointStat,
         int pointMaxHp, int pointAtk, int pointCritRate, int curGold,
-        string currentMapName, float posX, float posY, float posZ,
+        float posX, float posY, float posZ,
         int shotgunBullet, int cur_ShotgunBullet,
         int pistolBullet, int cur_PistolBullet,
         int gunBullet, int cur_GunBullet)
@@ -53,7 +53,6 @@ public class PlayerData
         this.pointAtk = pointAtk;
         this.pointCritRate = pointCritRate;
         this.curGold = curGold;
-        this.currentMapName = currentMapName;
         this.posX = posX;
         this.posY = posY;
         this.posZ = posZ;

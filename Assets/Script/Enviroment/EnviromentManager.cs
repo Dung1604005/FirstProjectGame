@@ -14,7 +14,11 @@ public class EnviromentManager : MonoBehaviour
 
     [SerializeField] private IndoorEnvironment indoorEnvironment;
 
+    public IndoorEnvironment IndoorEnvironment => indoorEnvironment;
+
     [SerializeField] private OutdoorEnvironment outdoorEnvironment;
+
+    public OutdoorEnvironment OutdoorEnvironment => outdoorEnvironment;
 
     
 
@@ -35,7 +39,7 @@ public class EnviromentManager : MonoBehaviour
     void Awake()
     {
         
-        SwitchEnvironment(EnvironmentType.Outdoor);
+        
     }
 
 

@@ -149,3 +149,4 @@ MonoBehaviour:
   indexLootTable: 0
   amountDrop: 3
   maxHealth: 30
+  timeSpawn: 15

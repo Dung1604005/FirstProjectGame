@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.SearchService;
 using UnityEngine;
@@ -12,6 +13,10 @@ public class SceneLoader: MonoBehaviour
 
     [SerializeField]  private SceneData currentSceneData;
     public SceneData CurrentSceneData => currentSceneData;
+
+    [SerializeField] private List<SceneData> sceneDatabase;
+
+    public List<SceneData> SceneDatabase => sceneDatabase;
 
     [SerializeField] private int totalSceneData;
 
@@ -35,6 +40,19 @@ public class SceneLoader: MonoBehaviour
             }
         }
     }
+    public SceneData GetSceneDataById(int id)
+    {
+        for (int i = 0; i < sceneDatabase.Count; i++)
+        {
+            if (sceneDatabase[i].IdSceneData == id)
+            {
+                return sceneDatabase[i];
+            }
+        }
+        Debug.LogError("Không tìm thấy SceneData với id: " + id);
+        return null;
+    }
+
     public void LoadScene(SceneData sceneData, Vector3 startPoint)
     {
         StartCoroutine(LoadSceneAsync(sceneData, LoadSceneMode.Single, startPoint));
@@ -67,18 +85,35 @@ public class SceneLoader: MonoBehaviour
         // Tam dung kich hoat scene de tranh bi dong man hinh
         asyncOperation.allowSceneActivation = false;
         
+        // Thoi gian toi thieu hien loading de tranh cam giac bi "nhay" qua nhanh
+        float minLoadTime = 0.5f;
+        float elapsed = 0f;
+        
         // Load scene den 90% (Unity chi cho load den 0.9 khi allowSceneActivation = false)
         while (asyncOperation.progress < 0.9f)
         {
+            elapsed += Time.unscaledDeltaTime;
             // Hien thi progress tu 0 -> 0.9 thanh 0 -> 0.95 de nguoi choi thay muot hon
             float displayProgress = Mathf.Clamp01(asyncOperation.progress / 0.9f) * 0.95f;
             UIManageMent.Instance.LoadingAdditive.SetFillTarget(displayProgress);
             yield return null;
         }
         
-        // Scene da load xong 90%, cho phep kich hoat
+        // Scene da load xong 90%, dat target fill len 1
         UIManageMent.Instance.LoadingAdditive.SetFillTarget(1f);
-        yield return null;
+        
+        // Dam bao thoi gian loading toi thieu da troi qua
+        while (elapsed < minLoadTime)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        
+        // Cho thanh loading chay animation den day (fill = 1) truoc khi kich hoat scene
+        while (!UIManageMent.Instance.LoadingAdditive.IsFillComplete())
+        {
+            yield return null;
+        }
         
         // Kich hoat scene (luc nay moi chay Awake, Start cua cac object)
         asyncOperation.allowSceneActivation = true;
@@ -88,13 +123,18 @@ public class SceneLoader: MonoBehaviour
         {
             yield return null;
         }
+        GameManageMent.Instance.StartGame();
+        SaveLoadManager.Instance.LoadDataRemain();
+        
 
         yield return new WaitForSeconds(0.5f);
+        
 
         
 
         // Load vi tri va bound
         UIManageMent.Instance.LoadingAdditive.TurnOff();
+        
         GameManageMent.Instance.PlayerManager.PlayerController.SetPosition(startPoint);
         
         currentSceneData = sceneData;

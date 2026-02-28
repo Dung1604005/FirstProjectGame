@@ -22,6 +22,7 @@ public class EventManager
   public void LoadEventSaveData(List<string> eventSaveDatas)
   {
     currentEventSignal.Clear();
+    if (eventSaveDatas == null) return;
     foreach(string _event in eventSaveDatas)
     {
       OnSignalSent?.Invoke(_event, true);

@@ -29,7 +29,7 @@ public class QuestManager : MonoBehaviour
 
     public ArrowQuest ArrowQuest => arrowQuest;
 
-    private Dictionary<int, NpcDataValue> npcData;
+    private Dictionary<int, NpcDataValue> npcData = new Dictionary<int, NpcDataValue>();
 
 
     public event Action OnQuestChange;
@@ -82,6 +82,7 @@ public class QuestManager : MonoBehaviour
     public void LoadCompletedQuests(List<int> savedCompletedIDs)
     {
         completedQuest.Clear();
+        if (savedCompletedIDs == null) return;
         foreach (int id in savedCompletedIDs)
         {
             QuestDefinition originalQuest = questDataBase.GetQuestByID(id);
@@ -111,10 +112,16 @@ public class QuestManager : MonoBehaviour
         curQuestDefinitions.Clear();
         questProgresses.Clear();
 
+        if (savedProgressList == null) return;
         foreach (QuestProgressSaveData savedData in savedProgressList)
         {
 
             QuestDefinition originalQuest = questDataBase.GetQuestByID(savedData.questId);
+            if (originalQuest == null)
+            {
+                UnityEngine.Debug.LogWarning("Không tìm thấy quest với ID: " + savedData.questId);
+                continue;
+            }
             curQuestDefinitions.Add(originalQuest);
 
 
@@ -134,7 +141,7 @@ public class QuestManager : MonoBehaviour
     public void LoadQuestData(QuestData questData)
     {
         if (questData == null) return;
-
+        
         LoadCompletedQuests(questData.completedQuestId);
         LoadQuestProgress(questData.questProgressSaveDatas);
         LoadNpcData(questData.savedNpcList);
@@ -259,7 +266,7 @@ public class QuestManager : MonoBehaviour
     }
     void Start()
     {
-        npcData = new Dictionary<int, NpcDataValue>();
+        
         GameManageMent.Instance.InventoryAndEquipmentManager.InventorySystem.OnChangeInventory += UpdateProgressAllQuestCollect;
         UIManageMent.Instance.QuestUI.Init();
         UIManageMent.Instance.QuestUI.QuestViewInfo.Init();
@@ -275,6 +282,8 @@ public class NpcDataValue
     public int indexDialogue ;
 
     public bool canContinueDialogue ;
+
+    public NpcDataValue() { }
 
     public NpcDataValue(bool _onQuest, int _curNpcDialogues, int _indexDialogue, bool _canContinueDialogue)
     {

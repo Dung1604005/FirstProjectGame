@@ -39,10 +39,12 @@ public class ObjectPool<T> where T : Component
         obj.transform.position = pos;
         obj.gameObject.SetActive(true);
         (obj as IPoolable)?.OnSpawn();
+        (obj as EnemyBase)?.SetEnemyInPool();
         return obj;
     }
     public void DeSpawn(T obj)
     {
+        
         if (pool.Count >= max_Size)
         {
             Object.Destroy(obj.gameObject);

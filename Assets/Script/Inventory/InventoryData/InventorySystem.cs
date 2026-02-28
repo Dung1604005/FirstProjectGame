@@ -38,9 +38,17 @@ public class InventorySystem
     public void LoadInventoryData(List<ItemSaveData> itemSaveDatas)
     {
         itemCount.Clear();
-        for(int i = 0; i < slots.Count && i < itemSaveDatas.Count; i++)
+        if (itemSaveDatas == null) return;
+        for(int i = 0; i < slots.Count; i++)
         {
-            slots[i] = new InventorySlot(null, 0); 
+            slots[i] = new InventorySlot(null, 0);
+            
+        }
+        OnChangeInventory?.Invoke();
+        for(int i = 0;  i < itemSaveDatas.Count; i++)
+        {
+            
+            
             Add(GameManageMent.Instance.ItemDataBase.ItemDatas[itemSaveDatas[i].itemId], itemSaveDatas[i].count, true);
             
         }

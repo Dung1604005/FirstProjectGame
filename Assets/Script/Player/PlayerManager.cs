@@ -42,6 +42,16 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Sprite playerAvatar;
 
     public Sprite PlayerAvatar => playerAvatar;
+
+    public void SetPlayerComponent(PlayerController _playerController, ExpSystem _expSystem, GoldPlayer _goldPlayer, StatPlayer _statPlayer,
+    Health _health){
+        playerController = _playerController;
+        expSystem = _expSystem;
+        gold = _goldPlayer;
+        stat = _statPlayer;
+        health = _health;
+
+    }
     
 
     public Vector2 GetDirFromMouseToPlayer()
@@ -104,7 +114,7 @@ public class PlayerManager : MonoBehaviour
     public bool CalculateCritDamage(ref float damage)
     {
          damage += stat.Atk;
-         int randomInt = Random.Range(0, 100);
+         int randomInt = UnityEngine.Random.Range(0, 100);
          if(randomInt <= stat.CritRate)
         {
             damage *= stat.CritDamagePercentage;
@@ -129,7 +139,6 @@ public class PlayerManager : MonoBehaviour
             stat.PointAtk,
             stat.PointCritRate,
             gold.CurGold,
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name,
             pos.x,
             pos.y,
             pos.z,
@@ -170,6 +179,7 @@ public class PlayerManager : MonoBehaviour
         // Load position
         playerController.SetPosition(new Vector3(data.posX, data.posY, data.posZ));
     }
+    
 
     void Awake()
     {

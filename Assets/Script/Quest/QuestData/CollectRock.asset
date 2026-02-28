@@ -21,10 +21,11 @@ MonoBehaviour:
   objectives:
   - objectiveType: 0
     targetId: 7
-    requiredCount: 1
+    requiredCount: 10
     objectiveRequirement: 
     haveDirection: 1
     destinationPosition: {x: 92, y: -225, z: 0}
+    destinationIdSceneData: 0
   goldReward: 50
   expReward: 100
   itemIdReward: []

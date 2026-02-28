@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyRange: EnemyBase
 {
+    private float lastDamageTime = 0f;
     private float dirX, dirY;
     private float radius_bullet;
 
@@ -16,6 +17,9 @@ public class EnemyRange: EnemyBase
 
     private void SpawnBullet()
     {
+        if (Time.time - lastDamageTime < 0.1f) return;
+    
+        lastDamageTime = Time.time; // Cập nhật lại mốc thời gian
        
         
         Vector2 spawnPos = (Vector2)this.gameObject.transform.position + new Vector2(dirX, dirY)*radius_bullet;

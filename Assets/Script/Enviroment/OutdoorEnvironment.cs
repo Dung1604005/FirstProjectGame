@@ -21,6 +21,8 @@ public class OutdoorEnvironment : EnviromentBase
 
     [SerializeField] private WeatherSystem weatherSystem;
 
+    public WeatherSystem WeatherSystem => weatherSystem;
+
     
     public AnimationCurve animationCurve;
 

@@ -83,21 +83,56 @@ public abstract class EnemyBase : MonoBehaviour
 
     [SerializeField] protected float maxMoveRadius;
 
+    [SerializeField] private bool isInPool;
+
+    [SerializeField] private float timeSpawn;
+
 
 
     public float GetDamage()
     {
         return attack;
     }
+    public void SetEnemyInPool()
+    {
+        isInPool = true;
+    }
     public void SetDie()
     {
         isDied = true;
-        this.gameObject.SetActive(false);
+        if (isInPool)
+        {
+            this.gameObject.SetActive(false);
+            GameManageMent.Instance.PoolManager.EnemytPoolsList[enemyBaseData.IndexEnemy].DeSpawn(this);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            transform.position = spawnPosition;
+            StartCoroutine(WaitingForSpawnRoutine());
+        }
+    }
+    IEnumerator WaitingForSpawnRoutine()
+    {
+        yield return new WaitForSeconds(timeSpawn);
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        SpawnEnemy(spawnPosition);
+        
+
+        GetComponent<SpriteRenderer>().enabled = true;
+        
     }
     // State dung yen
     protected virtual void OnIdle()
     {
-        
+
         float dis = (player.position - transform.position).sqrMagnitude;
 
         Vector2 gridPosition = gridManagement.GridBuilder.WorldToGridPosition(transform.position);
@@ -112,14 +147,14 @@ public abstract class EnemyBase : MonoBehaviour
         float disPlayerFromSpawn = ((Vector2)player.position - spawnPosition).sqrMagnitude;
         float disEnemyFromSpawn = ((Vector2)transform.position - spawnPosition).sqrMagnitude;
 
-        if (dis <= enemyBaseData.RangeAtk * enemyBaseData.RangeAtk && disPlayerFromSpawn <= maxMoveRadius*maxMoveRadius
-        && disEnemyFromSpawn <= maxMoveRadius*maxMoveRadius)
+        if (dis <= enemyBaseData.RangeAtk * enemyBaseData.RangeAtk && disPlayerFromSpawn <= maxMoveRadius * maxMoveRadius
+        && disEnemyFromSpawn <= maxMoveRadius * maxMoveRadius)
         {
             curState = State.Attack;
         }
         else if (dis <= rangeChase * rangeChase &&
-        distance < int.MaxValue / 10 && distance > 0 && disPlayerFromSpawn <= maxMoveRadius*maxMoveRadius
-        && disEnemyFromSpawn <= maxMoveRadius*maxMoveRadius)
+        distance < int.MaxValue / 10 && distance > 0 && disPlayerFromSpawn <= maxMoveRadius * maxMoveRadius
+        && disEnemyFromSpawn <= maxMoveRadius * maxMoveRadius)
         {
             curState = State.Chase;
         }
@@ -128,15 +163,15 @@ public abstract class EnemyBase : MonoBehaviour
         if (wanderingTimer > wanderingCooldown)
         {
             wanderingDir = UnityEngine.Random.insideUnitCircle.normalized;
-            
+
             wanderingTimer = 0f;
         }
-        if(disEnemyFromSpawn > maxMoveRadius * maxMoveRadius )
+        if (disEnemyFromSpawn > maxMoveRadius * maxMoveRadius)
         {
-            wanderingDir = (spawnPosition- (Vector2)transform.position).normalized;
-        
+            wanderingDir = (spawnPosition - (Vector2)transform.position).normalized;
+
         }
-        
+
         OnMove(wanderingDir, enemyBaseData.WalkSpeed);
 
 
@@ -153,6 +188,10 @@ public abstract class EnemyBase : MonoBehaviour
     // Tinh toan de cho enemy di chuyen den player
     protected virtual void OnMove(Vector2 flow, float speed)
     {
+        if (attacking)
+        {
+            return;
+        }
 
 
         Vector2 dir = flow.normalized;
@@ -209,7 +248,7 @@ public abstract class EnemyBase : MonoBehaviour
 
             }
         }
-        if(enemyCount > 0)
+        if (enemyCount > 0)
         {
             separationForce /= Mathf.Sqrt(enemyCount);
         }
@@ -222,7 +261,7 @@ public abstract class EnemyBase : MonoBehaviour
         Debug.DrawRay(pos, moveDir * avoidDistance, Color.yellow); // hướng chọn cuối
 
         AnimMove(animTypeMove, dir.x, dir.y);
-        Vector2 movePos = rb.position + dir * speed* Time.fixedDeltaTime;
+        Vector2 movePos = rb.position + dir * speed * Time.fixedDeltaTime;
         rb.MovePosition(movePos);
     }
 
@@ -236,8 +275,8 @@ public abstract class EnemyBase : MonoBehaviour
         float dis = (player.position - transform.position).sqrMagnitude;
         float disPlayerFromSpawn = ((Vector2)player.position - spawnPosition).sqrMagnitude;
         float disEnemyFromSpawn = ((Vector2)transform.position - spawnPosition).sqrMagnitude;
-        if (dis > rangeChase * rangeChase || disPlayerFromSpawn > maxMoveRadius*maxMoveRadius ||
-         disEnemyFromSpawn > maxMoveRadius*maxMoveRadius)
+        if (dis > rangeChase * rangeChase || disPlayerFromSpawn > maxMoveRadius * maxMoveRadius ||
+         disEnemyFromSpawn > maxMoveRadius * maxMoveRadius)
         {
             curState = State.Idle;
         }
@@ -249,7 +288,7 @@ public abstract class EnemyBase : MonoBehaviour
         if (!gridManagement.GridBuilder.IsValidGridPosition(gridPosition))
         {
             curState = State.Idle;
-            return; 
+            return;
         }
         int distance = (int)gridManagement.GridBuilder.GridCells[(int)gridPosition.x][(int)gridPosition.y].DistanceFromPlayer;
         if (distance >= int.MaxValue / 10)
@@ -269,7 +308,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             //Debug.Log("Here");
             Vector2 randomDir = UnityEngine.Random.insideUnitCircle.normalized;
-            OnMove(randomDir,enemyBaseData.RunSpeed);
+            OnMove(randomDir, enemyBaseData.RunSpeed);
         }
 
 
@@ -285,9 +324,9 @@ public abstract class EnemyBase : MonoBehaviour
         isDied = false;
         attacking = false;
         healthSystem.SetCurHealth(enemyBaseData.MaxHealth);
-        this.gameObject.SetActive(true);
+        
         // Reset thanh mau
-        float scale = healthSystem.CurHealth / healthSystem.MaxHealth;
+        
         this.transform.GetChild(1).gameObject.SetActive(false);
         this.transform.GetChild(2).gameObject.SetActive(false);
     }
@@ -366,7 +405,7 @@ public abstract class EnemyBase : MonoBehaviour
         {
             return;
         }
-        if (GameObject.FindWithTag(GameConfig.PLAYER_TAG0) == null) return;
+        if (player == null) return;
         if (!isDied)
         {
 

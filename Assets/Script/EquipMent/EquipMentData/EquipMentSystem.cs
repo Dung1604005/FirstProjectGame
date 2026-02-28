@@ -35,9 +35,18 @@ public class EquipMentSystem
 
     public void LoadEquipmentSaveData(List<ItemSaveData> itemSaveDatas)
     {
+        if (itemSaveDatas == null) return;
+        for(int i  = 0; i < slots.Count; i++)
+        {
+            slots[i].Set(null, 0);
+
+            
+            
+        }
+        OnEquipmentChange?.Invoke();
         for(int i = 0; i < slots.Count && i < itemSaveDatas.Count; i++)
         {
-            slots[i] = new EquipMentSlot(null, 0); 
+            
             if(TryEquip(GameManageMent.Instance.ItemDataBase.ItemDatas[itemSaveDatas[i].itemId], itemSaveDatas[i].count))
             {
                 

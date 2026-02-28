@@ -5,8 +5,12 @@ public class EquipmentSaveData
 {
     public List<ItemSaveData> savedEquipment = new List<ItemSaveData>();
 
+    public EquipmentSaveData() { }
+
     public EquipmentSaveData(List<ItemSaveData> itemSaveDatas)
     {
         savedEquipment = new List<ItemSaveData>(itemSaveDatas);
     }
+
+    
 }

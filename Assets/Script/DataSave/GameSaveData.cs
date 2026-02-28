@@ -14,4 +14,19 @@ public class GameSaveData
 
 
     public EventSaveData eventSaveData;
+
+    public GameSaveData()
+    {
+        playerData = new PlayerData();
+
+        equipmentSaveData = new EquipmentSaveData();
+
+        inventorySaveData = new InventorySaveData();
+
+        questData = new QuestData();
+
+        worldData = new WorldData();
+
+        eventSaveData = new EventSaveData();
+    }
 }

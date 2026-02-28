@@ -3,15 +3,19 @@ using System.Collections.Generic;
 
 public class WorldData
 {
-    public List<string> chestOpenedId;
+    public List<string> chestOpenedId = new List<string>();
 
-    public List<int> defeatedBossId;
+    public List<int> defeatedBossId = new List<int>();
 
-    public List<string> activatedObjectId;
+    public List<string> activatedObjectId = new List<string>();
 
-    public float timeSaveData;
+    public float timeSaveData = 0f;
 
-    public WorldData(List<string> _chestOpenedId, List<int> _defeatedBossId, List<string> _activatedObjectId, float _timeSaveData)
+    public int idSceneData = 0;
+
+    public WorldData() { }
+
+    public WorldData(List<string> _chestOpenedId, List<int> _defeatedBossId, List<string> _activatedObjectId, float _timeSaveData, int _idSceneData)
     {
         chestOpenedId = new List<string>(_chestOpenedId);
 
@@ -19,7 +23,10 @@ public class WorldData
 
         activatedObjectId = new List<string>(_activatedObjectId);
         timeSaveData = _timeSaveData;
+        idSceneData = _idSceneData;
     }
+
+    
 
 
 }

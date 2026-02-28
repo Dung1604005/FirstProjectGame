@@ -8,6 +8,11 @@ public class QuestProgressSaveData
     public List<int> curCount; 
 
     
+    public QuestProgressSaveData()
+    {
+        curCount = new List<int>();
+    }
+
     public QuestProgressSaveData(int id, List<int> counts)
     {
         questId = id;

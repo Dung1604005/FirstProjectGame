@@ -104,7 +104,7 @@ Transform:
   m_GameObject: {fileID: 2950582961466961889}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 1.13, z: 0}
+  m_LocalPosition: {x: -1, y: 1.73, z: 0}
   m_LocalScale: {x: 0.8, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -195,7 +195,7 @@ Transform:
   m_GameObject: {fileID: 3929376938704211188}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 1.13, z: 0}
+  m_LocalPosition: {x: -1, y: 1.7299908, z: 0}
   m_LocalScale: {x: 0.8, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -544,10 +544,12 @@ MonoBehaviour:
   wSeparation: 0.8
   separationRadius: 1.5
   rb: {fileID: 0}
-  enemyBaseData: {fileID: 11400000, guid: 583cac7a532019a409f4110ce51dcb67, type: 2}
+  enemyBaseData: {fileID: 11400000, guid: 61df3a64fe5584d45ac4a3420ba22deb, type: 2}
   wanderingCooldown: 1
   spawnPosition: {x: 0, y: 0}
   maxMoveRadius: 50
+  isInPool: 0
+  timeSpawn: 30
 --- !u!114 &6782668413530166515
 MonoBehaviour:
   m_ObjectHideFlags: 0

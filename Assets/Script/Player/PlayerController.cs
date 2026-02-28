@@ -195,6 +195,10 @@ public class PlayerController : MonoBehaviour
     // Lay vi tri
     public Vector2 getPos()
     {
+        if(rb == null)
+        {
+            return Vector2.zero;
+        }
         //Debug.Log(rb.position.x + ", " + rb.position.y);
         return rb.position;
     }
@@ -265,6 +269,16 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         Init();
+        GameManageMent.Instance.PlayerManager.SetPlayerComponent(this.GetComponent<PlayerController>(), 
+        this.GetComponent<ExpSystem>(), this.GetComponent<GoldPlayer>(), this.GetComponent<StatPlayer>(),
+        this.GetComponent<Health>());
+    }
+    void Start()
+    {
+        
+        this.GetComponent<Health>().OnHealthChanged.AddListener(UIManageMent.Instance.SetHealthBar);
+        this.GetComponent<ExpSystem>().OnExpChange.AddListener(UIManageMent.Instance.SetExpBar);
+        GameManageMent.Instance.CinemachineVirtualCamera.Follow = this.transform;
     }
     
     void FixedUpdate()

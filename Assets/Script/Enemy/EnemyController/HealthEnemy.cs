@@ -75,7 +75,7 @@ public class HealthEnemy : MonoBehaviour
             int randomOffsetX = Random.Range(-2,4);
             GameManageMent.Instance.PoolManager.FloatingTextPool.Spawn(Camera.main.WorldToScreenPoint(gameObject.transform.position+ new Vector3(randomOffsetX/2f, randomOffsetY/2, 0f) )).SetUp(((int)damaged).ToString(), Color.white, gradient, 12f);
         }
-        cur_health -= damaged;
+        cur_health = Mathf.Max(0, cur_health - damaged);
         OnDamagedEffect();
         UpdateHealthUIEnemy();
         if (cur_health <= 0f)

@@ -72,7 +72,6 @@ public class UIManageMent : MonoBehaviour
     [Header("HEALTH")]
     [SerializeField] private TextMeshProUGUI warning;
 
-    [SerializeField] private Health healthPlayer;
     [SerializeField] private Image hpBar;
 
     [SerializeField] private float fillTargetHp;
@@ -81,7 +80,7 @@ public class UIManageMent : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelText;
     public TextMeshProUGUI LevelText=> levelText;
     [SerializeField] private Image expBar;
-    [SerializeField] private ExpSystem expSystem;
+    
     [SerializeField] private float fillTargetExp;
     [SerializeField] private float fillSpeed;
 
@@ -155,8 +154,8 @@ public class UIManageMent : MonoBehaviour
     public void SetExpBar(float exp, float mx)
     {
         fillTargetExp = exp / mx;
-        String text = expSystem.Lv.ToString();
-        if(expSystem.Lv < 10){
+        String text = GameManageMent.Instance.PlayerManager.ExpSystem.Lv.ToString();
+        if(GameManageMent.Instance.PlayerManager.ExpSystem.Lv < 10){
             text = "0" + text;
         } 
         levelText.text = text;
@@ -174,8 +173,7 @@ public class UIManageMent : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(this);
-        healthPlayer.OnHealthChanged.AddListener(SetHealthBar);
-        expSystem.OnExpChange.AddListener(SetExpBar);
+        
         inventoryUI.TurnOff();
         expStatSystemUI.TurnOff();
         ShopSystem.TurnOff();

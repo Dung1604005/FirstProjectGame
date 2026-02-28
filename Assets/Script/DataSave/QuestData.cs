@@ -2,11 +2,16 @@ using System.Collections.Generic;
 [System.Serializable]
 public class QuestData
 {
-    public List<int> completedQuestId;
+    public List<int> completedQuestId = new List<int>();
 
-    public List<QuestProgressSaveData> questProgressSaveDatas;
+    public List<QuestProgressSaveData> questProgressSaveDatas = new List<QuestProgressSaveData>();
 
-    public List<NpcSaveData> savedNpcList;
+    public List<NpcSaveData> savedNpcList = new List<NpcSaveData>();
+
+    public QuestData()
+    {
+        
+    }
 
     public QuestData(List<int> _completedQuestId, List<QuestProgressSaveData> _questProgressSaveDatas,  List<NpcSaveData> _savedNpcList)
     {

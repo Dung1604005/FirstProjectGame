@@ -47,7 +47,7 @@ public class WeatherSystem : MonoBehaviour
     public void SetActive(bool active)
     {
         this.gameObject.SetActive(active);
-            rainParticalSystem.Stop();
+        rainParticalSystem.Stop();
         if (active)
         {
             

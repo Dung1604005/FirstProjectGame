@@ -25,6 +25,7 @@ public class GridManagement : MonoBehaviour
 
     void Awake()
     {
+        GameManageMent.Instance.SetGridManageMent(this.GetComponent<GridManagement>());
         gridBuilder = GetComponent<GridBuilder>();
         distanceField = new DistanceField(this);
         flowField = new FlowField(this);
@@ -34,6 +35,7 @@ public class GridManagement : MonoBehaviour
     void Start()
     {
         gridBuilder.initGrid();
+        
         StartCoroutine(UpdateGridField());
     }
     IEnumerator UpdateGridField()

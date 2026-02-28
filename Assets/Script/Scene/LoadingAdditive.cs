@@ -75,6 +75,14 @@ public class LoadingAdditive : MonoBehaviour
         fillTarget = _fillTarget;
     }
 
+    /// <summary>
+    /// Kiem tra thanh loading da gan dat den target chua (sai so nho hon 0.01)
+    /// </summary>
+    public bool IsFillComplete()
+    {
+        return Mathf.Abs(iconLoading.fillAmount - fillTarget) < 0.01f;
+    }
+
     void Awake()
     {
         //TurnOff();
@@ -84,7 +92,9 @@ public class LoadingAdditive : MonoBehaviour
     {
         if(iconLoading.fillAmount != fillTarget)
         {
-            iconLoading.fillAmount = Mathf.Lerp(iconLoading.fillAmount, fillTarget, fillSpeed*Time.deltaTime);
+            // Dung unscaledDeltaTime de khong bi anh huong boi timeScale
+            // Dung MoveTowards thay vi Lerp de toc do deu va dat duoc target chinh xac
+            iconLoading.fillAmount = Mathf.MoveTowards(iconLoading.fillAmount, fillTarget, fillSpeed * Time.unscaledDeltaTime);
         }
     }
 

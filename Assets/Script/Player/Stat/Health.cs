@@ -68,6 +68,7 @@ public class Health : MonoBehaviour
 
 
         }
+        
         OnDamagedEffect();
         if (this.gameObject.tag == GameConfig.PLAYER_TAG0)
         {
@@ -131,7 +132,7 @@ public class Health : MonoBehaviour
 
     public void OnDied()
     {
-        Destroy(this.gameObject);
+        
 
     }
     void Awake()
@@ -145,6 +146,7 @@ public class Health : MonoBehaviour
     void Start()
     {
         cur_health = max_health;
+        UIManageMent.Instance.SetHealthBar(cur_health, max_health);
     }
 
     // Update is called once per frame

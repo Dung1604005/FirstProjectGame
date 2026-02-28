@@ -15,6 +15,8 @@ public class ObjectController : MonoBehaviour
     private float curHealth;
     private Material defaultMaterial;
 
+    [SerializeField] private float timeSpawn;
+
     
 
     public void OnDamaged(float damaged)
@@ -24,8 +26,27 @@ public class ObjectController : MonoBehaviour
         if (curHealth <= 0f)
         {
             GameManageMent.Instance.DropSystem.DropItem(indexLootTable, amountDrop, this.gameObject.transform.position);
-            Destroy(this.gameObject);
+            StartCoroutine(SpawnActionRoutine());
         }
+    }
+
+    IEnumerator SpawnActionRoutine()
+    {
+        foreach(Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        this.GetComponent<SpriteRenderer>().enabled = false;
+
+        yield return new WaitForSeconds(timeSpawn);
+
+        foreach(Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        this.GetComponent<SpriteRenderer>().enabled = true;
+        curHealth = maxHealth;
+
     }
     
     void Awake()

@@ -46,7 +46,15 @@ public class GameManageMent : MonoBehaviour
 
     [Header("Camera")]
 
+    [SerializeField] private GameObject cameraContainer;
+
     [SerializeField] private CinemachineConfiner2D cinemachineConfiner2D;
+
+    
+
+    [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;
+
+    public CinemachineVirtualCamera CinemachineVirtualCamera => cinemachineVirtualCamera;
 
     [SerializeField] private float heightCamera;
 
@@ -123,6 +131,33 @@ public class GameManageMent : MonoBehaviour
        
 
     }
+    public void SetGridManageMent(GridManagement _gridManagement){
+        gridManagement = _gridManagement;
+    }
+    public void StartGame(){
+        foreach(Transform child in transform){
+            if(
+             child.gameObject.name == "LightGlobal" ){
+                child.gameObject.SetActive(true);
+            }
+        }
+        cameraContainer.SetActive(true);
+        playerManager.enabled = true;
+        poolManager.enabled = true;
+        dropSystem.enabled  = true;
+        questManager.enabled = true;
+        effectController.enabled = true;
+        timeManager.enabled =true;
+        enviromentManager.OutdoorEnvironment.WeatherSystem.enabled = true;
+        enviromentManager.OutdoorEnvironment.enabled = true;
+        enviromentManager.IndoorEnvironment.enabled = true;
+        enviromentManager.enabled = true;
+        
+        gameState = GameState.Continue;
+        
+
+
+    }
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -133,21 +168,38 @@ public class GameManageMent : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         buildManager = GetComponent<BuildManager>();
         playerManager = GetComponent<PlayerManager>();
+        playerManager.enabled = false;
         inventoryAndEquipmentManager = GetComponent<InventoryAndEquipmentManager>();
+        inventoryAndEquipmentManager.enabled = false;
         poolManager = GetComponent<PoolManager>();
+        poolManager.enabled = false;
         dropSystem = GetComponent<DropSystem>();
+        dropSystem.enabled = false;
         questManager = GetComponent<QuestManager>();
+        questManager.enabled = false;
         effectController = GetComponent<EffectController>();
+        effectController.enabled = false;
         timeManager = GetComponent<TimeManager>();
+        timeManager.enabled =false;
         enviromentManager = GetComponent<EnviromentManager>();
+        enviromentManager.OutdoorEnvironment.WeatherSystem.enabled = false;
+        enviromentManager.OutdoorEnvironment.enabled = false;
+        enviromentManager.IndoorEnvironment.enabled = false;
+        enviromentManager.enabled = false;
         _WorldManager = new WorldManager();
-        gameState = GameState.Continue;
+        gameState = GameState.Pause;
         Application.targetFrameRate = 120;
         Cursor.SetCursor(iconMouse, hotspot, cursorMode);
         Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
         Camera mainCamera = Camera.main;
         heightCamera = 2f *mainCamera.orthographicSize;
         widthCamera = heightCamera* mainCamera.aspect;
+
+        foreach(Transform child in transform){
+            if( child.gameObject.name == "LightGlobal" ){
+                child.gameObject.SetActive(false);
+            }
+        }
         
     }
     void Start()
@@ -156,6 +208,8 @@ public class GameManageMent : MonoBehaviour
         
         
     }
+
+    
 
     public void SetBoundMap(PolygonCollider2D polygonCollider2D)
     {
