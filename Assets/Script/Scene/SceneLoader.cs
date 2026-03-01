@@ -75,6 +75,7 @@ public class SceneLoader: MonoBehaviour
     {
         // Hien thi UI Loading
         UIManageMent.Instance.LoadingAdditive.TurnOn();
+        GameManageMent.Instance.PauseGame();
     
     yield return new WaitForSeconds(0.3f); 
     
@@ -124,11 +125,20 @@ public class SceneLoader: MonoBehaviour
         {
             yield return null;
         }
-        GameManageMent.Instance.StartGame();
-        SaveLoadManager.Instance.LoadDataRemain();
+        if (!GameManageMent.Instance.isGameStarted)
+        {
+            GameManageMent.Instance.StartGame();
+            SaveLoadManager.Instance.LoadDataRemain();
+        }
+        
         
 
         yield return new WaitForSeconds(0.5f);
+
+        GameManageMent.Instance.Continue();
+        GameManageMent.Instance.isGameStarted = true;
+
+        
 
         
         

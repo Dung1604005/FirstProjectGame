@@ -1107,7 +1107,6 @@ MonoBehaviour:
   uiObjectList:
   - {fileID: 976016436}
   - {fileID: 368467061}
-  - {fileID: 1556619876}
   - {fileID: 424715187}
 --- !u!1 &282886956 stripped
 GameObject:
@@ -3941,11 +3940,6 @@ MonoBehaviour:
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 9223187247053217080, guid: 84ee4df4d3af5334b83e3ded3d5e80a0, type: 3}
   m_PrefabInstance: {fileID: 677812659}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1556619876 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6367421864942546495, guid: a6aed22baf1121246b238807e791cf65, type: 3}
-  m_PrefabInstance: {fileID: 1064992800}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1651028111
 PrefabInstance:

@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyType: 1
   nameEnemy: Axe Zombie
   maxHealth: 70
-  atk: 40
+  atk: 25
   coolDown: 2.5
   rangeAtk: 7
   rangeChase: 50

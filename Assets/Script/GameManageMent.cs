@@ -112,6 +112,8 @@ public class GameManageMent : MonoBehaviour
     public NPC NpcInteracting => npcInteracting;
 
     Vector2[] arrayDir = {new Vector2(0, -1),new Vector2(-1, 0), new Vector2(1, 0),  new Vector2(0, 1)};
+
+    public bool isGameStarted;
     
     public void PauseGame()
     {
@@ -152,7 +154,8 @@ public class GameManageMent : MonoBehaviour
         enviromentManager.IndoorEnvironment.enabled = true;
         enviromentManager.enabled = true;
         
-        gameState = GameState.Continue;
+        
+
         
 
 
@@ -164,6 +167,7 @@ public class GameManageMent : MonoBehaviour
             Destroy(this);
         }
         Instance = this;
+        isGameStarted = false;
         DontDestroyOnLoad(gameObject);
         buildManager = GetComponent<BuildManager>();
         playerManager = GetComponent<PlayerManager>();
