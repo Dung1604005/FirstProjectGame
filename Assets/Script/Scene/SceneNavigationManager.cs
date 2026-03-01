@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Data;
 using NUnit.Framework.Internal;
-using Unity.PlasticSCM.Editor.WebApi;
+
 using UnityEngine;
 
 public class SceneNavigationManager : MonoBehaviour

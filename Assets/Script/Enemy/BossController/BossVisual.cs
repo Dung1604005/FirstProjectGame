@@ -38,6 +38,7 @@ public class BossVisual : MonoBehaviour
     {
         animator  = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        virtualCamera = GameManageMent.Instance.CinemachineVirtualCamera;
         if(GetComponent<CinemachineImpulseSource>() != null)
         {
             cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
@@ -130,6 +131,7 @@ public class BossVisual : MonoBehaviour
     }
     public void Die()
     {
+        DisableAnimator();
         EndShakingNoise();
         PlayChargeEffect(false);
         
@@ -194,6 +196,7 @@ public class BossVisual : MonoBehaviour
         
         this.transform.localScale = new Vector3(1,1,1);
     }
+    public void DisableAnimator() { GetComponent<Animator>().enabled = false; }
 
 
 

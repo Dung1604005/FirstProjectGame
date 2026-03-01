@@ -14,6 +14,8 @@ public class Chest : MonoBehaviour, IRestorable
     [SerializeField] private int indexLootTable;
     [SerializeField] private int amountDrop;
     [SerializeField] private float radInteract;
+
+    [SerializeField] private GameObject keyObject;
     private Animator animator;
 
     public bool isOpened;
@@ -55,7 +57,7 @@ public class Chest : MonoBehaviour, IRestorable
         isOpened = true;
         GameManageMent.Instance._WorldManager.AddOpenedChest(uniqueId);
         GameManageMent.Instance.DropSystem.DropItem(indexLootTable, amountDrop, this.gameObject.transform.position);
-
+        this.gameObject.SetActive(false);
     }
     public void Restore(string _id)
     {
@@ -63,6 +65,7 @@ public class Chest : MonoBehaviour, IRestorable
         {
             return;
         }
+        this.gameObject.SetActive(false);
         isOpened = true;
         animator.enabled = true;
     }
@@ -72,12 +75,22 @@ public class Chest : MonoBehaviour, IRestorable
 
     void Update()
     {
+        
         if (GameManageMent.Instance.PlayerManager.PlayerController!= null 
         &&(GameManageMent.Instance.PlayerManager.PlayerController.getPos() - (Vector2)this.transform.position).sqrMagnitude <= radInteract*radInteract
-        &&Input.GetKeyDown(KeyCode.E))
+        )
         {
-            animator.enabled = true;
+            keyObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                animator.enabled = true;
+            }
+            
 
+        }
+        else
+        {
+            keyObject.SetActive(false);
         }
     }
 

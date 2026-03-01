@@ -14,7 +14,7 @@ public class ExpSystem : MonoBehaviour
     [SerializeField] private int curExp;
     public int CurExp => curExp;
 
-    private int pointStat;
+    [SerializeField]private int pointStat;
     public int PointStat => pointStat;
 
     [SerializeField] private int pointPerLvUp;
@@ -29,12 +29,17 @@ public class ExpSystem : MonoBehaviour
     }
     public void LvUp()
     {
+        float prevLv = lv;
         while (curExp > expToLvUp)
         {
             pointStat += pointPerLvUp;
             curExp -= expToLvUp;
             expToLvUp += offSetNextExpLvUp;
             lv += 1;
+        }
+        if(prevLv < lv)
+        {
+            AudioManager.Instance.PlayLevelUp();
         }
         UIManageMent.Instance.ExpStatSystemUI.UpdateLvUI(lv.ToString());
         UIManageMent.Instance.ExpStatSystemUI.UpdatePointStatUI(pointStat.ToString());
@@ -59,10 +64,10 @@ public class ExpSystem : MonoBehaviour
         
         LvUp();
     }
-    public void LoadData(int savedLv, int savedExpToLvUp, int savedPointStat)
+    public void LoadData(int savedLv, int _currentExp, int savedPointStat)
     {
         lv = savedLv;
-        expToLvUp = savedExpToLvUp;
+        curExp = _currentExp;
         pointStat = savedPointStat;
         UIManageMent.Instance.ExpStatSystemUI.UpdateLvUI(lv.ToString());
         UIManageMent.Instance.ExpStatSystemUI.UpdatePointStatUI(pointStat.ToString());
@@ -71,12 +76,12 @@ public class ExpSystem : MonoBehaviour
 
     void Start()
     {
-        lv = 1;
-        curExp = 0;
-        pointStat = 0;
+        
         UIManageMent.Instance.ExpStatSystemUI.UpdateLvUI(lv.ToString());
         UIManageMent.Instance.ExpStatSystemUI.UpdatePointStatUI(pointStat.ToString());
-        UIManageMent.Instance.SetExpBar(0f, 1f);
+        
+
+        
     }
 
 }

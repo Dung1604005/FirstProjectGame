@@ -1,8 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SearchService;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -76,9 +75,11 @@ public class SceneLoader: MonoBehaviour
     {
         // Hien thi UI Loading
         UIManageMent.Instance.LoadingAdditive.TurnOn();
-        // Nhuong vai frame cho game de thuc hien UI Loading hoan toan
-        yield return null;
-        yield return null;
+    
+    yield return new WaitForSeconds(0.3f); 
+    
+    // Ép dọn rác hệ thống trong lúc người chơi đang nhìn màn hình Loading
+    System.GC.Collect();
         
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneData.NameScene, loadSceneMode);
         
@@ -128,6 +129,8 @@ public class SceneLoader: MonoBehaviour
         
 
         yield return new WaitForSeconds(0.5f);
+
+        
         
 
         
@@ -152,7 +155,14 @@ public class SceneLoader: MonoBehaviour
         GameManageMent.Instance.EnviromentManager.SwitchEnvironment(sceneData.EnvironmentType);
         if(sceneData.EnvironmentType == EnvironmentType.Indoor)
         {
+            AudioManager.Instance.StopBGM();
+            AudioManager.Instance.PlayBGMInDoor();
             GameManageMent.Instance.EnviromentManager.SetInfoForIndoorEnvironment(sceneData.LightIntense, sceneData.LightColor);
+        }
+        else
+        {
+            AudioManager.Instance.StopBGM();
+            AudioManager.Instance.PlayBGMForest();
         }
     }
 

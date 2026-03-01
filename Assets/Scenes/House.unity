@@ -448,6 +448,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &487735192
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -493,6 +494,7 @@ SpriteRenderer:
   m_SortingLayerID: 1276704215
   m_SortingLayer: 3
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -5426721591664952074, guid: c24f6ad1ab0b2e141b44533b5c17e5fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -502,7 +504,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &487735193
 Transform:
@@ -826,6 +827,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &661033658
 TilemapRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -871,6 +873,7 @@ TilemapRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -878,7 +881,6 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
 --- !u!1839735485 &661033659
 Tilemap:
   m_ObjectHideFlags: 0
@@ -13063,6 +13065,7 @@ TilemapCollider2D:
   m_UseDelaunayMesh: 0
 --- !u!483693784 &942097389
 TilemapRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -13108,6 +13111,7 @@ TilemapRenderer:
   m_SortingLayerID: 1276704215
   m_SortingLayer: 3
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -13115,7 +13119,6 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
 --- !u!1839735485 &942097390
 Tilemap:
   m_ObjectHideFlags: 0
@@ -128411,6 +128414,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2284874129777400489, guid: 347f2d809cd7a4c4c87ec185b741a129, type: 3}
+      propertyPath: startPoint.x
+      value: -146.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2284874129777400489, guid: 347f2d809cd7a4c4c87ec185b741a129, type: 3}
+      propertyPath: startPoint.y
+      value: -186.36
+      objectReference: {fileID: 0}
     - target: {fileID: 3015529425873640087, guid: 347f2d809cd7a4c4c87ec185b741a129, type: 3}
       propertyPath: m_Name
       value: TeleportPoint
@@ -128513,6 +128524,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1362755994
 TilemapRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128558,6 +128570,7 @@ TilemapRenderer:
   m_SortingLayerID: 1276704215
   m_SortingLayer: 3
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -128565,7 +128578,6 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
 --- !u!1839735485 &1362755995
 Tilemap:
   m_ObjectHideFlags: 0
@@ -130704,6 +130716,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1677177517
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -130749,6 +130762,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -7389967749310623695, guid: 5010b5b14121eb241bdf7de09084b1f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.7058824}
   m_FlipX: 0
@@ -130758,7 +130772,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1818361262
 GameObject:
@@ -130970,6 +130983,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &1935697473
 TilemapRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131015,6 +131029,7 @@ TilemapRenderer:
   m_SortingLayerID: 1276704215
   m_SortingLayer: 3
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -131022,7 +131037,6 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
 --- !u!1839735485 &1935697474
 Tilemap:
   m_ObjectHideFlags: 0
@@ -135460,6 +135474,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &2102286521
 TilemapRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -135505,6 +135520,7 @@ TilemapRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -135512,7 +135528,6 @@ TilemapRenderer:
   m_SortOrder: 0
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
-  m_MaskInteraction: 0
 --- !u!1839735485 &2102286522
 Tilemap:
   m_ObjectHideFlags: 0
@@ -168446,6 +168461,18 @@ PrefabInstance:
     - target: {fileID: 6219085404454891885, guid: 455db9121f905054b84d23d3f0e95d7f, type: 3}
       propertyPath: m_Layer
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6364202832152559003, guid: 455db9121f905054b84d23d3f0e95d7f, type: 3}
+      propertyPath: ItemIndexList.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6364202832152559003, guid: 455db9121f905054b84d23d3f0e95d7f, type: 3}
+      propertyPath: 'ItemIndexList.Array.data[11]'
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6364202832152559003, guid: 455db9121f905054b84d23d3f0e95d7f, type: 3}
+      propertyPath: 'ItemIndexList.Array.data[12]'
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

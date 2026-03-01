@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ExpStatSystemUI : MenuLayOutUI
@@ -14,6 +17,21 @@ public class ExpStatSystemUI : MenuLayOutUI
     [SerializeField] private TextMeshProUGUI lvUI;
 
     [SerializeField] private TextMeshProUGUI pointStatUI;
+
+    [SerializeField] private Button hpButton;
+
+    
+
+
+    [SerializeField] private Button atkButton;
+
+    
+
+    [SerializeField] private Button critButton;
+
+    
+
+
     
     public void UpdateLvUI(string content)
     {
@@ -36,4 +54,53 @@ public class ExpStatSystemUI : MenuLayOutUI
     {
         critRateStatUI.text = "Critical: "+content;
     }
+
+    public void ClearEventButton()
+    {
+        hpButton.onClick.RemoveAllListeners();
+        atkButton.onClick.RemoveAllListeners();
+        critButton.onClick.RemoveAllListeners();
+    }
+
+    public void SetActionHpButton(Action action)
+    {
+        hpButton.onClick.RemoveAllListeners();
+        
+        hpButton.onClick.AddListener(() =>
+        {
+            if(action != null)
+            {
+                action.Invoke();
+            }
+        });
+    }
+
+    public void SetActionAtkButton(Action action)
+    {
+        atkButton.onClick.RemoveAllListeners();
+        
+        atkButton.onClick.AddListener(() =>
+        {
+            if(action != null)
+            {
+                action.Invoke();
+            }
+        });
+    }
+
+    public void SetActionCritButton(Action action)
+    {
+        critButton.onClick.RemoveAllListeners();
+        
+        critButton.onClick.AddListener(() =>
+        {
+            if(action != null)
+            {
+                action.Invoke();
+            }
+        });
+    }
+
+
+    
 }

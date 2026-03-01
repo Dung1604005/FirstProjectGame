@@ -66,8 +66,9 @@ public class SaveLoadManager : MonoBehaviour
         string fullPath = Path.Combine(Application.persistentDataPath, saveFileName);
         if (!File.Exists(fullPath))
         {
+            ClearData();
             Debug.LogWarning("Không tìm thấy file save nào ở: " + fullPath);
-            return;
+            
         }
         try
         {

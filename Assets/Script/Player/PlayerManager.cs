@@ -133,7 +133,7 @@ public class PlayerManager : MonoBehaviour
         return new PlayerData(
             health.CurHp(),
             expSystem.Lv,
-            expSystem.ExpToLvUp,
+            expSystem.CurExp,
             expSystem.PointStat,
             stat.PointMaxHp,
             stat.PointAtk,
@@ -163,7 +163,7 @@ public class PlayerManager : MonoBehaviour
         health.SetCurHp(data.currentHpPlayer);
 
         // Load exp
-        expSystem.LoadData(data.levelPlayer, data.expToLevelUp, data.pointStat);
+        expSystem.LoadData(data.levelPlayer, data.currentExp, data.pointStat);
 
         // Load gold
         gold.LoadData(data.curGold);

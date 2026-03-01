@@ -28,9 +28,10 @@ public class InventoryUISlot : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         {
             return;
         }
+        AudioManager.Instance.PlayUIClick();
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            if(eventData.clickCount >= 2)
+            if(eventData.clickCount >= 1)
             {
                 inventoryUI.ContextMenu.UpdateIndex(index);
                 Vector3 pos = gameObject.GetComponent<RectTransform>().anchoredPosition3D ;

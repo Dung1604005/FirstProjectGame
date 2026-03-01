@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+
 using DG.Tweening;
-using UnityEditor.Rendering;
+
 using UnityEngine;
 
 public class LootItem : MonoBehaviour, IPoolable

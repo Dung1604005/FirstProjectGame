@@ -1,7 +1,11 @@
+
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MenuUIManagement : MonoBehaviour
 {
+
+    [SerializeField] private GameObject uiCanvas;
 
     [SerializeField] private GameObject startButton;
 
@@ -13,11 +17,28 @@ public class MenuUIManagement : MonoBehaviour
 
     [SerializeField] private GameObject choosePlayNotification;
 
+    [SerializeField] private List<GameObject> uiObjectList;
+
 
     
     public void StartGame()
     {
         
+    }
+
+    public void ClearUIBeforeStart()
+    {
+        foreach(GameObject gameObject in uiObjectList)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+    public void TurnOnUIAfterStart()
+    {
+        foreach(GameObject gameObject in uiObjectList)
+        {
+            gameObject.SetActive(true);
+        }
     }
 
 
@@ -29,36 +50,50 @@ public class MenuUIManagement : MonoBehaviour
     }
     public void OpenQuitNotification()
     {
+        AudioManager.Instance.PlayUIClick();
         SetActiveAllButtonMenu(false);
         confirmQuitNotification.SetActive(true);
     }
 
     public void OpenChoosePlayNotification()
     {
+        AudioManager.Instance.PlayUIClick();
         SetActiveAllButtonMenu(false);
         choosePlayNotification.SetActive(true);
     }
 
     public void NewGame()
     {
+        AudioManager.Instance.PlayUIClick();
+        uiCanvas.SetActive(false);
+        TurnOnUIAfterStart();
         SaveLoadManager.Instance.ClearData();
         SaveLoadManager.Instance.LoadGame();
     }
     public void Continue()
     {
+        AudioManager.Instance.PlayUIClick();
+        uiCanvas.SetActive(false);
+        TurnOnUIAfterStart();
         SaveLoadManager.Instance.LoadGame();
     }
 
     public void CloseQuitNotification()
     {
+        AudioManager.Instance.PlayUIClick();
         SetActiveAllButtonMenu(true);
         confirmQuitNotification.SetActive(false);
     }
 
     public void Quit(){
+        AudioManager.Instance.PlayUIClick();
         Application.Quit();
 
-        UnityEditor.EditorApplication.isPlaying = false;
+        
+    }
+    void Start()
+    {
+        ClearUIBeforeStart();
     }
 
     

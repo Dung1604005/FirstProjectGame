@@ -13,6 +13,8 @@ public class ActiveBossTrigger: ReceiverEvent
         {
             isUnlocked = true;
             bossManager.ActiveBoss();
+            AudioManager.Instance.StopBGM();
+            AudioManager.Instance.PlayBGMBossCombat();
         }
     }
 }

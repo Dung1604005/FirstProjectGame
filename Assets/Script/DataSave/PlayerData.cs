@@ -5,7 +5,7 @@ public class PlayerData
 
     public int levelPlayer = 1;
 
-    public int expToLevelUp = 50 ;
+    public int currentExp = 0 ;
 
     public int pointStat = 0 ;
 
@@ -38,7 +38,7 @@ public class PlayerData
 
     public PlayerData() { }
 
-    public PlayerData(float currentHpPlayer, int levelPlayer, int expToLevelUp, int pointStat,
+    public PlayerData(float currentHpPlayer, int levelPlayer, int _currentExp, int pointStat,
         int pointMaxHp, int pointAtk, int pointCritRate, int curGold,
         float posX, float posY, float posZ,
         int shotgunBullet, int cur_ShotgunBullet,
@@ -47,7 +47,7 @@ public class PlayerData
     {
         this.currentHpPlayer = currentHpPlayer;
         this.levelPlayer = levelPlayer;
-        this.expToLevelUp = expToLevelUp;
+        this.currentExp = _currentExp;
         this.pointStat = pointStat;
         this.pointMaxHp = pointMaxHp;
         this.pointAtk = pointAtk;

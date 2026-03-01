@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBaseData
   enemyType: 2
   nameEnemy: Ghost King
-  maxHealth: 3000
+  maxHealth: 2000
   atk: 0
   coolDown: 0
   rangeAtk: 0

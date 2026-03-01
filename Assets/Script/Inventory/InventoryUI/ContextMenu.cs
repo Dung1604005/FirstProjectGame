@@ -33,6 +33,7 @@ public class ContextMenuUI : MonoBehaviour
         {
             
             if (UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.TryEquip(itemData, amount)) {
+                AudioManager.Instance.PlayItemEquip();
                 UIManageMent.Instance.InventoryUI.Inven.RemoveByIndex(index, amount, true);
             }
             

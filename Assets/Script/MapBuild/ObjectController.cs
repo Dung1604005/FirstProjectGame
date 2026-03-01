@@ -16,6 +16,7 @@ public class ObjectController : MonoBehaviour
     private Material defaultMaterial;
 
     [SerializeField] private float timeSpawn;
+    
 
     
 
@@ -37,8 +38,11 @@ public class ObjectController : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         this.GetComponent<SpriteRenderer>().enabled = false;
+        this.GetComponent<Collider2D>().enabled = false;
 
         yield return new WaitForSeconds(timeSpawn);
+
+        this.GetComponent<Collider2D>().enabled = true;
 
         foreach(Transform child in transform)
         {

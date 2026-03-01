@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class StatPlayer : MonoBehaviour
@@ -104,7 +105,16 @@ public class StatPlayer : MonoBehaviour
         UIManageMent.Instance.ExpStatSystemUI.UpdateHealthStatUI(maxHP.ToString());
         UIManageMent.Instance.ExpStatSystemUI.UpdateAtkStatUI(atk.ToString());
         UIManageMent.Instance.ExpStatSystemUI.UpdateCritRateStatUI(critRate.ToString());
+
+        UIManageMent.Instance.ExpStatSystemUI.ClearEventButton();
+         UIManageMent.Instance.ExpStatSystemUI.SetActionHpButton(UpgradeHP);
+        UIManageMent.Instance.ExpStatSystemUI.SetActionAtkButton(UpgradeAtk);
+        UIManageMent.Instance.ExpStatSystemUI.SetActionCritButton(UpgradeCritRate);
+        
+        
     }
+
+    
 
 
 }

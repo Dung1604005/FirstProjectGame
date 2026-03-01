@@ -83,14 +83,10 @@ public class Health : MonoBehaviour
         // Hoat anh chet
         if (cur_health <= 0.1f)
         {
-            if (this.tag == GameConfig.DESTROYABLE_OBJECT_TAG)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                
-            }
+            OnPlayerDie?.Invoke();
+            AudioManager.Instance.PlayDie();
+            this.gameObject.SetActive(false);
+            SaveLoadManager.Instance.LoadGame();
         }
 
 
@@ -124,7 +120,7 @@ public class Health : MonoBehaviour
         
         if (this.gameObject.tag == GameConfig.PLAYER_TAG0)
         {
-            
+            AudioManager.Instance.PlayPlayerHit();
             OnHealthChanged.Invoke(cur_health, max_health);
         }
 

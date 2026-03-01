@@ -1,13 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Xml.Schema;
+
 using Cinemachine;
-using Unity.Jobs;
-using Unity.PlasticSCM.Editor.WebApi;
-using Unity.VisualScripting;
-using UnityEditor.PackageManager;
-using UnityEditor.U2D;
+
 using UnityEngine;
 
 public class Gun : Weapon
@@ -240,7 +235,24 @@ public class Gun : Weapon
 
         Recoil(dir.x, dir.y);
 
+        switch (weaponData.ItemName)
+        {
+            case "ShotGun":
+               AudioManager.Instance.PlayShotgunShot();
+               break;
+            case "Gun":
+               AudioManager.Instance.PlayRifleShot();
+               break;
+            case "Pistol":
+               AudioManager.Instance.PlayPistolShot();
+               break;
+            case "EnergyGun":
+               AudioManager.Instance.PlayEnergyGunShot();
+               break;
+            default:
+            break;
 
+        }
        
         if (weaponData.ItemName == "ShotGun")
         {
@@ -260,16 +272,13 @@ public class Gun : Weapon
         bullet.GetComponent<BulletController>().SetInfo(weaponData.Damaged, (weaponData as GunData).IndexBullet);
         bullet.GetComponent<BulletController>().Fire(dir);
         // Them vao sau hieu ung shake
-        if (weaponData.ItemName == "ShotGun")
-        {
-            
-            cinemachineImpulseSource.GenerateImpulse(strengthShake);
-        }
+        cinemachineImpulseSource.GenerateImpulseWithVelocity(-dir);
         
         curBullet -= 1;
         GameManageMent.Instance.PlayerManager.UpdateCurrentBullet((weaponData as GunData).GunType, curBullet);
         UpdateCurStateBullet();
         UIManageMent.Instance.BulletUIController.UpdateCurrentBullet(curBullet);
+        
 
         StartCoroutine(Couroutine(delayTimeAfterShoot));
 

@@ -1,12 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Threading;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
+
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 
 public class PlayerController : MonoBehaviour
@@ -41,6 +35,17 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 playerDir;
     public Vector2 PlayerDir => playerDir;
+
+    [SerializeField] private GameObject lightObject;
+
+    public void TurnOnLight()
+    {
+        lightObject.SetActive(true);
+    }
+    public void TurnOffLight()
+    {
+        lightObject.SetActive(false);
+    }
 
     
     // Kiem soat va cham
@@ -95,6 +100,7 @@ public class PlayerController : MonoBehaviour
 
         
         anim.SetTrigger(GameConfig.PUNCH_TRIGGER);
+        AudioManager.Instance.PlayPunch();
         AnimUpdate(x, y);
     }
     
@@ -190,6 +196,7 @@ public class PlayerController : MonoBehaviour
 
         Vector2 dir = new Vector2(moveX, moveY).normalized;
         Vector2 new_pos = rb.position + dir * Time.fixedDeltaTime * GameManageMent.Instance.PlayerManager.Stat.Speed;
+        //AudioManager.Instance.PlayFootstep();
         rb.MovePosition(new_pos);
     }
     // Lay vi tri
@@ -278,6 +285,8 @@ public class PlayerController : MonoBehaviour
         
         this.GetComponent<Health>().OnHealthChanged.AddListener(UIManageMent.Instance.SetHealthBar);
         this.GetComponent<ExpSystem>().OnExpChange.AddListener(UIManageMent.Instance.SetExpBar);
+        GameManageMent.Instance.TimeManager.ChangeToMidNight += TurnOnLight;
+        GameManageMent.Instance.TimeManager.ChangeToDay += TurnOffLight;
         GameManageMent.Instance.CinemachineVirtualCamera.Follow = this.transform;
     }
     

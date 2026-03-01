@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using Unity.VisualScripting;
-using UnityEditor.MPE;
-using UnityEditor.ShaderGraph.Internal;
+
 using UnityEngine;
 
 public class GhostKingCombat : MonoBehaviour
@@ -27,6 +24,8 @@ public class GhostKingCombat : MonoBehaviour
     [SerializeField] private Vector2 rangeSpawnSkill1;
 
     [SerializeField] private SkillBoss skill1Boss;
+
+    public SkillBoss Skill1Boss => skill1Boss;
     
     [SerializeField] private bool unlockedSkill1;
 

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a009bef43341bfa4b96de4b140dcf5b6, type: 3}
+  m_Name: ShotGunBullet
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeData
+  itemToCraftData: {fileID: 11400000, guid: 6f658012ba14f8141a6b78a226f7ee38, type: 2}
+  requiredMaterial1Data: {fileID: 11400000, guid: 7edafe27ebe154f4993e9b9c574a7553, type: 2}
+  requiredMaterial1Amount: 3
+  requiredMaterial2Data: {fileID: 11400000, guid: 8b0afd0efc4358748b1e4292922c042b, type: 2}
+  requiredMaterial2Amount: 3

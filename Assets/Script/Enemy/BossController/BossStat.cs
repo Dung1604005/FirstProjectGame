@@ -27,6 +27,8 @@ public class BossStat : MonoBehaviour
 
     [SerializeField] private GameObject healthObject;
 
+    public GameObject HealthObject => healthObject;
+
     [SerializeField] private Image healthUI;
 
     [SerializeField] private TextMeshProUGUI nameBossText;
@@ -120,7 +122,8 @@ public class BossStat : MonoBehaviour
     }
     private void Die()
     {
-        
+        AudioManager.Instance.StopBGM();
+        AudioManager.Instance.PlayBGMForest();
         isDead = true;
         healthObject.SetActive(false);
         GameManageMent.Instance.QuestManager.UpdateProgressAllQuestKill(1, bossData.IndexEnemy, ObjectiveType.Kill);

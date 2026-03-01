@@ -28,6 +28,8 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
 
     public bool IsActive => isActive;
 
+    [SerializeField] private GameObject boundBoss;
+
     public void Restore(int id)
     {
         if(id != bossStat.BossData.IndexEnemy)
@@ -203,6 +205,7 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
         if (bossStat != null)
         {
             bossStat.ResetStats();
+            
         }
         
         if (bossMovement != null)
@@ -230,6 +233,8 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
             return;
         }
         ResetBoss();
+        
+        ghostKingCombat.Skill1Boss.gameObject.SetActive(false);
         ghostKingCombat.enabled = true;
         bossMovement.enabled = true;
         
@@ -240,6 +245,11 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
 
     public void DeActiveBoss(){
         ghostKingCombat.StopAllCoroutines();
+        bossStat.StopAllCoroutines();
+        bossMovement.StopAllCoroutines();
+        bossStat.HealthObject.SetActive(false);
+        
+        ghostKingCombat.Skill1Boss.gameObject.SetActive(false);
         ghostKingCombat.enabled = false;
         bossMovement.enabled = false;
         
@@ -247,6 +257,7 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
         isActive = false;
 
     }
+    
 
     public void BossDie()
     {
@@ -255,11 +266,13 @@ public class GhostKingManager : MonoBehaviour, BossManagerInterface
              this.GetComponent<SenderEvent>().SendEvent();
             this.GetComponent<SenderEvent>().RecallEvent();
         }
+        boundBoss.SetActive(false);
         
         DeActiveBoss();
 
        
     }
+    
 
     void Update()
     {

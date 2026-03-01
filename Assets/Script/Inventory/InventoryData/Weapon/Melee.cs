@@ -39,6 +39,10 @@ public class Melee : Weapon
         float y = Mathf.Sin(angle);
         float x = Mathf.Cos(angle);
         attacking = true;
+        if(weaponData.ItemName == "Bat")
+        {
+            AudioManager.Instance.PlayWoodenMace();
+        }
 
         Debug.Log(x + " " + y);
         GameManageMent.Instance.PlayerManager.PlayerController.AnimUpdate(x, y);

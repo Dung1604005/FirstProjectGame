@@ -41,6 +41,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1983805593734649311
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -86,6 +87,7 @@ SpriteRenderer:
   m_SortingLayerID: 1276704215
   m_SortingLayer: 3
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 178538631, guid: 0603f02bb7e483647a5e4c6ab8f32813, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,7 +97,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &8718541115506677702
 Animator:
@@ -168,7 +169,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ImpulseDuration: 0.2
+    m_ImpulseDuration: 0.35
     m_ImpulseType: 0
     m_DissipationRate: 0.25
     m_RawSignal: {fileID: 0}
@@ -199,7 +200,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 1, y: -1, z: 0}
+  m_DefaultVelocity: {x: 2, y: 2, z: 0}
 --- !u!1001 &1105076610444625623
 PrefabInstance:
   m_ObjectHideFlags: 0

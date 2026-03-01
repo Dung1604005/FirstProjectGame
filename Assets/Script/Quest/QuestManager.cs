@@ -117,6 +117,8 @@ public class QuestManager : MonoBehaviour
         {
 
             QuestDefinition originalQuest = questDataBase.GetQuestByID(savedData.questId);
+
+            
             if (originalQuest == null)
             {
                 UnityEngine.Debug.LogWarning("Không tìm thấy quest với ID: " + savedData.questId);
@@ -136,6 +138,10 @@ public class QuestManager : MonoBehaviour
 
 
         OnQuestChange?.Invoke();
+        if(curQuestDefinitions.Count > 0)
+        {
+             UIManageMent.Instance.QuestUI.QuestViewInfo.SetInfo(0);
+        }
     }
 
     public void LoadQuestData(QuestData questData)

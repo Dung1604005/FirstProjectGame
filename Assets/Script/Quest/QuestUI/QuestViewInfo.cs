@@ -97,6 +97,7 @@ public class QuestViewInfo : MonoBehaviour
         }
          objectives.text = "Objectives:";
          String objectiveText = "";
+         Debug.Log(indexQuest + " " + GameManageMent.Instance.QuestManager.QuestProgresses.Count);
          for(int i = 0; i < GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives.Count; i++)
         {
             int id = GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives[i].targetId;  

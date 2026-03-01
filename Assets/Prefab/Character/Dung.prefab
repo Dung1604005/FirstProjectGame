@@ -34,6 +34,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &39977067034481425
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -79,6 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -7389967749310623695, guid: 5010b5b14121eb241bdf7de09084b1f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.7058824}
   m_FlipX: 0
@@ -88,7 +90,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &3369559889407715249
 GameObject:
@@ -129,6 +130,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &647209940402000898
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -174,6 +176,7 @@ SpriteRenderer:
   m_SortingLayerID: 1276704215
   m_SortingLayer: 3
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 1005763519, guid: 6d4206356b1522e4694a83fd424b047c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -183,7 +186,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &7129921294086532833
 BoxCollider2D:
@@ -335,9 +337,13 @@ MonoBehaviour:
   onQuest: 0
   onQuestDialogue: Have you done yet ?
   interactRadius: 3
+  curNpcDialogues: 0
+  indexDialogue: 0
   interacting: 0
   interactingKey: {fileID: 3703617466603374644}
   isQuestGiver: 0
+  unlocked: 0
+  questIdRequired: 0
 --- !u!1001 &2336785669025717053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,12 +361,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4181948131708493192, guid: 66385ba78e20707498b53ed6d284fb2f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181948131708493192, guid: 66385ba78e20707498b53ed6d284fb2f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4181948131708493192, guid: 66385ba78e20707498b53ed6d284fb2f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.07
+      value: 1.62
       objectReference: {fileID: 0}
     - target: {fileID: 4181948131708493192, guid: 66385ba78e20707498b53ed6d284fb2f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.05
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 4181948131708493192, guid: 66385ba78e20707498b53ed6d284fb2f, type: 3}
       propertyPath: m_LocalPosition.z

@@ -125,7 +125,7 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface
         bossMovement.enabled = false;
         
         bossStat.enabled = false;
-
+         GameManageMent.Instance.PlayerManager.Health.OnPlayerDie += DeActiveBoss;
         GameManageMent.Instance._WorldManager.OnLoadDataBoss += Restore;
     }
     /// <summary>
@@ -183,6 +183,7 @@ public class HuyBossManagement : MonoBehaviour, BossManagerInterface
         bossMovement.StopAllCoroutines();
         huyCombat.Skill1Boss.gameObject.SetActive(false);
         huyCombat.WarningIcon.gameObject.SetActive(false);
+        bossStat.HealthObject.SetActive(false);
         huyCombat.enabled = false;
         bossMovement.enabled = false;
         

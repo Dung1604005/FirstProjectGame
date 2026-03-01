@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a009bef43341bfa4b96de4b140dcf5b6, type: 3}
+  m_Name: Bat
+  m_EditorClassIdentifier: Assembly-CSharp::RecipeData
+  itemToCraftData: {fileID: 11400000, guid: 182d9cbc38dc7fd49855a75d6994cc8c, type: 2}
+  requiredMaterial1Data: {fileID: 11400000, guid: 8b0afd0efc4358748b1e4292922c042b, type: 2}
+  requiredMaterial1Amount: 67
+  requiredMaterial2Data: {fileID: 0}
+  requiredMaterial2Amount: 0

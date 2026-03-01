@@ -41,6 +41,7 @@ public class WeatherSystem : MonoBehaviour
     {
         if (active)
         {
+            AudioManager.Instance.PlayRain();
             rainParticalSystem.Play();
         }
     }

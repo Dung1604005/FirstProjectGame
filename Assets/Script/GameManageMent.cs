@@ -1,9 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.GameCenter;
+
 
 [Serializable]
 public enum DirType
@@ -145,7 +144,7 @@ public class GameManageMent : MonoBehaviour
         playerManager.enabled = true;
         poolManager.enabled = true;
         dropSystem.enabled  = true;
-        questManager.enabled = true;
+        
         effectController.enabled = true;
         timeManager.enabled =true;
         enviromentManager.OutdoorEnvironment.WeatherSystem.enabled = true;
@@ -176,7 +175,7 @@ public class GameManageMent : MonoBehaviour
         dropSystem = GetComponent<DropSystem>();
         dropSystem.enabled = false;
         questManager = GetComponent<QuestManager>();
-        questManager.enabled = false;
+        
         effectController = GetComponent<EffectController>();
         effectController.enabled = false;
         timeManager = GetComponent<TimeManager>();
@@ -190,7 +189,7 @@ public class GameManageMent : MonoBehaviour
         gameState = GameState.Pause;
         Application.targetFrameRate = 120;
         Cursor.SetCursor(iconMouse, hotspot, cursorMode);
-        Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+        //Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
         Camera mainCamera = Camera.main;
         heightCamera = 2f *mainCamera.orthographicSize;
         widthCamera = heightCamera* mainCamera.aspect;
@@ -299,54 +298,7 @@ public class GameManageMent : MonoBehaviour
         //Mo Menu
         ControlMenu();
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[5], 1))
-            {
-                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[5], 1);
-            }
-
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[1], 1))
-            {
-                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[1], 1);
-            }
-
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[2], 1))
-            {
-                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[2], 1);
-            }
-
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[3], 1))
-            {
-                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[3], 1);
-            }
-
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[6], 1))
-            {
-                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[6], 1);
-            }
-
-        }
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            if (UIManageMent.Instance.InventoryUI.Inven.TryAdd(itemDataBase.ItemDatas[7], 1))
-            {
-                UIManageMent.Instance.InventoryUI.Inven.Add(itemDataBase.ItemDatas[7], 1);
-            }
-
-        }
+        
       
         
        

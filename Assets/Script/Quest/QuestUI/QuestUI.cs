@@ -20,6 +20,7 @@ public class QuestUI : MenuLayOutUI
     public void Init()
     {
         GameManageMent.Instance.QuestManager.OnQuestChange += RefreshQuestUI;
+        
         for (int i = 0; i < questButtons.Count; i++)
         {
 
