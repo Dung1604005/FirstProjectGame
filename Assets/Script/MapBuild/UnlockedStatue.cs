@@ -56,6 +56,10 @@ public class UnlockedStatue : SenderEvent
     public override void Restore(string _id)
     {
         base.Restore(_id);
+        if(_id != uniqueId || this == null)
+        {
+            return;
+        }
         unlockedObject.SetActive(true);
     }
 

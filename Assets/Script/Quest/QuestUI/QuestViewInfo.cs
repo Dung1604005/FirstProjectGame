@@ -91,12 +91,16 @@ public class QuestViewInfo : MonoBehaviour
     public void UpdateProgress()
     {
         
-        if(indexQuest < 0)
+        if(indexQuest < 0 || indexQuest >= GameManageMent.Instance.QuestManager.QuestProgresses.Count)
         {
+            GameManageMent.Instance.QuestManager.ArrowQuest.TurnOff();
+            UIManageMent.Instance.QuestUI.QuestProgressUI.TurnOff();
+            
             return;
         }
          objectives.text = "Objectives:";
          String objectiveText = "";
+         
          
          for(int i = 0; i < GameManageMent.Instance.QuestManager.QuestProgresses[indexQuest].Objectives.Count; i++)
         {
@@ -148,7 +152,7 @@ public class QuestViewInfo : MonoBehaviour
     }
     public void UpdatePositionArrowQuest()
     {
-        if(indexQuest == -1)
+        if(indexQuest == -1 || indexQuest >= GameManageMent.Instance.QuestManager.QuestProgresses.Count)
         {
             // DONT HAVE QUEST NOW
             return;
@@ -163,7 +167,7 @@ public class QuestViewInfo : MonoBehaviour
     }
     public void ResetQuestView()
     {
-        if(indexQuest < 0)
+        if(indexQuest < 0 || indexQuest >= GameManageMent.Instance.QuestManager.QuestProgresses.Count)
         {
             indexQuest = -1;
             nameQuest.text = "";
@@ -188,6 +192,7 @@ public class QuestViewInfo : MonoBehaviour
     public void Init()
     {
         GameManageMent.Instance.QuestManager.OnQuestChange += UpdateProgress;
+        GameManageMent.Instance.QuestManager.OnQuestChange += ResetQuestView;
         GameManageMent.Instance.QuestManager.OnCompleteQuest += ResetQuestView;
         ResetQuestView();
     }

@@ -57,17 +57,19 @@ public class Chest : MonoBehaviour, IRestorable
         isOpened = true;
         GameManageMent.Instance._WorldManager.AddOpenedChest(uniqueId);
         GameManageMent.Instance.DropSystem.DropItem(indexLootTable, amountDrop, this.gameObject.transform.position);
-        this.gameObject.SetActive(false);
+        this.GetComponent<Chest>().enabled = false;
     }
     public void Restore(string _id)
     {
-        if(_id != uniqueId)
+        if(_id != uniqueId || this == null)
         {
             return;
         }
-        this.gameObject.SetActive(false);
+        Debug.Log(uniqueId);
+        
         isOpened = true;
-        animator.enabled = true;
+        this.GetComponent<Animator>().enabled = true;
+        this.GetComponent<Chest>().enabled = false;
     }
     
 

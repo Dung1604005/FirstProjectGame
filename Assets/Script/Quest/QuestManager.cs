@@ -138,10 +138,7 @@ public class QuestManager : MonoBehaviour
 
 
         OnQuestChange?.Invoke();
-        if(curQuestDefinitions.Count > 0)
-        {
-             UIManageMent.Instance.QuestUI.QuestViewInfo.SetInfo(0);
-        }
+        
     }
 
     public void LoadQuestData(QuestData questData)

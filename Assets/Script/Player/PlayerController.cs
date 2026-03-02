@@ -246,6 +246,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                
                 UpdatePunchAnim();
                 UpdatePlayerDir(dir.x, dir.y);
             }

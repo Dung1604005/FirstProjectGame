@@ -73,9 +73,13 @@ public class SlotPlayerController : MonoBehaviour
             weapon = weaponPrefab.GetComponent<Weapon>();
             return;
         }
+        if (itemData.Type == ItemType.HpPotion || itemData.Type == ItemType.Bullet)
+        {
+            itemData.UseItem();
+            UIManageMent.Instance.EquipmentSystemUI.EquipMentSystem.UseSlot(slot, 1);
 
-        
-        if (itemData.Type == ItemType.Buildable)
+        }
+        else if (itemData.Type == ItemType.Buildable)
         {
             BuildableData buildableData = itemData as BuildableData;
             GameManageMent.Instance.BuildManager.TurnOnBuildMode(buildableData.Index_BuildableObject);

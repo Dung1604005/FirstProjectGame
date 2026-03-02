@@ -15,7 +15,7 @@ public class SenderEvent : MonoBehaviour, IRestorable
 
     public virtual void Restore(string _id)
     {
-        if(_id != uniqueId)
+        if(_id != uniqueId || this == null)
         {
             return;
         }

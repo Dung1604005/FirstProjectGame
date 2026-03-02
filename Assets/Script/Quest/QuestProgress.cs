@@ -82,7 +82,7 @@ public class QuestProgress
         {
             if (objectives[i].objectiveType == type && objectives[i].targetId == _targetId)
             {
-                curCount[i] = Math.Min(objectives[i].requiredCount, amount);
+                curCount[i] = Math.Min(objectives[i].requiredCount, amount + curCount[i]);
             }
         }
         UpdateProgressRatio();

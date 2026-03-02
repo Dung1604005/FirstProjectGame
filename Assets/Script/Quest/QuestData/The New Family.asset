@@ -31,7 +31,7 @@ MonoBehaviour:
   - objectiveType: 2
     targetId: 4
     requiredCount: 1
-    objectiveRequirement: Talk To Hoang
+    objectiveRequirement: Talk To Mu
     haveDirection: 1
     destinationPosition: {x: 204, y: -497, z: 0}
     destinationIdSceneData: 3

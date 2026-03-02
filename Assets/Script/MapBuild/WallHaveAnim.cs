@@ -41,7 +41,11 @@ public class WallHaveAnim : ReceiverEvent
     public override void Restore(string _id)
     {
         base.Restore(_id);
-        animator.SetBool("down", true);
+        if(_id != uniqueId || this == null)
+        {
+            return;
+        }
+        GetComponent<Animator>().SetBool("down", true);
         
     }
 
