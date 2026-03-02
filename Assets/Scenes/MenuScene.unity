@@ -924,6 +924,10 @@ PrefabInstance:
       propertyPath: equipmentSystemUI
       value: 
       objectReference: {fileID: 696149750}
+    - target: {fileID: 7349500347251871546, guid: fd0bd1a69a08c8b4485994ae97cab5e7, type: 3}
+      propertyPath: timerPerDay
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8484079480730559194, guid: fd0bd1a69a08c8b4485994ae97cab5e7, type: 3}
       propertyPath: menuController
       value: 

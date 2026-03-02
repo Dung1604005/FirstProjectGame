@@ -85,7 +85,7 @@ public class Health : MonoBehaviour
         {
             OnPlayerDie?.Invoke();
             AudioManager.Instance.PlayDie();
-            this.gameObject.SetActive(false);
+            
             SaveLoadManager.Instance.LoadGame();
         }
 

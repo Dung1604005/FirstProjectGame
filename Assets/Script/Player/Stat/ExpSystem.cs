@@ -69,6 +69,7 @@ public class ExpSystem : MonoBehaviour
         lv = savedLv;
         curExp = _currentExp;
         pointStat = savedPointStat;
+        expToLvUp = expToLvUp + (lv - 1)*offSetNextExpLvUp;
         UIManageMent.Instance.ExpStatSystemUI.UpdateLvUI(lv.ToString());
         UIManageMent.Instance.ExpStatSystemUI.UpdatePointStatUI(pointStat.ToString());
         OnExpChange?.Invoke(curExp, expToLvUp);

@@ -115,12 +115,13 @@ public class GhostKingCombat : MonoBehaviour
         
         yield return new WaitForSeconds(delayAttackSkill1);
         DirType dirType = GameManageMent.Instance.CalculateDirType(dir.x, dir.y);
+        Debug.Log(dirType);
         if (dirType == DirType.RIGHT)
         {
             skill1Boss.transform.localPosition = new Vector3(rangeSpawnSkill1.x, 0f);
             skill1Boss.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
-            skill1Boss.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            skill1Boss.gameObject.transform.localScale = new Vector3(1, 1, 0);
 
         }
         else if (dirType == DirType.LEFT)
@@ -128,21 +129,21 @@ public class GhostKingCombat : MonoBehaviour
             skill1Boss.transform.localPosition = new Vector3(-rangeSpawnSkill1.x, 0f);
             skill1Boss.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
-            skill1Boss.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            skill1Boss.gameObject.transform.localScale = new Vector3(-1, 1, 0);
         }
         else if (dirType == DirType.DOWN)
         {
             skill1Boss.transform.localPosition = new Vector3(0, -rangeSpawnSkill1.y);
             skill1Boss.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
 
-            skill1Boss.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+             skill1Boss.gameObject.transform.localScale = new Vector3(-1, 1, 0);
         }
         else
         {
             skill1Boss.transform.localPosition = new Vector3(0, rangeSpawnSkill1.y);
             skill1Boss.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
 
-            skill1Boss.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            skill1Boss.gameObject.transform.localScale = new Vector3(1, 1, 0);
         }
 
         skill1Boss.gameObject.SetActive(true);

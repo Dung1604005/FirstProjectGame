@@ -158,12 +158,14 @@ public class PlayerManager : MonoBehaviour
         // Load stat points
         stat.LoadData(data.pointMaxHp, data.pointAtk, data.pointCritRate);
 
-        // Load health
-        health.SetMaxHp(stat.MaxHP, false);
-        health.SetCurHp(data.currentHpPlayer);
 
         // Load exp
         expSystem.LoadData(data.levelPlayer, data.currentExp, data.pointStat);
+
+        // Load health
+        health.SetCurHp(data.currentHpPlayer);
+        health.SetMaxHp(stat.MaxHP, false);
+        
 
         // Load gold
         gold.LoadData(data.curGold);

@@ -49,6 +49,7 @@ public class WeatherSystem : MonoBehaviour
     {
         this.gameObject.SetActive(active);
         rainParticalSystem.Stop();
+        AudioManager.Instance.StopRain();
         if (active)
         {
             

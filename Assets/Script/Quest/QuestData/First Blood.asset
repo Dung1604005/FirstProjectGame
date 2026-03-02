@@ -17,14 +17,24 @@ MonoBehaviour:
   description: "Survival isn't given; it is taken. \nD\u0169ng watches from the shadows.
     \nDon't disappoint him. The labyrinth of \nsurvival starts with a single kill."
   npcId: 0
+  itemQuestList: []
   objectives:
   - objectiveType: 1
     targetId: 0
-    requiredCount: 1
+    requiredCount: 15
+    objectiveRequirement: 
+    haveDirection: 0
+    destinationPosition: {x: 0, y: 0, z: 0}
+    destinationIdSceneData: 0
+  - objectiveType: 1
+    targetId: 1
+    requiredCount: 5
+    objectiveRequirement: 
+    haveDirection: 0
+    destinationPosition: {x: 0, y: 0, z: 0}
+    destinationIdSceneData: 0
   goldReward: 300
   expReward: 200
   itemIdReward:
   - itemId: 8
     count: 10
-  haveDirection: 0
-  destinationPosition: {x: 0, y: 0, z: 0}

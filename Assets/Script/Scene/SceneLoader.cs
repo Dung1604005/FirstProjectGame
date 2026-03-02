@@ -128,13 +128,15 @@ public class SceneLoader: MonoBehaviour
         if (!GameManageMent.Instance.isGameStarted)
         {
             GameManageMent.Instance.StartGame();
-            SaveLoadManager.Instance.LoadDataRemain();
+            
         }
+        
         
         
 
         yield return new WaitForSeconds(0.5f);
 
+        SaveLoadManager.Instance.LoadDataRemain();
         GameManageMent.Instance.Continue();
         GameManageMent.Instance.isGameStarted = true;
 
@@ -165,14 +167,20 @@ public class SceneLoader: MonoBehaviour
         GameManageMent.Instance.EnviromentManager.SwitchEnvironment(sceneData.EnvironmentType);
         if(sceneData.EnvironmentType == EnvironmentType.Indoor)
         {
+            GameManageMent.Instance.PlayerManager.PlayerController.TurnOffLight();
             AudioManager.Instance.StopBGM();
             AudioManager.Instance.PlayBGMInDoor();
             GameManageMent.Instance.EnviromentManager.SetInfoForIndoorEnvironment(sceneData.LightIntense, sceneData.LightColor);
         }
         else
         {
+            if(GameManageMent.Instance.TimeManager.TimeState == TimeState.MidNight)
+            {
+                GameManageMent.Instance.PlayerManager.PlayerController.TurnOnLight();
+            }
             AudioManager.Instance.StopBGM();
             AudioManager.Instance.PlayBGMForest();
+            
         }
     }
 
@@ -209,6 +217,25 @@ public class SceneLoader: MonoBehaviour
 
         UIManageMent.Instance.QuestUI.QuestViewInfo.UpdatePositionArrowQuest();
         yield return new WaitForSeconds(1f);
+
+        AudioManager.Instance.StopBGM();
+
+         if(currentSceneData.EnvironmentType == EnvironmentType.Indoor)
+        {
+            GameManageMent.Instance.PlayerManager.PlayerController.TurnOffLight();
+            
+            AudioManager.Instance.PlayBGMInDoor();
+            
+        }
+        else
+        {
+            if(GameManageMent.Instance.TimeManager.TimeState == TimeState.MidNight)
+            {
+                GameManageMent.Instance.PlayerManager.PlayerController.TurnOnLight();
+            }
+            
+            AudioManager.Instance.PlayBGMForest();
+        }
 
         
         

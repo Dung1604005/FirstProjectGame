@@ -69,7 +69,7 @@ public class BossVisual : MonoBehaviour
         if(bossStat != null)
         {
             bossStat.OnBossDie += SetAnimDie;
-            bossStat.OnBossDie += Die;
+            
         }
     }
 

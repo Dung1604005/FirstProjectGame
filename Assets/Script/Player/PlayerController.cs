@@ -40,11 +40,28 @@ public class PlayerController : MonoBehaviour
 
     public void TurnOnLight()
     {
-        lightObject.SetActive(true);
+        if(lightObject != null)
+        {
+            lightObject.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("NO LIGHT");
+        }
+        
     }
     public void TurnOffLight()
     {
-        lightObject.SetActive(false);
+
+        if(lightObject != null)
+        {
+            lightObject.SetActive(false);
+        }
+        else
+        {
+            Debug.Log("NO LIGHT");
+        }
+        
     }
 
     

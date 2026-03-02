@@ -86,13 +86,13 @@ public class StatPlayer : MonoBehaviour
     }
     public void LoadData(int savedPointMaxHp, int savedPointAtk, int savedPointCritRate)
     {
-        maxHP += savedPointMaxHp * healthGrowth;
+        maxHP = 100 + savedPointMaxHp * healthGrowth;
         pointMaxHp = savedPointMaxHp;
 
-        atk += savedPointAtk * atkGrowth;
+        atk =10 + savedPointAtk * atkGrowth;
         pointAtk = savedPointAtk;
 
-        critRate += savedPointCritRate * critRateGrowth;
+        critRate = 15+ savedPointCritRate * critRateGrowth;
         pointCritRate = savedPointCritRate;
 
         UIManageMent.Instance.ExpStatSystemUI.UpdateHealthStatUI(maxHP.ToString());

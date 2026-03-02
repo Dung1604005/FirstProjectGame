@@ -55,7 +55,7 @@ public class BulletController : MonoBehaviour, IPoolable
     }
     public void DeSpawn()
     {
-        Debug.Log("DESPAWN BULLET " + indexBullet);
+        
         GameManageMent.Instance.PoolManager.BulletPoolsList[indexBullet].DeSpawn(this);
     }
     //Kiem tra va cham voi dich
