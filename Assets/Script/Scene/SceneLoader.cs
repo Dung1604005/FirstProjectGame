@@ -136,7 +136,12 @@ public class SceneLoader: MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        SaveLoadManager.Instance.LoadDataRemain();
+        if(loadSceneMode == LoadSceneMode.Single)
+        {
+            SaveLoadManager.Instance.LoadDataRemain();
+        }
+
+        
         GameManageMent.Instance.Continue();
         GameManageMent.Instance.isGameStarted = true;
 
